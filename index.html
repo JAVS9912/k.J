@@ -1,298 +1,1754 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Historia de Amor</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #ffebf0;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        header {
-            background: #ffb6c1;
-            padding: 20px;
-            font-size: 2em;
-            color: white;
-        }
-        section {
-            padding: 20px;
-        }
-        .gallery img {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 10px;
-            margin: 10px;
-            cursor: pointer;
-        }
-        .timeline {
-            list-style: none;
-            padding: 0;
-        }
-        .timeline li {
-            background: #fff;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-        .message {
-            background: #fff0f5;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .hidden-content {
-            display: none;
-            padding: 10px;
-            background-color: #fce8f1;
-            margin-top: 10px;
-            border-radius: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#06010b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kenia 💖">
+<meta name="format-detection" content="telephone=no">
+<title>Para Kenia Malanche Lara 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Great+Vibes&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+:root{
+  --bg:#06010b;--glass:rgba(32,12,46,.82);--line:rgba(255,140,165,.36);
+  --accent:#ff2a6d;--accent2:#ff758c;--violet:#9d4edd;--gold:#ffde59;--gold2:#ffa726;
+  --text:#ffffff;--muted:#ede2f5;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bot:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:clip;line-height:1.6}
+body.locked{overflow:hidden;height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(circle at 15% 15%,rgba(255,42,109,.22),transparent 45%),
+             radial-gradient(circle at 85% 85%,rgba(157,78,221,.25),transparent 48%),
+             radial-gradient(circle at 50% 50%,rgba(255,222,89,.07),transparent 60%),#06010b}
+#fx{position:fixed;inset:0;z-index:1;pointer-events:none}
+#progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:420;background:linear-gradient(90deg,var(--accent),var(--gold),var(--violet));box-shadow:0 0 16px var(--accent)}
+main{position:relative;z-index:10}
+section{min-height:100vh;padding:calc(92px + var(--safe-top)) 18px calc(96px + var(--safe-bot));display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.wrap{width:100%;max-width:880px}
+.eyebrow{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:8px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+h2{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;text-align:center;margin-bottom:32px;letter-spacing:-.6px;color:var(--text);text-shadow:0 2px 10px rgba(0,0,0,.85)}
+h2 em{font-family:'Great Vibes',cursive;font-style:normal;font-weight:400;color:var(--gold);font-size:1.35em;padding:0 4px;filter:drop-shadow(0 2px 8px rgba(255,222,89,.35))}
+h3.gt{color:var(--gold);margin-bottom:6px;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:28px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 24px 60px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.18)}
+.hint{text-align:center;color:var(--muted);font-size:.88rem;margin-top:14px;text-shadow:0 1px 4px rgba(0,0,0,.7)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.btn{font-family:inherit;font-weight:600;border:none;cursor:pointer;border-radius:60px;color:#fff;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn:active{transform:scale(.95)}
+.btn.main{padding:14px 34px;font-size:1rem;background:linear-gradient(135deg,#ff2a6d,#b51755);box-shadow:0 12px 28px rgba(255,42,109,.5)}
+.btn.gold{padding:13px 30px;font-size:.96rem;background:linear-gradient(135deg,#ffde59,#ffa726);color:#12031a;font-weight:700;box-shadow:0 12px 26px rgba(255,222,89,.4)}
+.btn.ghost{padding:11px 22px;font-size:.88rem;background:rgba(255,255,255,.14);border:1px solid var(--line);color:var(--text)}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.sh{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes pulse{50%{opacity:.35}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floaty{50%{transform:translateY(-8px)}}
+
+/* Controles */
+.top-controls{position:fixed;top:calc(12px + var(--safe-top));right:14px;z-index:380;display:flex;gap:8px}
+.quest-pill{position:fixed;top:calc(12px + var(--safe-top));left:14px;z-index:380;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:rgba(20,5,32,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--gold);color:var(--gold);font-family:inherit;font-size:.84rem;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.icon-btn{width:42px;height:42px;border-radius:50%;background:rgba(20,5,32,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.icon-btn.spin{animation:spin 6s linear infinite;border-color:var(--gold)}
+.icon-btn.pulse-hb{animation:beat .75s infinite;background:rgba(255,42,109,.45);border-color:var(--accent)}
+.icon-btn.on-sensor{border-color:var(--gold);box-shadow:0 0 16px rgba(255,222,89,.6)}
+body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-events:none;box-shadow:inset 0 0 95px rgba(255,42,109,.6);animation:pulse .75s infinite}
+/* Tarjeta de nota de voz y buzón de Kenia */
+.voice-card{padding:20px 16px;text-align:center;margin-bottom:16px;border:1px solid rgba(255,222,89,.45)}
+.voice-wave{display:flex;gap:4px;justify-content:center;align-items:center;height:28px;margin:10px 0}
+.voice-wave i{width:4px;height:8px;border-radius:4px;background:var(--gold);transition:height .15s}
+.voice-wave.playing i{animation:vwave .6s infinite ease-in-out alternate}
+.voice-wave.playing i:nth-child(2n){animation-delay:.15s}
+.voice-wave.playing i:nth-child(3n){animation-delay:.3s}
+@keyframes vwave{from{height:6px}to{height:26px}}
+.wish-box{margin-top:20px;padding:24px 18px;text-align:center}
+.wish-inp{width:100%;min-height:92px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);padding:12px 14px;font-family:inherit;font-size:.95rem;resize:vertical;margin:10px 0}
+.wish-inp::placeholder{color:rgba(237,226,245,.55)}
+.wish-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+.wchip{padding:6px 12px;border-radius:99px;font-size:.76rem;background:rgba(255,222,89,.14);border:1px solid rgba(255,222,89,.4);color:var(--gold);cursor:pointer;font-family:inherit}
+#dock{position:fixed;left:50%;bottom:calc(12px + var(--safe-bot));transform:translateX(-50%);z-index:370;display:flex;align-items:center;gap:4px;padding:6px 12px;border-radius:99px;background:rgba(15,4,25,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,222,89,.35);box-shadow:0 18px 45px rgba(0,0,0,.8);max-width:96vw;overflow-x:auto;scrollbar-width:none}
+#dock::-webkit-scrollbar{display:none}
+#dock a{color:var(--muted);text-decoration:none;font-size:.76rem;padding:7px 11px;border-radius:99px;white-space:nowrap;transition:.2s;font-weight:500}
+#dock a.active{color:var(--gold);background:rgba(255,42,109,.38)}
+
+/* Puerta */
+#gate{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#310b3a,#06010b 80%);transition:opacity .8s,visibility .8s;padding:18px}
+#gate.out{opacity:0;visibility:hidden;pointer-events:none}
+.gate-card{width:100%;max-width:410px;padding:32px 22px;text-align:center}
+.lock{font-size:2.8rem;animation:beat 1.6s infinite;display:inline-block}
+.gate-card h1{font-family:'Great Vibes',cursive;font-weight:400;font-size:2.8rem;color:var(--gold);margin:4px 0}
+.gate-card p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
+.pin-dots{display:flex;justify-content:center;gap:12px;margin:12px 0}
+.pin-dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--accent2);transition:.2s}
+.pin-dot.filled{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px var(--accent);transform:scale(1.18)}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:250px;margin:12px auto}
+.kbtn{padding:13px 0;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.1);color:var(--text);font-size:1.25rem;font-weight:600;cursor:pointer;font-family:inherit}
+.kbtn:active{background:rgba(255,42,109,.5);transform:scale(.93)}
+#gateErr{min-height:1.4em;margin-top:8px;color:#ff8598;font-size:.88rem;font-weight:600}
+
+/* Hero */
+#hero{padding:0;text-align:center;overflow:hidden}
+#heart3d{position:absolute;inset:0;z-index:0}
+#heart3d canvas{display:block;width:100%;height:100%}
+.heart-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10rem;opacity:.25;animation:beat 2s infinite}
+.hero-over{position:relative;z-index:2;padding:0 18px;max-width:780px}
+.script{font-family:'Great Vibes',cursive;font-size:clamp(3.2rem,12vw,6.6rem);line-height:1.08;background:linear-gradient(120deg,#ff9ebb,#ff2a6d,#ffde59);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 24px rgba(0,0,0,.85)) drop-shadow(0 0 22px rgba(255,42,109,.65))}
+#typed{min-height:6.4em;max-width:560px;margin:14px auto 0;color:var(--text);font-size:1.08rem;white-space:pre-line;text-shadow:0 2px 12px rgba(0,0,0,.95);font-weight:500}
+.caret::after{content:"|";color:var(--gold);animation:pulse 1s infinite;margin-left:2px}
+.hero-modes{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.mode-chip{padding:7px 15px;border-radius:99px;font-size:.78rem;background:rgba(20,5,32,.75);border:1px solid var(--line);color:var(--text);cursor:pointer;font-family:inherit;font-weight:500;pointer-events:auto}
+.mode-chip.on{background:rgba(255,42,109,.45);border-color:var(--gold);color:var(--gold)}
+.hero-hint{margin-top:12px;font-size:.74rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;text-shadow:0 2px 6px #000}
+
+/* Contador */
+.counter{padding:30px 18px;text-align:center}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(min-width:640px){.cgrid{grid-template-columns:repeat(6,1fr)}}
+.tbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:14px 6px}
+.tnum{font-size:1.9rem;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;text-shadow:0 0 12px rgba(255,222,89,.4)}
+.tlbl{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stats-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.spill{background:rgba(255,222,89,.14);border:1px solid rgba(255,222,89,.4);border-radius:99px;padding:6px 14px;font-size:.84rem;font-weight:500;color:var(--text)}
+.spill b{color:var(--gold)}
+.next{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:.94rem}
+.next b{color:var(--gold)}
+.today-banner{margin-top:14px;padding:12px;border-radius:16px;background:linear-gradient(135deg,rgba(255,42,109,.4),rgba(255,222,89,.25));border:1px solid var(--gold);font-weight:700;color:var(--gold)}
+.scanner-card{padding:28px 20px;text-align:center;margin-top:20px}
+.fp-pad{position:relative;width:115px;height:115px;margin:14px auto;border-radius:50%;background:radial-gradient(circle,rgba(255,42,109,.3),rgba(157,78,221,.22));border:2px dashed rgba(255,222,89,.7);display:flex;align-items:center;justify-content:center;font-size:3.2rem;cursor:pointer;user-select:none;touch-action:none;transition:.2s}
+.fp-pad.scanning{transform:scale(1.08);border-style:solid;border-color:var(--accent);box-shadow:0 0 45px var(--accent)}
+.mic-meter{width:190px;height:8px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;margin:10px auto}
+.mic-meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s}
+
+/* Luna & vela */
+.astro-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:720px){.astro-grid{grid-template-columns:1fr 1fr}}
+.astro-card{padding:26px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:6px}
+#moonCv,#candleCv{width:210px;height:210px;display:block}
+
+/* Carta */
+.letter-stage{width:100%;max-width:640px;margin:0 auto;text-align:center}
+.wax-envelope{padding:38px 22px;border-radius:28px;background:linear-gradient(145deg,#320c2a,#17041e);border:1px solid rgba(255,222,89,.45);cursor:pointer}
+.wax-seal{width:88px;height:88px;border-radius:50%;margin:12px auto;background:radial-gradient(circle at 35% 30%,#ff4d79,#a30b37 70%,#5e041f);border:3px solid rgba(255,222,89,.85);display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;font-size:2rem;color:var(--gold);box-shadow:0 12px 28px rgba(0,0,0,.7);animation:beat 2s infinite}
+.paper-letter{display:none;background:linear-gradient(180deg,#fffaf0,#f3e5d0);color:#2c1823;padding:34px 24px;border-radius:24px;box-shadow:0 28px 65px rgba(0,0,0,.8);text-align:left;border:2px solid #dfc7b0}
+.paper-letter.open{display:block;animation:rise .8s}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.95)}}
+.paper-letter .hand{font-family:'Caveat',cursive;font-size:1.55rem;line-height:1.5;white-space:pre-line;font-weight:700;min-height:8em;color:#2a1220}
+.paper-letter .sign{font-family:'Great Vibes',cursive;font-size:2.2rem;color:#b81d4e;text-align:right;margin-top:16px;opacity:0;transition:opacity 1s}
+.paper-letter .sign.on{opacity:1}
+
+/* Capítulos */
+.chapters{width:100%;display:grid;gap:18px}
+.chapter{position:relative;border-radius:28px;overflow:hidden;padding:30px 24px;background:linear-gradient(150deg,#2c1035,#120419);border:1px solid var(--line)}
+.chapter .num{position:absolute;top:6px;right:18px;font-size:5rem;font-weight:800;line-height:1;color:rgba(255,117,140,.15)}
+.chapter .date{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.chapter h3{font-size:1.5rem;margin:4px 0 6px;color:var(--text)}
+.chapter p{color:var(--muted);font-size:.98rem}
+
+/* Cielo */
+.sky{position:relative;width:100%;height:440px;border-radius:30px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(255,42,109,.22),transparent 68%),rgba(10,2,18,.9)}
+.sky svg{position:absolute;inset:0;width:100%;height:100%}
+.sky path{fill:none;stroke:rgba(255,222,89,.65);stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 4s ease .4s}
+.sky.in path{stroke-dashoffset:0}
+.star{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border:none;background:none;cursor:pointer}
+.star i{position:absolute;inset:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px rgba(255,222,89,.95),0 0 34px 8px rgba(255,42,109,.6);animation:tw 3s infinite ease-in-out}
+@keyframes tw{50%{transform:scale(1.4);opacity:.7}}
+.star span{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;color:var(--text);text-shadow:0 2px 6px #000;font-weight:600}
+.secret-key-star{position:absolute;right:8%;top:12%;font-size:1.6rem;background:none;border:none;cursor:pointer;filter:drop-shadow(0 0 12px var(--gold));animation:floaty 3s infinite}
+
+/* Polaroids & cabina */
+.board{position:relative;width:100%;height:520px;border-radius:30px;border:1px dashed var(--line);overflow:hidden;background:rgba(15,4,25,.7)}
+.pol{position:absolute;width:145px;padding:8px 8px 32px;background:#fff8f0;border-radius:6px;box-shadow:0 14px 28px rgba(0,0,0,.7);cursor:grab;touch-action:none;user-select:none;z-index:2}
+.pol .img{width:100%;aspect-ratio:1;background:linear-gradient(145deg,#ff9bb3,#b784f0);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;border-radius:3px}
+.pol .img img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.pol .cap{position:absolute;left:6px;right:6px;bottom:6px;text-align:center;font-family:'Caveat',cursive;font-weight:700;font-size:1.02rem;color:#2c1523}
+.hidden-board-key{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);z-index:1;background:rgba(255,222,89,.2);border:1px dashed var(--gold);border-radius:14px;padding:8px 12px;color:var(--gold);font-family:inherit;font-size:.78rem;cursor:pointer;font-weight:600}
+.booth-card{padding:24px 16px;text-align:center;margin-top:20px}
+.booth-stage{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:center;margin:12px 0}
+#boothVideo{width:220px;height:220px;object-fit:cover;border-radius:16px;border:2px solid var(--line);background:#0d0414;display:none;transform:scaleX(-1)}
+#boothPreview{width:220px;height:auto;aspect-ratio:360/430;border-radius:8px;box-shadow:0 14px 32px rgba(0,0,0,.7)}
+.filter-chips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.fchip{padding:6px 12px;border-radius:99px;font-size:.76rem;background:rgba(255,255,255,.1);border:1px solid var(--line);color:var(--text);cursor:pointer;font-family:inherit}
+.fchip.on{background:rgba(255,42,109,.4);border-color:var(--gold);color:var(--gold);font-weight:600}
+
+/* Frasco & mascota */
+.jar-wrap{display:flex;flex-direction:column;align-items:center;padding:30px 18px;text-align:center}
+.jar-visual{position:relative;width:160px;height:210px;border-radius:28px 28px 38px 38px;border:3px solid rgba(255,255,255,.45);background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,42,109,.12));cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:2.8rem}
+.jar-lid{position:absolute;top:-15px;left:20px;right:20px;height:16px;border-radius:6px;background:linear-gradient(90deg,#d4a359,#ffde59,#b8863b)}
+.jar-note{max-width:540px;min-height:86px;padding:16px 20px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,222,89,.4);font-family:'Caveat',cursive;font-size:1.6rem;color:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-weight:700}
+.pet-stage{padding:24px 16px;text-align:center;margin-top:18px}
+.pet-avatar{font-size:4.4rem;display:inline-block;cursor:pointer;animation:beat 2.2s infinite;user-select:none}
+.pet-bar{max-width:250px;height:9px;background:rgba(255,255,255,.1);border-radius:99px;margin:10px auto;overflow:hidden}
+.pet-bar i{display:block;height:100%;width:20%;background:linear-gradient(90deg,#ff2a6d,#ffde59);transition:width .3s}
+
+/* Cupones */
+.coupon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.coupon{padding:18px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(255,222,89,.16),rgba(255,42,109,.15));border:1px dashed rgba(255,222,89,.6);cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s}
+.coupon:active{transform:scale(.97)}
+.coupon .c-top{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.coupon h4{font-size:1.12rem;margin:6px 0;color:var(--text)}
+.coupon p{font-size:.86rem;color:var(--muted)}
+.coupon .stamp{margin-top:10px;align-self:flex-start;font-size:.72rem;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.12);color:var(--gold);font-weight:600}
+.coupon.used .stamp{background:var(--accent);color:#fff}
+
+/* Rasca & ruleta */
+.fun-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:740px){.fun-grid{grid-template-columns:1fr 1fr}}
+.fun-card{padding:26px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px}
+.scratch-box{position:relative;width:100%;max-width:300px;height:165px;border-radius:18px;overflow:hidden;border:2px solid rgba(255,222,89,.6);margin:10px auto;background:linear-gradient(135deg,#310b3a,#17041e);display:flex;align-items:center;justify-content:center;padding:14px}
+.scratch-secret{font-family:'Caveat',cursive;font-size:1.45rem;color:var(--gold);text-align:center;font-weight:700;white-space:pre-line}
+#scratchCv{position:absolute;inset:0;width:100%;height:100%;cursor:pointer;touch-action:none;transition:opacity .7s}
+.wheel-wrap{position:relative;width:240px;height:240px;margin:8px auto}
+.wheel-pointer{position:absolute;top:-14px;left:50%;transform:translateX(-50%);z-index:5;font-size:1.7rem}
+#wheelCv{width:100%;height:100%;border-radius:50%;transition:transform 4s cubic-bezier(.15,.85,.25,1);box-shadow:0 0 30px rgba(255,42,109,.4)}
+
+/* Música */
+.vinyl-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:18px}
+.turntable{width:210px;height:210px;border-radius:26px;background:linear-gradient(145deg,#240c2e,#0e0413);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.vinyl-disc{width:170px;height:170px;border-radius:50%;background:repeating-radial-gradient(circle,#121212 0 4px,#222 4px 8px);display:flex;align-items:center;justify-content:center}
+.vinyl-disc.spin{animation:spin 4s linear infinite}
+.vinyl-label{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;color:#1a0618;font-size:1.2rem;font-weight:700}
+.pl{padding:10px}
+.song{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;cursor:pointer;border:1px solid transparent}
+.song h4{color:var(--text)}
+.song.on{background:rgba(255,42,109,.28);border-color:rgba(255,117,140,.5)}
+.song .ico{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--violet));display:flex;align-items:center;justify-content:center;flex:none}
+.song small{color:var(--muted)}
+.piano-wrap{margin-top:18px;padding:18px 12px;text-align:center}
+.piano-keys{display:flex;justify-content:center;gap:5px;max-width:480px;margin:12px auto}
+.pkey{flex:1;height:110px;border-radius:0 0 12px 12px;background:linear-gradient(180deg,rgba(255,255,255,.96),#f4d7e6);border:1px solid rgba(255,222,89,.6);color:#2d0e28;font-family:inherit;font-weight:700;font-size:.75rem;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:8px;cursor:pointer;user-select:none;touch-action:manipulation}
+.pkey.hit{transform:translateY(4px);background:linear-gradient(180deg,var(--gold),var(--accent2))}
+
+/* Ábreme cuando & cápsulas & tarot */
+.env-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.env{padding:22px 12px;text-align:center;border-radius:20px;cursor:pointer;background:linear-gradient(145deg,rgba(255,42,109,.18),rgba(157,78,221,.16));border:1px solid rgba(255,117,140,.35)}
+.env.read{opacity:.65}
+.env .ic{font-size:2rem}
+.env small{display:block;color:var(--gold);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;margin-top:6px;font-weight:700}
+.env h4{color:var(--text)}
+.caps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.cap-box{padding:18px 14px;border-radius:18px;text-align:center;background:rgba(255,255,255,.06);border:1px solid var(--line);cursor:pointer}
+.cap-box h4{color:var(--text)}
+.cap-box.locked{opacity:.75;border-style:dashed}
+.tarot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.tarot-card{padding:26px 16px;border-radius:24px;background:linear-gradient(145deg,#2e0f36,#12041a);border:2px solid rgba(255,222,89,.55);text-align:center;cursor:pointer;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .4s}
+.tarot-card h4{color:var(--text)}
+.tarot-card .face-up{display:none}
+.tarot-card.rev{transform:rotateY(360deg)}
+.tarot-card.rev .face-up{display:block}
+.tarot-card.rev .face-down{display:none}
+
+/* Juegos */
+.quiz-card,.game,.chest-card,.plans,.fw-card{padding:26px 18px;text-align:center}
+.q-opts{display:grid;gap:9px;max-width:480px;margin:14px auto}
+.q-btn{padding:13px 16px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);font-family:inherit;font-size:.95rem;cursor:pointer;text-align:left;font-weight:500}
+.q-btn.correct{background:rgba(46,213,115,.35);border-color:#2ed573}
+.q-btn.wrong{background:rgba(255,71,87,.35);border-color:#ff4757}
+.qdots{display:flex;gap:8px;justify-content:center;margin-bottom:10px}
+.qdots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2)}
+.qdots i.on{background:var(--gold);box-shadow:0 0 10px var(--gold)}
+#gc{width:100%;height:380px;border-radius:18px;background:rgba(0,0,0,.45);touch-action:none;display:block}
+.gbar{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:600}
+.gbar b{color:var(--gold)}
+.key-slots{display:flex;justify-content:center;gap:14px;margin:14px 0}
+.kslot{width:56px;height:56px;border-radius:50%;border:2px dashed rgba(255,222,89,.6);display:flex;align-items:center;justify-content:center;font-size:1.5rem;opacity:.4;transition:.4s}
+.kslot.got{opacity:1;border-style:solid;border-color:var(--gold);background:rgba(255,222,89,.25);box-shadow:0 0 18px rgba(255,222,89,.6)}
+.pbar{height:8px;background:rgba(255,255,255,.1);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .4s}
+.plan{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line);cursor:pointer;text-align:left;color:var(--text)}
+.plan .box{width:24px;height:24px;border-radius:7px;border:2px solid var(--accent2);display:flex;align-items:center;justify-content:center;flex:none}
+.plan.done .box{background:var(--accent);border-color:var(--accent)}
+.plan.done .box::after{content:"✓";color:#fff;font-weight:700}
+.plan.done span{text-decoration:line-through;color:var(--muted)}
+#fwCv{width:100%;height:310px;border-radius:20px;background:radial-gradient(ellipse at 50% 100%,#2a0a33,#06010d 78%);border:1px solid var(--line);display:block;touch-action:none}
+
+/* Final */
+.final-box{padding:38px 20px;text-align:center}
+.btns{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:28px;min-height:90px;position:relative}
+.btn.yes{padding:15px 42px;font-size:1.1rem;background:linear-gradient(135deg,#ff2a6d,#b51755);box-shadow:0 12px 30px rgba(255,42,109,.5)}
+.btn.no{padding:11px 24px;font-size:.92rem;background:rgba(255,255,255,.12);border:1px solid var(--line);color:var(--muted)}
+.btn.no.run{position:absolute}
+#yesMsg{display:none}
+.pact-card{margin:18px auto 0;max-width:500px;padding:22px;border-radius:22px;background:linear-gradient(145deg,rgba(255,222,89,.15),rgba(255,42,109,.15));border:1px solid rgba(255,222,89,.5)}
+#sigCv{width:100%;height:135px;background:#fff;border-radius:12px;border:2px dashed var(--accent2);touch-action:none;cursor:crosshair;margin:10px 0}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px calc(95px + var(--safe-bot));position:relative;z-index:10}
+#resetAll{margin-top:10px;background:none;border:none;color:rgba(255,255,255,.5);font-family:inherit;font-size:.75rem;cursor:pointer;text-decoration:underline}
+
+/* Modal & toast */
+#modal{position:fixed;inset:0;z-index:460;background:rgba(3,0,6,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px}
+#modal.show{display:flex;animation:fade .3s}
+@keyframes fade{from{opacity:0}}
+.mbox{position:relative;width:100%;max-width:500px;max-height:86vh;overflow:auto;padding:30px 22px;text-align:center;background:linear-gradient(150deg,#310b3a,#13041a);border:1px solid rgba(255,117,140,.5);border-radius:26px;color:var(--text)}
+.mbox .mi{font-size:3rem}
+.mbox h3{font-size:1.5rem;margin:6px 0;color:var(--text)}
+.mbox .md{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.mbox p{margin-top:12px;white-space:pre-line;font-size:.98rem;color:var(--text)}
+.mbox .photo{width:100%;max-height:300px;object-fit:cover;border-radius:16px;margin-bottom:12px}
+.mclose{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--muted);font-size:1.6rem;cursor:pointer}
+#toast{position:fixed;left:50%;bottom:calc(84px + var(--safe-bot));transform:translateX(-50%) translateY(20px);z-index:480;background:#310b3a;border:1px solid var(--gold);color:var(--gold);padding:11px 22px;border-radius:30px;font-size:.9rem;font-weight:700;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.8);max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
-<body>
-    <audio controls autoplay loop>
-        <source src="12.mp3" type="audio/mp3">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
-    <header>
-        <h1>Nuestra Historia de Amor</h1>
-    </header>
+<body class="locked">
+<div id="progress"></div>
+<canvas id="fx"></canvas>
+<audio id="audio" loop preload="none"></audio>
 
-    <section>
-        <h2>UN POCO DE NUESTA HISTORIA </h2>
-<h2> TE AMO Y TE AMARE TODA LA VIDA</h2>
-        <div class="gallery">
-            <img src="foto1.jpg" alt="Primer encuentro despues de varios anos de no vernos" onclick="toggleContent('content1')">
-            <div id="content1" class="hidden-content">
-                <p>Hoy quiero contarte algo que llevo guardado en mi corazon durante tanto tiempo. Hace cuatro anos, nuestra comunicacion se interrumpio, pero aunque el tiempo paso, nunca deje de pensar en ti. Cada dia me sentia feliz al saber de ti, al ver como ibas logrando todo lo que te proponias, porque recordaba aquellas palabras que alguna vez me dijiste, que lograrias cosas grandes. Y cuando, despues de tanto tiempo, me escribiste nuevamente, senti una felicidad indescriptible, como si estuviera sonando.
+<button class="quest-pill" id="questPill">🗝️ Llaves: <span id="keyCountTop">0</span>/3</button>
+<div class="top-controls">
+  <button class="icon-btn" id="shakeSensorBtn" title="Activar sensor mágico en iPhone">📳</button>
+  <button class="icon-btn" id="iosInstallBtn" title="Instalar como App en iPhone">📲</button>
+  <button class="icon-btn" id="missYouTopBtn" title="Toca si me extrañas">💕</button>
+  <button class="icon-btn" id="hbBtn" title="Latido">💓</button>
+  <button class="icon-btn" id="music" title="Música">🎵</button>
+</div>
 
-Aunque nuestro reencuentro fue solo por mensaje, fue el momento perfecto para abrirte mi corazon y expresarte todo lo que sentia. No pude evitar decirte cuanto te habia guardado en mi alma, cuanto te habia extranado y lo feliz que me hacia ver que todo lo que alguna vez dijiste se estaba cumpliendo. Y aunque el tiempo paso, el carino sigue intacto. Gracias por darme la oportunidad de volver a hablar contigo y poder compartir todo esto. Te aprecio mas de lo que las palabras pueden expresar</p>
-            </div>
-            <img src="foto2.jpg" alt="Primer viaje juntos" onclick="toggleContent('content2')">
-            <div id="content2" class="hidden-content">
-                <p>Recuerdo perfectamente la primera vez que nos vimos despues de tanto tiempo, y como todo comenzo con una mezcla de tristeza y esperanza. Quedamos en salir a desayunar, pero al principio me dijiste que no podias porque estabas ocupada entregando juguetes y cosas a personas de bajos recursos. Sin embargo, tu misma me dijiste que mejor iriamos a comer, y eso me lleno de alegria.
+<nav id="dock">
+  <a href="#hero" class="active">💖 Inicio</a>
+  <a href="#time">⏳ Tiempo</a>
+  <a href="#astrosec">🌙 Luna</a>
+  <a href="#lettersec">💌 Carta</a>
+  <a href="#story">📖 Historia</a>
+  <a href="#skysec">✨ Cielo</a>
+  <a href="#polsec">📸 Fotos</a>
+  <a href="#jarsec">🏺 Razones</a>
+  <a href="#couponsec">🎟️ Cupones</a>
+  <a href="#funsec">🎰 Ruleta</a>
+  <a href="#plsec">🎵 Música</a>
+  <a href="#opensec">✉️ Cartas</a>
+  <a href="#tarotsec">🔮 Tarot</a>
+  <a href="#gamesec">🎮 Juegos</a>
+  <a href="#plansec">🎆 Planes</a>
+  <a href="#final">💍 Pacto</a>
+</nav>
+<div id="toast"></div>
 
-Despues, al poco rato, me cancelaste de nuevo y me dijiste que mejor seria a cenar, porque estabas cansada y querias descansar un poco. Luego, me cancelaste otra vez, pero en ese momento no sabia por que lo hacias.  Fue un momento de incertidumbre para mi, porque tenia tantas ganas de verte despues de tanto tiempo.
-
-Al final, decidiste que desayunaramos juntos el 24 de diciembre de 2024, y aunque acepte por compromiso, en el fondo pensaba que tal vez seria lo mismo de siempre, que solo jugabas con mis sentimientos. Pense que me iba a volver a pasar lo mismo, como en los anos anteriores. Pero, a pesar de todo, mi ilusion por verte seguia ahi, y decidi que si, que ibamos a vernos.
-
-Esa noche, quedamos en que nos veriamos al dia siguiente a las 11 de la manana, y al recibir tu mensaje tan temprano, lo primero que pense fue en no responderte. Pero el amor que sentia por ti era mucho mas grande que el orgullo, asi que desbloquee mi celular y te conteste que si, que nos veriamos. Y asi empezo todo.
-
-Los nervios me invadieron. No sabia que me estaba pasando, pero estaba tan emocionado. Me aliste, y te escribi para ver si ya estabas lista, y me dijiste que ya casi. Decidi ir por ti, aunque el nerviosismo me hacia sentir como un tonto. Esa sonrisa tonta no me la podia quitar, y cuando llegue, todo empezo a cambiar. Los nervios, el sudor, todo estaba a mil. Pero cuando te vi salir, senti algo que nunca antes habia experimentado. Esa sensacion de mariposas en el estomago fue unica.
-
-Nos saludamos, nos abrazamos, y ese abrazo, despues de tantos anos de estar perdidos, fue simplemente hermoso. Todo ese tiempo de espera valio la pena en ese momento. Fue un reencuentro magico que jamas olvidare, fue increible.</p>
-            </div>
-            <img src="foto3.jpg" alt="Aniversario" onclick="toggleContent('content3')">
-            <div id="content3" class="hidden-content">
-                <p>Despues de ese primer abrazo, todo comenzo a sentirse como un sueno. Te vi, y era como si el tiempo se hubiera detenido. El nerviosismo aun me recorria, pero estar contigo de nuevo, despues de tanto tiempo, me hizo sentir una paz que no habia sentido en anos.
-
-Nos subimos al carro y empezamos a platicar mientras ibamos camino a desayunar. Ese viaje fue, y siempre sera, uno de los mas largos de mi vida por los nervios que sentia y lo feliz que era de estar a tu lado. Recuerdo que ibamos conversando tranquilamente sobre todo lo que habiamos hecho en esos anos, poniendonos al dia como si el tiempo nunca hubiera pasado.
-
-Llegamos a un restaurante de buffet, y despues de servirnos, seguimos charlando sobre nuestras vidas. Nunca olvidare como un mesero nos pregunto cuanto tiempo llevabamos de casados, y entre risas, le respondi que tu no querias todavia, que te hacias mucho del rogar. Tu risa y la forma en que me mirabas en ese momento me hicieron sentir que todo valia la pena.
-
-No se en que momento termine sentado a tu lado, acariciandote el cabello con tanta ternura. Sentir tu cabello suave entre mis dedos era un momento magico, y yo era increiblemente feliz. Hubo un instante en que estuvimos a nada de besarnos, lo recuerdo perfectamente. En tus ojos se veia ese brillo especial, pero por alguna razon, no sucedio. Me saco de onda, pero al mismo tiempo, me dejo sonando con volver a besar tus lindos labios algun dia.
-
-Cuando terminamos de desayunar, aun era temprano, asi que decidimos ir a Starbucks a tomar un cafe, como en los viejos tiempos, cuando me escribias solo para preguntarme como se llamaba tu cafe favorito. Esa vez, fui yo quien te invito, y fue como revivir esos momentos del pasado, pero ahora juntos, en persona.
-
-De regreso a tu casa, en pleno camino, nos topamos con un senor vendiendo flores. No lo pense mucho y te compre un pequeno ramo de rosas. No sabia como lo tomarias, estaba nervioso, pero solo queria darte algo especial. Tu cara de felicidad, las fotos que le ibas tomando a las flores y la forma en que nos mirabamos hicieron que ese momento fuera inolvidable. Y cuando tomaste mis manos... fue hermoso, algo que jamas podre olvidar.
-
-Al llegar a tu casa, me invitaste a pasar, y aunque tenia miedo y mucha verguenza porque era la primera vez que entraba y tu familia estaba ahi, me convenciste. Salude a tu mama y a tu hermana, y nos quedamos un rato platicando. De repente, recibiste una llamada de alguien interesado en tus cursos de ingles, y mientras atendias, me prestaste tu iPad. Me puse a dibujar una vida a tu lado, y tu te reias, pero tambien te chiveabas. Ese momento fue tan simple y a la vez tan significativo.
-
-Mas tarde, me pediste que te llevara a Smart a comprar unas cosas. Te lleve, hiciste tus compras, y me pediste que te ayudara a buscar una botella  para tu papa. Terminamos comprandole una botella de tequila de Navidad, un detalle inesperado pero divertido.
-
-Al final del dia, te deje en casa, y aunque me despedi, supe que ese no era el final, sino el comienzo de algo increible. Ese dia fue el inicio de nuestra historia, una historia que sigue creciendo con cada momento que compartimos juntos.
-
-Todo valio la pena. Cada espera, cada lagrima, cada ilusion... porque estar contigo es lo mas hermoso que me ha pasado..</p>
-            </div>
-            <img src="foto4.jpg" alt="Cena especial" onclick="toggleContent('content4')">
-            <div id="content4" class="hidden-content">
-                <p>La primera vez que te regale un ramo de rosas, tu cara de felicidad fue algo que jamas olvidare. Ver esa sonrisa en tu rostro, esa luz en tus ojos, hizo que ese momento fuera aun mas especial. Fue como si el simple gesto de regalarte flores se convirtiera en el recuerdo mas hermoso de todos. </p>
-            </div>
-            <img src="foto5.jpg" alt="Paseo en la playa" onclick="toggleContent('content5')">
-            <div id="content5" class="hidden-content">
-                <p>siendo felices </p>
-            </div>
-            <!-- Nueva imagenes anadidas hasta completar 28 -->
-            <img src="foto6.jpg" alt="Festejo sorpresa" onclick="toggleContent('content6')">
-            <div id="content6" class="hidden-content">
-                <p>nuestro primer viaje juntos junto a tu herma y su amigo</p>
-            </div>
-            <img src="foto7.jpg" alt="Tercer aniversario" onclick="toggleContent('content7')">
-            <div id="content7" class="hidden-content">
-                <p>FOTO FAVORITA DE FIN DE ANO</p>
-            </div>
-            <img src="foto8.jpg" alt="Caminata nocturna" onclick="toggleContent('content8')">
-            <div id="content8" class="hidden-content">
-                <p>Cuando estaba preparando todo para pedirte que fueras mi novia</p>
-            </div>
-            <img src="foto9.jpg" alt="Viaje en carretera" onclick="toggleContent('content9')">
-            <div id="content9" class="hidden-content">
-                <p>lo linda que te mirabas cuando te pedi que fueras mi novia </p>
-            </div>
-            <img src="foto10.jpg" alt="Encuentro con amigos" onclick="toggleContent('content10')">
-            <div id="content10" class="hidden-content">
-                <p>Uno de los momentos mas felices cuando te pedi que fueras mi novia te veias super  mega hermosa </p>
-            </div>
-            <img src="foto11.jpg" alt="Dia en el parque" onclick="toggleContent('content11')">
-            <div id="content11" class="hidden-content">
-                <p>ver tu cara de felicidad a mi bebe fue lo mejor del mundo </p>
-            </div>
-            <img src="foto12.jpg" alt="Cena romantica" onclick="toggleContent('content12')">
-            <div id="content12" class="hidden-content">
-                <p>deje de ser espectador y me hiciste muy feliz el dia de mi cumpleanos </p>
-            </div>
-            <img src="foto13.jpg" alt="Noche de cine" onclick="toggleContent('content13')">
-            <div id="content13" class="hidden-content">
-                <p>de las veces que hablabamos hace un par de anos atras</p>
-            </div>
-            <img src="foto14.jpg" alt="Vacaciones juntos" onclick="toggleContent('content14')">
-            <div id="content14" class="hidden-content">
-                <p>nuestra primera fotos fingiendo ser papas feliz yo </p>
-            </div>
-            <img src="foto15.jpg" alt="Reencuentro familiar" onclick="toggleContent('content15')">
-            <div id="content15" class="hidden-content">
-                <p>Un dia lleno de emociones al estar en mi lugar favorito con la persona favorita </p>
-            </div>
-            <img src="foto16.jpg" alt="Boda de amigos" onclick="toggleContent('content16')">
-            <div id="content16" class="hidden-content">
-                <p>seriamos buenos padres nos vemos super bien</p>
-            </div>
-            <img src="foto17.jpg" alt="Fiesta sorpresa" onclick="toggleContent('content17')">
-            <div id="content17" class="hidden-content">
-                <p>en tu cuimpleanos intentando hacerte feliz </p>
-            </div>
-            <img src="foto18.jpg" alt="Reencuentro con viejos amigos" onclick="toggleContent('content18')">
-            <div id="content18" class="hidden-content">
-                <p>Nuestro primer viaje largo juntos</p>
-            </div>
-            <img src="foto19.jpg" alt="Recuerdo especial" onclick="toggleContent('content19')">
-            <div id="content19" class="hidden-content">
-                <p>dos locos llenos de amor siendo felices en DISNEY</p>
-            </div>
-            <img src="foto22.jpg" alt="Paseo nocturno" onclick="toggleContent('content20')">
-            <div id="content20" class="hidden-content">
-                <p>Un paseo nocturno lleno de magia y amor.</p>
-            </div>
-            <img src="foto21.jpg" alt="Aventura en montana" onclick="toggleContent('content21')">
-            <div id="content21" class="hidden-content">
-                <p>Una aventura en la ciudad que nu duermeeeee las vegas mamiiiiiii!!!!!</p>
-            </div>
-            <img src="foto20.jpg" alt="Atardecer juntos" onclick="toggleContent('content22')">
-            <div id="content22" class="hidden-content">
-                <p>Disfrutando de un atardecer juntos, Pero en disney jeje.</p>
-            </div>
-            <img src="foto23.jpg" alt="Paseo en bicicleta" onclick="toggleContent('content23')">
-            <div id="content23" class="hidden-content">
-                <p>SI SERISMOS BUENOS PADRES OJALA ALUN DIA SE NOS CUMPLA ESE SUENO MIENTRAS DISFRUTAMOS A NUESTRA VICTORIA </p>
-            </div>
-            <img src="foto24.jpg" alt="Noche de estrellas" onclick="toggleContent('content24')">
-            <div id="content24" class="hidden-content">
-                <p>PRIMER ANO JUNTOS DE VOLVER A EMPEZAR A PLATICAR</p>
-            </div>
-            <img src="foto25.jpg" alt="Un regalo especial" onclick="toggleContent('content25')">
-            <div id="content25" class="hidden-content">
-                <p>INTNETANDO RECREAR NUESTRA PRIMERA SALIDAAAAAA.</p>
-            </div>
-            <img src="foto26.jpg" alt="Nuestro lugar favorito" onclick="toggleContent('content26')">
-            <div id="content26" class="hidden-content">
-                <p>ANIVERSAIRO  DE RELACION .</p>
-            </div>
-            <img src="foto27.jpg" alt="Desayuno en pareja" onclick="toggleContent('content27')">
-            <div id="content27" class="hidden-content">
-                <p>Un cena  juntos, terminando un dia lleno de amor.</p>
-            </div>
-            <img src="foto28.jpg" alt="Nuestros suenos juntos" onclick="toggleContent('content28')">
-            <div id="content28" class="hidden-content">
-                <p>Sonando juntos con lo que el futuro nos deparara.</p>
-            </div>
-        </div>
-    </section>
-
-
-
-
-<section>
-    <h2>Recuerdos en Video</h2>
-
-    <!-- Video 1 -->
-    <div class="video-container">
-        <h3>Video 1: la primera vez que te pedi la mano </h3>
-        <video class="video" controls>
-            <source src="video3.mp4" type="video/mp4">
-            Tu navegador no soporta el formato de video.
-        </video>
+<!-- PUERTA -->
+<div id="gate">
+  <div class="glass gate-card" id="gateCard">
+    <div class="lock">🔐</div>
+    <h1>Hola, Kenia 💖</h1>
+    <p id="gHint"></p>
+    <div class="pin-dots" id="pinDots"></div>
+    <div class="keypad" id="keypad">
+      <button class="kbtn" data-k="1">1</button><button class="kbtn" data-k="2">2</button><button class="kbtn" data-k="3">3</button>
+      <button class="kbtn" data-k="4">4</button><button class="kbtn" data-k="5">5</button><button class="kbtn" data-k="6">6</button>
+      <button class="kbtn" data-k="7">7</button><button class="kbtn" data-k="8">8</button><button class="kbtn" data-k="9">9</button>
+      <button class="kbtn" data-k="clr">⌫</button><button class="kbtn" data-k="0">0</button><button class="kbtn" data-k="ok">💖</button>
     </div>
+    <div id="gateErr"></div>
+  </div>
+</div>
 
-    <!-- Video 2 -->
-    <div class="video-container">
-        <h3>Video 2: El mejor momento de mi vida jamas te vi tan emocionada como esta vez </h3>
-        <video class="video" controls>
-            <source src="Video2.mp4" type="video/mp4">
-            Tu navegador no soporta el formato de video.
-        </video>
+<main>
+  <!-- HERO -->
+  <section id="hero">
+    <div id="heart3d"><div class="heart-fallback" id="hfb">💖</div></div>
+    <div class="hero-over">
+      <div class="eyebrow" id="greet"></div>
+      <div class="script" id="heroName"></div>
+      <div id="typed"></div>
+      <div class="hero-modes">
+        <button class="mode-chip on" data-mode="rose">🌹 Rosa Rubí</button>
+        <button class="mode-chip" data-mode="gold">✨ Oro Celestial</button>
+        <button class="mode-chip" data-mode="galaxy">🌌 Galaxia Violeta</button>
+      </div>
+      <div class="hero-hint">toca el corazón y míralo explotar</div>
     </div>
+  </section>
 
-    <!-- Video 3 -->
-    <div class="video-container">
-        <h3>Video 3: amo jugar con tigo ojala podamos jugar toda la vida </h3>
-        <video class="video" controls>
-            <source src="Video1.mp4" type="video/mp4">
-            Tu navegador no soporta el formato de video.
-        </video>
+  <!-- TIEMPO -->
+  <section id="time">
+    <div class="wrap">
+      <div class="eyebrow rv">nuestro tiempo</div>
+      <h2 class="rv">Cada segundo contigo <em>cuenta</em></h2>
+      <div class="glass counter rv">
+        <div class="cgrid" id="cgrid"></div>
+        <div class="stats-pills" id="statsPills"></div>
+        <div id="todayBanner"></div>
+        <div class="next" id="next"></div>
+        <div class="row" style="margin-top:18px">
+          <button class="btn main" id="missBtnMain">💕 Toca si me extrañas (<span id="missCount">0</span>)</button>
+          <button class="btn ghost" id="hbBtnMain">💓 Siente mi latido</button>
+        </div>
+      </div>
+      <div class="glass scanner-card rv">
+        <div class="eyebrow">detector biométrico de almas gemelas</div>
+        <h3 class="gt">Escáner del Hilo Rojo: Kenia & Javier 🧶</h3>
+        <p style="color:var(--muted);font-size:.88rem">Mantén presionada tu huella hasta llegar al 100%</p>
+        <div class="fp-pad" id="fpPad">☝️</div>
+        <div class="mic-meter"><i id="fpBar"></i></div>
+        <div id="fpStatus" style="font-size:.9rem;color:var(--gold);font-weight:700">Esperando la huella de Kenia...</div>
+      </div>
     </div>
+  </section>
 
-    <!-- Video 4 -->
-    <div class="video-container">
-        <h3>Video 4: video random jejeje </h3>
-        <video class="video" controls>
-            <source src="video4.mp4" type="video/mp4">
-            Tu navegador no soporta el formato de video.
-        </video>
+  <!-- LUNA & VELA -->
+  <section id="astrosec">
+    <div class="wrap">
+      <div class="eyebrow rv">magia y astronomía</div>
+      <h2 class="rv">La Luna de nuestra noche y <em>un deseo</em></h2>
+      <div class="astro-grid">
+        <div class="glass astro-card rv">
+          <div><h3 class="gt">🌙 La Luna cuando empezamos</h3><p style="font-size:.86rem;color:var(--muted)" id="moonDateLbl"></p></div>
+          <canvas id="moonCv" width="220" height="220"></canvas>
+          <div>
+            <div style="font-weight:700;color:var(--gold)" id="moonPhaseName"></div>
+            <div style="font-size:.84rem;color:var(--muted)" id="moonIllum"></div>
+            <button class="btn ghost" id="toggleMoonBtn" style="margin-top:8px">Ver la Luna de hoy 🔭</button>
+          </div>
+        </div>
+        <div class="glass astro-card rv">
+          <div><h3 class="gt">🎂 Pide un deseo, Kenia</h3><p style="font-size:.86rem;color:var(--muted)">Sóplale con el micrófono o usa el botón</p></div>
+          <canvas id="candleCv" width="220" height="200"></canvas>
+          <div>
+            <div class="mic-meter"><i id="micBar"></i></div>
+            <div class="row" style="margin-top:8px">
+              <button class="btn gold" id="micBtn">🎙️ Soplar</button>
+              <button class="btn ghost" id="tapBlowBtn">💨 Botón</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-    <section>
-        <h2>Mensajes Especiales</h2>
-        <div class="message" onclick="toggleContent('message1')">
-            <p>"Desde que te conoci, mi vida es mas bonita. Gracias por ser mi persona favorita."</p>
+  <!-- CARTA -->
+  <section id="lettersec">
+    <div class="wrap">
+      <div class="eyebrow rv">de mi puño y letra</div>
+      <h2 class="rv">Una carta para <em>Kenia</em></h2>
+      <div class="letter-stage rv">
+        <div class="wax-envelope" id="waxEnv">
+          <p style="color:var(--muted);font-size:.9rem">Sobre lacrado exclusivamente para Kenia Malanche Lara</p>
+          <div class="wax-seal" id="sealBtn">K ♥ J</div>
+          <p style="color:var(--gold);font-size:.86rem;font-weight:600">Toca el sello dorado para abrir 💌</p>
         </div>
-        <div id="message1" class="hidden-content">
-            <p>Este mensaje expresa como me siento cada dia contigo. ¡Te amo!</p>
+        <div class="paper-letter" id="paperLetter">
+          <div style="font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:#8c586c;margin-bottom:10px;font-weight:700" id="letterDate"></div>
+          <div class="hand" id="letterBody"></div>
+          <div class="sign" id="letterSign"></div>
         </div>
-        <div class="message" onclick="toggleContent('message2')">
-            <p>"Cada dia contigo es un regalo que atesoro. Te amo con todo mi corazon."</p>
-        </div>
-        <div id="message2" class="hidden-content">
-            <p>Este es otro de mis mensajes favoritos para ti, porque cada dia es especial.</p>
-        </div>
-<div class="message" onclick="toggleContent('message1')">
-            <p>"Deseo que aceptes casarte con migo "</p>
-        </div>
-<div class="message" onclick="toggleContent('message1')">
-            <p>"la pregunta del millon ¿ACEPTARIAS CASARTE CON MIGUEL?"</p>
-        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- HISTORIA -->
+  <section id="story">
+    <div class="wrap">
+      <div class="eyebrow rv">nuestra historia</div>
+      <h2 class="rv">Capítulo por <em>capítulo</em></h2>
+      <div class="chapters" id="chapters"></div>
+    </div>
+  </section>
 
-    </section>
+  <!-- CIELO -->
+  <section id="skysec">
+    <div class="wrap">
+      <div class="eyebrow rv">nuestro cielo</div>
+      <h2 class="rv">Cada estrella es un <em>recuerdo</em></h2>
+      <div class="sky rv" id="sky"></div>
+      <div class="hint">Toca las estrellas y busca el cometa dorado ☄️ (esconde una llave)</div>
+    </div>
+  </section>
 
-    <script>
-        // Funcion para mostrar u ocultar el contenido
-        function toggleContent(contentId) {
-            var content = document.getElementById(contentId);
-            if (content.style.display === "none" || content.style.display === "") {
-                content.style.display = "block";
-            } else {
-                content.style.display = "none";
-            }
-        }
-    </script>
+  <!-- FOTOS -->
+  <section id="polsec">
+    <div class="wrap">
+      <div class="eyebrow rv">álbum interactivo</div>
+      <h2 class="rv">Nuestras <em>Polaroids</em></h2>
+      <div class="board rv" id="board">
+        <button class="hidden-board-key" id="boardKeyBtn">🗝️ ¡Encontraste la Llave #1!</button>
+      </div>
+      <div class="hint">Toca cualquier Polaroid para subir tu foto y cambiarle la frase 📸</div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn gold" id="openPhotoMgrBtn">🖼️ Gestionar las 5 Fotos / Empaquetar para Kenia</button>
+      </div>
+      <div class="glass booth-card rv">
+        <h3 class="gt">📸 Cabina Polaroid para Kenia</h3>
+        <div class="booth-stage">
+          <video id="boothVideo" autoplay playsinline muted></video>
+          <canvas id="boothPreview" width="360" height="430"></canvas>
+        </div>
+        <div class="filter-chips" id="boothFilters">
+          <button class="fchip on" data-f="none">✨ Original</button>
+          <button class="fchip" data-f="warm">🌅 Cálido</button>
+          <button class="fchip" data-f="bw">🎞️ Vintage B&N</button>
+          <button class="fchip" data-f="pink">🌸 Sueño Rosa</button>
+        </div>
+        <div class="row">
+          <button class="btn main" id="startCamBtn">📷 Cámara Selfie</button>
+          <button class="btn gold" id="snapBtn" style="display:none">✨ Capturar</button>
+          <label class="btn ghost" style="cursor:pointer">🖼️ Elegir Foto<input type="file" id="uploadPhotoInp" accept="image/*" hidden></label>
+          <button class="btn ghost" id="dlBoothBtn">⬇️ Guardar / Compartir</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRASCO & MASCOTA -->
+  <section id="jarsec">
+    <div class="wrap">
+      <div class="eyebrow rv">dosis de amor</div>
+      <h2 class="rv">El frasco de las <em>razones</em></h2>
+      <div class="glass jar-wrap rv">
+        <div class="jar-visual" id="jarBox"><div class="jar-lid"></div>🏺✨</div>
+        <div class="jar-note" id="jarNote">Toca el frasco para sacar una razón por la que te amo, Kenia 💖</div>
+        <button class="btn gold" id="jarBtn">Sacar otro papelito ✨</button>
+      </div>
+      <div class="glass pet-stage rv">
+        <div class="eyebrow">mascota guardiana de nuestro amor</div>
+        <h3 class="gt" id="petTitle"></h3>
+        <div class="pet-avatar" id="petAvatar">🧸</div>
+        <div class="pet-bar"><i id="petFill"></i></div>
+        <p style="font-size:.86rem;color:var(--muted);margin-bottom:10px" id="petMsg"></p>
+        <div class="row">
+          <button class="btn ghost" data-pet="🍓">🍓 Fresita</button>
+          <button class="btn ghost" data-pet="🤗">🤗 Abrazo</button>
+          <button class="btn main" data-pet="💋">💋 Besito</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUPONES -->
+  <section id="couponsec">
+    <div class="wrap">
+      <div class="eyebrow rv">vales oficiales</div>
+      <h2 class="rv">Cuponera para <em>Kenia</em></h2>
+      <div class="coupon-grid" id="coupons"></div>
+      <div class="hint">Toca un cupón para canjearlo y avisarle a Javier por WhatsApp 🎟️</div>
+    </div>
+  </section>
+
+  <!-- RASCA & RULETA -->
+  <section id="funsec">
+    <div class="wrap">
+      <div class="eyebrow rv">azar romántico</div>
+      <h2 class="rv">Sorpresa oculta y <em>próxima cita</em></h2>
+      <div class="fun-grid">
+        <div class="glass fun-card rv">
+          <div><h3 class="gt">🪙 Rasca y Gana</h3><p style="font-size:.86rem;color:var(--muted)">Desliza tu dedo sobre el oro</p></div>
+          <div class="scratch-box"><div class="scratch-secret" id="scratchSecret"></div><canvas id="scratchCv"></canvas></div>
+          <button class="btn ghost" id="resetScratch">Volver a cubrir 🔄</button>
+        </div>
+        <div class="glass fun-card rv">
+          <div><h3 class="gt">🎡 Ruleta de Citas</h3><p style="font-size:.86rem;color:var(--muted)">¿Qué plan nos toca pronto?</p></div>
+          <div class="wheel-wrap"><div class="wheel-pointer">🔻</div><canvas id="wheelCv" width="260" height="260"></canvas></div>
+          <button class="btn main" id="spinBtn">Girar Ruleta 🎰</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÚSICA -->
+  <section id="plsec">
+    <div class="wrap">
+      <div class="eyebrow rv">banda sonora</div>
+      <h2 class="rv">Mi voz y canciones <em>nuestras</em></h2>
+      <div class="vinyl-wrap rv"><div class="turntable"><div class="vinyl-disc" id="vinylDisc"><div class="vinyl-label">K ♥ J</div></div></div></div>
+      <div class="glass voice-card rv">
+        <div class="eyebrow">mensaje de voz exclusivo</div>
+        <h3 class="gt">🎙️ Escucha la voz de Javier</h3>
+        <p style="font-size:.86rem;color:var(--muted)" id="voiceStatus">Un mensajito grabado con todo mi amor para ti, Kenia 💖</p>
+        <div class="voice-wave" id="voiceWave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="row">
+          <button class="btn gold" id="playVoiceBtn">▶️ Escuchar nota de voz</button>
+          <button class="btn ghost" id="recVoiceBtn">🎙️ Grabar mi voz (Javier)</button>
+        </div>
+      </div>
+      <div class="glass pl rv" id="playlist"></div>
+      <div class="glass piano-wrap rv">
+        <h3 class="gt">🎹 Piano de Cristal para Kenia</h3>
+        <div class="piano-keys" id="pianoKeys"></div>
+        <button class="btn gold" id="autoPlayPianoBtn">✨ Tocar serenata</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁBREME CUANDO -->
+  <section id="opensec">
+    <div class="wrap">
+      <div class="eyebrow rv">cartas selladas</div>
+      <h2 class="rv">Ábreme <em>cuando...</em></h2>
+      <div class="env-grid" id="envs"></div>
+      <div style="margin-top:26px">
+        <h3 class="gt" style="text-align:center">⏳ Cápsulas del Tiempo</h3>
+        <div class="caps-grid" id="capsules"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAROT -->
+  <section id="tarotsec">
+    <div class="wrap">
+      <div class="eyebrow rv">escrito en las estrellas</div>
+      <h2 class="rv">El Tarot de <em>Nuestro Destino</em></h2>
+      <div class="tarot-grid" id="tarotGrid"></div>
+      <div class="hint">Toca cada carta para revelarla 🔮</div>
+    </div>
+  </section>
+
+  <!-- JUEGOS -->
+  <section id="gamesec">
+    <div class="wrap">
+      <div class="eyebrow rv">retos y secretos</div>
+      <h2 class="rv">Juega y abre el <em>Cofre Secreto</em></h2>
+      <div class="glass quiz-card rv" style="margin-bottom:18px">
+        <div class="qdots" id="qDots"></div>
+        <h3 class="gt" id="qTitle"></h3>
+        <div class="q-opts" id="qOpts"></div>
+      </div>
+      <div class="glass game rv" style="margin-bottom:18px">
+        <div class="gbar"><span>Corazones: <b id="gScore">0</b> / <b id="gGoal"></b></span><span>Tiempo: <b id="gTime">25</b>s</span></div>
+        <canvas id="gc"></canvas>
+        <button class="btn main" id="gStart" style="margin-top:12px">Jugar Minijuego 🎮</button>
+        <div class="hint">💖 +1 · 🌟 +3 · 💔 −1. Mueve el dedo para mover la canasta.</div>
+      </div>
+      <div class="glass chest-card rv">
+        <div style="font-size:3.2rem" id="chestIcon">🔒🧰</div>
+        <h3 class="gt">El Cofre de las 3 Llaves</h3>
+        <div class="key-slots"><div class="kslot" id="ks1">🗝️</div><div class="kslot" id="ks2">🗝️</div><div class="kslot" id="ks3">🗝️</div></div>
+        <button class="btn gold" id="openChestBtn">Abrir Cofre Secreto ✨</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANES -->
+  <section id="plansec">
+    <div class="wrap">
+      <div class="eyebrow rv">lo que viene</div>
+      <h2 class="rv">Nuestra lista de <em>planes</em></h2>
+      <div class="glass plans rv" style="margin-bottom:18px">
+        <div class="pbar"><i id="pfill"></i></div>
+        <div id="plans"></div>
+        <div class="hint" id="pcount"></div>
+      </div>
+      <div class="glass fw-card rv">
+        <h3 class="gt">🎆 Pirotecnia en el Cielo para Kenia</h3>
+        <canvas id="fwCv"></canvas>
+        <p class="hint" style="margin-top:6px">Toca el cielo para lanzar corazones de fuego</p>
+        <button class="btn main" id="fwNamesBtn" style="margin-top:10px">💖 Iluminar Nuestros Nombres</button>
+      </div>
+      <div class="glass wish-box rv">
+        <div class="eyebrow">buzón directo al corazón de javier</div>
+        <h3 class="gt">💌 Buzón de Deseos y Antojos de Kenia</h3>
+        <p style="font-size:.86rem;color:var(--muted)">Escribe lo que se te antoje hoy, un plan que quieras hacer o un mensajito para Javier:</p>
+        <div class="wish-chips">
+          <button class="wchip" data-w="Amor, hoy tengo antojo de ">🍓 Tengo antojo de...</button>
+          <button class="wchip" data-w="Amor, nuestra próxima salida tiene que ser a ">🚗 Llévame a...</button>
+          <button class="wchip" data-w="Amor, hoy necesito muchos abrazos y besitos porque ">🤗 Necesito mimos...</button>
+        </div>
+        <textarea class="wish-inp" id="keniaWishInp" placeholder="Escribe aquí tu deseo o mensaje para Javier... 💖"></textarea>
+        <button class="btn gold" id="sendWishWaBtn">Enviar deseo a Javier por WhatsApp 💬</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section id="final">
+    <div class="wrap">
+      <div class="glass final-box rv">
+        <div id="ask">
+          <div class="eyebrow">una última pregunta</div>
+          <h2 id="askText"></h2>
+          <div class="btns" id="btns">
+            <button class="btn yes" id="yes">¡Sí, siempre! 💖</button>
+            <button class="btn no" id="no">No</button>
+          </div>
+        </div>
+        <div id="yesMsg">
+          <div class="script" id="yesTitle"></div>
+          <p style="margin-top:10px;font-weight:500" id="yesText"></p>
+          <div class="pact-card">
+            <h4 style="color:var(--gold)">📜 Certificado Oficial de Amor Eterno</h4>
+            <p style="font-size:.86rem;color:var(--muted)">Firma con tu dedo aquí abajo, Kenia, para sellar nuestro pacto:</p>
+            <canvas id="sigCv" width="420" height="140"></canvas>
+            <div class="row" style="margin-top:8px">
+              <button class="btn ghost" id="clearSig">Borrar firma</button>
+              <button class="btn gold" id="savePact">Sellar y enviar 💬</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div id="foot"></div>
+  <button id="resetAll">Reiniciar progreso (para volver a probarla desde cero)</button>
+</footer>
+<div id="modal"><div class="mbox" id="mbox"></div></div>
+
+<!-- =============================================================
+     ✏️ TODO LO PERSONAL ESTÁ AQUÍ
+     ============================================================= -->
+<script>
+const CONFIG = {
+  ella: "Kenia",
+  ellaCompleta: "Kenia Malanche Lara",
+  yo: "Javier",
+  whatsappRaw: "65466996813",
+  inicio: "2023-02-14T20:00:00",
+  clave: "1402",
+  pista: "Escribe nuestra clave secreta (1402) 💖",
+  musicaArchivo: "",
+  intro: "Para ti, Kenia Malanche Lara 💖\nHice este universo entero pensando en ti.\nPorque mereces algo tan único, mágico y bonito\ncomo todo lo que me haces sentir cada día.",
+  pregunta: "Kenia Malanche Lara, ¿quieres seguir escribiendo esta historia conmigo para siempre?",
+  respuestaTitulo: "¡Sabía que dirías que sí, Kenia! 💖",
+  respuestaTexto: "Gracias por ser mi hogar, mi paz, mi risa favorita y mi mejor aventura, Kenia. Te amo hoy, mañana y siempre.",
+  deseoVela: "✨ ¡Deseo concedido para Kenia Malanche Lara!\nMi único deseo siempre será que seas inmensamente feliz a mi lado 💖",
+  cofrePremio: "👑 ¡KENIA, ABRISTE EL COFRE SECRETO!\nEncontraste las 3 llaves de mi corazón. Tu regalo especial: una salida o cena sorpresa donde tú eliges todo y yo invito.",
+  carta: {
+    fecha: "Para Kenia Malanche Lara 💖",
+    texto: "Mi querida Kenia:\n\nSi pudiera pedir un deseo, sería detener el tiempo cada vez que me miras y sonríes.\n\nContigo aprendí que el amor verdadero es encontrar a alguien con quien hasta el silencio se siente bonito. Gracias por tus abrazos que curan todo y por caminar a mi lado.\n\nNo importa cuántos años pasen, Kenia, yo te voy a seguir eligiendo todos los días de mi vida.",
+    firma: "Con todo mi amor, Javier"
+  },
+  capitulos: [
+    { fecha: "El comienzo", titulo: "El día que te conocí, Kenia", texto: "Todavía recuerdo lo que sentí al verte. No sabía que ese instante cambiaría toda mi vida para bien." },
+    { fecha: "Primera cita", titulo: "Nervios y sonrisas", texto: "El tiempo se pasó volando y yo solo pensaba en cuánto quería volver a verte." },
+    { fecha: "Cuando supe", titulo: "Siempre fuiste tú", texto: "En un momento pequeño lo entendí todo de golpe: mi lugar favorito en el mundo es a tu lado." },
+    { fecha: "Hoy y siempre", titulo: "Todo lo que nos falta vivir", texto: "Cada día contigo es mi mejor día, Kenia. Y lo más bonito es que apenas vamos empezando." }
+  ],
+  recuerdos: [
+    { x: 14, y: 72, titulo: "Primer 'hola'", fecha: "Febrero 2023", texto: "La chispa donde empezó nuestra historia, Kenia." },
+    { x: 32, y: 34, titulo: "Primera salida", fecha: "Febrero 2023", texto: "Nuestras risas nerviosas y miradas cómplices." },
+    { x: 52, y: 64, titulo: "Nuestras aventuras", fecha: "2023 - 2024", texto: "Esos momentos donde el mundo parecía solo nuestro." },
+    { x: 70, y: 25, titulo: "A prueba de todo", fecha: "Siempre", texto: "Porque incluso en días difíciles nos elegimos." },
+    { x: 88, y: 56, titulo: "Nuestro futuro", fecha: "Hoy", texto: "Lo mejor todavía está por escribirse juntos." }
+  ],
+  /* 👇 AQUÍ PUEDES PONER TUS FOTOS (o usar el botón "Gestionar las 5 Fotos" en la página) */
+  /*__FOTOS_START__*/
+  fotos: [
+    { src: "", texto: "Kenia & Javier 💖" },
+    { src: "", texto: "Tu sonrisa hermosa" },
+    { src: "", texto: "Un día inolvidable" },
+    { src: "", texto: "Mi persona favorita" },
+    { src: "", texto: "Siempre juntos ✨" }
+  ],
+  /*__FOTOS_END__*/
+  /*__VOICE_START__*/
+  notaDeVoz: "",
+  /*__VOICE_END__*/
+  razones: [
+    "Por la forma en que tus ojos brillan cuando sonríes, Kenia.",
+    "Porque tus abrazos me reinician la vida y me dan paz.",
+    "Porque contigo puedo ser yo mismo sin ningún miedo.",
+    "Por cómo conviertes un día normal en mi recuerdo favorito.",
+    "Por tu ternura, tu fuerza y el corazón tan noble que tienes.",
+    "Porque te elijo hoy, mañana y en todas mis vidas, Kenia Malanche Lara."
+  ],
+  cupones: [
+    { id: "c1", titulo: "Cena Romántica 🍝", desc: "Kenia elige su lugar favorito. Yo invito todo." },
+    { id: "c2", titulo: "Masaje Relajante 💆‍♀️", desc: "30 minutos de masaje sin quejas después de un día largo." },
+    { id: "c3", titulo: "Noche de Pelis 🍿", desc: "Tú eliges las películas y todas las botanas." },
+    { id: "c4", titulo: "Un Antojo a Domicilio 🍓", desc: "Canjeable a cualquier hora por tu postre favorito." },
+    { id: "c5", titulo: "Ganar una Discusión 🏳️", desc: "Comodín oficial: Kenia tiene toda la razón." },
+    { id: "c6", titulo: "Paseo Sorpresa 🚗", desc: "Escapada juntos a escuchar música y ver el atardecer." }
+  ],
+  rascaPremio: "🎁 ¡VALE POR UN DESEO CUMPLIDO!\nKenia, pide lo que quieras hoy y se cumple sin excusas 💖",
+  ruletaCitas: ["🍕 Noche de Pizza", "🌅 Ver el Atardecer", "🍦 Ir por Helado", "🎬 Cine VIP", "🥞 Desayuno Juntos", "🚗 Paseo Nocturno"],
+  canciones: [
+    { t: "Melodía de Cristal", por: "Suena y pienso en ti al instante", notes: [523.25,659.25,783.99,1046.5,783.99,659.25], src: "" },
+    { t: "Vals Bajo las Estrellas", por: "Para bailar abrazados en silencio", notes: [440,554.37,659.25,880,659.25,554.37], src: "" },
+    { t: "Caja Musical del Destino", por: "Dice todo lo que siento por ti", notes: [587.33,739.99,880,1174.66,880,739.99], src: "" }
+  ],
+  abrir: [
+    { ic: "🌧️", t: "Estés triste", msg: "Respira profundo, mi amor Kenia. Estoy contigo siempre y te amo exactamente como eres." },
+    { ic: "😴", t: "No puedas dormir", msg: "Cierra los ojos y piensa en nuestro próximo abrazo. Descansa, mi vida." },
+    { ic: "😡", t: "Estés enojada conmigo", msg: "Perdón si me equivoqué. Siempre te voy a elegir a ti por encima de cualquier orgullo." },
+    { ic: "🥹", t: "Me extrañes", msg: "Yo también te extraño muchísimo, Kenia. Mándame mensaje ahorita mismo 💕" },
+    { ic: "🎉", t: "Algo salga bien", msg: "¡Sabía que lo lograrías! Estoy súper orgulloso de ti, mi amor." },
+    { ic: "💭", t: "Dudes de ti", msg: "Mírate con mis ojos, Kenia: eres brillante, hermosa y capaz de todo." }
+  ],
+  capsulas: [
+    { titulo: "Para Kenia, hoy", unlock: "2023-02-14", msg: "Kenia Malanche Lara: eres lo más bonito que me ha pasado en la vida 💖" },
+    { titulo: "Próximo 14 de Febrero", unlock: "2027-02-14", msg: "¡Feliz San Valentín, mi amor! Gracias por otro año maravilloso juntos." },
+    { titulo: "Nuestro próximo aniversario", unlock: "2028-02-14", msg: "Cinco años y sigo eligiéndote igual que el primer día. Te amo, Kenia." }
+  ],
+  tarot: [
+    { tiempo: "Pasado • El Encuentro", ic: "🌙", titulo: "Los Amantes Estelares", txt: "Entre millones de caminos, las almas de Kenia y Javier supieron dónde coincidir." },
+    { tiempo: "Presente • La Unión", ic: "☀️", titulo: "El Hogar Sagrado", txt: "Hoy son refugio, risa cómplice y paz verdadera." },
+    { tiempo: "Futuro • La Eternidad", ic: "🌟", titulo: "La Estrella Dorada", txt: "Vienen viajes inolvidables, sueños cumplidos y toda una vida juntos." }
+  ],
+  trivia: [
+    { q: "¿Cómo se llama la mujer más hermosa del universo?", opts: ["Kenia Malanche Lara 💖", "La novia de Javier ✨", "Las dos anteriores 🥰"], a: 2 },
+    { q: "¿Cuál es mi lugar favorito en todo el mundo?", opts: ["Cualquier lugar mientras sea con Kenia", "El cine", "La playa"], a: 0 },
+    { q: "¿Hasta cuándo te voy a seguir eligiendo, Kenia?", opts: ["Hoy, mañana y en todas mis vidas 💖", "Este mes", "Un rato"], a: 0 }
+  ],
+  meta: 12,
+  planes: [
+    "Viajar juntos a un lugar nuevo que soñemos conocer",
+    "Ver el amanecer abrazados frente al mar",
+    "Hacer noche de películas con nuestras botanas favoritas",
+    "Cocinar juntos nuestra comida favorita entre risas",
+    "Tomarnos una foto en cada lugar nuevo que visitemos"
+  ]
+};
+</script>
+
+<!-- Corazón 3D -->
+<script type="module">
+try{
+  const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js");
+  const holder = document.getElementById("heart3d");
+  const renderer = new THREE.WebGLRenderer({alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  holder.appendChild(renderer.domElement);
+  document.getElementById("hfb").style.display = "none";
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55,1,.1,100);
+  const N = 8000, pos = new Float32Array(N*3), tgt = new Float32Array(N*3), col = new Float32Array(N*3), mix = new Float32Array(N);
+  for(let i=0;i<N;i++){
+    const t = Math.random()*Math.PI*2, s = .15 + .85*Math.pow(Math.random(),.45);
+    const x = 16*Math.pow(Math.sin(t),3), y = 13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
+    tgt[i*3] = x*s*.27; tgt[i*3+1] = y*s*.27+.3; tgt[i*3+2] = (Math.random()-.5)*9*(1.15-s)*.5;
+    mix[i] = Math.random();
+  }
+  function scatter(){ for(let i=0;i<N;i++){ const r=11+Math.random()*6,a=Math.random()*6.283,b=Math.acos(2*Math.random()-1); pos[i*3]=r*Math.sin(b)*Math.cos(a); pos[i*3+1]=r*Math.sin(b)*Math.sin(a); pos[i*3+2]=r*Math.cos(b); } }
+  scatter();
+  const PAL = { rose:["#ff2a6d","#ffde59","#ff758c"], gold:["#ffde59","#ffa726","#fff4c2"], galaxy:["#9d4edd","#4cc9f0","#ff2a6d"] };
+  const ca = new THREE.Color(), cb = new THREE.Color(), cc = new THREE.Color(), tmp = new THREE.Color();
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos,3));
+  geo.setAttribute("color", new THREE.BufferAttribute(col,3));
+  function recolor(mode){
+    const p = PAL[mode] || PAL.rose; ca.set(p[0]); cb.set(p[1]); cc.set(p[2]);
+    for(let i=0;i<N;i++){
+      const m = mix[i];
+      if(m < .12) tmp.copy(cc); else tmp.copy(ca).lerp(cb, Math.pow(m,2.2));
+      col[i*3]=tmp.r; col[i*3+1]=tmp.g; col[i*3+2]=tmp.b;
+    }
+    geo.attributes.color.needsUpdate = true;
+  }
+  let saved = "rose"; try{ saved = JSON.parse(localStorage.getItem("kenia_mode")) || "rose"; }catch(e){}
+  recolor(saved);
+  window.addEventListener("heartmode", e => recolor(e.detail));
+  const cv = document.createElement("canvas"); cv.width = cv.height = 64;
+  const g = cv.getContext("2d"), gr = g.createRadialGradient(32,32,0,32,32,32);
+  gr.addColorStop(0,"rgba(255,255,255,1)"); gr.addColorStop(.4,"rgba(255,255,255,.5)"); gr.addColorStop(1,"rgba(255,255,255,0)");
+  g.fillStyle = gr; g.fillRect(0,0,64,64);
+  const pts = new THREE.Points(geo, new THREE.PointsMaterial({size:.11,map:new THREE.CanvasTexture(cv),vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));
+  scene.add(pts);
+  function size(){ const w=holder.clientWidth||innerWidth,h=holder.clientHeight||innerHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); camera.position.z = w<640 ? 11 : 8.5; }
+  addEventListener("resize",size); size();
+  let mx=0,my=0,visible=true,t0=performance.now();
+  addEventListener("pointermove",e=>{ mx=(e.clientX/innerWidth-.5)*2; my=(e.clientY/innerHeight-.5)*2; });
+  new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(holder);
+  window.addEventListener("entered",()=>{ scatter(); t0=performance.now(); });
+  document.getElementById("hero").addEventListener("pointerdown",e=>{ if(e.target.closest("button")) return; for(let i=0;i<N*3;i++) pos[i]+=(Math.random()-.5)*5; });
+  (function frame(now){
+    requestAnimationFrame(frame);
+    if(!visible) return;
+    const t=(now-t0)/1000, k=Math.min(1,t/2.5), ease=.015+.05*k;
+    for(let i=0;i<N*3;i++) pos[i]+=(tgt[i]-pos[i])*ease;
+    geo.attributes.position.needsUpdate = true;
+    pts.scale.setScalar(1+.05*Math.pow(Math.max(0,Math.sin(t*3.2)),2));
+    pts.rotation.y += ((mx*.7+Math.sin(t*.5)*.25)-pts.rotation.y)*.05;
+    pts.rotation.x += ((my*.3)-pts.rotation.x)*.05;
+    renderer.render(scene,camera);
+  })(performance.now());
+}catch(e){ console.warn("Corazón 3D no disponible", e); }
+</script>
+
+<script>
+/* ===================== UTILIDADES ===================== */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const rnd = (a,b) => a + Math.random()*(b-a);
+const sleep = ms => new Promise(r => setTimeout(r,ms));
+const store = {
+  get(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } }
+};
+const vib = p => { try{ navigator.vibrate && navigator.vibrate(p); }catch(e){} };
+const conf = o => { if(window.confetti) confetti(o); };
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),2600); }
+
+function sendWhatsApp(msg){
+  const raw = (CONFIG.whatsappRaw||"65466996813").replace(/\D/g,"");
+  const phone = raw.startsWith("52") ? raw : "52" + raw;
+  const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+  const a = document.createElement("a"); a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ===================== SONIDO ===================== */
+const Sound = (function(){
+  let ctx=null, melTimer=null, hbTimer=null, hbOn=false, track=-1, noteI=0;
+  const audio = $("#audio");
+  function init(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); if(ctx.state==="suspended") ctx.resume(); }
+  function tone(f=523.25,dur=.25,type="sine",vol=.1){
+    try{
+      init(); const o=ctx.createOscillator(), g=ctx.createGain();
+      o.type=type; o.frequency.setValueAtTime(f,ctx.currentTime);
+      g.gain.setValueAtTime(.001,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(vol,ctx.currentTime+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+dur);
+      o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime+dur);
+    }catch(e){}
+  }
+  const chime = ()=>[523.25,659.25,783.99,1046.5].forEach((n,i)=>setTimeout(()=>tone(n,.3,"triangle",.12),i*75));
+  const win = ()=>[523.25,659.25,783.99,1046.5,1318.5].forEach((n,i)=>setTimeout(()=>tone(n,.4,"sine",.14),i*90));
+  const pop = ()=>tone(640,.12,"sine",.1);
+  function ui(on){
+    $("#music").classList.toggle("spin",on); $("#vinylDisc").classList.toggle("spin",on);
+    $$("#playlist .song").forEach((el,i)=>el.classList.toggle("on", on && i===track));
+  }
+  function stop(){ clearInterval(melTimer); audio.pause(); track=-1; ui(false); }
+  function play(i){
+    clearInterval(melTimer); audio.pause();
+    track = i; const s = CONFIG.canciones[i];
+    if(s.src){ audio.src=s.src; audio.volume=.7; audio.play().catch(()=>{}); }
+    else {
+      noteI=0; const seq=s.notes;
+      const step=()=>{ const f=seq[noteI%seq.length]; tone(f,.55,"triangle",.1); tone(f/2,.9,"sine",.05); noteI++; };
+      step(); melTimer=setInterval(step,440);
+    }
+    ui(true);
+  }
+  function toggleMain(){
+    if(track>=0){ stop(); return; }
+    if(CONFIG.musicaArchivo){ audio.src=CONFIG.musicaArchivo; audio.volume=.6; audio.play().catch(()=>{}); track=0; ui(true); return; }
+    play(0);
+  }
+  function toggleHb(){
+    hbOn=!hbOn; document.body.classList.toggle("hb-active",hbOn); $("#hbBtn").classList.toggle("pulse-hb",hbOn);
+    clearInterval(hbTimer);
+    if(hbOn){ const b=()=>{ tone(65,.12,"sine",.25); vib([40,90,40]); setTimeout(()=>tone(55,.16,"sine",.2),190); }; b(); hbTimer=setInterval(b,820); toast("💓 Latido de Javier activado (73 BPM)"); }
+  }
+  return {init,tone,chime,win,pop,play,stop,toggleMain,toggleHb,get track(){return track;}};
+})();
+addEventListener("touchstart",()=>Sound.init(),{once:true,passive:true});
+$("#music").onclick = Sound.toggleMain;
+$("#hbBtn").onclick = Sound.toggleHb;
+$("#hbBtnMain").onclick = Sound.toggleHb;
+
+/* ===================== FONDO ANIMADO ===================== */
+const fx=$("#fx"), cx=fx.getContext("2d");
+let W=fx.width=innerWidth, H=fx.height=innerHeight;
+addEventListener("resize",()=>{ W=fx.width=innerWidth; H=fx.height=innerHeight; });
+const stars=Array.from({length:70},()=>({x:rnd(0,W),y:rnd(0,H),r:rnd(.5,1.8),tw:rnd(0,6)}));
+const floaters=Array.from({length:12},()=>({x:rnd(0,W),y:rnd(0,H),s:rnd(10,22),vy:rnd(.25,.7),sw:rnd(0,6),a:rnd(.07,.2)}));
+const bursts=[], shooters=[];
+function burst(x,y,n=7){ for(let i=0;i<n;i++){ const a=rnd(0,6.28),v=rnd(1,3.5); bursts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.5,l:1,e:["💖","✨","💕"][i%3]}); } }
+addEventListener("pointerdown",e=>burst(e.clientX,e.clientY,5));
+setInterval(()=>{ if(!document.hidden) shooters.push({x:rnd(W*.3,W),y:rnd(0,H*.4),l:1}); },6500);
+(function bg(){
+  cx.clearRect(0,0,W,H);
+  stars.forEach(s=>{ s.tw+=.02; cx.globalAlpha=.4+Math.abs(Math.sin(s.tw))*.6; cx.fillStyle="#fff"; cx.beginPath(); cx.arc(s.x,s.y,s.r,0,7); cx.fill(); });
+  floaters.forEach(f=>{ f.y-=f.vy; f.sw+=.02; f.x+=Math.sin(f.sw)*.4; if(f.y<-30){ f.y=H+30; f.x=rnd(0,W); } cx.globalAlpha=f.a; cx.font=f.s+"px serif"; cx.fillText("💗",f.x,f.y); });
+  for(let i=shooters.length-1;i>=0;i--){ const s=shooters[i]; s.x-=9; s.y+=4.5; s.l-=.02; if(s.l<=0){ shooters.splice(i,1); continue; }
+    const g=cx.createLinearGradient(s.x,s.y,s.x+70,s.y-35); g.addColorStop(0,`rgba(255,222,89,${s.l})`); g.addColorStop(1,"rgba(255,222,89,0)");
+    cx.globalAlpha=1; cx.strokeStyle=g; cx.lineWidth=2; cx.beginPath(); cx.moveTo(s.x,s.y); cx.lineTo(s.x+70,s.y-35); cx.stroke(); }
+  for(let i=bursts.length-1;i>=0;i--){ const b=bursts[i]; b.x+=b.vx; b.y+=b.vy; b.vy+=.04; b.l-=.02; if(b.l<=0){ bursts.splice(i,1); continue; } cx.globalAlpha=b.l; cx.font="18px serif"; cx.fillText(b.e,b.x,b.y); }
+  cx.globalAlpha=1; requestAnimationFrame(bg);
+})();
+
+/* ===================== MODAL ===================== */
+function openModal(html){ $("#mbox").innerHTML=`<button class="mclose" aria-label="Cerrar">✕</button>${html}`; $("#modal").classList.add("show"); $("#mbox .mclose").onclick=closeModal; }
+function closeModal(){ $("#modal").classList.remove("show"); }
+$("#modal").onclick = e=>{ if(e.target.id==="modal") closeModal(); };
+addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
+
+/* ===================== TEXTOS BASE ===================== */
+$("#gHint").textContent = CONFIG.pista;
+$("#heroName").textContent = CONFIG.ellaCompleta;
+$("#askText").textContent = CONFIG.pregunta;
+$("#yesTitle").textContent = CONFIG.respuestaTitulo;
+$("#yesText").textContent = CONFIG.respuestaTexto;
+$("#letterDate").textContent = CONFIG.carta.fecha;
+$("#scratchSecret").textContent = CONFIG.rascaPremio;
+$("#gGoal").textContent = CONFIG.meta;
+$("#foot").textContent = `Hecho con todo mi 💖 para ${CONFIG.ellaCompleta} • Por ${CONFIG.yo}`;
+(function(){ const h=new Date().getHours(); $("#greet").textContent = (h<12?"☀️ Buenos días":h<19?"🌤️ Buenas tardes":"🌙 Buenas noches")+", "+CONFIG.ella; })();
+
+/* ===================== PUERTA ===================== */
+let pinVal="";
+const PL = CONFIG.clave.length;
+$("#pinDots").innerHTML = Array.from({length:PL},()=>`<span class="pin-dot"></span>`).join("");
+const dots = ()=>$$("#pinDots .pin-dot").forEach((d,i)=>d.classList.toggle("filled",i<pinVal.length));
+let typing=false;
+async function typeIntro(){
+  if(typing) return; typing=true;
+  const el=$("#typed"); el.textContent=""; el.classList.add("caret");
+  for(const ch of CONFIG.intro){ el.textContent+=ch; await sleep(ch==="\n"?350:32); }
+  el.classList.remove("caret"); typing=false;
+}
+function enter(first){
+  document.body.classList.remove("locked");
+  window.dispatchEvent(new Event("entered"));
+  if(first){ Sound.win(); conf({particleCount:110,spread:90,origin:{y:.6},colors:["#ff2a6d","#ff758c","#ffd27a","#fff"]}); vib(60); }
+  $("#gate").classList.add("out");
+  setTimeout(typeIntro, first?600:200);
+}
+function checkPin(){
+  if(pinVal===CONFIG.clave){ store.set("kenia_in",true); enter(true); }
+  else{ $("#gateErr").textContent="Esa no es 🥺 Pista: "+CONFIG.pista; const c=$("#gateCard"); c.classList.remove("sh"); void c.offsetWidth; c.classList.add("sh"); vib(200); pinVal=""; dots(); }
+}
+$$("#keypad .kbtn").forEach(b=>b.onclick=()=>{
+  Sound.pop(); const k=b.dataset.k;
+  if(k==="clr") pinVal=pinVal.slice(0,-1);
+  else if(k==="ok") checkPin();
+  else if(pinVal.length<PL){ pinVal+=k; if(pinVal.length===PL){ dots(); setTimeout(checkPin,180); return; } }
+  dots();
+});
+if(store.get("kenia_in",false)){ $("#gate").style.display="none"; enter(false); }
+
+/* ===================== REVEAL, PROGRESO, SCROLLSPY ===================== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }),{threshold:.08});
+const observeRv = ()=>$$(".rv:not(.watched)").forEach(el=>{ el.classList.add("watched"); io.observe(el); });
+addEventListener("scroll",()=>{ const h=document.documentElement; $("#progress").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%"; },{passive:true});
+const spy=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  const id="#"+e.target.id;
+  $$("#dock a").forEach(a=>{ const on=a.getAttribute("href")===id; a.classList.toggle("active",on); if(on){ const d=$("#dock"); d.scrollTo({left:a.offsetLeft-d.clientWidth/2+a.clientWidth/2,behavior:"smooth"}); } });
+}),{rootMargin:"-45% 0px -45% 0px"});
+$$("main section[id]").forEach(s=>spy.observe(s));
+
+/* ===================== LLAVES & COFRE ===================== */
+let keys=store.get("kenia_keys",[]);
+function updateKeys(){
+  $("#keyCountTop").textContent=keys.length;
+  [1,2,3].forEach(n=>$("#ks"+n).classList.toggle("got",keys.includes(n)));
+  if(keys.length>=3) $("#chestIcon").textContent="👑🧰✨";
+}
+function addKey(id,title){
+  if(keys.includes(id)) return;
+  keys.push(id); store.set("kenia_keys",keys); updateKeys(); Sound.win(); vib([60,40,60]);
+  conf({particleCount:75,spread:75,origin:{y:.6}}); toast(`🗝️ ¡Llave #${id} encontrada! (${title})`);
+}
+updateKeys();
+$("#questPill").onclick=()=>openModal(`<div class="mi">🗝️</div><h3>Misión de las 3 Llaves</h3><p>Llevas <b>${keys.length}/3</b>:\n${keys.includes(1)?"✅":"1️⃣"} Escondida detrás de las fotos Polaroid\n${keys.includes(2)?"✅":"2️⃣"} En el cometa dorado ☄️ del cielo\n${keys.includes(3)?"✅":"3️⃣"} Al terminar la Trivia o ganar el Minijuego</p>`);
+$("#openChestBtn").onclick=()=>{
+  if(keys.length<3){ toast(`Te faltan ${3-keys.length} llave(s) dorada(s) 🗝️`); vib(120); return; }
+  Sound.win(); conf({particleCount:160,spread:110,origin:{y:.6}});
+  openModal(`<div class="mi">👑</div><h3>¡Felicidades, Kenia Malanche Lara!</h3><p>${CONFIG.cofrePremio}</p><button class="btn gold" style="margin-top:14px" id="waChest">Reclamar con Javier 💬</button>`);
+  $("#waChest").onclick=()=>sendWhatsApp("¡Amor! Ya encontré las 3 llaves doradas y abrí el Cofre Secreto en nuestra app 👑💖 ¡Quiero mi sorpresa!");
+};
+
+/* ===================== CONTADOR ===================== */
+const labels=["años","meses","días","horas","minutos","segundos"];
+$("#cgrid").innerHTML=labels.map((l,i)=>`<div class="tbox"><div class="tnum" id="t${i}">0</div><div class="tlbl">${l}</div></div>`).join("");
+const start=new Date(CONFIG.inicio);
+function tick(){
+  const now=new Date();
+  let y=now.getFullYear()-start.getFullYear(), m=now.getMonth()-start.getMonth(), d=now.getDate()-start.getDate(),
+      h=now.getHours()-start.getHours(), mi=now.getMinutes()-start.getMinutes(), s=now.getSeconds()-start.getSeconds();
+  if(s<0){s+=60;mi--} if(mi<0){mi+=60;h--} if(h<0){h+=24;d--}
+  if(d<0){ d+=new Date(now.getFullYear(),now.getMonth(),0).getDate(); m--; }
+  if(m<0){m+=12;y--}
+  [y,m,d,h,mi,s].forEach((v,i)=>$("#t"+i).textContent=v);
+  const totalDays=Math.max(1,Math.floor((now-start)/864e5));
+  $("#statsPills").innerHTML=`<span class="spill">📅 <b>${totalDays.toLocaleString("es-MX")}</b> días juntos</span><span class="spill">🕐 <b>${Math.floor((now-start)/36e5).toLocaleString("es-MX")}</b> horas</span><span class="spill">💓 <b>${Math.floor((now-start)/1000*1.2).toLocaleString("es-MX")}</b> latidos por ti</span>`;
+  let nx=new Date(now.getFullYear(),now.getMonth(),start.getDate(),start.getHours(),start.getMinutes());
+  if(nx<=now) nx=new Date(now.getFullYear(),now.getMonth()+1,start.getDate(),start.getHours(),start.getMinutes());
+  const tm=(nx.getFullYear()-start.getFullYear())*12+nx.getMonth()-start.getMonth();
+  const txt=tm%12===0?`${tm/12} ${tm/12===1?"año":"años"}`:`${tm} ${tm===1?"mes":"meses"}`;
+  const dl=Math.ceil((nx-now)/864e5);
+  $("#next").innerHTML=`Faltan <b>${dl} ${dl===1?"día":"días"}</b> para cumplir <b>${txt}</b> juntos 💞`;
+  const isDay = now.getDate()===start.getDate();
+  $("#todayBanner").innerHTML = isDay ? `<div class="today-banner">🎉 ¡Hoy es nuestro día especial, Kenia! Te amo 💖</div>` : "";
+  if(isDay && store.get("kenia_celebrated")!==now.toDateString() && !document.body.classList.contains("locked")){ store.set("kenia_celebrated",now.toDateString()); conf({particleCount:200,spread:120,origin:{y:.5}}); }
+}
+setInterval(tick,1000); tick();
+
+/* Extrañar */
+let miss=store.get("kenia_miss",0); $("#missCount").textContent=miss;
+function triggerMiss(){
+  miss++; store.set("kenia_miss",miss); $("#missCount").textContent=miss; Sound.chime(); vib([50,50,50]);
+  openModal(`<div class="mi">💕</div><h3>¡Javier también te extraña, Kenia!</h3><p>Llevas <b>${miss}</b> toques de amor. ¿Le avisas ahorita por WhatsApp?</p><button class="btn main" style="margin-top:14px" id="waMiss">Mandar "Te extraño" 💬</button>`);
+  $("#waMiss").onclick=()=>sendWhatsApp(`¡Hola mi amor! Toqué el botón de "Te extraño" en nuestra app (toque #${miss}) 💕 Te amo.`);
+}
+$("#missBtnMain").onclick=triggerMiss; $("#missYouTopBtn").onclick=triggerMiss;
+
+/* Modos del corazón */
+(function(){
+  const saved=store.get("kenia_mode","rose");
+  $$(".mode-chip").forEach(c=>{
+    c.classList.toggle("on",c.dataset.mode===saved);
+    c.onclick=()=>{ $$(".mode-chip").forEach(x=>x.classList.remove("on")); c.classList.add("on"); store.set("kenia_mode",c.dataset.mode); window.dispatchEvent(new CustomEvent("heartmode",{detail:c.dataset.mode})); Sound.pop(); };
+  });
+})();
+
+/* Escáner hilo rojo */
+(function(){
+  const pad=$("#fpPad"), bar=$("#fpBar"), st=$("#fpStatus"); let timer=null,p=0,done=false;
+  const stopScan=()=>{ clearInterval(timer); pad.classList.remove("scanning"); if(!done){ p=0; bar.style.width="0"; } };
+  pad.addEventListener("pointerdown",e=>{
+    e.preventDefault(); done=false; p=0; pad.classList.add("scanning"); st.textContent="Escaneando huella de Kenia..."; clearInterval(timer);
+    timer=setInterval(()=>{
+      p=Math.min(100,p+4); bar.style.width=p+"%"; if(p%20===0) vib(25);
+      if(p>=100){
+        clearInterval(timer); done=true; pad.classList.remove("scanning"); Sound.win(); vib([80,40,80]);
+        st.textContent="💖 ¡1000% Almas Gemelas Confirmadas!";
+        openModal(`<div class="mi">🧶</div><h3>Kenia Malanche Lara & Javier</h3><p>Resultado biométrico: <b>1000% Almas Gemelas unidas por el Hilo Rojo</b>.</p><button class="btn main" style="margin-top:14px" id="waFp">Mandar resultado a Javier 💬</button>`);
+        $("#waFp").onclick=()=>sendWhatsApp("¡Amor! Escaneé mi huella en nuestra app y salió 1000% Almas Gemelas (Kenia & Javier) 🧶💖");
+        setTimeout(()=>{ done=false; bar.style.width="0"; },2500);
+      }
+    },90);
+  });
+  addEventListener("pointerup",stopScan); addEventListener("pointercancel",stopScan);
+})();
+
+/* ===================== LUNA ===================== */
+(function(){
+  const cv=$("#moonCv"), ctx=cv.getContext("2d"); let today=false;
+  const SYN=29.530588853, REF=Date.UTC(2000,0,6,18,14);
+  function phaseOf(d){ return ((((d.getTime()-REF)/864e5)/SYN)%1+1)%1; }
+  function nameOf(p){ return p<.03||p>.97?"Luna nueva":p<.22?"Luna creciente":p<.28?"Cuarto creciente":p<.47?"Gibosa creciente":p<.53?"Luna llena":p<.72?"Gibosa menguante":p<.78?"Cuarto menguante":"Luna menguante"; }
+  function draw(d){
+    const p=phaseOf(d), R=74, c=110, k=Math.cos(p*2*Math.PI), wax=p<.5;
+    ctx.clearRect(0,0,220,220);
+    const gl=ctx.createRadialGradient(c,c,R*.9,c,c,R*1.55); gl.addColorStop(0,"rgba(255,244,214,.28)"); gl.addColorStop(1,"rgba(255,244,214,0)");
+    ctx.fillStyle=gl; ctx.fillRect(0,0,220,220);
+    ctx.fillStyle="#2a2040"; ctx.beginPath(); ctx.arc(c,c,R,0,7); ctx.fill();
+    ctx.save(); ctx.beginPath(); ctx.arc(c,c,R,-Math.PI/2,Math.PI/2,!wax);
+    ctx.ellipse(c,c,Math.max(.01,Math.abs(k))*R,R,0,Math.PI/2,-Math.PI/2,wax?k>0:k<0); ctx.closePath();
+    ctx.fillStyle="#fff4d6"; ctx.fill(); ctx.clip();
+    ctx.fillStyle="rgba(190,170,130,.35)"; [[-20,-18,13],[22,-30,9],[10,22,16],[-34,16,8],[34,10,7]].forEach(([x,y,r])=>{ ctx.beginPath(); ctx.arc(c+x,c+y,r,0,7); ctx.fill(); });
+    ctx.restore();
+    $("#moonDateLbl").textContent=d.toLocaleDateString("es-MX",{year:"numeric",month:"long",day:"numeric"});
+    $("#moonPhaseName").textContent=nameOf(p)+" ✨";
+    $("#moonIllum").textContent=`${Math.round((1-k)/2*100)}% iluminada`;
+  }
+  draw(new Date(CONFIG.inicio));
+  $("#toggleMoonBtn").onclick=()=>{ today=!today; draw(today?new Date():new Date(CONFIG.inicio)); $("#toggleMoonBtn").textContent=today?"Ver la Luna de nuestro inicio 🌙":"Ver la Luna de hoy 🔭"; Sound.pop(); };
+
+  /* Vela */
+  const cc=$("#candleCv"), c2=cc.getContext("2d"); let lit=true,t=0,smoke=[];
+  (function loop(){
+    t+=.09; c2.clearRect(0,0,220,200);
+    c2.fillStyle="#ff758c"; c2.fillRect(40,140,140,50);
+    c2.fillStyle="#ffc2d1"; c2.fillRect(40,140,140,14);
+    c2.fillStyle="#fff5e4"; c2.fillRect(98,70,24,70);
+    c2.fillStyle="#ff2a6d"; for(let i=0;i<4;i++) c2.fillRect(98,80+i*14,24,5);
+    if(lit){
+      const sw=Math.sin(t)*3, gl=c2.createRadialGradient(110,56,2,110,56,70); gl.addColorStop(0,"rgba(255,210,122,.4)"); gl.addColorStop(1,"rgba(255,210,122,0)");
+      c2.fillStyle=gl; c2.fillRect(30,0,160,130);
+      c2.beginPath(); c2.moveTo(110,70); c2.bezierCurveTo(97,60,102+sw,46,110+sw,32); c2.bezierCurveTo(118+sw,46,123,60,110,70);
+      const fg=c2.createLinearGradient(0,32,0,70); fg.addColorStop(0,"#fff3b0"); fg.addColorStop(.6,"#ffb347"); fg.addColorStop(1,"#ff6b35"); c2.fillStyle=fg; c2.fill();
+    }
+    for(let i=smoke.length-1;i>=0;i--){ const s=smoke[i]; s.y-=.8; s.x+=Math.sin(s.y*.1)*.5; s.a-=.012; s.r+=.25; if(s.a<=0){ smoke.splice(i,1); continue; } c2.fillStyle=`rgba(220,220,230,${s.a})`; c2.beginPath(); c2.arc(s.x,s.y,s.r,0,7); c2.fill(); }
+    requestAnimationFrame(loop);
+  })();
+  function blow(){
+    if(!lit) return; lit=false; for(let i=0;i<10;i++) smoke.push({x:110+rnd(-3,3),y:60-i*3,a:.5,r:3});
+    Sound.win(); vib([50,30,50]); conf({particleCount:90,spread:85,origin:{y:.6}});
+    openModal(`<div class="mi">🎂✨</div><h3>¡Deseo pedido, Kenia!</h3><p>${CONFIG.deseoVela}</p>`);
+  }
+  cc.onclick=()=>{ if(lit) blow(); else { lit=true; Sound.chime(); toast("🕯️ Vela encendida otra vez"); } };
+  $("#tapBlowBtn").onclick=blow;
+  $("#micBtn").onclick=async()=>{
+    if(!lit){ lit=true; }
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      const ac=new (window.AudioContext||window.webkitAudioContext)(), src=ac.createMediaStreamSource(stream), an=ac.createAnalyser();
+      an.fftSize=256; src.connect(an); const data=new Uint8Array(an.frequencyBinCount);
+      toast("¡Sóplale fuerte a tu teléfono, Kenia! 💨");
+      const iv=setInterval(()=>{
+        an.getByteFrequencyData(data); let sum=0; for(let i=0;i<20;i++) sum+=data[i];
+        const lvl=Math.min(100,Math.round(sum/25)); $("#micBar").style.width=lvl+"%";
+        if(lvl>60){ clearInterval(iv); stream.getTracks().forEach(x=>x.stop()); ac.close(); $("#micBar").style.width="0"; blow(); }
+      },60);
+      setTimeout(()=>{ clearInterval(iv); try{ stream.getTracks().forEach(x=>x.stop()); }catch(e){} },15000);
+    }catch(e){ toast("No pude usar el micrófono: usa el botón 💨"); }
+  };
+})();
+
+/* ===================== CARTA ===================== */
+let letterOpened=false;
+$("#waxEnv").onclick=async()=>{
+  if(letterOpened) return; letterOpened=true; Sound.chime(); vib(40);
+  $("#waxEnv").style.display="none"; $("#paperLetter").classList.add("open");
+  const el=$("#letterBody"), txt=CONFIG.carta.texto; el.textContent="";
+  let skip=false;
+  $("#paperLetter").onclick=()=>{ el.textContent=txt; $("#letterSign").textContent=CONFIG.carta.firma; $("#letterSign").classList.add("on"); skip=true; };
+  for(const ch of txt){ if(skip) return; el.textContent+=ch; await sleep(ch==="\n"?220:34); }
+  $("#letterSign").textContent=CONFIG.carta.firma; $("#letterSign").classList.add("on");
+};
+
+/* ===================== HISTORIA ===================== */
+$("#chapters").innerHTML=CONFIG.capitulos.map((c,i)=>`<article class="chapter rv"><div class="num">0${i+1}</div><div class="date">${c.fecha}</div><h3>${c.titulo}</h3><p>${c.texto}</p></article>`).join("");
+
+/* ===================== CIELO ===================== */
+(function(){
+  const pts=CONFIG.recuerdos, d=pts.map((p,i)=>(i?"L":"M")+p.x+" "+p.y).join(" ");
+  $("#sky").innerHTML=`<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="${d}" pathLength="1"/></svg>`+
+    pts.map((p,i)=>`<button class="star" style="left:${p.x}%;top:${p.y}%" data-i="${i}"><i style="animation-delay:${i*.5}s"></i><span>${p.titulo}</span></button>`).join("")+
+    `<button class="secret-key-star" id="skyKeyBtn" aria-label="Cometa">☄️</button>`;
+  $$("#sky .star").forEach(b=>b.onclick=()=>{ const p=pts[b.dataset.i]; Sound.chime(); vib(30); openModal(`<div class="mi">⭐</div><div class="md">${p.fecha}</div><h3>${p.titulo}</h3><p>${p.texto}</p>`); });
+  $("#skyKeyBtn").onclick=()=>addKey(2,"Cometa del Cielo");
+})();
+
+/* ===================== POLAROIDS + EMPAQUETADOR DE FOTOS ===================== */
+const photos=store.get("kenia_photos",{});
+const captions=store.get("kenia_captions",{});
+function shrink(file,max){
+  return new Promise((res,rej)=>{
+    const img=new Image(); img.onload=()=>{
+      const sc=Math.min(1,max/Math.max(img.width,img.height)), c=document.createElement("canvas");
+      c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      URL.revokeObjectURL(img.src); res(c.toDataURL("image/jpeg",.8));
+    }; img.onerror=rej; img.src=URL.createObjectURL(file);
+  });
+}
+function openPhoto(i){
+  const f=CONFIG.fotos[i], src=photos[i]||f.src, txt=captions[i]||f.texto;
+  openModal(`
+    ${src?`<img class="photo" src="${src}" alt="">`:`<div class="mi">💖</div>`}
+    <h3>${txt}</h3>
+    <input id="capInp" value="${txt.replace(/"/g,'&quot;')}" placeholder="Frase de la foto..." style="width:100%;margin-top:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:center">
+    <div class="row" style="margin-top:12px">
+      <label class="btn gold" style="cursor:pointer">📷 ${src?"Cambiar":"Elegir"} foto<input type="file" accept="image/*" id="phInp" hidden></label>
+      <button class="btn ghost" id="saveCapBtn">Guardar frase ✨</button>
+    </div>
+  `);
+  $("#saveCapBtn").onclick=()=>{
+    const v=$("#capInp").value.trim();
+    if(v){ captions[i]=v; store.set("kenia_captions",captions); renderPols(); toast("✨ Frase guardada"); closeModal(); }
+  };
+  $("#phInp").onchange=async e=>{
+    const file=e.target.files[0]; if(!file) return;
+    const v=$("#capInp").value.trim(); if(v){ captions[i]=v; store.set("kenia_captions",captions); }
+    try{ photos[i]=await shrink(file,680); if(!store.set("kenia_photos",photos)) toast("Foto muy pesada para memoria local"); else toast("📸 Foto agregada"); }catch(err){ toast("No pude leer esa foto"); }
+    renderPols(); closeModal();
+  };
+}
+let zTop=10;
+function renderPols(){
+  const board=$("#board"); board.querySelectorAll(".pol").forEach(e=>e.remove());
+  const bw=board.clientWidth||340, cols=bw<520?2:3, pw=145, gap=Math.max(6,(bw-cols*pw)/(cols+1)), rows=Math.ceil(CONFIG.fotos.length/cols);
+  board.style.height=Math.max(420,rows*215+70)+"px";
+  CONFIG.fotos.forEach((f,i)=>{
+    const src=photos[i]||f.src, txt=captions[i]||f.texto, el=document.createElement("div"); el.className="pol";
+    el.innerHTML=`<div class="img">${src?`<img src="${src}" alt="">`:"💖"}</div><div class="cap">${txt}</div>`;
+    el.style.left=(gap+(i%cols)*(pw+gap))+"px"; el.style.top=(20+Math.floor(i/cols)*215)+"px"; el.style.transform=`rotate(${rnd(-7,7)}deg)`;
+    board.appendChild(el);
+    let drag=false,sx=0,sy=0,ol=0,ot=0,moved=0;
+    el.addEventListener("pointerdown",e=>{ drag=true; moved=0; el.setPointerCapture(e.pointerId); sx=e.clientX; sy=e.clientY; ol=el.offsetLeft; ot=el.offsetTop; el.style.zIndex=++zTop; });
+    el.addEventListener("pointermove",e=>{ if(!drag) return; const dx=e.clientX-sx, dy=e.clientY-sy; moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));
+      el.style.left=Math.max(0,Math.min(board.clientWidth-el.offsetWidth,ol+dx))+"px"; el.style.top=Math.max(0,Math.min(board.clientHeight-el.offsetHeight,ot+dy))+"px"; });
+    el.addEventListener("pointerup",()=>{ drag=false; if(moved<6) openPhoto(i); });
+  });
+}
+renderPols(); addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(renderPols,300); });
+$("#boardKeyBtn").onclick=()=>{ addKey(1,"Álbum Polaroid"); $("#boardKeyBtn").textContent="🗝️ Llave #1 obtenida ✓"; };
+
+/* Gestor & Empaquetador de Fotos en 1 clic */
+$("#openPhotoMgrBtn").onclick=()=>{
+  const list = CONFIG.fotos.map((f,i)=>{
+    const has = !!(photos[i]||f.src);
+    const txt = captions[i]||f.texto;
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:1px solid var(--line);text-align:left">
+      <span style="font-size:.88rem">${has?"✅":"📷"} <b>Foto #${i+1}:</b> ${txt}</span>
+      <button class="btn ghost" style="padding:6px 12px;font-size:.78rem" data-edit="${i}">Elegir</button>
+    </div>`;
+  }).join("");
+  const hasVoice = !!(store.get("kenia_voice","") || CONFIG.notaDeVoz);
+  openModal(`
+    <div class="mi">🖼️</div>
+    <h3>Empaquetar Fotos y Voz para Kenia</h3>
+    <p style="font-size:.86rem;color:var(--muted)">Elige tus 5 fotos aquí abajo (y graba tu nota de voz en la sección Música). Al tocar <b>"Descargar index.html listo"</b>, el archivo descargado ya llevará tus fotos y tu voz integradas adentro.</p>
+    <div style="margin:12px 0;background:rgba(255,255,255,.05);border-radius:16px;padding:6px">
+      ${list}
+      <div style="padding:8px 10px;text-align:left;font-size:.86rem;color:var(--gold)">
+        ${hasVoice?"✅ Nota de voz de Javier lista para incluir":"🎙️ Sin nota de voz grabada aún (puedes grabarla en la sección Música)"}
+      </div>
+    </div>
+    <button class="btn gold" id="exportHtmlWithPhotos" style="width:100%;margin-top:8px">📦 Descargar index.html listo con Fotos y Voz</button>
+  `);
+  $$("[data-edit]").forEach(b=>b.onclick=()=>openPhoto(+b.dataset.edit));
+  $("#exportHtmlWithPhotos").onclick=()=>{
+    const merged = CONFIG.fotos.map((f,i)=>({
+      src: photos[i] || f.src || "",
+      texto: captions[i] || f.texto
+    }));
+    const savedVoice = store.get("kenia_voice","") || CONFIG.notaDeVoz || "";
+    const block = "/*__FOTOS_START__*/\n  fotos: " + JSON.stringify(merged, null, 4) + ",\n  /*__FOTOS_END__*/";
+    const vblock = "/*__VOICE_START__*/\n  notaDeVoz: " + JSON.stringify(savedVoice) + ",\n  /*__VOICE_END__*/";
+    const rawHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML
+      .replace(/\/\*__FOTOS_START__\*\/[\s\S]*?\/\*__FOTOS_END__\*\//, block)
+      .replace(/\/\*__VOICE_START__\*\/[\s\S]*?\/\*__VOICE_END__\*\//, vblock);
+    const blob = new Blob([rawHtml], {type:"text/html;charset=utf-8"});
+    const a = document.createElement("a");
+    a.download = "index.html";
+    a.href = URL.createObjectURL(blob);
+    a.click();
+    toast("✅ index.html descargado con tus fotos y voz incluidas");
+  };
+};
+
+/* Cabina con filtros en vivo y Share Sheet para iPhone */
+(function(){
+  const pv=$("#boothPreview"), px=pv.getContext("2d"), vid=$("#boothVideo");
+  let stream=null, lastImg=null, lastMirror=false, curFilter="none";
+  function cover(src,sw,sh,mirror){
+    const s=Math.max(320/sw,320/sh), w=sw*s, h=sh*s, x=20+(320-w)/2, y=20+(320-h)/2;
+    px.save(); px.beginPath(); px.rect(20,20,320,320); px.clip();
+    if(mirror){ px.translate(360,0); px.scale(-1,1); }
+    px.drawImage(src,mirror?360-x-w:x,y,w,h);
+    if(curFilter==="warm"){ px.fillStyle="rgba(255,180,80,.18)"; px.fillRect(0,0,360,360); }
+    else if(curFilter==="pink"){ px.fillStyle="rgba(255,60,130,.18)"; px.fillRect(0,0,360,360); }
+    else if(curFilter==="bw"){
+      const id=px.getImageData(20,20,320,320), d=id.data;
+      for(let i=0;i<d.length;i+=4){ const g=.3*d[i]+.59*d[i+1]+.11*d[i+2]; d[i]=d[i+1]=d[i+2]=g; }
+      px.putImageData(id,20,20);
+    }
+    px.restore();
+  }
+  function render(src,sw,sh,mirror){
+    if(src){ lastImg={src,sw,sh}; lastMirror=!!mirror; }
+    px.fillStyle="#fff8f0"; px.fillRect(0,0,360,430);
+    if(lastImg) cover(lastImg.src,lastImg.sw,lastImg.sh,lastMirror);
+    else { px.fillStyle="#310b3a"; px.fillRect(20,20,320,320); px.font="64px serif"; px.textAlign="center"; px.fillText("💖",180,200); }
+    px.fillStyle="#2c1523"; px.font="bold 26px Caveat, cursive"; px.textAlign="center"; px.fillText("Kenia & Javier 💖",180,385);
+    px.font="16px Outfit"; px.fillStyle="#8c586c"; px.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),180,410);
+  }
+  render(null);
+  $$("#boothFilters .fchip").forEach(b=>b.onclick=()=>{
+    $$("#boothFilters .fchip").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on"); curFilter=b.dataset.f; render(); Sound.pop();
+  });
+  $("#startCamBtn").onclick=async()=>{
+    try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false}); vid.srcObject=stream; vid.style.display="block"; $("#snapBtn").style.display="inline-flex"; }
+    catch(e){ toast("No hay cámara: elige una foto de tu galería 🖼️"); }
+  };
+  $("#snapBtn").onclick=()=>{
+    const c=document.createElement("canvas"); c.width=vid.videoWidth||320; c.height=vid.videoHeight||320; c.getContext("2d").drawImage(vid,0,0);
+    render(c,c.width,c.height,true); if(stream) stream.getTracks().forEach(t=>t.stop()); vid.style.display="none"; $("#snapBtn").style.display="none"; Sound.chime(); vib(40); conf({particleCount:40,spread:60,origin:{y:.7}});
+  };
+  $("#uploadPhotoInp").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image(); img.onload=()=>render(img,img.width,img.height,false); img.src=URL.createObjectURL(f); };
+  $("#dlBoothBtn").onclick=()=>{
+    pv.toBlob(async blob=>{
+      const file=new File([blob],"Polaroid-Kenia-y-Javier.png",{type:"image/png"});
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        try{ await navigator.share({files:[file],title:"Kenia & Javier 💖"}); return; }catch(e){}
+      }
+      const a=document.createElement("a"); a.download=file.name; a.href=URL.createObjectURL(blob); a.click();
+    },"image/png");
+  };
+})();
+
+/* ===================== FRASCO & MASCOTA ===================== */
+let order=[], oi=0;
+function shuffle(){ order=CONFIG.razones.map((_,i)=>i).sort(()=>Math.random()-.5); oi=0; }
+shuffle();
+function pullReason(){
+  if(oi>=order.length) shuffle();
+  Sound.chime(); vib(25);
+  const j=$("#jarBox"); j.classList.remove("sh"); void j.offsetWidth; j.classList.add("sh");
+  $("#jarNote").textContent=`"${CONFIG.razones[order[oi++]]}"`;
+}
+$("#jarBox").onclick=pullReason; $("#jarBtn").onclick=pullReason;
+
+let petXp=store.get("kenia_pet",20);
+const stages=["🧸","🐰","🦊","🦄","🐉"], pmsg=["¡Dale cariñitos para que crezca!","¡Ya se siente querido! 🥰","¡Está feliz de verte, Kenia!","¡Casi alcanza su forma final!","¡Es el guardián más poderoso del amor! 👑"];
+function updatePet(lvUp){
+  const lv=Math.min(4,Math.floor(petXp/100));
+  $("#petAvatar").textContent=stages[lv]; $("#petTitle").textContent=`Guardián de Kenia & Javier • Nivel ${lv+1}`;
+  $("#petFill").style.width=(lv===4?100:petXp%100)+"%"; $("#petMsg").textContent=pmsg[lv];
+  if(lvUp){ Sound.win(); conf({particleCount:120,spread:100,origin:{y:.6}}); toast("🎉 ¡Tu guardián evolucionó!"); }
+}
+updatePet();
+$$("[data-pet]").forEach(b=>b.onclick=e=>{
+  const before=Math.floor(petXp/100); petXp+=25; store.set("kenia_pet",petXp); Sound.pop(); vib(20);
+  const r=b.getBoundingClientRect(); burst(r.left+r.width/2,r.top,6);
+  updatePet(Math.min(4,Math.floor(petXp/100))>before);
+});
+$("#petAvatar").onclick=()=>{ Sound.pop(); vib(15); const r=$("#petAvatar").getBoundingClientRect(); burst(r.left+r.width/2,r.top+20,5); };
+
+/* ===================== CUPONES ===================== */
+let usedC=store.get("kenia_coupons",[]);
+function renderCoupons(){
+  $("#coupons").innerHTML=CONFIG.cupones.map(c=>{ const u=usedC.includes(c.id); return `<div class="coupon rv in ${u?"used":""}" data-id="${c.id}"><div><div class="c-top">Vale para Kenia</div><h4>${c.titulo}</h4><p>${c.desc}</p></div><div class="stamp">${u?"CANJEADO 💖":"Toca para canjear →"}</div></div>`; }).join("");
+  $$("#coupons .coupon").forEach(el=>el.onclick=()=>{
+    const c=CONFIG.cupones.find(x=>x.id===el.dataset.id), used=usedC.includes(c.id);
+    openModal(`<div class="mi">🎟️</div><div class="md">Vale para Kenia</div><h3>${c.titulo}</h3><p>${c.desc}</p><button class="btn main" style="margin-top:14px" id="useC">${used?"Recordárselo a Javier 💬":"Canjear y avisar a Javier 💬"}</button>`);
+    $("#useC").onclick=()=>{
+      if(!used){ usedC.push(c.id); store.set("kenia_coupons",usedC); renderCoupons(); Sound.win(); conf({particleCount:90,spread:80,origin:{y:.6}}); }
+      sendWhatsApp(`¡Hola amor! ${used?"Te recuerdo mi":"Acabo de canjear mi"} cupón "${c.titulo}" en nuestra app 🎟️💖 ¿Cuándo lo hacemos válido?`); closeModal();
+    };
+  });
+}
+renderCoupons();
+
+/* ===================== RASCA & RULETA ===================== */
+(function(){
+  const cv=$("#scratchCv"), ctx=cv.getContext("2d"); let down=false, n=0, won=false;
+  function fill(){
+    cv.style.transition="none"; cv.style.opacity=1; cv.style.pointerEvents="auto"; won=false;
+    cv.width=cv.parentElement.clientWidth||280; cv.height=cv.parentElement.clientHeight||165;
+    ctx.globalCompositeOperation="source-over";
+    const g=ctx.createLinearGradient(0,0,cv.width,cv.height); g.addColorStop(0,"#ffde59"); g.addColorStop(.5,"#ffc83d"); g.addColorStop(1,"#ffa726");
+    ctx.fillStyle=g; ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle="#310b3a"; ctx.font="bold 15px Outfit"; ctx.textAlign="center"; ctx.fillText("✨ RASCA AQUÍ, KENIA ✨",cv.width/2,cv.height/2+5);
+    requestAnimationFrame(()=>cv.style.transition="opacity .7s");
+  }
+  setTimeout(fill,200); addEventListener("resize",()=>{ if(!won) fill(); });
+  function cleared(){ const d=ctx.getImageData(0,0,cv.width,cv.height).data; let c=0,t=0; for(let i=3;i<d.length;i+=64){ t++; if(d[i]===0) c++; } return c/t; }
+  function reveal(){
+    won=true; cv.style.opacity=0; cv.style.pointerEvents="none"; Sound.win(); vib([60,40,60]); conf({particleCount:130,spread:100,origin:{y:.6}});
+    setTimeout(()=>{ openModal(`<div class="mi">🎁</div><h3>¡Premio desbloqueado!</h3><p>${CONFIG.rascaPremio}</p><button class="btn main" style="margin-top:14px" id="waScr">Reclamarlo con Javier 💬</button>`); $("#waScr").onclick=()=>sendWhatsApp("¡Amor! Raspé el boleto en nuestra app y gané: vale por un deseo cumplido 🎁💖"); },800);
+  }
+  cv.addEventListener("pointerdown",e=>{ down=true; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener("pointermove",e=>{
+    if(!down||won) return; const r=cv.getBoundingClientRect();
+    ctx.globalCompositeOperation="destination-out"; ctx.beginPath(); ctx.arc((e.clientX-r.left)*(cv.width/r.width),(e.clientY-r.top)*(cv.height/r.height),22,0,7); ctx.fill();
+    if(++n%8===0 && cleared()>.55) reveal();
+  });
+  addEventListener("pointerup",()=>down=false);
+  $("#resetScratch").onclick=fill;
+
+  /* Ruleta */
+  const wcv=$("#wheelCv"), w=wcv.getContext("2d"), items=CONFIG.ruletaCitas, arc=Math.PI*2/items.length, arcDeg=360/items.length;
+  const cols=["#ff2a6d","#9d4edd","#d4145a","#7b2cbf","#e0527b","#560bad"];
+  items.forEach((it,i)=>{
+    w.beginPath(); w.moveTo(130,130); w.arc(130,130,126,i*arc,(i+1)*arc); w.fillStyle=cols[i%cols.length]; w.fill();
+    w.strokeStyle="rgba(255,222,89,.6)"; w.lineWidth=1.5; w.stroke();
+    w.save(); w.translate(130,130); w.rotate(i*arc+arc/2); w.fillStyle="#fff"; w.font="bold 11px Outfit"; w.textAlign="right"; w.fillText(it,114,4); w.restore();
+  });
+  w.beginPath(); w.arc(130,130,14,0,7); w.fillStyle="#ffde59"; w.fill();
+  let deg=0, spinning=false;
+  $("#spinBtn").onclick=()=>{
+    if(spinning) return; spinning=true; Sound.pop();
+    const win=Math.floor(Math.random()*items.length);
+    const land=((270-(win+.5)*arcDeg)%360+360)%360;
+    deg=Math.ceil(deg/360)*360+360*5+land;
+    wcv.style.transform=`rotate(${deg}deg)`;
+    let tk=0; const iv=setInterval(()=>{ Sound.tone(300+(tk++%8)*40,.05,"square",.03); },180);
+    setTimeout(()=>{
+      clearInterval(iv); spinning=false; Sound.win(); vib([80,40,80]); conf({particleCount:100,spread:90,origin:{y:.6}});
+      const prize=items[win];
+      openModal(`<div class="mi">🎡</div><h3>¡Nos toca: ${prize}!</h3><button class="btn main" style="margin-top:14px" id="waWh">Mandar plan a Javier 💬</button>`);
+      $("#waWh").onclick=()=>sendWhatsApp(`¡Amor! Giré la ruleta en nuestra app y nos tocó: ${prize} 🎡💖`);
+    },4100);
+  };
+})();
+
+/* ===================== MÚSICA ===================== */
+$("#playlist").innerHTML=CONFIG.canciones.map((s,i)=>`<div class="song" data-i="${i}"><div class="ico">🎵</div><div><h4>${s.t}</h4><small>${s.por}</small></div></div>`).join("");
+$$("#playlist .song").forEach(el=>el.onclick=()=>{ const i=+el.dataset.i; if(Sound.track===i) Sound.stop(); else Sound.play(i); });
+const pn=[{l:"Do",f:523.25},{l:"Re",f:587.33},{l:"Mi",f:659.25},{l:"Fa",f:698.46},{l:"Sol",f:783.99},{l:"La",f:880},{l:"Si",f:987.77},{l:"Do+",f:1046.5}];
+$("#pianoKeys").innerHTML=pn.map((n,i)=>`<button class="pkey" data-i="${i}"><span>${n.l}</span></button>`).join("");
+function hit(i){ Sound.tone(pn[i].f,.5,"triangle",.14); const k=$$("#pianoKeys .pkey")[i]; k.classList.add("hit"); setTimeout(()=>k.classList.remove("hit"),180); }
+$$("#pianoKeys .pkey").forEach(b=>b.addEventListener("pointerdown",()=>hit(+b.dataset.i)));
+$("#autoPlayPianoBtn").onclick=()=>[0,2,4,7,4,2,0,4,7,5,2,4,0].forEach((idx,s)=>setTimeout(()=>hit(idx),s*260));
+
+/* Estudio de Nota de Voz (Graba y reproduce la voz real de Javier) */
+(function(){
+  const playBtn=$("#playVoiceBtn"), recBtn=$("#recVoiceBtn"), wave=$("#voiceWave"), st=$("#voiceStatus");
+  const vAudio = new Audio();
+  let rec=null, chunks=[], recording=false;
+  function getVoiceSrc(){ return store.get("kenia_voice","") || CONFIG.notaDeVoz || ""; }
+  function refreshVoiceUI(){
+    const has = !!getVoiceSrc();
+    st.textContent = has ? "Toca reproducir para escuchar el mensaje de voz de Javier 💖" : "Javier: toca 'Grabar mi voz' para dejarle un audio a Kenia (máx 20s)";
+  }
+  refreshVoiceUI();
+  playBtn.onclick=()=>{
+    const src = getVoiceSrc();
+    if(!src){ toast("🎙️ Primero graba tu voz con el botón 'Grabar mi voz'"); return; }
+    if(!vAudio.paused){ vAudio.pause(); wave.classList.remove("playing"); $("#vinylDisc").classList.remove("spin"); playBtn.textContent="▶️ Escuchar nota de voz"; return; }
+    Sound.stop();
+    vAudio.src = src;
+    vAudio.play().then(()=>{
+      wave.classList.add("playing"); $("#vinylDisc").classList.add("spin");
+      playBtn.textContent="⏸️ Pausar voz";
+    }).catch(()=>toast("Toca de nuevo para reproducir 🔊"));
+    vAudio.onended = ()=>{ wave.classList.remove("playing"); $("#vinylDisc").classList.remove("spin"); playBtn.textContent="▶️ Escuchar nota de voz"; };
+  };
+  recBtn.onclick=async()=>{
+    if(recording && rec){ rec.stop(); return; }
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+      chunks=[]; rec = new MediaRecorder(stream);
+      rec.ondataavailable = e=>{ if(e.data.size>0) chunks.push(e.data); };
+      rec.onstop = ()=>{
+        stream.getTracks().forEach(t=>t.stop()); recording=false;
+        wave.classList.remove("playing");
+        recBtn.textContent="🎙️ Regrabar mi voz";
+        const blob = new Blob(chunks, {type: rec.mimeType || "audio/webm"});
+        const reader = new FileReader();
+        reader.onloadend = ()=>{
+          store.set("kenia_voice", reader.result);
+          refreshVoiceUI(); Sound.win();
+          toast("✅ ¡Tu voz quedó guardada! Descarga el index.html en Fotos para empaquetarla");
+        };
+        reader.readAsDataURL(blob);
+      };
+      rec.start(); recording=true;
+      wave.classList.add("playing");
+      recBtn.textContent="⏹️ Detener grabación";
+      toast("🎙️ Grabando tu voz para Kenia... (habla ahora)");
+      setTimeout(()=>{ if(recording && rec) rec.stop(); }, 20000);
+    }catch(e){ toast("Permite el micrófono para grabar tu nota de voz 🎙️"); }
+  };
+})();
+
+/* ===================== ÁBREME CUANDO, CÁPSULAS, TAROT ===================== */
+const readE=store.get("kenia_read",[]);
+$("#envs").innerHTML=CONFIG.abrir.map((o,i)=>`<div class="env rv ${readE.includes(i)?"read":""}" data-i="${i}"><div class="ic">${readE.includes(i)?"💌":"✉️"}</div><small>ábreme cuando</small><h4>${o.t}</h4></div>`).join("");
+$$("#envs .env").forEach(el=>el.onclick=()=>{
+  const i=+el.dataset.i, o=CONFIG.abrir[i]; Sound.chime(); vib(30);
+  openModal(`<div class="mi">${o.ic}</div><div class="md">ábreme cuando</div><h3>${o.t}</h3><p>${o.msg}</p>`);
+  if(!readE.includes(i)){ readE.push(i); store.set("kenia_read",readE); el.classList.add("read"); el.querySelector(".ic").textContent="💌"; }
+});
+function capState(c){ const d=new Date(c.unlock+"T00:00:00"), left=Math.ceil((d-new Date())/864e5); return {open:left<=0,left,d}; }
+$("#capsules").innerHTML=CONFIG.capsulas.map((c,i)=>{ const s=capState(c); return `<div class="cap-box rv ${s.open?"":"locked"}" data-i="${i}"><div style="font-size:1.8rem">${s.open?"📬":"🔒"}</div><h4>${c.titulo}</h4><small style="color:var(--gold)">${s.open?"¡Ya se puede abrir!":`Se abre en ${s.left} ${s.left===1?"día":"días"}`}</small></div>`; }).join("");
+$$("#capsules .cap-box").forEach(el=>el.onclick=()=>{
+  const c=CONFIG.capsulas[el.dataset.i], s=capState(c);
+  if(!s.open){ vib(150); toast(`🔒 Se abre el ${s.d.toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"})}`); return; }
+  Sound.chime(); openModal(`<div class="mi">⏳</div><h3>${c.titulo}</h3><p>${c.msg}</p>`);
+});
+$("#tarotGrid").innerHTML=CONFIG.tarot.map((t,i)=>`<div class="tarot-card rv" data-i="${i}"><div class="face-down"><div style="font-size:3rem">🔮</div><small style="color:var(--gold);font-weight:700">${t.tiempo}</small><p style="color:var(--muted);font-size:.85rem;margin-top:6px">Toca para revelar</p></div><div class="face-up"><div style="font-size:2.4rem">${t.ic}</div><small style="color:var(--gold);font-weight:700">${t.tiempo}</small><h4 style="margin:6px 0">${t.titulo}</h4><p style="font-size:.88rem;color:var(--muted)">${t.txt}</p></div></div>`).join("");
+$$("#tarotGrid .tarot-card").forEach(el=>el.onclick=()=>{ if(!el.classList.contains("rev")){ el.classList.add("rev"); Sound.chime(); vib(30); } });
+
+/* ===================== TRIVIA ===================== */
+let qi=0;
+function renderQ(){
+  $("#qDots").innerHTML=CONFIG.trivia.map((_,i)=>`<i class="${i<qi?"on":""}"></i>`).join("");
+  const it=CONFIG.trivia[qi];
+  if(!it){ $("#qTitle").textContent="🎉 ¡Trivia completada, Kenia!"; $("#qOpts").innerHTML=`<p style="color:var(--gold);font-weight:700">¡Desbloqueaste la Llave #3! 🗝️</p>`; addKey(3,"Trivia del Amor"); return; }
+  $("#qTitle").textContent=`${qi+1}. ${it.q}`;
+  $("#qOpts").innerHTML=it.opts.map((o,i)=>`<button class="q-btn" data-i="${i}">${o}</button>`).join("");
+  $$("#qOpts .q-btn").forEach(b=>b.onclick=()=>{
+    if(+b.dataset.i===it.a){ b.classList.add("correct"); Sound.chime(); vib(30); setTimeout(()=>{ qi++; renderQ(); },650); }
+    else{ b.classList.add("wrong","sh"); vib(150); setTimeout(()=>b.classList.remove("sh"),500); }
+  });
+}
+renderQ();
+
+/* ===================== MINIJUEGO ===================== */
+(function(){
+  const cv=$("#gc"), g=cv.getContext("2d"); let run=false,score=0,left=25,bx=0,items=[],timer=null,last=0,spawn=0,cw=0,ch=0;
+  function fit(){ const d=Math.min(devicePixelRatio||1,2); cw=cv.clientWidth||320; ch=cv.clientHeight||380; cv.width=cw*d; cv.height=ch*d; g.setTransform(d,0,0,d,0,0); if(!bx) bx=cw/2; }
+  setTimeout(fit,200); addEventListener("resize",fit);
+  const mv=e=>{ const r=cv.getBoundingClientRect(); bx=Math.max(30,Math.min(cw-30,e.clientX-r.left)); };
+  cv.addEventListener("pointermove",mv); cv.addEventListener("pointerdown",mv);
+  function loop(ts){
+    if(!run) return; const dt=Math.min(40,ts-last); last=ts; spawn-=dt;
+    if(spawn<=0){ spawn=rnd(300,560); const r=Math.random(); items.push({x:rnd(24,cw-24),y:-20,v:rnd(2.2,4.4),k:r<.2?"bad":r<.3?"star":"ok"}); }
+    g.clearRect(0,0,cw,ch); g.font="30px serif"; g.textAlign="center";
+    for(let i=items.length-1;i>=0;i--){
+      const it=items[i]; it.y+=it.v*(dt/16); g.fillText(it.k==="bad"?"💔":it.k==="star"?"🌟":"💖",it.x,it.y);
+      if(it.y>ch-54&&it.y<ch-8&&Math.abs(it.x-bx)<50){
+        score=Math.max(0,score+(it.k==="bad"?-1:it.k==="star"?3:1)); $("#gScore").textContent=score;
+        it.k==="bad"?vib(80):vib(15); if(it.k!=="bad"){ const r=cv.getBoundingClientRect(); burst(r.left+it.x,r.top+it.y,3); }
+        items.splice(i,1);
+      } else if(it.y>ch+20) items.splice(i,1);
+    }
+    g.font="44px serif"; g.fillText("🧺",bx,ch-10); requestAnimationFrame(loop);
+  }
+  $("#gStart").onclick=()=>{
+    fit(); items=[]; score=0; left=25; run=true; last=performance.now(); spawn=0; bx=cw/2;
+    $("#gScore").textContent=0; $("#gTime").textContent=25; $("#gStart").style.display="none"; clearInterval(timer);
+    timer=setInterval(()=>{ left--; $("#gTime").textContent=left; if(left<=0) end(); },1000); requestAnimationFrame(loop);
+  };
+  function end(){
+    run=false; clearInterval(timer); g.clearRect(0,0,cw,ch); $("#gStart").style.display=""; $("#gStart").textContent="Jugar otra vez 🎮";
+    const best=Math.max(score,store.get("kenia_best",0)); store.set("kenia_best",best);
+    if(score>=CONFIG.meta){ addKey(3,"Minijuego"); conf({particleCount:160,spread:110,origin:{y:.6}}); Sound.win(); openModal(`<div class="mi">🏆</div><h3>¡Ganaste con ${score} corazones, Kenia!</h3><p>Récord: ${best} 💖</p>`); }
+    else openModal(`<div class="mi">💔</div><h3>${score} corazones</h3><p>Te faltaron ${CONFIG.meta-score} para la meta. ¡Tú puedes!\nRécord: ${best} 💖</p>`);
+  }
+})();
+
+/* ===================== PLANES ===================== */
+const doneP=store.get("kenia_plans",[]);
+function renderPlans(){
+  $("#plans").innerHTML=CONFIG.planes.map((p,i)=>`<div class="plan ${doneP.includes(i)?"done":""}" data-i="${i}"><div class="box"></div><span>${p}</span></div>`).join("");
+  $("#pfill").style.width=(doneP.length/CONFIG.planes.length*100)+"%";
+  $("#pcount").textContent=`${doneP.length} de ${CONFIG.planes.length} planes cumplidos`;
+  $$("#plans .plan").forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.i,k=doneP.indexOf(i);
+    if(k>=0) doneP.splice(k,1); else{ doneP.push(i); Sound.chime(); conf({particleCount:50,spread:60,origin:{y:.7}}); }
+    store.set("kenia_plans",doneP); renderPlans();
+    if(doneP.length===CONFIG.planes.length){ Sound.win(); conf({particleCount:200,spread:120,origin:{y:.5}}); openModal(`<div class="mi">🏆</div><h3>¡Cumplimos todos los planes!</h3><p>Entonces toca soñar planes nuevos juntos, Kenia 💖</p>`); }
+  });
+}
+renderPlans();
+
+/* ===================== PIROTECNIA ===================== */
+(function(){
+  const cv=$("#fwCv"), ctx=cv.getContext("2d"); let cw=320,ch=310,showTxt=false,sparks=[],rockets=[];
+  function fit(){ const d=Math.min(devicePixelRatio||1,2); cw=cv.clientWidth||320; ch=cv.clientHeight||310; cv.width=cw*d; cv.height=ch*d; ctx.setTransform(d,0,0,d,0,0); }
+  setTimeout(fit,200); addEventListener("resize",fit);
+  function boom(x,y,heart=true){
+    Sound.pop(); vib(20); const col=[["#ff2a6d","#ff758c"],["#ffde59","#ffa726"],["#9d4edd","#ff2a6d"]][Math.floor(Math.random()*3)];
+    for(let i=0;i<46;i++){
+      const t=i/46*Math.PI*2; let vx,vy;
+      if(heart){ vx=16*Math.pow(Math.sin(t),3)*.13; vy=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*.13; }
+      else{ const v=rnd(1,3.2); vx=Math.cos(t)*v; vy=Math.sin(t)*v; }
+      sparks.push({x,y,vx,vy,a:1,c:col[i%2]});
+    }
+  }
+  const launch=(x,y)=>rockets.push({x,y:ch,ty:y,v:6});
+  cv.addEventListener("pointerdown",e=>{ const r=cv.getBoundingClientRect(); launch(e.clientX-r.left,e.clientY-r.top); });
+  $("#fwNamesBtn").onclick=()=>{ showTxt=true; launch(cw*.3,ch*.35); setTimeout(()=>launch(cw*.7,ch*.35),300); setTimeout(()=>launch(cw*.5,ch*.2),600); };
+  setInterval(()=>{ if(!document.hidden&&Math.random()<.35) launch(rnd(cw*.15,cw*.85),rnd(ch*.15,ch*.5)); },2200);
+  (function loop(){
+    ctx.fillStyle="rgba(10,2,18,.22)"; ctx.fillRect(0,0,cw,ch);
+    if(showTxt){ ctx.shadowColor="#ffde59"; ctx.shadowBlur=18; ctx.fillStyle="#ffde59"; ctx.font="32px 'Great Vibes', cursive"; ctx.textAlign="center"; ctx.fillText("Kenia 💖 Javier",cw/2,ch-34); ctx.shadowBlur=0; }
+    for(let i=rockets.length-1;i>=0;i--){ const r=rockets[i]; r.y-=r.v; ctx.fillStyle="#fff"; ctx.fillRect(r.x,r.y,2,8); if(r.y<=r.ty){ boom(r.x,r.y,Math.random()<.7); rockets.splice(i,1); } }
+    for(let i=sparks.length-1;i>=0;i--){ const p=sparks[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=.03; p.a-=.014; if(p.a<=0){ sparks.splice(i,1); continue; } ctx.globalAlpha=p.a; ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,2.3,0,7); ctx.fill(); }
+    ctx.globalAlpha=1; requestAnimationFrame(loop);
+  })();
+})();
+
+/* ===================== FINAL ===================== */
+const yes=$("#yes"), no=$("#no"); let ys=1;
+function runNo(e){
+  if(e) e.preventDefault();
+  no.classList.add("run"); const bw=$("#btns").clientWidth-no.offsetWidth;
+  no.style.left=rnd(0,Math.max(bw,0))+"px"; no.style.top=rnd(-40,90)+"px";
+  ys=Math.min(ys+.12,1.8); yes.style.transform=`scale(${ys})`; vib(30);
+  no.textContent=["¿Segura? 🥺","Piénsalo bien...","Ese botón está roto 😅","Mejor di que sí 💖"][Math.floor(Math.random()*4)];
+}
+no.addEventListener("mouseenter",runNo); no.addEventListener("touchstart",runNo,{passive:false}); no.addEventListener("click",runNo);
+
+let sigDirty=false;
+yes.onclick=async()=>{
+  Sound.win(); vib([100,50,100,50,200]); store.set("kenia_yes",true);
+  $("#ask").style.display="none"; $("#yesMsg").style.display="block";
+  const end=Date.now()+5000;
+  (function f(){ conf({particleCount:6,angle:60,spread:60,origin:{x:0},colors:["#ff2a6d","#ffde59","#fff"]}); conf({particleCount:6,angle:120,spread:60,origin:{x:1},colors:["#ff2a6d","#ffde59","#fff"]}); if(Date.now()<end) requestAnimationFrame(f); })();
+  for(let i=0;i<6;i++){ burst(rnd(W*.2,W*.8),rnd(H*.3,H*.7),14); await sleep(250); }
+};
+(function(){
+  const cv=$("#sigCv"), ctx=cv.getContext("2d"); ctx.strokeStyle="#c9184a"; ctx.lineWidth=3; ctx.lineCap="round"; ctx.lineJoin="round";
+  let draw=false;
+  const pos=e=>{ const r=cv.getBoundingClientRect(); return {x:(e.clientX-r.left)*(cv.width/r.width),y:(e.clientY-r.top)*(cv.height/r.height)}; };
+  cv.addEventListener("pointerdown",e=>{ draw=true; sigDirty=true; cv.setPointerCapture(e.pointerId); const p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
+  cv.addEventListener("pointermove",e=>{ if(!draw) return; const p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); });
+  addEventListener("pointerup",()=>draw=false);
+  $("#clearSig").onclick=()=>{ ctx.clearRect(0,0,cv.width,cv.height); sigDirty=false; };
+
+  function wrap(c,text,x,y,maxW,lh){ const words=text.split(" "); let line=""; for(const w of words){ const t=line?line+" "+w:w; if(c.measureText(t).width>maxW&&line){ c.fillText(line,x,y); line=w; y+=lh; } else line=t; } c.fillText(line,x,y); return y; }
+  async function certificate(){
+    try{ await document.fonts.load("60px 'Great Vibes'"); await document.fonts.load("700 30px Outfit"); }catch(e){}
+    const c=document.createElement("canvas"); c.width=900; c.height=1200; const x=c.getContext("2d");
+    const bg=x.createLinearGradient(0,0,900,1200); bg.addColorStop(0,"#2b0d36"); bg.addColorStop(1,"#12041a"); x.fillStyle=bg; x.fillRect(0,0,900,1200);
+    x.strokeStyle="#ffde59"; x.lineWidth=6; x.strokeRect(34,34,832,1132); x.lineWidth=2; x.strokeRect(50,50,800,1100);
+    x.textAlign="center"; x.fillStyle="#ffde59"; x.font="700 30px Outfit"; x.fillText("CERTIFICADO OFICIAL",450,150);
+    x.font="84px 'Great Vibes'"; x.fillStyle="#ff758c"; x.fillText("de Amor Eterno",450,260);
+    x.font="80px serif"; x.fillText("💖",450,380);
+    x.fillStyle="#fff"; x.font="400 34px Outfit"; x.fillText("Se certifica que",450,470);
+    x.font="84px 'Great Vibes'"; x.fillStyle="#ffde59"; x.fillText("Kenia Malanche Lara",450,570);
+    x.fillStyle="#fff"; x.font="400 34px Outfit";
+    wrap(x,"aceptó escribir su historia de amor con Javier para siempre, con risas, abrazos y muchísimos planes por cumplir.",450,660,660,50);
+    const days=Math.floor((Date.now()-start)/864e5);
+    x.fillStyle="#e2d4ec"; x.font="400 28px Outfit"; x.fillText(`Después de ${days.toLocaleString("es-MX")} días juntos`,450,830);
+    x.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),450,875);
+    x.fillStyle="#fff"; x.fillRect(150,930,260,2); x.fillRect(490,930,260,2);
+    x.drawImage($("#sigCv"),150,850,260,87);
+    x.fillStyle="#ffde59"; x.font="54px 'Great Vibes'"; x.fillText("Javier",620,915);
+    x.fillStyle="#e2d4ec"; x.font="400 22px Outfit"; x.fillText("Firma de Kenia",280,965); x.fillText("Firma de Javier",620,965);
+    return new Promise(r=>c.toBlob(r,"image/png"));
+  }
+  $("#savePact").onclick=async()=>{
+    if(!sigDirty){ toast("Primero firma con tu dedo ✍️"); vib(120); return; }
+    const blob=await certificate(), file=new File([blob],"Certificado-Kenia-y-Javier.png",{type:"image/png"});
+    const msg="¡Amor! Dije que SÍ y firmé nuestro Certificado Oficial de Amor Eterno (Kenia Malanche Lara & Javier) 📜💖 ¡Te amo!";
+    Sound.win(); conf({particleCount:150,spread:100,origin:{y:.6}});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file],text:msg}); return; }catch(e){} }
+    const a=document.createElement("a"); a.download=file.name; a.href=URL.createObjectURL(blob); a.click();
+    setTimeout(()=>sendWhatsApp(msg),600);
+  };
+})();
+
+/* ===================== REINICIAR (Modal personalizado sin confirm nativo) ===================== */
+$("#resetAll").onclick=()=>{
+  openModal(`
+    <div class="mi">🔄</div>
+    <h3>¿Reiniciar progreso?</h3>
+    <p>Se borrarán las llaves, cupones canjeados y la contraseña recordada en este dispositivo para volver a probarla desde cero.</p>
+    <div class="row" style="margin-top:16px">
+      <button class="btn ghost" id="cancelReset">Cancelar</button>
+      <button class="btn main" id="confirmReset">Sí, reiniciar</button>
+    </div>
+  `);
+  $("#cancelReset").onclick = closeModal;
+  $("#confirmReset").onclick = ()=>{
+    Object.keys(localStorage).filter(k=>k.startsWith("kenia_")).forEach(k=>localStorage.removeItem(k));
+    location.reload();
+  };
+};
+
+/* ===================== EXTRAS iOS SAFARI: BUZÓN, SHAKE SENSOR & APP ICON ===================== */
+(function(){
+  /* Generar ícono de App para iPhone (apple-touch-icon) en vivo */
+  try{
+    const ic=document.createElement("canvas"); ic.width=ic.height=180; const x=ic.getContext("2d");
+    const g=x.createLinearGradient(0,0,180,180); g.addColorStop(0,"#310b3a"); g.addColorStop(1,"#ff2a6d");
+    x.fillStyle=g; x.fillRect(0,0,180,180);
+    x.fillStyle="#ffde59"; x.font="bold 64px serif"; x.textAlign="center"; x.fillText("💖",90,95);
+    x.font="bold 28px Outfit, sans-serif"; x.fillStyle="#fff"; x.fillText("K ♥ J",90,148);
+    const link=document.createElement("link"); link.rel="apple-touch-icon"; link.href=ic.toDataURL("image/png");
+    document.head.appendChild(link);
+  }catch(e){}
+
+  /* Botón de guía para instalar como Web App en iPhone */
+  $("#iosInstallBtn").onclick=()=>{
+    Sound.chime();
+    openModal(`
+      <div class="mi">📲</div>
+      <h3>Instálala en tu iPhone, Kenia 💖</h3>
+      <p style="text-align:left;font-size:.92rem;line-height:1.7">
+        Para tener este universo como una App real en tu pantalla de inicio:<br><br>
+        1️⃣ Toca el botón <b>Compartir</b> de Safari (el cuadrito con flecha hacia arriba <b>⬆️</b> abajo en tu pantalla).<br>
+        2️⃣ Desliza hacia abajo y elige <b>"Agregar a pantalla de inicio" (➕)</b>.<br>
+        3️⃣ Toca <b>Agregar</b> arriba a la derecha. ¡Así podrás abrirla a pantalla completa cuando quieras! ✨
+      </p>
+    `);
+  };
+
+  /* Sensor "Sacude tu iPhone" (Shake to Love) */
+  let lastShake=0;
+  function attachShake(){
+    addEventListener("devicemotion",e=>{
+      const a=e.accelerationIncludingGravity; if(!a) return;
+      const force=Math.abs(a.x||0)+Math.abs(a.y||0)+Math.abs(a.z||0);
+      if(force>34 && Date.now()-lastShake>2200){
+        lastShake=Date.now(); Sound.win(); vib([70,40,70]);
+        conf({particleCount:95,spread:100,origin:{y:.5}});
+        const msg = CONFIG.razones[Math.floor(Math.random()*CONFIG.razones.length)];
+        toast("📳 ¡Sorpresa! " + msg);
+      }
+    });
+    $("#shakeSensorBtn").classList.add("on-sensor");
+    toast("📳 ¡Sensor activado! Sacude tu iPhone para ver magia 💖");
+  }
+  $("#shakeSensorBtn").onclick=async()=>{
+    if(typeof DeviceMotionEvent!=="undefined" && typeof DeviceMotionEvent.requestPermission==="function"){
+      try{
+        const p = await DeviceMotionEvent.requestPermission();
+        if(p==="granted") attachShake(); else toast("Activa el permiso de movimiento en Safari 📱");
+      }catch(e){ attachShake(); }
+    } else attachShake();
+  };
+
+  /* Buzón de Deseos de Kenia directo a WhatsApp */
+  $$(".wchip").forEach(b=>b.onclick=()=>{
+    const inp=$("#keniaWishInp"); inp.value=b.dataset.w; inp.focus(); Sound.pop();
+  });
+  $("#sendWishWaBtn").onclick=()=>{
+    const val=($("#keniaWishInp").value||"").trim();
+    if(!val){ toast("Escribe primero tu deseo o antojo, Kenia 💌"); vib(80); return; }
+    Sound.win(); conf({particleCount:80,spread:70,origin:{y:.7}});
+    sendWhatsApp(`💌 *Buzón de Deseos de Kenia Malanche Lara:*\n"${val}" 💖`);
+  };
+})();
+
+observeRv();
+</script>
 </body>
 </html>
