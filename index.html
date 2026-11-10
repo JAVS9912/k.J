@@ -470,7 +470,8 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       </div>
       <div class="hint">Toca cualquier Polaroid para subir tu foto y cambiarle la frase 📸</div>
       <div class="row" style="margin-top:12px">
-        <button class="btn gold" id="openPhotoMgrBtn">🖼️ Gestionar las 5 Fotos / Empaquetar para Kenia</button>
+        <button class="btn gold" id="openPhotoMgrBtn">🐙 Guardar Fotos / Voz para GitHub</button>
+        <button class="btn ghost" id="quickResetBtn">🔄 Reiniciar App Ahora</button>
       </div>
       <div class="glass booth-card rv">
         <h3 class="gt">📸 Cabina Polaroid para Kenia</h3>
@@ -697,12 +698,12 @@ const CONFIG = {
   ella: "Kenia",
   ellaCompleta: "Kenia Malanche Lara",
   yo: "Javier",
-  whatsappRaw: "65466996813",
-  inicio: "2023-02-14T20:00:00",
-  clave: "1402",
-  pista: "Escribe nuestra clave secreta (1402) 💖",
+  whatsappRaw: "6566996813",
+  inicio: "2026-01-30T20:00:00",
+  clave: "0130",
+  pista: "Escribe nuestra fecha especial (MMDD: 0130) 💖",
   musicaArchivo: "",
-  intro: "Para ti, Kenia Malanche Lara 💖\nHice este universo entero pensando en ti.\nPorque mereces algo tan único, mágico y bonito\ncomo todo lo que me haces sentir cada día.",
+  intro: "Para ti, Kenia Malanche Lara 💖\nHice este universo entero pensando en ti.\nPorque mereces algo tan único, mágico y bonito\ncomo todo lo que me haces sentir desde el 30 de enero.",
   pregunta: "Kenia Malanche Lara, ¿quieres seguir escribiendo esta historia conmigo para siempre?",
   respuestaTitulo: "¡Sabía que dirías que sí, Kenia! 💖",
   respuestaTexto: "Gracias por ser mi hogar, mi paz, mi risa favorita y mi mejor aventura, Kenia. Te amo hoy, mañana y siempre.",
@@ -720,11 +721,11 @@ const CONFIG = {
     { fecha: "Hoy y siempre", titulo: "Todo lo que nos falta vivir", texto: "Cada día contigo es mi mejor día, Kenia. Y lo más bonito es que apenas vamos empezando." }
   ],
   recuerdos: [
-    { x: 14, y: 72, titulo: "Primer 'hola'", fecha: "Febrero 2023", texto: "La chispa donde empezó nuestra historia, Kenia." },
-    { x: 32, y: 34, titulo: "Primera salida", fecha: "Febrero 2023", texto: "Nuestras risas nerviosas y miradas cómplices." },
-    { x: 52, y: 64, titulo: "Nuestras aventuras", fecha: "2023 - 2024", texto: "Esos momentos donde el mundo parecía solo nuestro." },
-    { x: 70, y: 25, titulo: "A prueba de todo", fecha: "Siempre", texto: "Porque incluso en días difíciles nos elegimos." },
-    { x: 88, y: 56, titulo: "Nuestro futuro", fecha: "Hoy", texto: "Lo mejor todavía está por escribirse juntos." }
+    { x: 14, y: 72, titulo: "Primer 'hola'", fecha: "El Comienzo", texto: "La chispa donde empezó nuestra historia, Kenia." },
+    { x: 32, y: 34, titulo: "Primera salida", fecha: "Enero 2026", texto: "Nuestras risas nerviosas y miradas cómplices." },
+    { x: 52, y: 64, titulo: "30 de Enero 2026", fecha: "30 Enero 2026", texto: "El día en que oficializamos nuestra historia juntos 💖" },
+    { x: 70, y: 25, titulo: "A prueba de todo", fecha: "2026", texto: "Porque cada día juntos nos hace más unidos." },
+    { x: 88, y: 56, titulo: "Nuestro futuro", fecha: "Hoy y siempre", texto: "Lo mejor todavía está por escribirse juntos." }
   ],
   /* 👇 AQUÍ PUEDES PONER TUS FOTOS (o usar el botón "Gestionar las 5 Fotos" en la página) */
   /*__FOTOS_START__*/
@@ -739,6 +740,16 @@ const CONFIG = {
   /*__VOICE_START__*/
   notaDeVoz: "",
   /*__VOICE_END__*/
+  /*__STATE_START__*/
+  estadoInicial: {
+    keys: [],
+    coupons: [],
+    plans: [],
+    read: [],
+    miss: 0,
+    pet: 20
+  },
+  /*__STATE_END__*/
   razones: [
     "Por la forma en que tus ojos brillan cuando sonríes, Kenia.",
     "Porque tus abrazos me reinician la vida y me dan paz.",
@@ -771,9 +782,9 @@ const CONFIG = {
     { ic: "💭", t: "Dudes de ti", msg: "Mírate con mis ojos, Kenia: eres brillante, hermosa y capaz de todo." }
   ],
   capsulas: [
-    { titulo: "Para Kenia, hoy", unlock: "2023-02-14", msg: "Kenia Malanche Lara: eres lo más bonito que me ha pasado en la vida 💖" },
-    { titulo: "Próximo 14 de Febrero", unlock: "2027-02-14", msg: "¡Feliz San Valentín, mi amor! Gracias por otro año maravilloso juntos." },
-    { titulo: "Nuestro próximo aniversario", unlock: "2028-02-14", msg: "Cinco años y sigo eligiéndote igual que el primer día. Te amo, Kenia." }
+    { titulo: "Para Kenia, hoy", unlock: "2026-01-30", msg: "Kenia Malanche Lara: desde aquel 30 de enero de 2026 eres lo más bonito que me ha pasado en la vida 💖" },
+    { titulo: "Nuestro 1er Aniversario", unlock: "2027-01-30", msg: "¡Feliz primer año juntos, mi amor! Gracias por estos primeros 365 días desde el 30 de enero de 2026 💖" },
+    { titulo: "Próximo 14 de Febrero", unlock: "2027-02-14", msg: "¡Feliz San Valentín, Kenia! Sigo eligiéndote igual que el primer día. Te amo." }
   ],
   tarot: [
     { tiempo: "Pasado • El Encuentro", ic: "🌙", titulo: "Los Amantes Estelares", txt: "Entre millones de caminos, las almas de Kenia y Javier supieron dónde coincidir." },
@@ -866,16 +877,50 @@ const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const rnd = (a,b) => a + Math.random()*(b-a);
 const sleep = ms => new Promise(r => setTimeout(r,ms));
+
+/* Guardamos una plantilla limpia del HTML antes de que el JS modifique el DOM,
+   para que al exportar a GitHub el archivo quede 100% limpio y reiniciable */
+const CLEAN_HTML_TEMPLATE = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+
+const memStore = {};
 const store = {
-  get(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } },
-  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } }
+  get(k,d){
+    try{
+      const raw = localStorage.getItem(k);
+      if(raw !== null) return JSON.parse(raw);
+    }catch(e){}
+    if(k in memStore) return memStore[k];
+    const st = CONFIG.estadoInicial || {};
+    if(k==="kenia_keys" && Array.isArray(st.keys)) return [...st.keys];
+    if(k==="kenia_coupons" && Array.isArray(st.coupons)) return [...st.coupons];
+    if(k==="kenia_plans" && Array.isArray(st.plans)) return [...st.plans];
+    if(k==="kenia_read" && Array.isArray(st.read)) return [...st.read];
+    if(k==="kenia_miss" && typeof st.miss==="number") return st.miss;
+    if(k==="kenia_pet" && typeof st.pet==="number") return st.pet;
+    return d;
+  },
+  set(k,v){
+    memStore[k] = v;
+    try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; }
+  },
+  clearAll(){
+    Object.keys(memStore).forEach(k=>delete memStore[k]);
+    try{
+      const toRemove = [];
+      for(let i=0;i<localStorage.length;i++){
+        const k = localStorage.key(i);
+        if(k && k.startsWith("kenia_")) toRemove.push(k);
+      }
+      toRemove.forEach(k=>localStorage.removeItem(k));
+    }catch(e){}
+  }
 };
 const vib = p => { try{ navigator.vibrate && navigator.vibrate(p); }catch(e){} };
 const conf = o => { if(window.confetti) confetti(o); };
 function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),2600); }
 
 function sendWhatsApp(msg){
-  const raw = (CONFIG.whatsappRaw||"65466996813").replace(/\D/g,"");
+  const raw = (CONFIG.whatsappRaw||"6566996813").replace(/\D/g,"");
   const phone = raw.startsWith("52") ? raw : "52" + raw;
   const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
   const a = document.createElement("a"); a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
@@ -1198,7 +1243,7 @@ function shrink(file,max){
     const img=new Image(); img.onload=()=>{
       const sc=Math.min(1,max/Math.max(img.width,img.height)), c=document.createElement("canvas");
       c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-      URL.revokeObjectURL(img.src); res(c.toDataURL("image/jpeg",.8));
+      URL.revokeObjectURL(img.src); res(c.toDataURL("image/jpeg",.72));
     }; img.onerror=rej; img.src=URL.createObjectURL(file);
   });
 }
@@ -1208,19 +1253,23 @@ function openPhoto(i){
     ${src?`<img class="photo" src="${src}" alt="">`:`<div class="mi">💖</div>`}
     <h3>${txt}</h3>
     <input id="capInp" value="${txt.replace(/"/g,'&quot;')}" placeholder="Frase de la foto..." style="width:100%;margin-top:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:center">
+    <input id="urlInp" value="${(src&&!src.startsWith('data:')?src:'').replace(/"/g,'&quot;')}" placeholder="O pega ruta de GitHub (ej. fotos/1.jpg)" style="width:100%;margin-top:8px;padding:9px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--gold);font-family:inherit;font-size:.82rem;text-align:center">
     <div class="row" style="margin-top:12px">
-      <label class="btn gold" style="cursor:pointer">📷 ${src?"Cambiar":"Elegir"} foto<input type="file" accept="image/*" id="phInp" hidden></label>
-      <button class="btn ghost" id="saveCapBtn">Guardar frase ✨</button>
+      <label class="btn gold" style="cursor:pointer">📷 Subir de Galería<input type="file" accept="image/*" id="phInp" hidden></label>
+      <button class="btn ghost" id="saveCapBtn">Guardar cambios ✨</button>
     </div>
   `);
   $("#saveCapBtn").onclick=()=>{
     const v=$("#capInp").value.trim();
-    if(v){ captions[i]=v; store.set("kenia_captions",captions); renderPols(); toast("✨ Frase guardada"); closeModal(); }
+    const u=$("#urlInp").value.trim();
+    if(v){ captions[i]=v; store.set("kenia_captions",captions); }
+    if(u){ photos[i]=u; store.set("kenia_photos",photos); }
+    renderPols(); toast("✨ Cambios guardados"); closeModal();
   };
   $("#phInp").onchange=async e=>{
     const file=e.target.files[0]; if(!file) return;
     const v=$("#capInp").value.trim(); if(v){ captions[i]=v; store.set("kenia_captions",captions); }
-    try{ photos[i]=await shrink(file,680); if(!store.set("kenia_photos",photos)) toast("Foto muy pesada para memoria local"); else toast("📸 Foto agregada"); }catch(err){ toast("No pude leer esa foto"); }
+    try{ photos[i]=await shrink(file,560); if(!store.set("kenia_photos",photos)) toast("Foto guardada en sesión para exportar a GitHub"); else toast("📸 Foto lista"); }catch(err){ toast("No pude leer esa foto"); }
     renderPols(); closeModal();
   };
 }
@@ -1244,47 +1293,82 @@ function renderPols(){
 renderPols(); addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(renderPols,300); });
 $("#boardKeyBtn").onclick=()=>{ addKey(1,"Álbum Polaroid"); $("#boardKeyBtn").textContent="🗝️ Llave #1 obtenida ✓"; };
 
-/* Gestor & Empaquetador de Fotos en 1 clic */
+/* Construye el HTML 100% limpio para subir a GitHub sin estado sucio del DOM */
+function buildCleanGitHubHtml(includeProgress){
+  const mergedFotos = CONFIG.fotos.map((f,i)=>({
+    src: photos[i] || f.src || "",
+    texto: captions[i] || f.texto
+  }));
+  const savedVoice = store.get("kenia_voice","") || CONFIG.notaDeVoz || "";
+  const stateObj = includeProgress ? {
+    keys: keys,
+    coupons: usedC,
+    plans: doneP,
+    read: readE,
+    miss: miss,
+    pet: petXp
+  } : { keys:[], coupons:[], plans:[], read:[], miss:0, pet:20 };
+
+  const blockFotos = "/*__FOTOS_START__*/\n  fotos: " + JSON.stringify(mergedFotos, null, 4) + ",\n  /*__FOTOS_END__*/";
+  const blockVoice = "/*__VOICE_START__*/\n  notaDeVoz: " + JSON.stringify(savedVoice) + ",\n  /*__VOICE_END__*/";
+  const blockState = "/*__STATE_START__*/\n  estadoInicial: " + JSON.stringify(stateObj) + ",\n  /*__STATE_END__*/";
+
+  return CLEAN_HTML_TEMPLATE
+    .replace(/\/\*__FOTOS_START__\*\/[\s\S]*?\/\*__FOTOS_END__\*\//, blockFotos)
+    .replace(/\/\*__VOICE_START__\*\/[\s\S]*?\/\*__VOICE_END__\*\//, blockVoice)
+    .replace(/\/\*__STATE_START__\*\/[\s\S]*?\/\*__STATE_END__\*\//, blockState);
+}
+
+/* Gestor & Empaquetador para GitHub */
 $("#openPhotoMgrBtn").onclick=()=>{
   const list = CONFIG.fotos.map((f,i)=>{
     const has = !!(photos[i]||f.src);
     const txt = captions[i]||f.texto;
     return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:1px solid var(--line);text-align:left">
-      <span style="font-size:.88rem">${has?"✅":"📷"} <b>Foto #${i+1}:</b> ${txt}</span>
-      <button class="btn ghost" style="padding:6px 12px;font-size:.78rem" data-edit="${i}">Elegir</button>
+      <span style="font-size:.86rem">${has?"✅":"📷"} <b>Foto #${i+1}:</b> ${txt}</span>
+      <button class="btn ghost" style="padding:5px 12px;font-size:.76rem" data-edit="${i}">Editar</button>
     </div>`;
   }).join("");
   const hasVoice = !!(store.get("kenia_voice","") || CONFIG.notaDeVoz);
   openModal(`
-    <div class="mi">🖼️</div>
-    <h3>Empaquetar Fotos y Voz para Kenia</h3>
-    <p style="font-size:.86rem;color:var(--muted)">Elige tus 5 fotos aquí abajo (y graba tu nota de voz en la sección Música). Al tocar <b>"Descargar index.html listo"</b>, el archivo descargado ya llevará tus fotos y tu voz integradas adentro.</p>
-    <div style="margin:12px 0;background:rgba(255,255,255,.05);border-radius:16px;padding:6px">
+    <div class="mi">🐙</div>
+    <h3>Guardar Datos para GitHub</h3>
+    <p style="font-size:.84rem;color:var(--muted);line-height:1.45">
+      GitHub es estático: para que tus fotos y voz queden guardadas para siempre en tu repositorio de GitHub, elígelas aquí y luego <b>copia el código</b> o <b>descarga el index.html limpio</b> para subirlo a tu repo.
+    </p>
+    <div style="margin:10px 0;background:rgba(255,255,255,.05);border-radius:16px;padding:6px">
       ${list}
-      <div style="padding:8px 10px;text-align:left;font-size:.86rem;color:var(--gold)">
-        ${hasVoice?"✅ Nota de voz de Javier lista para incluir":"🎙️ Sin nota de voz grabada aún (puedes grabarla en la sección Música)"}
+      <div style="padding:8px 10px;text-align:left;font-size:.84rem;color:var(--gold)">
+        ${hasVoice?"✅ Nota de voz de Javier lista":"🎙️ Sin nota de voz (puedes grabarla en la sección Música)"}
       </div>
     </div>
-    <button class="btn gold" id="exportHtmlWithPhotos" style="width:100%;margin-top:8px">📦 Descargar index.html listo con Fotos y Voz</button>
+    <label style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:.82rem;color:var(--muted);margin:8px 0;cursor:pointer">
+      <input type="checkbox" id="keepProgChk"> Incluir también el progreso actual (llaves/cupones)
+    </label>
+    <div class="row" style="margin-top:10px">
+      <button class="btn gold" id="copyGitHubBtn" style="flex:1">📋 Copiar código para GitHub</button>
+      <button class="btn main" id="exportHtmlWithPhotos" style="flex:1">📦 Descargar index.html</button>
+    </div>
   `);
   $$("[data-edit]").forEach(b=>b.onclick=()=>openPhoto(+b.dataset.edit));
+  $("#copyGitHubBtn").onclick=()=>{
+    const keep = $("#keepProgChk").checked;
+    const code = buildCleanGitHubHtml(keep);
+    const ta = document.createElement("textarea");
+    ta.value = code; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); toast("📋 ¡Código copiado! Pégalo en tu index.html de GitHub"); }
+    catch(e){ toast("Usa el botón Descargar index.html 📦"); }
+    ta.remove();
+  };
   $("#exportHtmlWithPhotos").onclick=()=>{
-    const merged = CONFIG.fotos.map((f,i)=>({
-      src: photos[i] || f.src || "",
-      texto: captions[i] || f.texto
-    }));
-    const savedVoice = store.get("kenia_voice","") || CONFIG.notaDeVoz || "";
-    const block = "/*__FOTOS_START__*/\n  fotos: " + JSON.stringify(merged, null, 4) + ",\n  /*__FOTOS_END__*/";
-    const vblock = "/*__VOICE_START__*/\n  notaDeVoz: " + JSON.stringify(savedVoice) + ",\n  /*__VOICE_END__*/";
-    const rawHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML
-      .replace(/\/\*__FOTOS_START__\*\/[\s\S]*?\/\*__FOTOS_END__\*\//, block)
-      .replace(/\/\*__VOICE_START__\*\/[\s\S]*?\/\*__VOICE_END__\*\//, vblock);
+    const keep = $("#keepProgChk").checked;
+    const rawHtml = buildCleanGitHubHtml(keep);
     const blob = new Blob([rawHtml], {type:"text/html;charset=utf-8"});
     const a = document.createElement("a");
     a.download = "index.html";
     a.href = URL.createObjectURL(blob);
     a.click();
-    toast("✅ index.html descargado con tus fotos y voz incluidas");
+    toast("✅ index.html limpio descargado para subir a GitHub");
   };
 };
 
@@ -1496,13 +1580,16 @@ $("#autoPlayPianoBtn").onclick=()=>[0,2,4,7,4,2,0,4,7,5,2,4,0].forEach((idx,s)=>
 })();
 
 /* ===================== ÁBREME CUANDO, CÁPSULAS, TAROT ===================== */
-const readE=store.get("kenia_read",[]);
-$("#envs").innerHTML=CONFIG.abrir.map((o,i)=>`<div class="env rv ${readE.includes(i)?"read":""}" data-i="${i}"><div class="ic">${readE.includes(i)?"💌":"✉️"}</div><small>ábreme cuando</small><h4>${o.t}</h4></div>`).join("");
-$$("#envs .env").forEach(el=>el.onclick=()=>{
-  const i=+el.dataset.i, o=CONFIG.abrir[i]; Sound.chime(); vib(30);
-  openModal(`<div class="mi">${o.ic}</div><div class="md">ábreme cuando</div><h3>${o.t}</h3><p>${o.msg}</p>`);
-  if(!readE.includes(i)){ readE.push(i); store.set("kenia_read",readE); el.classList.add("read"); el.querySelector(".ic").textContent="💌"; }
-});
+let readE=store.get("kenia_read",[]);
+function renderEnvs(){
+  $("#envs").innerHTML=CONFIG.abrir.map((o,i)=>`<div class="env rv in ${readE.includes(i)?"read":""}" data-i="${i}"><div class="ic">${readE.includes(i)?"💌":"✉️"}</div><small>ábreme cuando</small><h4>${o.t}</h4></div>`).join("");
+  $$("#envs .env").forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.i, o=CONFIG.abrir[i]; Sound.chime(); vib(30);
+    openModal(`<div class="mi">${o.ic}</div><div class="md">ábreme cuando</div><h3>${o.t}</h3><p>${o.msg}</p>`);
+    if(!readE.includes(i)){ readE.push(i); store.set("kenia_read",readE); el.classList.add("read"); el.querySelector(".ic").textContent="💌"; }
+  });
+}
+renderEnvs();
 function capState(c){ const d=new Date(c.unlock+"T00:00:00"), left=Math.ceil((d-new Date())/864e5); return {open:left<=0,left,d}; }
 $("#capsules").innerHTML=CONFIG.capsulas.map((c,i)=>{ const s=capState(c); return `<div class="cap-box rv ${s.open?"":"locked"}" data-i="${i}"><div style="font-size:1.8rem">${s.open?"📬":"🔒"}</div><h4>${c.titulo}</h4><small style="color:var(--gold)">${s.open?"¡Ya se puede abrir!":`Se abre en ${s.left} ${s.left===1?"día":"días"}`}</small></div>`; }).join("");
 $$("#capsules .cap-box").forEach(el=>el.onclick=()=>{
@@ -1563,7 +1650,7 @@ renderQ();
 })();
 
 /* ===================== PLANES ===================== */
-const doneP=store.get("kenia_plans",[]);
+let doneP=store.get("kenia_plans",[]);
 function renderPlans(){
   $("#plans").innerHTML=CONFIG.planes.map((p,i)=>`<div class="plan ${doneP.includes(i)?"done":""}" data-i="${i}"><div class="box"></div><span>${p}</span></div>`).join("");
   $("#pfill").style.width=(doneP.length/CONFIG.planes.length*100)+"%";
@@ -1622,66 +1709,66 @@ yes.onclick=async()=>{
   const end=Date.now()+5000;
   (function f(){ conf({particleCount:6,angle:60,spread:60,origin:{x:0},colors:["#ff2a6d","#ffde59","#fff"]}); conf({particleCount:6,angle:120,spread:60,origin:{x:1},colors:["#ff2a6d","#ffde59","#fff"]}); if(Date.now()<end) requestAnimationFrame(f); })();
   for(let i=0;i<6;i++){ burst(rnd(W*.2,W*.8),rnd(H*.3,H*.7),14); await sleep(250); }
-};
-(function(){
-  const cv=$("#sigCv"), ctx=cv.getContext("2d"); ctx.strokeStyle="#c9184a"; ctx.lineWidth=3; ctx.lineCap="round"; ctx.lineJoin="round";
-  let draw=false;
-  const pos=e=>{ const r=cv.getBoundingClientRect(); return {x:(e.clientX-r.left)*(cv.width/r.width),y:(e.clientY-r.top)*(cv.height/r.height)}; };
-  cv.addEventListener("pointerdown",e=>{ draw=true; sigDirty=true; cv.setPointerCapture(e.pointerId); const p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
-  cv.addEventListener("pointermove",e=>{ if(!draw) return; const p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); });
-  addEventListener("pointerup",()=>draw=false);
-  $("#clearSig").onclick=()=>{ ctx.clearRect(0,0,cv.width,cv.height); sigDirty=false; };
-
-  function wrap(c,text,x,y,maxW,lh){ const words=text.split(" "); let line=""; for(const w of words){ const t=line?line+" "+w:w; if(c.measureText(t).width>maxW&&line){ c.fillText(line,x,y); line=w; y+=lh; } else line=t; } c.fillText(line,x,y); return y; }
-  async function certificate(){
-    try{ await document.fonts.load("60px 'Great Vibes'"); await document.fonts.load("700 30px Outfit"); }catch(e){}
-    const c=document.createElement("canvas"); c.width=900; c.height=1200; const x=c.getContext("2d");
-    const bg=x.createLinearGradient(0,0,900,1200); bg.addColorStop(0,"#2b0d36"); bg.addColorStop(1,"#12041a"); x.fillStyle=bg; x.fillRect(0,0,900,1200);
-    x.strokeStyle="#ffde59"; x.lineWidth=6; x.strokeRect(34,34,832,1132); x.lineWidth=2; x.strokeRect(50,50,800,1100);
-    x.textAlign="center"; x.fillStyle="#ffde59"; x.font="700 30px Outfit"; x.fillText("CERTIFICADO OFICIAL",450,150);
-    x.font="84px 'Great Vibes'"; x.fillStyle="#ff758c"; x.fillText("de Amor Eterno",450,260);
-    x.font="80px serif"; x.fillText("💖",450,380);
-    x.fillStyle="#fff"; x.font="400 34px Outfit"; x.fillText("Se certifica que",450,470);
-    x.font="84px 'Great Vibes'"; x.fillStyle="#ffde59"; x.fillText("Kenia Malanche Lara",450,570);
-    x.fillStyle="#fff"; x.font="400 34px Outfit";
-    wrap(x,"aceptó escribir su historia de amor con Javier para siempre, con risas, abrazos y muchísimos planes por cumplir.",450,660,660,50);
-    const days=Math.floor((Date.now()-start)/864e5);
-    x.fillStyle="#e2d4ec"; x.font="400 28px Outfit"; x.fillText(`Después de ${days.toLocaleString("es-MX")} días juntos`,450,830);
-    x.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),450,875);
-    x.fillStyle="#fff"; x.fillRect(150,930,260,2); x.fillRect(490,930,260,2);
-    x.drawImage($("#sigCv"),150,850,260,87);
-    x.fillStyle="#ffde59"; x.font="54px 'Great Vibes'"; x.fillText("Javier",620,915);
-    x.fillStyle="#e2d4ec"; x.font="400 22px Outfit"; x.fillText("Firma de Kenia",280,965); x.fillText("Firma de Javier",620,965);
-    return new Promise(r=>c.toBlob(r,"image/png"));
+/* ===================== REINICIAR EN VIVO (Sin depender de location.reload) ===================== */
+function resetEverythingNow(clearMedia){
+  store.clearAll();
+  if(!clearMedia){
+    /* Conservamos las fotos y voz que hayas subido si solo quieres reiniciar el juego/candado */
+    Object.keys(photos).forEach(k=>store.set("kenia_photos",photos));
+    Object.keys(captions).forEach(k=>store.set("kenia_captions",captions));
+  } else {
+    Object.keys(photos).forEach(k=>delete photos[k]);
+    Object.keys(captions).forEach(k=>delete captions[k]);
   }
-  $("#savePact").onclick=async()=>{
-    if(!sigDirty){ toast("Primero firma con tu dedo ✍️"); vib(120); return; }
-    const blob=await certificate(), file=new File([blob],"Certificado-Kenia-y-Javier.png",{type:"image/png"});
-    const msg="¡Amor! Dije que SÍ y firmé nuestro Certificado Oficial de Amor Eterno (Kenia Malanche Lara & Javier) 📜💖 ¡Te amo!";
-    Sound.win(); conf({particleCount:150,spread:100,origin:{y:.6}});
-    if(navigator.canShare&&navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file],text:msg}); return; }catch(e){} }
-    const a=document.createElement("a"); a.download=file.name; a.href=URL.createObjectURL(blob); a.click();
-    setTimeout(()=>sendWhatsApp(msg),600);
-  };
-})();
+  /* Reiniciar estados en vivo inmediatamente */
+  keys = []; updateKeys();
+  $("#chestIcon").textContent = "🔒🧰";
+  $("#boardKeyBtn").textContent = "🗝️ ¡Encontraste la Llave #1!";
+  usedC = []; renderCoupons();
+  doneP = []; renderPlans();
+  readE = []; renderEnvs();
+  miss = 0; $("#missCount").textContent = "0";
+  petXp = 20; updatePet(false);
+  qi = 0; renderQ();
+  letterOpened = false;
+  $("#waxEnv").style.display = "block";
+  $("#paperLetter").classList.remove("open");
+  $$("#tarotGrid .tarot-card").forEach(c=>c.classList.remove("rev"));
+  $("#ask").style.display = "block";
+  $("#yesMsg").style.display = "none";
+  no.classList.remove("run"); no.style.left=""; no.style.top=""; no.textContent="No";
+  ys = 1; yes.style.transform = "scale(1)";
+  const scv = $("#sigCv"); scv.getContext("2d").clearRect(0,0,scv.width,scv.height);
+  renderPols();
+  /* Volver a mostrar la puerta con PIN 1402 */
+  pinVal = ""; dots(); $("#gateErr").textContent = "";
+  const gate = $("#gate");
+  gate.style.display = "flex";
+  gate.classList.remove("out");
+  document.body.classList.add("locked");
+  window.scrollTo({top:0,behavior:"smooth"});
+  Sound.stop();
+  closeModal();
+  toast("🔄 ¡App reiniciada al 100%! Pon la clave 0130");
+}
 
-/* ===================== REINICIAR (Modal personalizado sin confirm nativo) ===================== */
-$("#resetAll").onclick=()=>{
+function openResetDialog(){
   openModal(`
     <div class="mi">🔄</div>
-    <h3>¿Reiniciar progreso?</h3>
-    <p>Se borrarán las llaves, cupones canjeados y la contraseña recordada en este dispositivo para volver a probarla desde cero.</p>
-    <div class="row" style="margin-top:16px">
+    <h3>Reiniciar Progreso</h3>
+    <p style="font-size:.9rem;color:var(--muted)">Elige cómo quieres reiniciar la app ahora mismo (volverá a cerrarse con el candado de la clave <b>0130</b>):</p>
+    <div style="display:grid;gap:10px;margin-top:16px">
+      <button class="btn gold" id="confirmSoftReset">🔄 Reiniciar juegos/candado (Conservar mis fotos)</button>
+      <button class="btn main" id="confirmFullReset">🗑️ Borrar todo (Incluyendo fotos de prueba)</button>
       <button class="btn ghost" id="cancelReset">Cancelar</button>
-      <button class="btn main" id="confirmReset">Sí, reiniciar</button>
     </div>
   `);
   $("#cancelReset").onclick = closeModal;
-  $("#confirmReset").onclick = ()=>{
-    Object.keys(localStorage).filter(k=>k.startsWith("kenia_")).forEach(k=>localStorage.removeItem(k));
-    location.reload();
-  };
-};
+  $("#confirmSoftReset").onclick = ()=>resetEverythingNow(false);
+  $("#confirmFullReset").onclick = ()=>resetEverythingNow(true);
+}
+$("#resetAll").onclick = openResetDialog;
+if($("#quickResetBtn")) $("#quickResetBtn").onclick = openResetDialog;
 
 /* ===================== EXTRAS iOS SAFARI: BUZÓN, SHAKE SENSOR & APP ICON ===================== */
 (function(){
