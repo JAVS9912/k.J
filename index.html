@@ -14,9 +14,9 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <style>
 :root{
-  --bg:#06010b;--glass:rgba(32,12,46,.82);--line:rgba(255,140,165,.36);
+  --bg:#06010b;--glass:rgba(32,12,46,.82);--line:rgba(255,117,140,.3);
   --accent:#ff2a6d;--accent2:#ff758c;--violet:#9d4edd;--gold:#ffde59;--gold2:#ffa726;
-  --text:#ffffff;--muted:#ede2f5;
+  --text:#fff;--muted:#e2d4ec;
   --safe-top:env(safe-area-inset-top,0px);--safe-bot:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
@@ -33,18 +33,18 @@ main{position:relative;z-index:10}
 section{min-height:100vh;padding:calc(92px + var(--safe-top)) 18px calc(96px + var(--safe-bot));display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
 .wrap{width:100%;max-width:880px}
 .eyebrow{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:8px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.8)}
-h2{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;text-align:center;margin-bottom:32px;letter-spacing:-.6px;color:var(--text);text-shadow:0 2px 10px rgba(0,0,0,.85)}
-h2 em{font-family:'Great Vibes',cursive;font-style:normal;font-weight:400;color:var(--gold);font-size:1.35em;padding:0 4px;filter:drop-shadow(0 2px 8px rgba(255,222,89,.35))}
-h3.gt{color:var(--gold);margin-bottom:6px;text-shadow:0 1px 6px rgba(0,0,0,.7)}
-.glass{background:var(--glass);border:1px solid var(--line);border-radius:28px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 24px 60px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.18)}
-.hint{text-align:center;color:var(--muted);font-size:.88rem;margin-top:14px;text-shadow:0 1px 4px rgba(0,0,0,.7)}
-.rv{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1)}
+h2{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;text-align:center;margin-bottom:32px;letter-spacing:-.6px;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+h2 em{font-family:'Great Vibes',cursive;font-style:normal;font-weight:400;color:var(--gold);font-size:1.35em;padding:0 4px;filter:drop-shadow(0 2px 8px rgba(255,222,89,.3))}
+h3.gt{color:var(--gold);margin-bottom:6px}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:28px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 24px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.15)}
+.hint{text-align:center;color:var(--muted);font-size:.88rem;margin-top:14px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
 .btn{font-family:inherit;font-weight:600;border:none;cursor:pointer;border-radius:60px;color:#fff;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
 .btn:active{transform:scale(.95)}
 .btn.main{padding:14px 34px;font-size:1rem;background:linear-gradient(135deg,#ff2a6d,#b51755);box-shadow:0 12px 28px rgba(255,42,109,.5)}
 .btn.gold{padding:13px 30px;font-size:.96rem;background:linear-gradient(135deg,#ffde59,#ffa726);color:#12031a;font-weight:700;box-shadow:0 12px 26px rgba(255,222,89,.4)}
-.btn.ghost{padding:11px 22px;font-size:.88rem;background:rgba(255,255,255,.14);border:1px solid var(--line);color:var(--text)}
+.btn.ghost{padding:11px 22px;font-size:.88rem;background:rgba(255,255,255,.12);border:1px solid var(--line);color:var(--text)}
 .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .sh{animation:shake .45s}
 @keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
@@ -59,25 +59,11 @@ h3.gt{color:var(--gold);margin-bottom:6px;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 .icon-btn{width:42px;height:42px;border-radius:50%;background:rgba(20,5,32,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.6)}
 .icon-btn.spin{animation:spin 6s linear infinite;border-color:var(--gold)}
 .icon-btn.pulse-hb{animation:beat .75s infinite;background:rgba(255,42,109,.45);border-color:var(--accent)}
-.icon-btn.on-sensor{border-color:var(--gold);box-shadow:0 0 16px rgba(255,222,89,.6)}
 body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-events:none;box-shadow:inset 0 0 95px rgba(255,42,109,.6);animation:pulse .75s infinite}
-/* Tarjeta de nota de voz y buzón de Kenia */
-.voice-card{padding:20px 16px;text-align:center;margin-bottom:16px;border:1px solid rgba(255,222,89,.45)}
-.voice-wave{display:flex;gap:4px;justify-content:center;align-items:center;height:28px;margin:10px 0}
-.voice-wave i{width:4px;height:8px;border-radius:4px;background:var(--gold);transition:height .15s}
-.voice-wave.playing i{animation:vwave .6s infinite ease-in-out alternate}
-.voice-wave.playing i:nth-child(2n){animation-delay:.15s}
-.voice-wave.playing i:nth-child(3n){animation-delay:.3s}
-@keyframes vwave{from{height:6px}to{height:26px}}
-.wish-box{margin-top:20px;padding:24px 18px;text-align:center}
-.wish-inp{width:100%;min-height:92px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);padding:12px 14px;font-family:inherit;font-size:.95rem;resize:vertical;margin:10px 0}
-.wish-inp::placeholder{color:rgba(237,226,245,.55)}
-.wish-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
-.wchip{padding:6px 12px;border-radius:99px;font-size:.76rem;background:rgba(255,222,89,.14);border:1px solid rgba(255,222,89,.4);color:var(--gold);cursor:pointer;font-family:inherit}
 #dock{position:fixed;left:50%;bottom:calc(12px + var(--safe-bot));transform:translateX(-50%);z-index:370;display:flex;align-items:center;gap:4px;padding:6px 12px;border-radius:99px;background:rgba(15,4,25,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,222,89,.35);box-shadow:0 18px 45px rgba(0,0,0,.8);max-width:96vw;overflow-x:auto;scrollbar-width:none}
 #dock::-webkit-scrollbar{display:none}
 #dock a{color:var(--muted);text-decoration:none;font-size:.76rem;padding:7px 11px;border-radius:99px;white-space:nowrap;transition:.2s;font-weight:500}
-#dock a.active{color:var(--gold);background:rgba(255,42,109,.38)}
+#dock a.active{color:var(--gold);background:rgba(255,42,109,.35)}
 
 /* Puerta */
 #gate{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#310b3a,#06010b 80%);transition:opacity .8s,visibility .8s;padding:18px}
@@ -90,9 +76,9 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .pin-dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--accent2);transition:.2s}
 .pin-dot.filled{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px var(--accent);transform:scale(1.18)}
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:250px;margin:12px auto}
-.kbtn{padding:13px 0;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.1);color:var(--text);font-size:1.25rem;font-weight:600;cursor:pointer;font-family:inherit}
+.kbtn{padding:13px 0;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);font-size:1.25rem;font-weight:600;cursor:pointer;font-family:inherit}
 .kbtn:active{background:rgba(255,42,109,.5);transform:scale(.93)}
-#gateErr{min-height:1.4em;margin-top:8px;color:#ff8598;font-size:.88rem;font-weight:600}
+#gateErr{min-height:1.4em;margin-top:8px;color:#ff6b81;font-size:.88rem;font-weight:600}
 
 /* Hero */
 #hero{padding:0;text-align:center;overflow:hidden}
@@ -100,23 +86,23 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 #heart3d canvas{display:block;width:100%;height:100%}
 .heart-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10rem;opacity:.25;animation:beat 2s infinite}
 .hero-over{position:relative;z-index:2;padding:0 18px;max-width:780px}
-.script{font-family:'Great Vibes',cursive;font-size:clamp(3.2rem,12vw,6.6rem);line-height:1.08;background:linear-gradient(120deg,#ff9ebb,#ff2a6d,#ffde59);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 24px rgba(0,0,0,.85)) drop-shadow(0 0 22px rgba(255,42,109,.65))}
-#typed{min-height:6.4em;max-width:560px;margin:14px auto 0;color:var(--text);font-size:1.08rem;white-space:pre-line;text-shadow:0 2px 12px rgba(0,0,0,.95);font-weight:500}
+.script{font-family:'Great Vibes',cursive;font-size:clamp(3.2rem,12vw,6.6rem);line-height:1.08;background:linear-gradient(120deg,#ff758c,#ff2a6d,#ffd27a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(255,42,109,.6))}
+#typed{min-height:6.4em;max-width:560px;margin:14px auto 0;color:var(--text);font-size:1.08rem;white-space:pre-line;text-shadow:0 2px 10px rgba(0,0,0,.9);font-weight:500}
 .caret::after{content:"|";color:var(--gold);animation:pulse 1s infinite;margin-left:2px}
 .hero-modes{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-.mode-chip{padding:7px 15px;border-radius:99px;font-size:.78rem;background:rgba(20,5,32,.75);border:1px solid var(--line);color:var(--text);cursor:pointer;font-family:inherit;font-weight:500;pointer-events:auto}
-.mode-chip.on{background:rgba(255,42,109,.45);border-color:var(--gold);color:var(--gold)}
-.hero-hint{margin-top:12px;font-size:.74rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;text-shadow:0 2px 6px #000}
+.mode-chip{padding:7px 15px;border-radius:99px;font-size:.78rem;background:rgba(255,255,255,.1);border:1px solid var(--line);color:var(--text);cursor:pointer;font-family:inherit;font-weight:500;pointer-events:auto}
+.mode-chip.on{background:rgba(255,42,109,.4);border-color:var(--gold);color:var(--gold)}
+.hero-hint{margin-top:12px;font-size:.74rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
 
 /* Contador */
 .counter{padding:30px 18px;text-align:center}
 .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(min-width:640px){.cgrid{grid-template-columns:repeat(6,1fr)}}
-.tbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:14px 6px}
+.tbox{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px 6px}
 .tnum{font-size:1.9rem;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;text-shadow:0 0 12px rgba(255,222,89,.4)}
 .tlbl{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .stats-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
-.spill{background:rgba(255,222,89,.14);border:1px solid rgba(255,222,89,.4);border-radius:99px;padding:6px 14px;font-size:.84rem;font-weight:500;color:var(--text)}
+.spill{background:rgba(255,222,89,.12);border:1px solid rgba(255,222,89,.35);border-radius:99px;padding:6px 14px;font-size:.84rem;font-weight:500}
 .spill b{color:var(--gold)}
 .next{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:.94rem}
 .next b{color:var(--gold)}
@@ -124,7 +110,7 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .scanner-card{padding:28px 20px;text-align:center;margin-top:20px}
 .fp-pad{position:relative;width:115px;height:115px;margin:14px auto;border-radius:50%;background:radial-gradient(circle,rgba(255,42,109,.3),rgba(157,78,221,.22));border:2px dashed rgba(255,222,89,.7);display:flex;align-items:center;justify-content:center;font-size:3.2rem;cursor:pointer;user-select:none;touch-action:none;transition:.2s}
 .fp-pad.scanning{transform:scale(1.08);border-style:solid;border-color:var(--accent);box-shadow:0 0 45px var(--accent)}
-.mic-meter{width:190px;height:8px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;margin:10px auto}
+.mic-meter{width:190px;height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px auto}
 .mic-meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s}
 
 /* Luna & vela */
@@ -135,12 +121,12 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 
 /* Carta */
 .letter-stage{width:100%;max-width:640px;margin:0 auto;text-align:center}
-.wax-envelope{padding:38px 22px;border-radius:28px;background:linear-gradient(145deg,#320c2a,#17041e);border:1px solid rgba(255,222,89,.45);cursor:pointer}
-.wax-seal{width:88px;height:88px;border-radius:50%;margin:12px auto;background:radial-gradient(circle at 35% 30%,#ff4d79,#a30b37 70%,#5e041f);border:3px solid rgba(255,222,89,.85);display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;font-size:2rem;color:var(--gold);box-shadow:0 12px 28px rgba(0,0,0,.7);animation:beat 2s infinite}
+.wax-envelope{padding:38px 22px;border-radius:28px;background:linear-gradient(145deg,#320c2a,#17041e);border:1px solid rgba(255,222,89,.4);cursor:pointer}
+.wax-seal{width:88px;height:88px;border-radius:50%;margin:12px auto;background:radial-gradient(circle at 35% 30%,#ff4d79,#a30b37 70%,#5e041f);border:3px solid rgba(255,222,89,.8);display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;font-size:2rem;color:var(--gold);box-shadow:0 12px 28px rgba(0,0,0,.7);animation:beat 2s infinite}
 .paper-letter{display:none;background:linear-gradient(180deg,#fffaf0,#f3e5d0);color:#2c1823;padding:34px 24px;border-radius:24px;box-shadow:0 28px 65px rgba(0,0,0,.8);text-align:left;border:2px solid #dfc7b0}
 .paper-letter.open{display:block;animation:rise .8s}
 @keyframes rise{from{opacity:0;transform:translateY(40px) scale(.95)}}
-.paper-letter .hand{font-family:'Caveat',cursive;font-size:1.55rem;line-height:1.5;white-space:pre-line;font-weight:700;min-height:8em;color:#2a1220}
+.paper-letter .hand{font-family:'Caveat',cursive;font-size:1.55rem;line-height:1.5;white-space:pre-line;font-weight:700;min-height:8em}
 .paper-letter .sign{font-family:'Great Vibes',cursive;font-size:2.2rem;color:#b81d4e;text-align:right;margin-top:16px;opacity:0;transition:opacity 1s}
 .paper-letter .sign.on{opacity:1}
 
@@ -149,7 +135,7 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .chapter{position:relative;border-radius:28px;overflow:hidden;padding:30px 24px;background:linear-gradient(150deg,#2c1035,#120419);border:1px solid var(--line)}
 .chapter .num{position:absolute;top:6px;right:18px;font-size:5rem;font-weight:800;line-height:1;color:rgba(255,117,140,.15)}
 .chapter .date{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
-.chapter h3{font-size:1.5rem;margin:4px 0 6px;color:var(--text)}
+.chapter h3{font-size:1.5rem;margin:4px 0 6px}
 .chapter p{color:var(--muted);font-size:.98rem}
 
 /* Cielo */
@@ -160,7 +146,7 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .star{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border:none;background:none;cursor:pointer}
 .star i{position:absolute;inset:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px rgba(255,222,89,.95),0 0 34px 8px rgba(255,42,109,.6);animation:tw 3s infinite ease-in-out}
 @keyframes tw{50%{transform:scale(1.4);opacity:.7}}
-.star span{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;color:var(--text);text-shadow:0 2px 6px #000;font-weight:600}
+.star span{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;text-shadow:0 2px 6px #000;font-weight:600}
 .secret-key-star{position:absolute;right:8%;top:12%;font-size:1.6rem;background:none;border:none;cursor:pointer;filter:drop-shadow(0 0 12px var(--gold));animation:floaty 3s infinite}
 
 /* Polaroids & cabina */
@@ -174,9 +160,6 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .booth-stage{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:center;margin:12px 0}
 #boothVideo{width:220px;height:220px;object-fit:cover;border-radius:16px;border:2px solid var(--line);background:#0d0414;display:none;transform:scaleX(-1)}
 #boothPreview{width:220px;height:auto;aspect-ratio:360/430;border-radius:8px;box-shadow:0 14px 32px rgba(0,0,0,.7)}
-.filter-chips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0}
-.fchip{padding:6px 12px;border-radius:99px;font-size:.76rem;background:rgba(255,255,255,.1);border:1px solid var(--line);color:var(--text);cursor:pointer;font-family:inherit}
-.fchip.on{background:rgba(255,42,109,.4);border-color:var(--gold);color:var(--gold);font-weight:600}
 
 /* Frasco & mascota */
 .jar-wrap{display:flex;flex-direction:column;align-items:center;padding:30px 18px;text-align:center}
@@ -193,7 +176,7 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .coupon{padding:18px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(255,222,89,.16),rgba(255,42,109,.15));border:1px dashed rgba(255,222,89,.6);cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s}
 .coupon:active{transform:scale(.97)}
 .coupon .c-top{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
-.coupon h4{font-size:1.12rem;margin:6px 0;color:var(--text)}
+.coupon h4{font-size:1.12rem;margin:6px 0}
 .coupon p{font-size:.86rem;color:var(--muted)}
 .coupon .stamp{margin-top:10px;align-self:flex-start;font-size:.72rem;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.12);color:var(--gold);font-weight:600}
 .coupon.used .stamp{background:var(--accent);color:#fff}
@@ -217,7 +200,6 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .vinyl-label{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;color:#1a0618;font-size:1.2rem;font-weight:700}
 .pl{padding:10px}
 .song{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;cursor:pointer;border:1px solid transparent}
-.song h4{color:var(--text)}
 .song.on{background:rgba(255,42,109,.28);border-color:rgba(255,117,140,.5)}
 .song .ico{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--violet));display:flex;align-items:center;justify-content:center;flex:none}
 .song small{color:var(--muted)}
@@ -229,17 +211,14 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 /* Ábreme cuando & cápsulas & tarot */
 .env-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
 .env{padding:22px 12px;text-align:center;border-radius:20px;cursor:pointer;background:linear-gradient(145deg,rgba(255,42,109,.18),rgba(157,78,221,.16));border:1px solid rgba(255,117,140,.35)}
-.env.read{opacity:.65}
+.env.read{opacity:.6}
 .env .ic{font-size:2rem}
 .env small{display:block;color:var(--gold);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;margin-top:6px;font-weight:700}
-.env h4{color:var(--text)}
 .caps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
 .cap-box{padding:18px 14px;border-radius:18px;text-align:center;background:rgba(255,255,255,.06);border:1px solid var(--line);cursor:pointer}
-.cap-box h4{color:var(--text)}
-.cap-box.locked{opacity:.75;border-style:dashed}
+.cap-box.locked{opacity:.7;border-style:dashed}
 .tarot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .tarot-card{padding:26px 16px;border-radius:24px;background:linear-gradient(145deg,#2e0f36,#12041a);border:2px solid rgba(255,222,89,.55);text-align:center;cursor:pointer;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .4s}
-.tarot-card h4{color:var(--text)}
 .tarot-card .face-up{display:none}
 .tarot-card.rev{transform:rotateY(360deg)}
 .tarot-card.rev .face-up{display:block}
@@ -262,7 +241,7 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .kslot.got{opacity:1;border-style:solid;border-color:var(--gold);background:rgba(255,222,89,.25);box-shadow:0 0 18px rgba(255,222,89,.6)}
 .pbar{height:8px;background:rgba(255,255,255,.1);border-radius:8px;overflow:hidden;margin-bottom:14px}
 .pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .4s}
-.plan{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line);cursor:pointer;text-align:left;color:var(--text)}
+.plan{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line);cursor:pointer;text-align:left}
 .plan .box{width:24px;height:24px;border-radius:7px;border:2px solid var(--accent2);display:flex;align-items:center;justify-content:center;flex:none}
 .plan.done .box{background:var(--accent);border-color:var(--accent)}
 .plan.done .box::after{content:"✓";color:#fff;font-weight:700}
@@ -279,17 +258,16 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .pact-card{margin:18px auto 0;max-width:500px;padding:22px;border-radius:22px;background:linear-gradient(145deg,rgba(255,222,89,.15),rgba(255,42,109,.15));border:1px solid rgba(255,222,89,.5)}
 #sigCv{width:100%;height:135px;background:#fff;border-radius:12px;border:2px dashed var(--accent2);touch-action:none;cursor:crosshair;margin:10px 0}
 footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px calc(95px + var(--safe-bot));position:relative;z-index:10}
-#resetAll{margin-top:10px;background:none;border:none;color:rgba(255,255,255,.5);font-family:inherit;font-size:.75rem;cursor:pointer;text-decoration:underline}
 
 /* Modal & toast */
 #modal{position:fixed;inset:0;z-index:460;background:rgba(3,0,6,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px}
 #modal.show{display:flex;animation:fade .3s}
 @keyframes fade{from{opacity:0}}
-.mbox{position:relative;width:100%;max-width:500px;max-height:86vh;overflow:auto;padding:30px 22px;text-align:center;background:linear-gradient(150deg,#310b3a,#13041a);border:1px solid rgba(255,117,140,.5);border-radius:26px;color:var(--text)}
+.mbox{position:relative;width:100%;max-width:500px;max-height:86vh;overflow:auto;padding:30px 22px;text-align:center;background:linear-gradient(150deg,#310b3a,#13041a);border:1px solid rgba(255,117,140,.5);border-radius:26px}
 .mbox .mi{font-size:3rem}
-.mbox h3{font-size:1.5rem;margin:6px 0;color:var(--text)}
+.mbox h3{font-size:1.5rem;margin:6px 0}
 .mbox .md{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
-.mbox p{margin-top:12px;white-space:pre-line;font-size:.98rem;color:var(--text)}
+.mbox p{margin-top:12px;white-space:pre-line;font-size:.98rem}
 .mbox .photo{width:100%;max-height:300px;object-fit:cover;border-radius:16px;margin-bottom:12px}
 .mclose{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--muted);font-size:1.6rem;cursor:pointer}
 #toast{position:fixed;left:50%;bottom:calc(84px + var(--safe-bot));transform:translateX(-50%) translateY(20px);z-index:480;background:#310b3a;border:1px solid var(--gold);color:var(--gold);padding:11px 22px;border-radius:30px;font-size:.9rem;font-weight:700;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.8);max-width:90vw;text-align:center}
@@ -304,8 +282,6 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
 
 <button class="quest-pill" id="questPill">🗝️ Llaves: <span id="keyCountTop">0</span>/3</button>
 <div class="top-controls">
-  <button class="icon-btn" id="shakeSensorBtn" title="Activar sensor mágico en iPhone">📳</button>
-  <button class="icon-btn" id="iosInstallBtn" title="Instalar como App en iPhone">📲</button>
   <button class="icon-btn" id="missYouTopBtn" title="Toca si me extrañas">💕</button>
   <button class="icon-btn" id="hbBtn" title="Latido">💓</button>
   <button class="icon-btn" id="music" title="Música">🎵</button>
@@ -336,7 +312,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <div class="glass gate-card" id="gateCard">
     <div class="lock">🔐</div>
     <h1>Hola, Kenia 💖</h1>
-    <p id="gHint"></p>
+    <p id="gHint">Adivina los 4 dígitos de nuestra fecha más especial 💖</p>
     <div class="pin-dots" id="pinDots"></div>
     <div class="keypad" id="keypad">
       <button class="kbtn" data-k="1">1</button><button class="kbtn" data-k="2">2</button><button class="kbtn" data-k="3">3</button>
@@ -468,28 +444,18 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       <div class="board rv" id="board">
         <button class="hidden-board-key" id="boardKeyBtn">🗝️ ¡Encontraste la Llave #1!</button>
       </div>
-      <div class="hint">Toca cualquier Polaroid para subir tu foto y cambiarle la frase 📸</div>
-      <div class="row" style="margin-top:12px">
-        <button class="btn gold" id="openPhotoMgrBtn">🐙 Guardar Fotos / Voz para GitHub</button>
-        <button class="btn ghost" id="quickResetBtn">🔄 Reiniciar App Ahora</button>
-      </div>
+      <div class="hint">Arrastra las fotos para moverlas. Toca una para verla grande y poner tu propia foto 📸</div>
       <div class="glass booth-card rv">
         <h3 class="gt">📸 Cabina Polaroid para Kenia</h3>
         <div class="booth-stage">
           <video id="boothVideo" autoplay playsinline muted></video>
           <canvas id="boothPreview" width="360" height="430"></canvas>
         </div>
-        <div class="filter-chips" id="boothFilters">
-          <button class="fchip on" data-f="none">✨ Original</button>
-          <button class="fchip" data-f="warm">🌅 Cálido</button>
-          <button class="fchip" data-f="bw">🎞️ Vintage B&N</button>
-          <button class="fchip" data-f="pink">🌸 Sueño Rosa</button>
-        </div>
         <div class="row">
           <button class="btn main" id="startCamBtn">📷 Cámara Selfie</button>
           <button class="btn gold" id="snapBtn" style="display:none">✨ Capturar</button>
           <label class="btn ghost" style="cursor:pointer">🖼️ Elegir Foto<input type="file" id="uploadPhotoInp" accept="image/*" hidden></label>
-          <button class="btn ghost" id="dlBoothBtn">⬇️ Guardar / Compartir</button>
+          <button class="btn ghost" id="dlBoothBtn">⬇️ Guardar</button>
         </div>
       </div>
     </div>
@@ -554,18 +520,8 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <section id="plsec">
     <div class="wrap">
       <div class="eyebrow rv">banda sonora</div>
-      <h2 class="rv">Mi voz y canciones <em>nuestras</em></h2>
+      <h2 class="rv">Canciones que son <em>nuestras</em></h2>
       <div class="vinyl-wrap rv"><div class="turntable"><div class="vinyl-disc" id="vinylDisc"><div class="vinyl-label">K ♥ J</div></div></div></div>
-      <div class="glass voice-card rv">
-        <div class="eyebrow">mensaje de voz exclusivo</div>
-        <h3 class="gt">🎙️ Escucha la voz de Javier</h3>
-        <p style="font-size:.86rem;color:var(--muted)" id="voiceStatus">Un mensajito grabado con todo mi amor para ti, Kenia 💖</p>
-        <div class="voice-wave" id="voiceWave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="row">
-          <button class="btn gold" id="playVoiceBtn">▶️ Escuchar nota de voz</button>
-          <button class="btn ghost" id="recVoiceBtn">🎙️ Grabar mi voz (Javier)</button>
-        </div>
-      </div>
       <div class="glass pl rv" id="playlist"></div>
       <div class="glass piano-wrap rv">
         <h3 class="gt">🎹 Piano de Cristal para Kenia</h3>
@@ -639,18 +595,6 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
         <p class="hint" style="margin-top:6px">Toca el cielo para lanzar corazones de fuego</p>
         <button class="btn main" id="fwNamesBtn" style="margin-top:10px">💖 Iluminar Nuestros Nombres</button>
       </div>
-      <div class="glass wish-box rv">
-        <div class="eyebrow">buzón directo al corazón de javier</div>
-        <h3 class="gt">💌 Buzón de Deseos y Antojos de Kenia</h3>
-        <p style="font-size:.86rem;color:var(--muted)">Escribe lo que se te antoje hoy, un plan que quieras hacer o un mensajito para Javier:</p>
-        <div class="wish-chips">
-          <button class="wchip" data-w="Amor, hoy tengo antojo de ">🍓 Tengo antojo de...</button>
-          <button class="wchip" data-w="Amor, nuestra próxima salida tiene que ser a ">🚗 Llévame a...</button>
-          <button class="wchip" data-w="Amor, hoy necesito muchos abrazos y besitos porque ">🤗 Necesito mimos...</button>
-        </div>
-        <textarea class="wish-inp" id="keniaWishInp" placeholder="Escribe aquí tu deseo o mensaje para Javier... 💖"></textarea>
-        <button class="btn gold" id="sendWishWaBtn">Enviar deseo a Javier por WhatsApp 💬</button>
-      </div>
     </div>
   </section>
 
@@ -686,7 +630,6 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
 
 <footer>
   <div id="foot"></div>
-  <button id="resetAll">Reiniciar progreso (para volver a probarla desde cero)</button>
 </footer>
 <div id="modal"><div class="mbox" id="mbox"></div></div>
 
@@ -701,9 +644,8 @@ const CONFIG = {
   whatsappRaw: "6566996813",
   inicio: "2026-01-30T20:00:00",
   clave: "0130",
-  pista: "Escribe nuestra fecha especial (MMDD: 0130) 💖",
   musicaArchivo: "",
-  intro: "Para ti, Kenia Malanche Lara 💖\nHice este universo entero pensando en ti.\nPorque mereces algo tan único, mágico y bonito\ncomo todo lo que me haces sentir desde el 30 de enero.",
+  intro: "Para ti, Kenia Malanche Lara 💖\nHice este universo entero pensando en ti.\nPorque mereces algo tan único, mágico y bonito\ncomo todo lo que me haces sentir cada día.",
   pregunta: "Kenia Malanche Lara, ¿quieres seguir escribiendo esta historia conmigo para siempre?",
   respuestaTitulo: "¡Sabía que dirías que sí, Kenia! 💖",
   respuestaTexto: "Gracias por ser mi hogar, mi paz, mi risa favorita y mi mejor aventura, Kenia. Te amo hoy, mañana y siempre.",
@@ -721,14 +663,12 @@ const CONFIG = {
     { fecha: "Hoy y siempre", titulo: "Todo lo que nos falta vivir", texto: "Cada día contigo es mi mejor día, Kenia. Y lo más bonito es que apenas vamos empezando." }
   ],
   recuerdos: [
-    { x: 14, y: 72, titulo: "Primer 'hola'", fecha: "El Comienzo", texto: "La chispa donde empezó nuestra historia, Kenia." },
+    { x: 14, y: 72, titulo: "Primer 'hola'", fecha: "Enero 2026", texto: "La chispa donde empezó nuestra historia, Kenia." },
     { x: 32, y: 34, titulo: "Primera salida", fecha: "Enero 2026", texto: "Nuestras risas nerviosas y miradas cómplices." },
-    { x: 52, y: 64, titulo: "30 de Enero 2026", fecha: "30 Enero 2026", texto: "El día en que oficializamos nuestra historia juntos 💖" },
-    { x: 70, y: 25, titulo: "A prueba de todo", fecha: "2026", texto: "Porque cada día juntos nos hace más unidos." },
-    { x: 88, y: 56, titulo: "Nuestro futuro", fecha: "Hoy y siempre", texto: "Lo mejor todavía está por escribirse juntos." }
+    { x: 52, y: 64, titulo: "Nuestras aventuras", fecha: "2026", texto: "Esos momentos donde el mundo parecía solo nuestro." },
+    { x: 70, y: 25, titulo: "A prueba de todo", fecha: "Siempre", texto: "Porque incluso en días difíciles nos elegimos." },
+    { x: 88, y: 56, titulo: "Nuestro futuro", fecha: "Hoy", texto: "Lo mejor todavía está por escribirse juntos." }
   ],
-  /* 👇 AQUÍ PUEDES PONER TUS FOTOS (o usar el botón "Gestionar las 5 Fotos" en la página) */
-  /*__FOTOS_START__*/
   fotos: [
     { src: "", texto: "Kenia & Javier 💖" },
     { src: "", texto: "Tu sonrisa hermosa" },
@@ -736,20 +676,6 @@ const CONFIG = {
     { src: "", texto: "Mi persona favorita" },
     { src: "", texto: "Siempre juntos ✨" }
   ],
-  /*__FOTOS_END__*/
-  /*__VOICE_START__*/
-  notaDeVoz: "",
-  /*__VOICE_END__*/
-  /*__STATE_START__*/
-  estadoInicial: {
-    keys: [],
-    coupons: [],
-    plans: [],
-    read: [],
-    miss: 0,
-    pet: 20
-  },
-  /*__STATE_END__*/
   razones: [
     "Por la forma en que tus ojos brillan cuando sonríes, Kenia.",
     "Porque tus abrazos me reinician la vida y me dan paz.",
@@ -782,9 +708,9 @@ const CONFIG = {
     { ic: "💭", t: "Dudes de ti", msg: "Mírate con mis ojos, Kenia: eres brillante, hermosa y capaz de todo." }
   ],
   capsulas: [
-    { titulo: "Para Kenia, hoy", unlock: "2026-01-30", msg: "Kenia Malanche Lara: desde aquel 30 de enero de 2026 eres lo más bonito que me ha pasado en la vida 💖" },
-    { titulo: "Nuestro 1er Aniversario", unlock: "2027-01-30", msg: "¡Feliz primer año juntos, mi amor! Gracias por estos primeros 365 días desde el 30 de enero de 2026 💖" },
-    { titulo: "Próximo 14 de Febrero", unlock: "2027-02-14", msg: "¡Feliz San Valentín, Kenia! Sigo eligiéndote igual que el primer día. Te amo." }
+    { titulo: "Para Kenia, hoy", unlock: "2026-01-30", msg: "Kenia Malanche Lara: eres lo más bonito que me ha pasado en la vida 💖" },
+    { titulo: "Nuestro 1er Aniversario", unlock: "2027-01-30", msg: "¡Feliz primer aniversario, mi amor! Gracias por un año maravilloso juntos." },
+    { titulo: "Próximo San Valentín", unlock: "2027-02-14", msg: "Te amo hoy y siempre, Kenia." }
   ],
   tarot: [
     { tiempo: "Pasado • El Encuentro", ic: "🌙", titulo: "Los Amantes Estelares", txt: "Entre millones de caminos, las almas de Kenia y Javier supieron dónde coincidir." },
@@ -803,7 +729,8 @@ const CONFIG = {
     "Hacer noche de películas con nuestras botanas favoritas",
     "Cocinar juntos nuestra comida favorita entre risas",
     "Tomarnos una foto en cada lugar nuevo que visitemos"
-  ]
+  ],
+  autoLockMinutos: 3
 };
 </script>
 
@@ -877,52 +804,22 @@ const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const rnd = (a,b) => a + Math.random()*(b-a);
 const sleep = ms => new Promise(r => setTimeout(r,ms));
-
-/* Guardamos una plantilla limpia del HTML antes de que el JS modifique el DOM,
-   para que al exportar a GitHub el archivo quede 100% limpio y reiniciable */
-const CLEAN_HTML_TEMPLATE = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-
-const memStore = {};
 const store = {
-  get(k,d){
-    try{
-      const raw = localStorage.getItem(k);
-      if(raw !== null) return JSON.parse(raw);
-    }catch(e){}
-    if(k in memStore) return memStore[k];
-    const st = CONFIG.estadoInicial || {};
-    if(k==="kenia_keys" && Array.isArray(st.keys)) return [...st.keys];
-    if(k==="kenia_coupons" && Array.isArray(st.coupons)) return [...st.coupons];
-    if(k==="kenia_plans" && Array.isArray(st.plans)) return [...st.plans];
-    if(k==="kenia_read" && Array.isArray(st.read)) return [...st.read];
-    if(k==="kenia_miss" && typeof st.miss==="number") return st.miss;
-    if(k==="kenia_pet" && typeof st.pet==="number") return st.pet;
-    return d;
-  },
-  set(k,v){
-    memStore[k] = v;
-    try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; }
-  },
-  clearAll(){
-    Object.keys(memStore).forEach(k=>delete memStore[k]);
-    try{
-      const toRemove = [];
-      for(let i=0;i<localStorage.length;i++){
-        const k = localStorage.key(i);
-        if(k && k.startsWith("kenia_")) toRemove.push(k);
-      }
-      toRemove.forEach(k=>localStorage.removeItem(k));
-    }catch(e){}
-  }
+  get(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } }
 };
 const vib = p => { try{ navigator.vibrate && navigator.vibrate(p); }catch(e){} };
 const conf = o => { if(window.confetti) confetti(o); };
 function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),2600); }
 
 function sendWhatsApp(msg){
-  const raw = (CONFIG.whatsappRaw||"6566996813").replace(/\D/g,"");
-  const phone = raw.startsWith("52") ? raw : "52" + raw;
-  const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+  let d = (CONFIG.whatsappRaw||"").replace(/\D/g,"");
+  let phone = "";
+  if(d.length === 10) phone = "52"+d;
+  else if(d.length === 12 && d.startsWith("52")) phone = d;
+  else if(d.length === 13 && d.startsWith("521")) phone = d;
+  else toast("⚠️ Número de WhatsApp no válido: elige el contacto manualmente");
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
   const a = document.createElement("a"); a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
   document.body.appendChild(a); a.click(); a.remove();
 }
@@ -1006,7 +903,6 @@ $("#modal").onclick = e=>{ if(e.target.id==="modal") closeModal(); };
 addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
 
 /* ===================== TEXTOS BASE ===================== */
-$("#gHint").textContent = CONFIG.pista;
 $("#heroName").textContent = CONFIG.ellaCompleta;
 $("#askText").textContent = CONFIG.pregunta;
 $("#yesTitle").textContent = CONFIG.respuestaTitulo;
@@ -1017,8 +913,8 @@ $("#gGoal").textContent = CONFIG.meta;
 $("#foot").textContent = `Hecho con todo mi 💖 para ${CONFIG.ellaCompleta} • Por ${CONFIG.yo}`;
 (function(){ const h=new Date().getHours(); $("#greet").textContent = (h<12?"☀️ Buenos días":h<19?"🌤️ Buenas tardes":"🌙 Buenas noches")+", "+CONFIG.ella; })();
 
-/* ===================== PUERTA ===================== */
-let pinVal="";
+/* ===================== PUERTA (SIN PISTAS + 3 INTENTOS + COOLDOWN) ===================== */
+let pinVal="", failedAttempts=0, lockCooldown=false;
 const PL = CONFIG.clave.length;
 $("#pinDots").innerHTML = Array.from({length:PL},()=>`<span class="pin-dot"></span>`).join("");
 const dots = ()=>$$("#pinDots .pin-dot").forEach((d,i)=>d.classList.toggle("filled",i<pinVal.length));
@@ -1037,20 +933,66 @@ function enter(first){
   setTimeout(typeIntro, first?600:200);
 }
 function checkPin(){
-  if(pinVal===CONFIG.clave){ store.set("kenia_in",true); enter(true); }
-  else{ $("#gateErr").textContent="Esa no es 🥺 Pista: "+CONFIG.pista; const c=$("#gateCard"); c.classList.remove("sh"); void c.offsetWidth; c.classList.add("sh"); vib(200); pinVal=""; dots(); }
+  if(lockCooldown) return;
+  if(pinVal===CONFIG.clave){
+    failedAttempts=0;
+    enter(true);
+  } else {
+    failedAttempts++;
+    pinVal=""; dots();
+    const c=$("#gateCard"); c.classList.remove("sh"); void c.offsetWidth; c.classList.add("sh"); vib(200);
+    if(failedAttempts===1){
+      $("#gateErr").textContent="Mmm nop 🥺 ¡Tú te la sabes, mi amor! (Te quedan 2 intentos)";
+    } else if(failedAttempts===2){
+      $("#gateErr").textContent="¡Casi, hermosa! 🙈 Acuérdate de nuestra fecha especial (Último intento 👀)";
+    } else {
+      lockCooldown=true;
+      let left=25;
+      const errEl=$("#gateErr");
+      const iv=setInterval(()=>{
+        errEl.textContent=`🕵️‍♀️💖 ¡Alto ahí, hermosa!\nEste corazón tiene seguridad nivel VIP.\n⏳ Vuelve a intentarlo en ${left}s`;
+        left--;
+        if(left<0){
+          clearInterval(iv);
+          lockCooldown=false;
+          failedAttempts=0;
+          errEl.textContent="✨ ¡Listo, mi amor! Ya puedes volver a intentarlo 💖";
+        }
+      },1000);
+    }
+  }
 }
 $$("#keypad .kbtn").forEach(b=>b.onclick=()=>{
+  if(lockCooldown) return;
   Sound.pop(); const k=b.dataset.k;
   if(k==="clr") pinVal=pinVal.slice(0,-1);
   else if(k==="ok") checkPin();
   else if(pinVal.length<PL){ pinVal+=k; if(pinVal.length===PL){ dots(); setTimeout(checkPin,180); return; } }
   dots();
 });
-if(store.get("kenia_in",false)){ $("#gate").style.display="none"; enter(false); }
+
+/* Auto-bloqueo automático por inactividad o cierre (sin botones) */
+(function(){
+  let idleTimer=null;
+  const lockApp=()=>{
+    document.body.classList.add("locked");
+    $("#gate").classList.remove("out");
+    pinVal=""; failedAttempts=0; dots(); $("#gateErr").textContent="";
+    toast("🔒 Franja de seguridad activada por inactividad");
+  };
+  const resetIdle=()=>{
+    clearTimeout(idleTimer);
+    const mins = CONFIG.autoLockMinutos || 3;
+    idleTimer = setTimeout(lockApp, mins * 60 * 1000);
+  };
+  ["pointerdown","keydown","touchstart","scroll"].forEach(ev=>addEventListener(ev,resetIdle,{passive:true}));
+  resetIdle();
+  document.addEventListener("visibilitychange",()=>{ if(document.hidden) lockApp(); });
+  window.addEventListener("pagehide",lockApp);
+})();
 
 /* ===================== REVEAL, PROGRESO, SCROLLSPY ===================== */
-const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }),{threshold:.08});
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }),{threshold:.12});
 const observeRv = ()=>$$(".rv:not(.watched)").forEach(el=>{ el.classList.add("watched"); io.observe(el); });
 addEventListener("scroll",()=>{ const h=document.documentElement; $("#progress").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%"; },{passive:true});
 const spy=new IntersectionObserver(es=>es.forEach(e=>{
@@ -1216,8 +1158,8 @@ $("#waxEnv").onclick=async()=>{
   if(letterOpened) return; letterOpened=true; Sound.chime(); vib(40);
   $("#waxEnv").style.display="none"; $("#paperLetter").classList.add("open");
   const el=$("#letterBody"), txt=CONFIG.carta.texto; el.textContent="";
-  let skip=false;
   $("#paperLetter").onclick=()=>{ el.textContent=txt; $("#letterSign").textContent=CONFIG.carta.firma; $("#letterSign").classList.add("on"); skip=true; };
+  let skip=false;
   for(const ch of txt){ if(skip) return; el.textContent+=ch; await sleep(ch==="\n"?220:34); }
   $("#letterSign").textContent=CONFIG.carta.firma; $("#letterSign").classList.add("on");
 };
@@ -1235,41 +1177,23 @@ $("#chapters").innerHTML=CONFIG.capitulos.map((c,i)=>`<article class="chapter rv
   $("#skyKeyBtn").onclick=()=>addKey(2,"Cometa del Cielo");
 })();
 
-/* ===================== POLAROIDS + EMPAQUETADOR DE FOTOS ===================== */
+/* ===================== POLAROIDS ===================== */
 const photos=store.get("kenia_photos",{});
-const captions=store.get("kenia_captions",{});
 function shrink(file,max){
   return new Promise((res,rej)=>{
     const img=new Image(); img.onload=()=>{
       const sc=Math.min(1,max/Math.max(img.width,img.height)), c=document.createElement("canvas");
       c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-      URL.revokeObjectURL(img.src); res(c.toDataURL("image/jpeg",.72));
+      URL.revokeObjectURL(img.src); res(c.toDataURL("image/jpeg",.82));
     }; img.onerror=rej; img.src=URL.createObjectURL(file);
   });
 }
 function openPhoto(i){
-  const f=CONFIG.fotos[i], src=photos[i]||f.src, txt=captions[i]||f.texto;
-  openModal(`
-    ${src?`<img class="photo" src="${src}" alt="">`:`<div class="mi">💖</div>`}
-    <h3>${txt}</h3>
-    <input id="capInp" value="${txt.replace(/"/g,'&quot;')}" placeholder="Frase de la foto..." style="width:100%;margin-top:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:center">
-    <input id="urlInp" value="${(src&&!src.startsWith('data:')?src:'').replace(/"/g,'&quot;')}" placeholder="O pega ruta de GitHub (ej. fotos/1.jpg)" style="width:100%;margin-top:8px;padding:9px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--gold);font-family:inherit;font-size:.82rem;text-align:center">
-    <div class="row" style="margin-top:12px">
-      <label class="btn gold" style="cursor:pointer">📷 Subir de Galería<input type="file" accept="image/*" id="phInp" hidden></label>
-      <button class="btn ghost" id="saveCapBtn">Guardar cambios ✨</button>
-    </div>
-  `);
-  $("#saveCapBtn").onclick=()=>{
-    const v=$("#capInp").value.trim();
-    const u=$("#urlInp").value.trim();
-    if(v){ captions[i]=v; store.set("kenia_captions",captions); }
-    if(u){ photos[i]=u; store.set("kenia_photos",photos); }
-    renderPols(); toast("✨ Cambios guardados"); closeModal();
-  };
+  const f=CONFIG.fotos[i], src=photos[i]||f.src;
+  openModal(`${src?`<img class="photo" src="${src}" alt="">`:`<div class="mi">💖</div>`}<h3>${f.texto}</h3><label class="btn gold" style="margin-top:12px;cursor:pointer">📷 ${src?"Cambiar":"Añadir"} foto<input type="file" accept="image/*" id="phInp" hidden></label>`);
   $("#phInp").onchange=async e=>{
     const file=e.target.files[0]; if(!file) return;
-    const v=$("#capInp").value.trim(); if(v){ captions[i]=v; store.set("kenia_captions",captions); }
-    try{ photos[i]=await shrink(file,560); if(!store.set("kenia_photos",photos)) toast("Foto guardada en sesión para exportar a GitHub"); else toast("📸 Foto lista"); }catch(err){ toast("No pude leer esa foto"); }
+    try{ photos[i]=await shrink(file,700); if(!store.set("kenia_photos",photos)) toast("No cupo para guardarla en este dispositivo"); else toast("📸 Foto guardada"); }catch(err){ toast("No pude leer esa foto"); }
     renderPols(); closeModal();
   };
 }
@@ -1279,8 +1203,8 @@ function renderPols(){
   const bw=board.clientWidth||340, cols=bw<520?2:3, pw=145, gap=Math.max(6,(bw-cols*pw)/(cols+1)), rows=Math.ceil(CONFIG.fotos.length/cols);
   board.style.height=Math.max(420,rows*215+70)+"px";
   CONFIG.fotos.forEach((f,i)=>{
-    const src=photos[i]||f.src, txt=captions[i]||f.texto, el=document.createElement("div"); el.className="pol";
-    el.innerHTML=`<div class="img">${src?`<img src="${src}" alt="">`:"💖"}</div><div class="cap">${txt}</div>`;
+    const src=photos[i]||f.src, el=document.createElement("div"); el.className="pol";
+    el.innerHTML=`<div class="img">${src?`<img src="${src}" alt="">`:"💖"}</div><div class="cap">${f.texto}</div>`;
     el.style.left=(gap+(i%cols)*(pw+gap))+"px"; el.style.top=(20+Math.floor(i/cols)*215)+"px"; el.style.transform=`rotate(${rnd(-7,7)}deg)`;
     board.appendChild(el);
     let drag=false,sx=0,sy=0,ol=0,ot=0,moved=0;
@@ -1293,134 +1217,29 @@ function renderPols(){
 renderPols(); addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(renderPols,300); });
 $("#boardKeyBtn").onclick=()=>{ addKey(1,"Álbum Polaroid"); $("#boardKeyBtn").textContent="🗝️ Llave #1 obtenida ✓"; };
 
-/* Construye el HTML 100% limpio para subir a GitHub sin estado sucio del DOM */
-function buildCleanGitHubHtml(includeProgress){
-  const mergedFotos = CONFIG.fotos.map((f,i)=>({
-    src: photos[i] || f.src || "",
-    texto: captions[i] || f.texto
-  }));
-  const savedVoice = store.get("kenia_voice","") || CONFIG.notaDeVoz || "";
-  const stateObj = includeProgress ? {
-    keys: keys,
-    coupons: usedC,
-    plans: doneP,
-    read: readE,
-    miss: miss,
-    pet: petXp
-  } : { keys:[], coupons:[], plans:[], read:[], miss:0, pet:20 };
-
-  const blockFotos = "/*__FOTOS_START__*/\n  fotos: " + JSON.stringify(mergedFotos, null, 4) + ",\n  /*__FOTOS_END__*/";
-  const blockVoice = "/*__VOICE_START__*/\n  notaDeVoz: " + JSON.stringify(savedVoice) + ",\n  /*__VOICE_END__*/";
-  const blockState = "/*__STATE_START__*/\n  estadoInicial: " + JSON.stringify(stateObj) + ",\n  /*__STATE_END__*/";
-
-  return CLEAN_HTML_TEMPLATE
-    .replace(/\/\*__FOTOS_START__\*\/[\s\S]*?\/\*__FOTOS_END__\*\//, blockFotos)
-    .replace(/\/\*__VOICE_START__\*\/[\s\S]*?\/\*__VOICE_END__\*\//, blockVoice)
-    .replace(/\/\*__STATE_START__\*\/[\s\S]*?\/\*__STATE_END__\*\//, blockState);
-}
-
-/* Gestor & Empaquetador para GitHub */
-$("#openPhotoMgrBtn").onclick=()=>{
-  const list = CONFIG.fotos.map((f,i)=>{
-    const has = !!(photos[i]||f.src);
-    const txt = captions[i]||f.texto;
-    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:1px solid var(--line);text-align:left">
-      <span style="font-size:.86rem">${has?"✅":"📷"} <b>Foto #${i+1}:</b> ${txt}</span>
-      <button class="btn ghost" style="padding:5px 12px;font-size:.76rem" data-edit="${i}">Editar</button>
-    </div>`;
-  }).join("");
-  const hasVoice = !!(store.get("kenia_voice","") || CONFIG.notaDeVoz);
-  openModal(`
-    <div class="mi">🐙</div>
-    <h3>Guardar Datos para GitHub</h3>
-    <p style="font-size:.84rem;color:var(--muted);line-height:1.45">
-      GitHub es estático: para que tus fotos y voz queden guardadas para siempre en tu repositorio de GitHub, elígelas aquí y luego <b>copia el código</b> o <b>descarga el index.html limpio</b> para subirlo a tu repo.
-    </p>
-    <div style="margin:10px 0;background:rgba(255,255,255,.05);border-radius:16px;padding:6px">
-      ${list}
-      <div style="padding:8px 10px;text-align:left;font-size:.84rem;color:var(--gold)">
-        ${hasVoice?"✅ Nota de voz de Javier lista":"🎙️ Sin nota de voz (puedes grabarla en la sección Música)"}
-      </div>
-    </div>
-    <label style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:.82rem;color:var(--muted);margin:8px 0;cursor:pointer">
-      <input type="checkbox" id="keepProgChk"> Incluir también el progreso actual (llaves/cupones)
-    </label>
-    <div class="row" style="margin-top:10px">
-      <button class="btn gold" id="copyGitHubBtn" style="flex:1">📋 Copiar código para GitHub</button>
-      <button class="btn main" id="exportHtmlWithPhotos" style="flex:1">📦 Descargar index.html</button>
-    </div>
-  `);
-  $$("[data-edit]").forEach(b=>b.onclick=()=>openPhoto(+b.dataset.edit));
-  $("#copyGitHubBtn").onclick=()=>{
-    const keep = $("#keepProgChk").checked;
-    const code = buildCleanGitHubHtml(keep);
-    const ta = document.createElement("textarea");
-    ta.value = code; document.body.appendChild(ta); ta.select();
-    try{ document.execCommand("copy"); toast("📋 ¡Código copiado! Pégalo en tu index.html de GitHub"); }
-    catch(e){ toast("Usa el botón Descargar index.html 📦"); }
-    ta.remove();
-  };
-  $("#exportHtmlWithPhotos").onclick=()=>{
-    const keep = $("#keepProgChk").checked;
-    const rawHtml = buildCleanGitHubHtml(keep);
-    const blob = new Blob([rawHtml], {type:"text/html;charset=utf-8"});
-    const a = document.createElement("a");
-    a.download = "index.html";
-    a.href = URL.createObjectURL(blob);
-    a.click();
-    toast("✅ index.html limpio descargado para subir a GitHub");
-  };
-};
-
-/* Cabina con filtros en vivo y Share Sheet para iPhone */
+/* Cabina */
 (function(){
-  const pv=$("#boothPreview"), px=pv.getContext("2d"), vid=$("#boothVideo");
-  let stream=null, lastImg=null, lastMirror=false, curFilter="none";
+  const pv=$("#boothPreview"), px=pv.getContext("2d"), vid=$("#boothVideo"); let stream=null;
   function cover(src,sw,sh,mirror){
     const s=Math.max(320/sw,320/sh), w=sw*s, h=sh*s, x=20+(320-w)/2, y=20+(320-h)/2;
     px.save(); px.beginPath(); px.rect(20,20,320,320); px.clip();
     if(mirror){ px.translate(360,0); px.scale(-1,1); }
-    px.drawImage(src,mirror?360-x-w:x,y,w,h);
-    if(curFilter==="warm"){ px.fillStyle="rgba(255,180,80,.18)"; px.fillRect(0,0,360,360); }
-    else if(curFilter==="pink"){ px.fillStyle="rgba(255,60,130,.18)"; px.fillRect(0,0,360,360); }
-    else if(curFilter==="bw"){
-      const id=px.getImageData(20,20,320,320), d=id.data;
-      for(let i=0;i<d.length;i+=4){ const g=.3*d[i]+.59*d[i+1]+.11*d[i+2]; d[i]=d[i+1]=d[i+2]=g; }
-      px.putImageData(id,20,20);
-    }
-    px.restore();
+    px.drawImage(src,mirror?360-x-w:x,y,w,h); px.restore();
   }
   function render(src,sw,sh,mirror){
-    if(src){ lastImg={src,sw,sh}; lastMirror=!!mirror; }
     px.fillStyle="#fff8f0"; px.fillRect(0,0,360,430);
-    if(lastImg) cover(lastImg.src,lastImg.sw,lastImg.sh,lastMirror);
-    else { px.fillStyle="#310b3a"; px.fillRect(20,20,320,320); px.font="64px serif"; px.textAlign="center"; px.fillText("💖",180,200); }
+    if(src) cover(src,sw,sh,mirror); else { px.fillStyle="#310b3a"; px.fillRect(20,20,320,320); px.font="64px serif"; px.textAlign="center"; px.fillText("💖",180,200); }
     px.fillStyle="#2c1523"; px.font="bold 26px Caveat, cursive"; px.textAlign="center"; px.fillText("Kenia & Javier 💖",180,385);
     px.font="16px Outfit"; px.fillStyle="#8c586c"; px.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),180,410);
   }
   render(null);
-  $$("#boothFilters .fchip").forEach(b=>b.onclick=()=>{
-    $$("#boothFilters .fchip").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on"); curFilter=b.dataset.f; render(); Sound.pop();
-  });
   $("#startCamBtn").onclick=async()=>{
     try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false}); vid.srcObject=stream; vid.style.display="block"; $("#snapBtn").style.display="inline-flex"; }
     catch(e){ toast("No hay cámara: elige una foto de tu galería 🖼️"); }
   };
-  $("#snapBtn").onclick=()=>{
-    const c=document.createElement("canvas"); c.width=vid.videoWidth||320; c.height=vid.videoHeight||320; c.getContext("2d").drawImage(vid,0,0);
-    render(c,c.width,c.height,true); if(stream) stream.getTracks().forEach(t=>t.stop()); vid.style.display="none"; $("#snapBtn").style.display="none"; Sound.chime(); vib(40); conf({particleCount:40,spread:60,origin:{y:.7}});
-  };
-  $("#uploadPhotoInp").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image(); img.onload=()=>render(img,img.width,img.height,false); img.src=URL.createObjectURL(f); };
-  $("#dlBoothBtn").onclick=()=>{
-    pv.toBlob(async blob=>{
-      const file=new File([blob],"Polaroid-Kenia-y-Javier.png",{type:"image/png"});
-      if(navigator.canShare && navigator.canShare({files:[file]})){
-        try{ await navigator.share({files:[file],title:"Kenia & Javier 💖"}); return; }catch(e){}
-      }
-      const a=document.createElement("a"); a.download=file.name; a.href=URL.createObjectURL(blob); a.click();
-    },"image/png");
-  };
+  $("#snapBtn").onclick=()=>{ render(vid,vid.videoWidth||320,vid.videoHeight||320,true); if(stream) stream.getTracks().forEach(t=>t.stop()); vid.style.display="none"; $("#snapBtn").style.display="none"; Sound.chime(); vib(40); conf({particleCount:40,spread:60,origin:{y:.7}}); };
+  $("#uploadPhotoInp").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image(); img.onload=()=>{ render(img,img.width,img.height,false); URL.revokeObjectURL(img.src); }; img.src=URL.createObjectURL(f); };
+  $("#dlBoothBtn").onclick=()=>{ const a=document.createElement("a"); a.download="Polaroid-Kenia-y-Javier.png"; a.href=pv.toDataURL("image/png"); a.click(); };
 })();
 
 /* ===================== FRASCO & MASCOTA ===================== */
@@ -1528,68 +1347,14 @@ function hit(i){ Sound.tone(pn[i].f,.5,"triangle",.14); const k=$$("#pianoKeys .
 $$("#pianoKeys .pkey").forEach(b=>b.addEventListener("pointerdown",()=>hit(+b.dataset.i)));
 $("#autoPlayPianoBtn").onclick=()=>[0,2,4,7,4,2,0,4,7,5,2,4,0].forEach((idx,s)=>setTimeout(()=>hit(idx),s*260));
 
-/* Estudio de Nota de Voz (Graba y reproduce la voz real de Javier) */
-(function(){
-  const playBtn=$("#playVoiceBtn"), recBtn=$("#recVoiceBtn"), wave=$("#voiceWave"), st=$("#voiceStatus");
-  const vAudio = new Audio();
-  let rec=null, chunks=[], recording=false;
-  function getVoiceSrc(){ return store.get("kenia_voice","") || CONFIG.notaDeVoz || ""; }
-  function refreshVoiceUI(){
-    const has = !!getVoiceSrc();
-    st.textContent = has ? "Toca reproducir para escuchar el mensaje de voz de Javier 💖" : "Javier: toca 'Grabar mi voz' para dejarle un audio a Kenia (máx 20s)";
-  }
-  refreshVoiceUI();
-  playBtn.onclick=()=>{
-    const src = getVoiceSrc();
-    if(!src){ toast("🎙️ Primero graba tu voz con el botón 'Grabar mi voz'"); return; }
-    if(!vAudio.paused){ vAudio.pause(); wave.classList.remove("playing"); $("#vinylDisc").classList.remove("spin"); playBtn.textContent="▶️ Escuchar nota de voz"; return; }
-    Sound.stop();
-    vAudio.src = src;
-    vAudio.play().then(()=>{
-      wave.classList.add("playing"); $("#vinylDisc").classList.add("spin");
-      playBtn.textContent="⏸️ Pausar voz";
-    }).catch(()=>toast("Toca de nuevo para reproducir 🔊"));
-    vAudio.onended = ()=>{ wave.classList.remove("playing"); $("#vinylDisc").classList.remove("spin"); playBtn.textContent="▶️ Escuchar nota de voz"; };
-  };
-  recBtn.onclick=async()=>{
-    if(recording && rec){ rec.stop(); return; }
-    try{
-      const stream = await navigator.mediaDevices.getUserMedia({audio:true});
-      chunks=[]; rec = new MediaRecorder(stream);
-      rec.ondataavailable = e=>{ if(e.data.size>0) chunks.push(e.data); };
-      rec.onstop = ()=>{
-        stream.getTracks().forEach(t=>t.stop()); recording=false;
-        wave.classList.remove("playing");
-        recBtn.textContent="🎙️ Regrabar mi voz";
-        const blob = new Blob(chunks, {type: rec.mimeType || "audio/webm"});
-        const reader = new FileReader();
-        reader.onloadend = ()=>{
-          store.set("kenia_voice", reader.result);
-          refreshVoiceUI(); Sound.win();
-          toast("✅ ¡Tu voz quedó guardada! Descarga el index.html en Fotos para empaquetarla");
-        };
-        reader.readAsDataURL(blob);
-      };
-      rec.start(); recording=true;
-      wave.classList.add("playing");
-      recBtn.textContent="⏹️ Detener grabación";
-      toast("🎙️ Grabando tu voz para Kenia... (habla ahora)");
-      setTimeout(()=>{ if(recording && rec) rec.stop(); }, 20000);
-    }catch(e){ toast("Permite el micrófono para grabar tu nota de voz 🎙️"); }
-  };
-})();
-
 /* ===================== ÁBREME CUANDO, CÁPSULAS, TAROT ===================== */
-let readE=store.get("kenia_read",[]);
-function renderEnvs(){
-  $("#envs").innerHTML=CONFIG.abrir.map((o,i)=>`<div class="env rv in ${readE.includes(i)?"read":""}" data-i="${i}"><div class="ic">${readE.includes(i)?"💌":"✉️"}</div><small>ábreme cuando</small><h4>${o.t}</h4></div>`).join("");
-  $$("#envs .env").forEach(el=>el.onclick=()=>{
-    const i=+el.dataset.i, o=CONFIG.abrir[i]; Sound.chime(); vib(30);
-    openModal(`<div class="mi">${o.ic}</div><div class="md">ábreme cuando</div><h3>${o.t}</h3><p>${o.msg}</p>`);
-    if(!readE.includes(i)){ readE.push(i); store.set("kenia_read",readE); el.classList.add("read"); el.querySelector(".ic").textContent="💌"; }
-  });
-}
-renderEnvs();
+const readE=store.get("kenia_read",[]);
+$("#envs").innerHTML=CONFIG.abrir.map((o,i)=>`<div class="env rv ${readE.includes(i)?"read":""}" data-i="${i}"><div class="ic">${readE.includes(i)?"💌":"✉️"}</div><small>ábreme cuando</small><h4>${o.t}</h4></div>`).join("");
+$$("#envs .env").forEach(el=>el.onclick=()=>{
+  const i=+el.dataset.i, o=CONFIG.abrir[i]; Sound.chime(); vib(30);
+  openModal(`<div class="mi">${o.ic}</div><div class="md">ábreme cuando</div><h3>${o.t}</h3><p>${o.msg}</p>`);
+  if(!readE.includes(i)){ readE.push(i); store.set("kenia_read",readE); el.classList.add("read"); el.querySelector(".ic").textContent="💌"; }
+});
 function capState(c){ const d=new Date(c.unlock+"T00:00:00"), left=Math.ceil((d-new Date())/864e5); return {open:left<=0,left,d}; }
 $("#capsules").innerHTML=CONFIG.capsulas.map((c,i)=>{ const s=capState(c); return `<div class="cap-box rv ${s.open?"":"locked"}" data-i="${i}"><div style="font-size:1.8rem">${s.open?"📬":"🔒"}</div><h4>${c.titulo}</h4><small style="color:var(--gold)">${s.open?"¡Ya se puede abrir!":`Se abre en ${s.left} ${s.left===1?"día":"días"}`}</small></div>`; }).join("");
 $$("#capsules .cap-box").forEach(el=>el.onclick=()=>{
@@ -1650,7 +1415,7 @@ renderQ();
 })();
 
 /* ===================== PLANES ===================== */
-let doneP=store.get("kenia_plans",[]);
+const doneP=store.get("kenia_plans",[]);
 function renderPlans(){
   $("#plans").innerHTML=CONFIG.planes.map((p,i)=>`<div class="plan ${doneP.includes(i)?"done":""}" data-i="${i}"><div class="box"></div><span>${p}</span></div>`).join("");
   $("#pfill").style.width=(doneP.length/CONFIG.planes.length*100)+"%";
@@ -1710,8 +1475,6 @@ yes.onclick=async()=>{
   (function f(){ conf({particleCount:6,angle:60,spread:60,origin:{x:0},colors:["#ff2a6d","#ffde59","#fff"]}); conf({particleCount:6,angle:120,spread:60,origin:{x:1},colors:["#ff2a6d","#ffde59","#fff"]}); if(Date.now()<end) requestAnimationFrame(f); })();
   for(let i=0;i<6;i++){ burst(rnd(W*.2,W*.8),rnd(H*.3,H*.7),14); await sleep(250); }
 };
-
-/* Lienzo de Firma y Generador de Certificado Oficial */
 (function(){
   const cv=$("#sigCv"), ctx=cv.getContext("2d"); ctx.strokeStyle="#c9184a"; ctx.lineWidth=3; ctx.lineCap="round"; ctx.lineJoin="round";
   let draw=false;
@@ -1733,14 +1496,14 @@ yes.onclick=async()=>{
     x.fillStyle="#fff"; x.font="400 34px Outfit"; x.fillText("Se certifica que",450,470);
     x.font="84px 'Great Vibes'"; x.fillStyle="#ffde59"; x.fillText("Kenia Malanche Lara",450,570);
     x.fillStyle="#fff"; x.font="400 34px Outfit";
-    wrap(x,"aceptó escribir su historia de amor con Javier para siempre, desde el 30 de enero de 2026 y por toda la eternidad.",450,660,660,50);
-    const days=Math.max(1,Math.floor((Date.now()-start)/864e5));
-    x.fillStyle="#ede2f5"; x.font="400 28px Outfit"; x.fillText(`Después de ${days.toLocaleString("es-MX")} días juntos`,450,830);
+    wrap(x,"aceptó escribir su historia de amor con Javier para siempre, con risas, abrazos y muchísimos planes por cumplir.",450,660,660,50);
+    const days=Math.floor((Date.now()-start)/864e5);
+    x.fillStyle="#e2d4ec"; x.font="400 28px Outfit"; x.fillText(`Después de ${days.toLocaleString("es-MX")} días juntos`,450,830);
     x.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),450,875);
     x.fillStyle="#fff"; x.fillRect(150,930,260,2); x.fillRect(490,930,260,2);
-    x.drawImage($("#sigCv"),150,850,260,87);
+    x.drawImage($("#sigCv"),150,830+20,260,87);
     x.fillStyle="#ffde59"; x.font="54px 'Great Vibes'"; x.fillText("Javier",620,915);
-    x.fillStyle="#ede2f5"; x.font="400 22px Outfit"; x.fillText("Firma de Kenia",280,965); x.fillText("Firma de Javier",620,965);
+    x.fillStyle="#e2d4ec"; x.font="400 22px Outfit"; x.fillText("Firma de Kenia",280,965); x.fillText("Firma de Javier",620,965);
     return new Promise(r=>c.toBlob(r,"image/png"));
   }
   $("#savePact").onclick=async()=>{
@@ -1751,132 +1514,6 @@ yes.onclick=async()=>{
     if(navigator.canShare&&navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file],text:msg}); return; }catch(e){} }
     const a=document.createElement("a"); a.download=file.name; a.href=URL.createObjectURL(blob); a.click();
     setTimeout(()=>sendWhatsApp(msg),600);
-  };
-})();
-
-/* ===================== REINICIAR EN VIVO (Sin depender de location.reload) ===================== */
-function resetEverythingNow(clearMedia){
-  store.clearAll();
-  if(!clearMedia){
-    /* Conservamos las fotos y voz que hayas subido si solo quieres reiniciar el juego/candado */
-    Object.keys(photos).forEach(k=>store.set("kenia_photos",photos));
-    Object.keys(captions).forEach(k=>store.set("kenia_captions",captions));
-  } else {
-    Object.keys(photos).forEach(k=>delete photos[k]);
-    Object.keys(captions).forEach(k=>delete captions[k]);
-  }
-  /* Reiniciar estados en vivo inmediatamente */
-  keys = []; updateKeys();
-  $("#chestIcon").textContent = "🔒🧰";
-  $("#boardKeyBtn").textContent = "🗝️ ¡Encontraste la Llave #1!";
-  usedC = []; renderCoupons();
-  doneP = []; renderPlans();
-  readE = []; renderEnvs();
-  miss = 0; $("#missCount").textContent = "0";
-  petXp = 20; updatePet(false);
-  qi = 0; renderQ();
-  letterOpened = false;
-  $("#waxEnv").style.display = "block";
-  $("#paperLetter").classList.remove("open");
-  $$("#tarotGrid .tarot-card").forEach(c=>c.classList.remove("rev"));
-  $("#ask").style.display = "block";
-  $("#yesMsg").style.display = "none";
-  no.classList.remove("run"); no.style.left=""; no.style.top=""; no.textContent="No";
-  ys = 1; yes.style.transform = "scale(1)";
-  const scv = $("#sigCv"); scv.getContext("2d").clearRect(0,0,scv.width,scv.height);
-  renderPols();
-  /* Volver a mostrar la puerta con PIN 1402 */
-  pinVal = ""; dots(); $("#gateErr").textContent = "";
-  const gate = $("#gate");
-  gate.style.display = "flex";
-  gate.classList.remove("out");
-  document.body.classList.add("locked");
-  window.scrollTo({top:0,behavior:"smooth"});
-  Sound.stop();
-  closeModal();
-  toast("🔄 ¡App reiniciada al 100%! Pon la clave 0130");
-}
-
-function openResetDialog(){
-  openModal(`
-    <div class="mi">🔄</div>
-    <h3>Reiniciar Progreso</h3>
-    <p style="font-size:.9rem;color:var(--muted)">Elige cómo quieres reiniciar la app ahora mismo (volverá a cerrarse con el candado de la clave <b>0130</b>):</p>
-    <div style="display:grid;gap:10px;margin-top:16px">
-      <button class="btn gold" id="confirmSoftReset">🔄 Reiniciar juegos/candado (Conservar mis fotos)</button>
-      <button class="btn main" id="confirmFullReset">🗑️ Borrar todo (Incluyendo fotos de prueba)</button>
-      <button class="btn ghost" id="cancelReset">Cancelar</button>
-    </div>
-  `);
-  $("#cancelReset").onclick = closeModal;
-  $("#confirmSoftReset").onclick = ()=>resetEverythingNow(false);
-  $("#confirmFullReset").onclick = ()=>resetEverythingNow(true);
-}
-$("#resetAll").onclick = openResetDialog;
-if($("#quickResetBtn")) $("#quickResetBtn").onclick = openResetDialog;
-
-/* ===================== EXTRAS iOS SAFARI: BUZÓN, SHAKE SENSOR & APP ICON ===================== */
-(function(){
-  /* Generar ícono de App para iPhone (apple-touch-icon) en vivo */
-  try{
-    const ic=document.createElement("canvas"); ic.width=ic.height=180; const x=ic.getContext("2d");
-    const g=x.createLinearGradient(0,0,180,180); g.addColorStop(0,"#310b3a"); g.addColorStop(1,"#ff2a6d");
-    x.fillStyle=g; x.fillRect(0,0,180,180);
-    x.fillStyle="#ffde59"; x.font="bold 64px serif"; x.textAlign="center"; x.fillText("💖",90,95);
-    x.font="bold 28px Outfit, sans-serif"; x.fillStyle="#fff"; x.fillText("K ♥ J",90,148);
-    const link=document.createElement("link"); link.rel="apple-touch-icon"; link.href=ic.toDataURL("image/png");
-    document.head.appendChild(link);
-  }catch(e){}
-
-  /* Botón de guía para instalar como Web App en iPhone */
-  $("#iosInstallBtn").onclick=()=>{
-    Sound.chime();
-    openModal(`
-      <div class="mi">📲</div>
-      <h3>Instálala en tu iPhone, Kenia 💖</h3>
-      <p style="text-align:left;font-size:.92rem;line-height:1.7">
-        Para tener este universo como una App real en tu pantalla de inicio:<br><br>
-        1️⃣ Toca el botón <b>Compartir</b> de Safari (el cuadrito con flecha hacia arriba <b>⬆️</b> abajo en tu pantalla).<br>
-        2️⃣ Desliza hacia abajo y elige <b>"Agregar a pantalla de inicio" (➕)</b>.<br>
-        3️⃣ Toca <b>Agregar</b> arriba a la derecha. ¡Así podrás abrirla a pantalla completa cuando quieras! ✨
-      </p>
-    `);
-  };
-
-  /* Sensor "Sacude tu iPhone" (Shake to Love) */
-  let lastShake=0;
-  function attachShake(){
-    addEventListener("devicemotion",e=>{
-      const a=e.accelerationIncludingGravity; if(!a) return;
-      const force=Math.abs(a.x||0)+Math.abs(a.y||0)+Math.abs(a.z||0);
-      if(force>34 && Date.now()-lastShake>2200){
-        lastShake=Date.now(); Sound.win(); vib([70,40,70]);
-        conf({particleCount:95,spread:100,origin:{y:.5}});
-        const msg = CONFIG.razones[Math.floor(Math.random()*CONFIG.razones.length)];
-        toast("📳 ¡Sorpresa! " + msg);
-      }
-    });
-    $("#shakeSensorBtn").classList.add("on-sensor");
-    toast("📳 ¡Sensor activado! Sacude tu iPhone para ver magia 💖");
-  }
-  $("#shakeSensorBtn").onclick=async()=>{
-    if(typeof DeviceMotionEvent!=="undefined" && typeof DeviceMotionEvent.requestPermission==="function"){
-      try{
-        const p = await DeviceMotionEvent.requestPermission();
-        if(p==="granted") attachShake(); else toast("Activa el permiso de movimiento en Safari 📱");
-      }catch(e){ attachShake(); }
-    } else attachShake();
-  };
-
-  /* Buzón de Deseos de Kenia directo a WhatsApp */
-  $$(".wchip").forEach(b=>b.onclick=()=>{
-    const inp=$("#keniaWishInp"); inp.value=b.dataset.w; inp.focus(); Sound.pop();
-  });
-  $("#sendWishWaBtn").onclick=()=>{
-    const val=($("#keniaWishInp").value||"").trim();
-    if(!val){ toast("Escribe primero tu deseo o antojo, Kenia 💌"); vib(80); return; }
-    Sound.win(); conf({particleCount:80,spread:70,origin:{y:.7}});
-    sendWhatsApp(`💌 *Buzón de Deseos de Kenia Malanche Lara:*\n"${val}" 💖`);
   };
 })();
 
