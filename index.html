@@ -1709,6 +1709,51 @@ yes.onclick=async()=>{
   const end=Date.now()+5000;
   (function f(){ conf({particleCount:6,angle:60,spread:60,origin:{x:0},colors:["#ff2a6d","#ffde59","#fff"]}); conf({particleCount:6,angle:120,spread:60,origin:{x:1},colors:["#ff2a6d","#ffde59","#fff"]}); if(Date.now()<end) requestAnimationFrame(f); })();
   for(let i=0;i<6;i++){ burst(rnd(W*.2,W*.8),rnd(H*.3,H*.7),14); await sleep(250); }
+};
+
+/* Lienzo de Firma y Generador de Certificado Oficial */
+(function(){
+  const cv=$("#sigCv"), ctx=cv.getContext("2d"); ctx.strokeStyle="#c9184a"; ctx.lineWidth=3; ctx.lineCap="round"; ctx.lineJoin="round";
+  let draw=false;
+  const pos=e=>{ const r=cv.getBoundingClientRect(); return {x:(e.clientX-r.left)*(cv.width/r.width),y:(e.clientY-r.top)*(cv.height/r.height)}; };
+  cv.addEventListener("pointerdown",e=>{ draw=true; sigDirty=true; cv.setPointerCapture(e.pointerId); const p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
+  cv.addEventListener("pointermove",e=>{ if(!draw) return; const p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); });
+  addEventListener("pointerup",()=>draw=false);
+  $("#clearSig").onclick=()=>{ ctx.clearRect(0,0,cv.width,cv.height); sigDirty=false; };
+
+  function wrap(c,text,x,y,maxW,lh){ const words=text.split(" "); let line=""; for(const w of words){ const t=line?line+" "+w:w; if(c.measureText(t).width>maxW&&line){ c.fillText(line,x,y); line=w; y+=lh; } else line=t; } c.fillText(line,x,y); return y; }
+  async function certificate(){
+    try{ await document.fonts.load("60px 'Great Vibes'"); await document.fonts.load("700 30px Outfit"); }catch(e){}
+    const c=document.createElement("canvas"); c.width=900; c.height=1200; const x=c.getContext("2d");
+    const bg=x.createLinearGradient(0,0,900,1200); bg.addColorStop(0,"#2b0d36"); bg.addColorStop(1,"#12041a"); x.fillStyle=bg; x.fillRect(0,0,900,1200);
+    x.strokeStyle="#ffde59"; x.lineWidth=6; x.strokeRect(34,34,832,1132); x.lineWidth=2; x.strokeRect(50,50,800,1100);
+    x.textAlign="center"; x.fillStyle="#ffde59"; x.font="700 30px Outfit"; x.fillText("CERTIFICADO OFICIAL",450,150);
+    x.font="84px 'Great Vibes'"; x.fillStyle="#ff758c"; x.fillText("de Amor Eterno",450,260);
+    x.font="80px serif"; x.fillText("💖",450,380);
+    x.fillStyle="#fff"; x.font="400 34px Outfit"; x.fillText("Se certifica que",450,470);
+    x.font="84px 'Great Vibes'"; x.fillStyle="#ffde59"; x.fillText("Kenia Malanche Lara",450,570);
+    x.fillStyle="#fff"; x.font="400 34px Outfit";
+    wrap(x,"aceptó escribir su historia de amor con Javier para siempre, desde el 30 de enero de 2026 y por toda la eternidad.",450,660,660,50);
+    const days=Math.max(1,Math.floor((Date.now()-start)/864e5));
+    x.fillStyle="#ede2f5"; x.font="400 28px Outfit"; x.fillText(`Después de ${days.toLocaleString("es-MX")} días juntos`,450,830);
+    x.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),450,875);
+    x.fillStyle="#fff"; x.fillRect(150,930,260,2); x.fillRect(490,930,260,2);
+    x.drawImage($("#sigCv"),150,850,260,87);
+    x.fillStyle="#ffde59"; x.font="54px 'Great Vibes'"; x.fillText("Javier",620,915);
+    x.fillStyle="#ede2f5"; x.font="400 22px Outfit"; x.fillText("Firma de Kenia",280,965); x.fillText("Firma de Javier",620,965);
+    return new Promise(r=>c.toBlob(r,"image/png"));
+  }
+  $("#savePact").onclick=async()=>{
+    if(!sigDirty){ toast("Primero firma con tu dedo ✍️"); vib(120); return; }
+    const blob=await certificate(), file=new File([blob],"Certificado-Kenia-y-Javier.png",{type:"image/png"});
+    const msg="¡Amor! Dije que SÍ y firmé nuestro Certificado Oficial de Amor Eterno (Kenia Malanche Lara & Javier) 📜💖 ¡Te amo!";
+    Sound.win(); conf({particleCount:150,spread:100,origin:{y:.6}});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file],text:msg}); return; }catch(e){} }
+    const a=document.createElement("a"); a.download=file.name; a.href=URL.createObjectURL(blob); a.click();
+    setTimeout(()=>sendWhatsApp(msg),600);
+  };
+})();
+
 /* ===================== REINICIAR EN VIVO (Sin depender de location.reload) ===================== */
 function resetEverythingNow(clearMedia){
   store.clearAll();
