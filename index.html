@@ -1517,6 +1517,62 @@ yes.onclick=async()=>{
   };
 })();
 
+const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
+const REPO_API = "https://api.github.com/repos/JAVS9912/k.J/contents/fotos";
+
+async function cargarFotosDeGitHub(){
+  try{
+    const r = await fetch(REPO_API);
+    if(!r.ok) return;
+    const archivos = await r.json();
+    const imgs = archivos
+      .filter(a => a.type === "file" && /\.(jpe?g|png|webp)$/i.test(a.name))
+      .sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}))
+      .map(a => ({ src: a.download_url, texto: a.name.replace(/\.[^.]+$/,"").replace(/[-_]/g," ") }));
+    if(!imgs.length) return;
+    CONFIG.fotos = imgs;
+    renderPols();
+  }catch(e){ console.warn(e); }
+}
+cargarFotosDeGitHub();
+
+function comprimirFoto(file){
+  return new Promise((res, rej) => {
+    const img = new Image();
+    img.onload = () => {
+      const sc = Math.min(1, 1000 / Math.max(img.width, img.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.width * sc); c.height = Math.round(img.height * sc);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(img.src);
+      res(c.toDataURL("image/jpeg", .8).split(",")[1]);
+    };
+    img.onerror = rej;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function subirFoto(file){
+  toast("📤 Subiendo tu foto...");
+  try{
+    const b64 = await comprimirFoto(file);
+    const r = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contentBase64: b64 })
+    });
+    if(!r.ok) throw new Error(await r.text());
+    toast("✅ Foto subida. Aparecerá en un minuto 💖");
+  }catch(e){ toast("No se pudo subir la foto 🥺"); }
+}
+
+const btnSubir = document.createElement("label");
+btnSubir.className = "btn gold";
+btnSubir.style.cssText = "cursor:pointer;margin-top:14px";
+btnSubir.innerHTML = `📤 Subir mi foto<input type="file" accept="image/*" hidden>`;
+btnSubir.querySelector("input").onchange = e => { const f = e.target.files[0]; if(f) subirFoto(f); };
+$("#polsec .wrap").appendChild(btnSubir);
+
 observeRv();
 </script>
 </body>
