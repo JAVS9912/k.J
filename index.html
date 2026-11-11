@@ -660,7 +660,7 @@ const CONFIG = {
     { fecha: "El comienzo", titulo: "El día que te conocí, Kenia", texto: "Todavía recuerdo lo que sentí al verte. No sabía que ese instante cambiaría toda mi vida para bien." },
     { fecha: "Primera cita", titulo: "Nervios y sonrisas", texto: "El tiempo se pasó volando y yo solo pensaba en cuánto quería volver a verte." },
     { fecha: "Cuando supe", titulo: "Siempre fuiste tú", texto: "En un momento pequeño lo entendí todo de golpe: mi lugar favorito en el mundo es a tu lado." },
-    { fecha: "Hoy y siempre", titulo: "Todo lo que nos falta vivir", texto: "Cada día contigo es mi mejor día, Kenia. E lo más bonito es que apenas vamos empezando." }
+    { fecha: "Hoy y siempre", titulo: "Todo lo que nos falta vivir", texto: "Cada día contigo es mi mejor día, Kenia. Y lo más bonito es que apenas vamos empezando." }
   ],
   recuerdos: [
     { x: 14, y: 72, titulo: "Primer 'hola'", fecha: "Enero 2026", texto: "La chispa donde empezó nuestra historia, Kenia." },
@@ -1562,10 +1562,14 @@ async function subirFoto(file){
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contentBase64: b64 })
     });
-    if(!r.ok) throw new Error(await r.text());
-    toast("✅ Foto subida. Aparecerá en un minuto 💖");
-    setTimeout(cargarFotosDeGitHub, 4000); // Recargar galería tras unos segundos
-  }catch(e){ toast("No se pudo subir la foto 🥺"); }
+    const resData = await r.json();
+    if(!r.ok) throw new Error(resData.error || "Error al subir");
+    toast("✅ ¡Foto subida con éxito a GitHub! 💖");
+    setTimeout(cargarFotosDeGitHub, 3000);
+  }catch(e){
+    console.error(e);
+    toast("No se pudo subir la foto 🥺 Revisa la consola.");
+  }
 }
 
 const btnSubir = document.createElement("label");
