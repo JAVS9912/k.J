@@ -660,7 +660,7 @@ const CONFIG = {
     { fecha: "El comienzo", titulo: "El día que te conocí, Kenia", texto: "Todavía recuerdo lo que sentí al verte. No sabía que ese instante cambiaría toda mi vida para bien." },
     { fecha: "Primera cita", titulo: "Nervios y sonrisas", texto: "El tiempo se pasó volando y yo solo pensaba en cuánto quería volver a verte." },
     { fecha: "Cuando supe", titulo: "Siempre fuiste tú", texto: "En un momento pequeño lo entendí todo de golpe: mi lugar favorito en el mundo es a tu lado." },
-    { fecha: "Hoy y siempre", titulo: "Todo lo que nos falta vivir", texto: "Cada día contigo es mi mejor día, Kenia. Y lo más bonito es que apenas vamos empezando." }
+    { fecha: "Hoy y siempre", titulo: "Todo lo que nos falta vivir", texto: "Cada día contigo es mi mejor día, Kenia. E lo más bonito es que apenas vamos empezando." }
   ],
   recuerdos: [
     { x: 14, y: 72, titulo: "Primer 'hola'", fecha: "Enero 2026", texto: "La chispa donde empezó nuestra historia, Kenia." },
@@ -1141,7 +1141,7 @@ $("#missBtnMain").onclick=triggerMiss; $("#missYouTopBtn").onclick=triggerMiss;
       const stream=await navigator.mediaDevices.getUserMedia({audio:true});
       const ac=new (window.AudioContext||window.webkitAudioContext)(), src=ac.createMediaStreamSource(stream), an=ac.createAnalyser();
       an.fftSize=256; src.connect(an); const data=new Uint8Array(an.frequencyBinCount);
-      toast("¡Sóplale fuerte a tu teléfono, Kenia! 💨");
+      toast("¡Sóplale fuerte al teléfono, Kenia! 💨");
       const iv=setInterval(()=>{
         an.getByteFrequencyData(data); let sum=0; for(let i=0;i<20;i++) sum+=data[i];
         const lvl=Math.min(100,Math.round(sum/25)); $("#micBar").style.width=lvl+"%";
@@ -1517,6 +1517,7 @@ yes.onclick=async()=>{
   };
 })();
 
+/* ===================== INTEGRACIÓN CLOUDFLARE WORKER & GITHUB ===================== */
 const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
 const REPO_API = "https://api.github.com/repos/JAVS9912/k.J/contents/fotos";
 
@@ -1563,6 +1564,7 @@ async function subirFoto(file){
     });
     if(!r.ok) throw new Error(await r.text());
     toast("✅ Foto subida. Aparecerá en un minuto 💖");
+    setTimeout(cargarFotosDeGitHub, 4000); // Recargar galería tras unos segundos
   }catch(e){ toast("No se pudo subir la foto 🥺"); }
 }
 
