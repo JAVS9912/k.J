@@ -439,18 +439,18 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <!-- FOTOS -->
   <section id="polsec">
     <div class="wrap">
-      <div class="eyebrow rv">álbum interactivo</div>
+      <div class="eyebrow rv">álbum interactivo en la nube</div>
       <h2 class="rv">Nuestras <em>Polaroids</em></h2>
       <div class="row rv" style="margin-bottom:18px">
         <label class="btn gold" style="cursor:pointer">
-          📤 Subir foto nueva al álbum 💖
+          📤 Agregar nueva Polaroid al álbum 💖
           <input type="file" id="mainUploadInp" accept="image/*" hidden>
         </label>
       </div>
       <div class="board rv" id="board">
         <button class="hidden-board-key" id="boardKeyBtn">🗝️ ¡Encontraste la Llave #1!</button>
       </div>
-      <div class="hint">Arrastra las fotos para moverlas. Toca cualquier Polaroid o el botón dorado para subir tu foto a GitHub 📸</div>
+      <div class="hint">Toca cualquier Polaroid para poner o cambiar su foto (se verá en todos nuestros dispositivos) 📸</div>
       <div class="glass booth-card rv">
         <h3 class="gt">📸 Cabina Polaroid para Kenia</h3>
         <div class="booth-stage">
@@ -1176,10 +1176,18 @@ $("#chapters").innerHTML=CONFIG.capitulos.map((c,i)=>`<article class="chapter rv
   $("#skyKeyBtn").onclick=()=>addKey(2,"Cometa del Cielo");
 })();
 
-/* ===================== POLAROIDS + SUBIDA CLOUDFLARE & GITHUB ===================== */
+/* ===================== POLAROIDS SINCRONIZADAS EN LA NUBE ===================== */
 const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
-const REPO_API = "https://api.github.com/repos/JAVS9912/k.J/contents/fotos";
-const photos = store.get("kenia_photos", {});
+const TEXTOS_BASE = [
+  "Kenia & Javier 💖",
+  "Tu sonrisa hermosa",
+  "Un día inolvidable",
+  "Mi persona favorita",
+  "Siempre juntos ✨"
+];
+
+// Limpiamos el caché local viejo para que ningún dispositivo oculte las fotos de GitHub
+try { localStorage.removeItem("kenia_photos"); } catch(e){}
 
 function comprimirFoto(file, max=1000){
   return new Promise((res, rej) => {
@@ -1201,42 +1209,81 @@ function comprimirFoto(file, max=1000){
 
 async function cargarFotosDeGitHub(){
   try{
-    const r = await fetch(`${REPO_API}?t=${Date.now()}`, { cache: "no-store" });
-    if(!r.ok) return;
-    const archivos = await r.json();
-    if(!Array.isArray(archivos)) return;
-    const imgs = archivos
-      .filter(a => a.type === "file" && /\.(jpe?g|png|webp)$/i.test(a.name))
-      .sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}))
-      .map((a, idx) => ({
-        src: `${a.download_url}?t=${Date.now()}`,
-        texto: CONFIG.fotos[idx]?.texto || "Kenia & Javier 💖"
-      }));
-    if(!imgs.length) return;
-    CONFIG.fotos = imgs;
+    // 1. Primero intentamos leer a través del Worker (con tu token para evitar bloqueos y ver todo al instante)
+    let files = [];
+    try {
+      const r = await fetch(`${WORKER_URL}?t=${Date.now()}`, { cache: "no-store" });
+      if(r.ok){
+        const data = await r.json();
+        if(Array.isArray(data.files)) files = data.files;
+      }
+    } catch(e){}
+
+    // 2. Respaldo directo si aún no has actualizado el código del Worker
+    if(!files.length){
+      const r2 = await fetch(`https://api.github.com/repos/JAVS9912/k.J/contents/fotos?t=${Date.now()}`, { cache: "no-store" });
+      if(r2.ok){
+        const raw = await r2.json();
+        if(Array.isArray(raw)){
+          files = raw
+            .filter(a => a.type === "file" && /\.(jpe?g|png|webp)$/i.test(a.name))
+            .map(a => ({ name: a.name, url: `${a.download_url}?v=${(a.sha||"").slice(0,8)}` }));
+        }
+      }
+    }
+
+    if(!files.length) return;
+
+    // Organizar las 5 tarjetas base + cualquier foto extra
+    const baseSlots = TEXTOS_BASE.map(t => ({ src: "", texto: t }));
+    const extras = [];
+
+    files.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true})).forEach(f => {
+      const m = f.name.match(/^slot_(\d+)\./i);
+      if(m){
+        const idx = parseInt(m[1], 10);
+        if(idx >= 0 && idx < baseSlots.length){
+          baseSlots[idx].src = f.url;
+        } else {
+          extras.push({ src: f.url, texto: "Kenia & Javier 💖" });
+        }
+      } else {
+        extras.push({ src: f.url, texto: "Kenia & Javier 💖" });
+      }
+    });
+
+    // Si hay fotos con el formato anterior (foto_12345.jpg), llenar los espacios vacíos primero
+    for(const ex of extras){
+      const emptySlot = baseSlots.find(s => !s.src);
+      if(emptySlot){
+        emptySlot.src = ex.src;
+      } else {
+        baseSlots.push(ex);
+      }
+    }
+
+    CONFIG.fotos = baseSlots;
     renderPols();
-  }catch(e){ console.warn("Error leyendo fotos de GitHub:", e); }
+  }catch(e){ console.warn("Error sincronizando galería:", e); }
 }
 
-async function subirFoto(file, indexPol = null){
-  toast("📤 Subiendo tu foto a GitHub...");
+async function subirFoto(file, slotIndex = null){
+  toast("📤 Subiendo foto para todos los dispositivos...");
   try{
     const { dataUrl, base64 } = await comprimirFoto(file, 1000);
 
-    // Mostrar vista previa inmediata en la tarjeta o agregar una nueva
-    if(indexPol !== null){
-      photos[indexPol] = dataUrl;
-      store.set("kenia_photos", photos);
+    // Vista previa inmediata
+    if(slotIndex !== null && CONFIG.fotos[slotIndex]){
+      CONFIG.fotos[slotIndex].src = dataUrl;
     } else {
-      CONFIG.fotos.push({ src: dataUrl, texto: "Nuevo recuerdo 💖" });
+      CONFIG.fotos.push({ src: dataUrl, texto: "Kenia & Javier 💖" });
     }
     renderPols();
 
-    // Enviar al Cloudflare Worker
     const r = await fetch(WORKER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contentBase64: base64 })
+      body: JSON.stringify({ contentBase64: base64, slot: slotIndex })
     });
 
     const txt = await r.text();
@@ -1249,18 +1296,17 @@ async function subirFoto(file, indexPol = null){
 
     Sound.win();
     conf({particleCount:80,spread:70,origin:{y:.6}});
-    toast("✅ ¡Foto guardada en GitHub para siempre! 💖");
-    setTimeout(cargarFotosDeGitHub, 2500);
+    toast("✅ ¡Foto sincronizada en todos los dispositivos! 💖");
+    setTimeout(cargarFotosDeGitHub, 1800);
   }catch(e){
-    console.error("Error al subir foto al Worker:", e);
-    toast("⚠️ Error en Worker: " + (e.message || "Revisa el token en Cloudflare"));
+    console.error("Error al subir:", e);
+    toast("⚠️ Error al subir: " + (e.message || "Verifica el Worker"));
   }
 }
 
 function openPhoto(i){
   const f = CONFIG.fotos[i] || { src: "", texto: "Kenia & Javier 💖" };
-  const src = photos[i] || f.src;
-  openModal(`${src?`<img class="photo" src="${src}" alt="">`:`<div class="mi">💖</div>`}<h3>${f.texto}</h3><label class="btn gold" style="margin-top:12px;cursor:pointer">📷 ${src?"Cambiar y subir":"Elegir y subir"} foto<input type="file" accept="image/*" id="phInp" hidden></label>`);
+  openModal(`${f.src?`<img class="photo" src="${f.src}" alt="">`:`<div class="mi">💖</div>`}<h3>${f.texto}</h3><label class="btn gold" style="margin-top:12px;cursor:pointer">📷 ${f.src?"Cambiar foto en la nube":"Subir foto a esta Polaroid"}<input type="file" accept="image/*" id="phInp" hidden></label>`);
   $("#phInp").onchange = async e => {
     const file = e.target.files[0];
     if(!file) return;
@@ -1275,7 +1321,7 @@ function renderPols(){
   const bw=board.clientWidth||340, cols=bw<520?2:3, pw=145, gap=Math.max(6,(bw-cols*pw)/(cols+1)), rows=Math.ceil(CONFIG.fotos.length/cols);
   board.style.height=Math.max(420,rows*215+70)+"px";
   CONFIG.fotos.forEach((f,i)=>{
-    const src=photos[i]||f.src, el=document.createElement("div"); el.className="pol";
+    const src=f.src, el=document.createElement("div"); el.className="pol";
     el.innerHTML=`<div class="img">${src?`<img src="${src}" alt="">`:"💖"}</div><div class="cap">${f.texto}</div>`;
     el.style.left=(gap+(i%cols)*(pw+gap))+"px"; el.style.top=(20+Math.floor(i/cols)*215)+"px"; el.style.transform=`rotate(${rnd(-7,7)}deg)`;
     board.appendChild(el);
@@ -1291,14 +1337,13 @@ cargarFotosDeGitHub();
 addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(renderPols,300); });
 $("#boardKeyBtn").onclick=()=>{ addKey(1,"Álbum Polaroid"); $("#boardKeyBtn").textContent="🗝️ Llave #1 obtenida ✓"; };
 
-// Conectar el botón principal de subida
 $("#mainUploadInp").onchange = e => {
   const f = e.target.files[0];
-  if(f) subirFoto(f);
+  if(f) subirFoto(f, null);
   e.target.value = "";
 };
 
-/* Cabina Polaroid (también sube a GitHub) */
+/* Cabina Polaroid */
 (function(){
   const pv=$("#boothPreview"), px=pv.getContext("2d"), vid=$("#boothVideo"); let stream=null;
   function cover(src,sw,sh,mirror){
@@ -1323,14 +1368,14 @@ $("#mainUploadInp").onchange = e => {
     if(stream) stream.getTracks().forEach(t=>t.stop());
     vid.style.display="none"; $("#snapBtn").style.display="none";
     Sound.chime(); vib(40); conf({particleCount:40,spread:60,origin:{y:.7}});
-    pv.toBlob(blob => { if(blob) subirFoto(new File([blob], "selfie.jpg", {type:"image/jpeg"})); }, "image/jpeg", 0.85);
+    pv.toBlob(blob => { if(blob) subirFoto(new File([blob], "selfie.jpg", {type:"image/jpeg"}), null); }, "image/jpeg", 0.85);
   };
   $("#uploadPhotoInp").onchange=e=>{
     const f=e.target.files[0]; if(!f) return;
     const img=new Image();
     img.onload=()=>{ render(img,img.width,img.height,false); URL.revokeObjectURL(img.src); };
     img.src=URL.createObjectURL(f);
-    subirFoto(f);
+    subirFoto(f, null);
     e.target.value = "";
   };
   $("#dlBoothBtn").onclick=()=>{ const a=document.createElement("a"); a.download="Polaroid-Kenia-y-Javier.png"; a.href=pv.toDataURL("image/png"); a.click(); };
