@@ -21,7 +21,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:clip;line-height:1.6}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:clip;line-height:1.6;position:relative}
 body.locked{overflow:hidden;height:100vh}
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(circle at 15% 15%,rgba(255,42,109,.22),transparent 45%),
@@ -54,17 +54,35 @@ h3.gt{color:var(--gold);margin-bottom:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes floaty{50%{transform:translateY(-8px)}}
 
-/* Controles */
-.top-controls{position:fixed;top:calc(12px + var(--safe-top));right:14px;z-index:380;display:flex;gap:8px}
+/* Controles Superiores */
+.top-controls{position:fixed;top:calc(12px + var(--safe-top));right:14px;z-index:380;display:flex;gap:6px}
 .quest-pill{position:fixed;top:calc(12px + var(--safe-top));left:14px;z-index:380;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:rgba(20,5,32,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--gold);color:var(--gold);font-family:inherit;font-size:.84rem;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.6)}
-.icon-btn{width:42px;height:42px;border-radius:50%;background:rgba(20,5,32,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.icon-btn{width:40px;height:40px;border-radius:50%;background:rgba(20,5,32,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--text);font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.6)}
 .icon-btn.spin{animation:spin 6s linear infinite;border-color:var(--gold)}
 .icon-btn.pulse-hb{animation:beat .75s infinite;background:rgba(255,42,109,.45);border-color:var(--accent)}
+.icon-btn.off{opacity:.45}
 body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-events:none;box-shadow:inset 0 0 95px rgba(255,42,109,.6);animation:pulse .75s infinite}
 #dock{position:fixed;left:50%;bottom:calc(12px + var(--safe-bot));transform:translateX(-50%);z-index:370;display:flex;align-items:center;gap:4px;padding:6px 12px;border-radius:99px;background:rgba(15,4,25,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,222,89,.35);box-shadow:0 18px 45px rgba(0,0,0,.8);max-width:96vw;overflow-x:auto;scrollbar-width:none}
 #dock::-webkit-scrollbar{display:none}
 #dock a{color:var(--muted);text-decoration:none;font-size:.76rem;padding:7px 11px;border-radius:99px;white-space:nowrap;transition:.2s;font-weight:500}
 #dock a.active{color:var(--gold);background:rgba(255,42,109,.35)}
+
+/* Banner flotante de Antojo / Deseo de Hoy */
+.craving-pill{margin:16px auto 0;display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:99px;background:linear-gradient(135deg,rgba(255,42,109,.38),rgba(157,78,221,.38));border:1px solid var(--gold);color:#fff;font-size:.86rem;cursor:pointer;box-shadow:0 10px 28px rgba(255,42,109,.35);max-width:92vw;pointer-events:auto}
+.craving-pill b{color:var(--gold)}
+
+/* Capa global de Post-its flotantes por toda la página */
+#freeNotesLayer{position:absolute;inset:0;z-index:320;pointer-events:none;overflow:hidden}
+body.hide-postits #freeNotesLayer{display:none}
+.postit{position:absolute;width:175px;padding:18px 14px 12px;border-radius:6px 16px 16px 16px;color:#2a1221;font-family:'Caveat',cursive;box-shadow:0 16px 32px rgba(0,0,0,.75);display:flex;flex-direction:column;justify-content:space-between;min-height:130px;cursor:grab;user-select:none;touch-action:none;pointer-events:auto;transition:box-shadow .2s}
+.postit:active{cursor:grabbing;box-shadow:0 22px 45px rgba(255,222,89,.45)}
+.postit::before{content:"📌";position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:1.25rem;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5));pointer-events:none}
+.postit.pink{background:linear-gradient(145deg,#ffd1dc,#ffb3c6);border:1px solid rgba(255,255,255,.5)}
+.postit.gold{background:linear-gradient(145deg,#fff3b0,#ffde7a);border:1px solid rgba(255,255,255,.6)}
+.postit.lilac{background:linear-gradient(145deg,#e5d4ff,#cdb4db);border:1px solid rgba(255,255,255,.5)}
+.postit .p-txt{font-size:1.34rem;line-height:1.22;font-weight:700;word-break:break-word;margin-top:2px}
+.postit .p-meta{margin-top:8px;padding-top:5px;border-top:1px dashed rgba(42,18,33,.25);display:flex;justify-content:space-between;align-items:center;font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:700;color:#5e2a47}
+.postit .p-del{background:rgba(255,255,255,.45);border:none;border-radius:50%;width:22px;height:22px;color:#a30b37;cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center}
 
 /* Puerta */
 #gate{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#310b3a,#06010b 80%);transition:opacity .8s,visibility .8s;padding:18px}
@@ -152,12 +170,15 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .star span{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;text-shadow:0 2px 6px #000;font-weight:600}
 .secret-key-star{position:absolute;right:8%;top:12%;font-size:1.6rem;background:none;border:none;cursor:pointer;filter:drop-shadow(0 0 12px var(--gold));animation:floaty 3s infinite}
 
-/* Polaroids & cabina */
-.board{position:relative;width:100%;height:520px;border-radius:30px;border:1px dashed var(--line);overflow:hidden;background:rgba(15,4,25,.7)}
-.pol{position:absolute;width:145px;padding:8px 8px 32px;background:#fff8f0;border-radius:6px;box-shadow:0 14px 28px rgba(0,0,0,.7);cursor:grab;touch-action:none;user-select:none;z-index:2}
+/* Polaroids & Reacciones & Cabina */
+.board{position:relative;width:100%;height:540px;border-radius:30px;border:1px dashed var(--line);overflow:hidden;background:rgba(15,4,25,.7)}
+.pol{position:absolute;width:150px;padding:8px 8px 54px;background:#fff8f0;border-radius:6px;box-shadow:0 14px 28px rgba(0,0,0,.7);cursor:grab;touch-action:none;user-select:none;z-index:2}
 .pol .img{width:100%;aspect-ratio:1;background:linear-gradient(145deg,#ff9bb3,#b784f0);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;border-radius:3px}
 .pol .img img{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.pol .cap{position:absolute;left:6px;right:6px;bottom:6px;text-align:center;font-family:'Caveat',cursive;font-weight:700;font-size:1.02rem;color:#2c1523;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pol .cap{position:absolute;left:6px;right:6px;bottom:28px;text-align:center;font-family:'Caveat',cursive;font-weight:700;font-size:1.02rem;color:#2c1523;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pol-reacts{position:absolute;left:4px;right:4px;bottom:5px;display:flex;justify-content:center;gap:4px}
+.react-chip{border:1px solid rgba(255,42,109,.25);background:rgba(255,42,109,.08);border-radius:99px;padding:1px 6px;font-family:'Outfit',sans-serif;font-size:.66rem;font-weight:700;color:#6e1438;cursor:pointer;display:inline-flex;align-items:center;gap:2px;transition:transform .15s}
+.react-chip:active{transform:scale(1.25);background:rgba(255,42,109,.25)}
 .hidden-board-key{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);z-index:1;background:rgba(255,222,89,.2);border:1px dashed var(--gold);border-radius:14px;padding:8px 12px;color:var(--gold);font-family:inherit;font-size:.78rem;cursor:pointer;font-weight:600}
 .booth-card{padding:24px 16px;text-align:center;margin-top:20px}
 .booth-stage{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:center;margin:12px 0}
@@ -169,20 +190,15 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .sync-badge{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;color:var(--gold);background:rgba(255,222,89,.1);border:1px solid rgba(255,222,89,.3);padding:4px 12px;border-radius:99px;margin-bottom:12px}
 .sync-dot{width:8px;height:8px;border-radius:50%;background:#2ed573;box-shadow:0 0 8px #2ed573;animation:pulse 2s infinite}
 
-/* Muro de Notitas & Audios en la nube */
+/* Creador de Notitas, Pizarra de Dibujo & Audios */
 .notes-composer{padding:22px 18px;text-align:center;margin-bottom:18px}
 .author-switch{display:inline-flex;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:99px;padding:4px;margin-bottom:12px}
 .author-switch button{border:none;background:none;color:var(--muted);padding:6px 16px;border-radius:99px;font-family:inherit;font-weight:700;font-size:.84rem;cursor:pointer}
 .author-switch button.on{background:linear-gradient(135deg,var(--accent),var(--violet));color:#fff}
-.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:24px}
-.postit{position:relative;padding:18px 16px 14px;border-radius:16px;color:#2a1221;font-family:'Caveat',cursive;box-shadow:0 14px 28px rgba(0,0,0,.6);display:flex;flex-direction:column;justify-content:space-between;min-height:145px;transition:transform .2s}
-.postit:hover{transform:translateY(-4px)}
-.postit.pink{background:linear-gradient(145deg,#ffd1dc,#ffb3c6)}
-.postit.gold{background:linear-gradient(145deg,#fff3b0,#ffde7a)}
-.postit.lilac{background:linear-gradient(145deg,#e5d4ff,#cdb4db)}
-.postit .p-txt{font-size:1.42rem;line-height:1.25;font-weight:700;word-break:break-word}
-.postit .p-meta{margin-top:10px;padding-top:6px;border-top:1px dashed rgba(42,18,33,.25);display:flex;justify-content:space-between;align-items:center;font-family:'Outfit',sans-serif;font-size:.74rem;font-weight:700;color:#5e2a47}
-.postit .p-del{background:none;border:none;color:#a30b37;cursor:pointer;font-size:.95rem;padding:2px 6px}
+.doodle-card{padding:24px 18px;text-align:center;margin-bottom:18px}
+#doodleCv{width:100%;max-width:520px;height:270px;background:#14051f;border-radius:20px;border:2px dashed rgba(255,222,89,.55);touch-action:none;cursor:crosshair;display:block;margin:10px auto;box-shadow:inset 0 0 30px rgba(0,0,0,.7)}
+.color-dot{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.4);cursor:pointer;transition:transform .15s}
+.color-dot.on{transform:scale(1.25);border-color:#fff;box-shadow:0 0 12px currentColor}
 .voice-card{padding:24px 18px;text-align:center}
 .voice-list{display:grid;gap:10px;margin-top:16px;max-width:560px;margin-inline:auto}
 .voice-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid var(--line);flex-wrap:wrap}
@@ -251,7 +267,7 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .tarot-card.rev .face-up{display:block}
 .tarot-card.rev .face-down{display:none}
 
-/* Juegos */
+/* Juegos & Planes */
 .quiz-card,.game,.chest-card,.plans,.fw-card{padding:26px 18px;text-align:center}
 .q-opts{display:grid;gap:9px;max-width:480px;margin:14px auto}
 .q-btn{padding:13px 16px;border-radius:15px;border-color:var(--line);border-style:solid;border-width:1px;background:rgba(255,255,255,.08);color:var(--text);font-family:inherit;font-size:.95rem;cursor:pointer;text-align:left;font-weight:500}
@@ -268,11 +284,13 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .kslot.got{opacity:1;border-style:solid;border-color:var(--gold);background:rgba(255,222,89,.25);box-shadow:0 0 18px rgba(255,222,89,.6)}
 .pbar{height:8px;background:rgba(255,255,255,.1);border-radius:8px;overflow:hidden;margin-bottom:14px}
 .pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .4s}
-.plan{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line);cursor:pointer;text-align:left}
+.plan{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line);cursor:pointer;text-align:left}
+.plan-left{display:flex;align-items:center;gap:12px;flex:1}
 .plan .box{width:24px;height:24px;border-radius:7px;border:2px solid var(--accent2);display:flex;align-items:center;justify-content:center;flex:none}
 .plan.done .box{background:var(--accent);border-color:var(--accent)}
 .plan.done .box::after{content:"✓";color:#fff;font-weight:700}
 .plan.done span{text-decoration:line-through;color:var(--muted)}
+.plan-del{background:none;border:none;color:var(--muted);font-size:.9rem;cursor:pointer;padding:4px 8px}
 #fwCv{width:100%;height:310px;border-radius:20px;background:radial-gradient(ellipse at 50% 100%,#2a0a33,#06010d 78%);border:1px solid var(--line);display:block;touch-action:none}
 
 /* Final */
@@ -307,8 +325,14 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
 <canvas id="fx"></canvas>
 <audio id="audio" loop preload="none"></audio>
 
+<!-- Capa global donde flotan los Post-its por toda la página -->
+<div id="freeNotesLayer"></div>
+
 <button class="quest-pill" id="questPill">🗝️ Llaves: <span id="keyCountTop">0</span>/3</button>
 <div class="top-controls">
+  <button class="icon-btn" id="cravingTopBtn" title="Antojo o Deseo de Hoy">🍓</button>
+  <button class="icon-btn" id="quickPostitBtn" title="Pegar Post-it aquí">📌</button>
+  <button class="icon-btn" id="togglePostitsBtn" title="Mostrar/Ocultar Post-its">👁️</button>
   <button class="icon-btn" id="missYouTopBtn" title="Toca si me extrañas">💕</button>
   <button class="icon-btn" id="hbBtn" title="Latido">💓</button>
   <button class="icon-btn" id="music" title="Música">🎵</button>
@@ -322,7 +346,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <a href="#story">📖 Historia</a>
   <a href="#skysec">✨ Cielo</a>
   <a href="#polsec">📸 Fotos</a>
-  <a href="#notesec">📌 Muro & Voz</a>
+  <a href="#notesec">📌 Post-its & Arte</a>
   <a href="#jarsec">🏺 Razones</a>
   <a href="#couponsec">🎟️ Cupones</a>
   <a href="#funsec">🎰 Ruleta</a>
@@ -365,6 +389,12 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
         <button class="mode-chip" data-mode="gold">✨ Oro Celestial</button>
         <button class="mode-chip" data-mode="galaxy">🌌 Galaxia Violeta</button>
       </div>
+      <!-- Banner interactivo de Antojo / Deseo de Hoy -->
+      <div>
+        <button class="craving-pill" id="cravingBannerBtn">
+          🍓 <b>Antojo / Deseo de hoy:</b> <span id="cravingBannerTxt">Toca aquí para pedir un antojo o abrazo ✨</span>
+        </button>
+      </div>
       <div class="hero-hint">toca el corazón y míralo explotar</div>
     </div>
   </section>
@@ -381,6 +411,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
         <div class="next" id="next"></div>
         <div class="row" style="margin-top:18px">
           <button class="btn main" id="missBtnMain">💕 Toca si me extrañas (<span id="missCount">0</span>)</button>
+          <button class="btn gold" id="cravingMainBtn">🍓 Pedir Antojo / Deseo</button>
           <button class="btn ghost" id="hbBtnMain">💓 Siente mi latido</button>
         </div>
       </div>
@@ -485,7 +516,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       <div class="eyebrow rv">álbum interactivo en la nube</div>
       <h2 class="rv" style="margin-bottom:14px">Nuestras <em>Polaroids</em></h2>
       <div style="text-align:center" class="rv">
-        <span class="sync-badge"><i class="sync-dot"></i> Sincronización automática activa (cada 12s sin mover la página)</span>
+        <span class="sync-badge"><i class="sync-dot"></i> Posiciones, fotos y reacciones sincronizadas (cada 12s)</span>
       </div>
       <div class="row rv" style="margin-bottom:18px">
         <label class="btn gold" style="cursor:pointer">
@@ -500,7 +531,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       <div class="board rv" id="board">
         <button class="hidden-board-key" id="boardKeyBtn">🗝️ ¡Encontraste la Llave #1!</button>
       </div>
-      <div class="hint">Toca cualquier Polaroid para verla en grande, cambiar su frase o eliminarla 🗑️📸</div>
+      <div class="hint">Arrastra cualquier Polaroid para acomodar el collage (se guarda para ambos), reacciona con ❤️🥰🔥 o tócala para editar/borrar 📸</div>
       <div class="glass booth-card rv">
         <h3 class="gt">📸 Cabina Polaroid en Vivo</h3>
         <p style="font-size:.85rem;color:var(--muted)">Toma una foto instantánea con marco Polaroid y súbela directo al álbum</p>
@@ -521,29 +552,46 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- MURO DE NOTITAS & NOTAS DE VOZ EN LA NUBE -->
+  <!-- POST-ITS LIBRES, PIZARRA DE DIBUJO & NOTAS DE VOZ -->
   <section id="notesec">
     <div class="wrap">
       <div class="eyebrow rv">conectados en tiempo real</div>
-      <h2 class="rv">Muro de Notitas y <em>Nuestra Voz</em></h2>
+      <h2 class="rv">Post-its, Grafiti y <em>Nuestra Voz</em></h2>
 
-      <!-- Creador de Post-its -->
+      <!-- Creador de Post-its Libres -->
       <div class="glass notes-composer rv">
-        <h3 class="gt">📌 Pega una Notita de Amor en el Muro</h3>
+        <h3 class="gt">📌 Crea un Post-it y arrástralo a cualquier rincón de la página</h3>
+        <p style="font-size:.86rem;color:var(--muted);margin-bottom:10px">También puedes tocar el botón <b>📌</b> de arriba a la derecha en cualquier sección para pegar uno ahí mismo</p>
         <div class="author-switch" id="noteAuthorSwitch">
           <button type="button" class="on" data-author="Kenia 💖">Soy Kenia 💖</button>
           <button type="button" data-author="Javier 🖤">Soy Javier 🖤</button>
         </div>
         <div>
-          <input type="text" id="noteTextInp" class="cap-input" style="max-width:480px" placeholder="Escribe un mensajito bonito para que aparezca en ambos celulares..." maxlength="110">
+          <input type="text" id="noteTextInp" class="cap-input" style="max-width:480px" placeholder="Escribe una notita bonita y muévela por toda la página..." maxlength="110">
         </div>
         <div class="row" style="margin-top:12px">
-          <button class="btn gold" id="addNoteBtn">📌 Pegar Notita en la Nube</button>
+          <button class="btn gold" id="addNoteBtn">📌 Crear Post-it Flotante</button>
         </div>
       </div>
 
-      <!-- Cuadrícula de Post-its -->
-      <div class="notes-grid rv" id="notesGrid"></div>
+      <!-- Pizarra de Dibujo / Grafiti Compartido en la Nube -->
+      <div class="glass doodle-card rv">
+        <div class="eyebrow">nuestro lienzo compartido</div>
+        <h3 class="gt">🎨 Pizarra de Dibujo: Kenia & Javier</h3>
+        <p style="font-size:.85rem;color:var(--muted)">Dibuja un mensajito o corazón con tu dedo y guárdalo para que aparezca en el celular del otro</p>
+        <canvas id="doodleCv" width="520" height="270"></canvas>
+        <div class="row" style="margin:10px 0;align-items:center">
+          <button class="color-dot on" data-col="#ff2a6d" style="background:#ff2a6d"></button>
+          <button class="color-dot" data-col="#ffde59" style="background:#ffde59"></button>
+          <button class="color-dot" data-col="#4cc9f0" style="background:#4cc9f0"></button>
+          <button class="color-dot" data-col="#2ed573" style="background:#2ed573"></button>
+          <button class="color-dot" data-col="#ffffff" style="background:#ffffff"></button>
+        </div>
+        <div class="row">
+          <button class="btn ghost" id="clearDoodleBtn">🧽 Limpiar pizarra</button>
+          <button class="btn gold" id="saveDoodleBtn">💾 Guardar dibujo para los dos</button>
+        </div>
+      </div>
 
       <!-- Grabadora de Notas de Voz -->
       <div class="glass voice-card rv">
@@ -684,7 +732,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- PLANES -->
+  <!-- PLANES (CON AGREGAR NUEVOS PLANES EN LA NUBE) -->
   <section id="plansec">
     <div class="wrap">
       <div class="eyebrow rv">lo que viene (sincronizado en ambos celulares)</div>
@@ -692,6 +740,10 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       <div class="glass plans rv" style="margin-bottom:18px">
         <div class="pbar"><i id="pfill"></i></div>
         <div id="plans"></div>
+        <div class="row" style="margin-top:14px;align-items:center">
+          <input type="text" id="newPlanInp" class="cap-input" style="margin-top:0;max-width:360px" placeholder="➕ Escribe un nuevo plan o sueño juntos..." maxlength="85">
+          <button class="btn gold" id="addPlanBtn">➕ Agregar Plan</button>
+        </div>
         <div class="hint" id="pcount"></div>
       </div>
       <div class="glass fw-card rv">
@@ -1119,17 +1171,22 @@ const spy=new IntersectionObserver(es=>es.forEach(e=>{
 }),{rootMargin:"-45% 0px -45% 0px"});
 $$("main section[id]").forEach(s=>spy.observe(s));
 
-/* ===================== ESTADO COMPARTIDO EN LA NUBE (TODO POR POST) ===================== */
+/* ===================== ESTADO COMPARTIDO EN LA NUBE ===================== */
 const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
 let cloudState = store.get("kenia_cloud_state", {
   notes: [
-    { id: "n1", author: "Javier 🖤", text: "Bienvenida a nuestro muro compartido, mi amor 💖 Escríbeme una notita cuando quieras.", date: "Siempre juntos", color: "gold" }
+    { id: "n1", author: "Javier 🖤", text: "¡Arrástrame a cualquier parte de la página, mi amor! 💖", date: "Siempre", color: "gold", xPct: 68, yPx: 320, rot: 3 }
   ],
   nextDate: { title: "Nuestra Próxima Cita 💑", iso: "" },
+  craving: { text: "", author: "Kenia 💖", time: "" },
+  plansList: CONFIG.planes.slice(),
   plansDone: store.get("kenia_plans", []),
   couponsUsed: store.get("kenia_coupons", []),
   missCount: store.get("kenia_miss", 0),
   captions: {},
+  polCoords: {},
+  photoReacts: {},
+  doodleDataUrl: "",
   audioMeta: {}
 });
 
@@ -1143,6 +1200,61 @@ async function guardarEstadoEnNube(){
     });
   }catch(e){ console.warn("Error guardando estado en nube:", e); }
 }
+
+/* ===================== BUZÓN DE ANTOJO / DESEO DE HOY ===================== */
+function renderCravingBanner(){
+  const c = cloudState.craving || {};
+  const txtEl = $("#cravingBannerTxt");
+  if(c.text){
+    txtEl.textContent = `“${c.text}” (${c.author || "Kenia 💖"}${c.time ? " • " + c.time : ""})`;
+  } else {
+    txtEl.textContent = "Toca aquí para pedir un antojo, salida o abrazo ✨";
+  }
+}
+renderCravingBanner();
+
+function openCravingModal(){
+  const c = cloudState.craving || { text: "", author: "Kenia 💖" };
+  openModal(`
+    <div class="mi">🍓</div>
+    <h3>Antojo o Deseo de Hoy</h3>
+    <p style="font-size:.86rem;color:var(--muted)">Quedará encendido hasta arriba en los teléfonos de los dos</p>
+    <input type="text" id="cravingInp" class="cap-input" value="${(c.text||"").replace(/"/g,'&quot;')}" placeholder="Ej. Fresas con crema, un elote o muchos besitos..." maxlength="65">
+    <div class="row" style="margin-top:14px">
+      <button class="btn gold" id="saveCravingBtn">✨ Publicar Antojo</button>
+      <button class="btn main" id="waCravingBtn">💬 Pedírselo por WhatsApp</button>
+    </div>
+  `);
+  $("#saveCravingBtn").onclick = async () => {
+    const val = ($("#cravingInp").value || "").trim();
+    cloudState.craving = {
+      text: val,
+      author: selectedNoteAuthor,
+      time: new Date().toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"})
+    };
+    renderCravingBanner();
+    closeModal();
+    Sound.win();
+    conf({particleCount:55,spread:60,origin:{y:.6}});
+    toast("🍓 ¡Antojo actualizado en ambos celulares!");
+    await guardarEstadoEnNube();
+  };
+  $("#waCravingBtn").onclick = async () => {
+    const val = ($("#cravingInp").value || "").trim() || "muchos abrazos y besitos";
+    cloudState.craving = {
+      text: val,
+      author: selectedNoteAuthor,
+      time: new Date().toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"})
+    };
+    renderCravingBanner();
+    closeModal();
+    guardarEstadoEnNube();
+    sendWhatsApp(`¡Amor! Acabo de poner mi antojo/deseo de hoy en nuestra app: "${val}" 🍓💖`);
+  };
+}
+$("#cravingTopBtn").onclick = openCravingModal;
+$("#cravingBannerBtn").onclick = openCravingModal;
+$("#cravingMainBtn").onclick = openCravingModal;
 
 /* ===================== LLAVES & COFRE ===================== */
 let keys=store.get("kenia_keys",[]);
@@ -1364,8 +1476,11 @@ $("#chapters").innerHTML=CONFIG.capitulos.map((c,i)=>`<article class="chapter rv
   $("#skyKeyBtn").onclick=()=>addKey(2,"Cometa del Cielo");
 })();
 
-/* ===================== MURO DE NOTITAS & NOTAS DE VOZ ===================== */
+/* ===================== POST-ITS LIBRES POR TODA LA PÁGINA ===================== */
 let selectedNoteAuthor = "Kenia 💖";
+let isDraggingNote = false;
+let noteZ = 330;
+
 $$("#noteAuthorSwitch button").forEach(b => {
   b.onclick = () => {
     $$("#noteAuthorSwitch button").forEach(x => x.classList.remove("on"));
@@ -1375,52 +1490,242 @@ $$("#noteAuthorSwitch button").forEach(b => {
   };
 });
 
+$("#togglePostitsBtn").onclick = () => {
+  const hidden = document.body.classList.toggle("hide-postits");
+  $("#togglePostitsBtn").classList.toggle("off", hidden);
+  toast(hidden ? "🙈 Post-its ocultos temporalmente" : "📌 Post-its visibles en la página");
+};
+
 function renderNotes(){
+  if(isDraggingNote) return;
+  const layer = $("#freeNotesLayer");
+  const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, innerHeight);
+  layer.style.height = docH + "px";
+  layer.innerHTML = "";
+
   const list = cloudState.notes || [];
   const colors = ["pink", "gold", "lilac"];
-  $("#notesGrid").innerHTML = list.map((n, idx) => `
-    <div class="postit ${n.color || colors[idx % colors.length]}" style="transform:rotate(${(idx%2===0?-1.5:1.5)}deg)">
+  const secNotesTop = $("#notesec") ? $("#notesec").offsetTop : 1800;
+
+  list.forEach((n, idx) => {
+    if(typeof n.xPct !== "number") n.xPct = 10 + (idx * 23) % 65;
+    if(typeof n.yPx !== "number") n.yPx = secNotesTop + 120 + (idx * 70);
+    if(typeof n.rot !== "number") n.rot = (idx % 2 === 0 ? -3.5 : 3.5);
+
+    const el = document.createElement("div");
+    el.className = `postit ${n.color || colors[idx % colors.length]}`;
+    const maxLeftPx = Math.max(10, innerWidth - 185);
+    const leftPx = Math.min(maxLeftPx, Math.max(8, (n.xPct / 100) * innerWidth));
+    el.style.left = leftPx + "px";
+    el.style.top = Math.max(70, n.yPx) + "px";
+    el.style.transform = `rotate(${n.rot}deg)`;
+
+    el.innerHTML = `
       <div class="p-txt">“${(n.text || "").replace(/</g,"&lt;")}”</div>
       <div class="p-meta">
         <span>${n.author || "Con amor"} • ${n.date || ""}</span>
-        <button class="p-del" data-id="${n.id}" title="Borrar notita">🗑️</button>
+        <button class="p-del" title="Borrar Post-it">✕</button>
       </div>
-    </div>
-  `).join("");
+    `;
 
-  $$("#notesGrid .p-del").forEach(btn => {
-    btn.onclick = async () => {
-      cloudState.notes = (cloudState.notes || []).filter(x => x.id !== btn.dataset.id);
+    el.querySelector(".p-del").addEventListener("pointerdown", e => e.stopPropagation());
+    el.querySelector(".p-del").onclick = async e => {
+      e.stopPropagation();
+      cloudState.notes = (cloudState.notes || []).filter(x => x.id !== n.id);
       renderNotes();
       Sound.pop();
-      toast("🗑️ Notita eliminada");
+      toast("🗑️ Post-it eliminado");
       await guardarEstadoEnNube();
     };
+
+    let drag = false, sx = 0, sy = 0, ol = 0, ot = 0, moved = 0;
+    el.addEventListener("pointerdown", e => {
+      drag = true;
+      isDraggingNote = true;
+      moved = 0;
+      el.setPointerCapture(e.pointerId);
+      sx = e.pageX;
+      sy = e.pageY;
+      ol = parseFloat(el.style.left) || 0;
+      ot = parseFloat(el.style.top) || 0;
+      el.style.zIndex = ++noteZ;
+    });
+
+    el.addEventListener("pointermove", e => {
+      if(!drag) return;
+      const dx = e.pageX - sx, dy = e.pageY - sy;
+      moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
+      const fullH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 160;
+      const newLeft = Math.max(6, Math.min(innerWidth - 182, ol + dx));
+      const newTop = Math.max(64, Math.min(fullH, ot + dy));
+      el.style.left = newLeft + "px";
+      el.style.top = newTop + "px";
+    });
+
+    const endDrag = async () => {
+      if(!drag) return;
+      drag = false;
+      isDraggingNote = false;
+      if(moved > 5){
+        const curLeft = parseFloat(el.style.left) || 10;
+        const curTop = parseFloat(el.style.top) || 200;
+        n.xPct = Math.round((curLeft / innerWidth) * 1000) / 10;
+        n.yPx = Math.round(curTop);
+        Sound.pop();
+        toast("📌 Posición del Post-it guardada para ambos");
+        await guardarEstadoEnNube();
+      }
+    };
+
+    el.addEventListener("pointerup", endDrag);
+    el.addEventListener("pointercancel", endDrag);
+
+    layer.appendChild(el);
   });
 }
-renderNotes();
+
+addEventListener("resize", () => {
+  clearTimeout(renderNotes.t);
+  renderNotes.t = setTimeout(renderNotes, 250);
+});
+setTimeout(renderNotes, 300);
+
+async function crearPostitEn(text, author, targetY){
+  const colors = ["pink", "gold", "lilac"];
+  const nueva = {
+    id: "n_" + Date.now(),
+    author: author || selectedNoteAuthor,
+    text: text.trim(),
+    date: new Date().toLocaleDateString("es-MX",{day:"numeric",month:"short"}),
+    color: colors[Math.floor(Math.random()*colors.length)],
+    xPct: Math.round(rnd(12, 62)),
+    yPx: Math.round(targetY),
+    rot: Math.round(rnd(-6, 6))
+  };
+  cloudState.notes = [nueva, ...(cloudState.notes || [])];
+  document.body.classList.remove("hide-postits");
+  $("#togglePostitsBtn").classList.remove("off");
+  renderNotes();
+  Sound.win();
+  conf({particleCount:55,spread:65,origin:{y:.6}});
+  toast("📌 ¡Post-it pegado! Arrástralo a donde quieras 💖");
+  await guardarEstadoEnNube();
+}
 
 $("#addNoteBtn").onclick = async () => {
   const txt = ($("#noteTextInp").value || "").trim();
   if(!txt){ toast("Escribe primero tu notita ✏️"); vib(80); return; }
-  const colors = ["pink", "gold", "lilac"];
-  const nueva = {
-    id: "n_" + Date.now(),
-    author: selectedNoteAuthor,
-    text: txt,
-    date: new Date().toLocaleDateString("es-MX",{day:"numeric",month:"short"}),
-    color: colors[Math.floor(Math.random()*colors.length)]
-  };
-  cloudState.notes = [nueva, ...(cloudState.notes || [])];
   $("#noteTextInp").value = "";
-  renderNotes();
-  Sound.win();
-  conf({particleCount:55,spread:65,origin:{y:.7}});
-  toast("📌 ¡Notita pegada en el muro de los dos!");
-  await guardarEstadoEnNube();
+  await crearPostitEn(txt, selectedNoteAuthor, window.scrollY + innerHeight * 0.32);
 };
 
-/* Notas de voz */
+$("#quickPostitBtn").onclick = () => {
+  openModal(`
+    <div class="mi">📌</div>
+    <h3>Pegar Post-it aquí</h3>
+    <p style="font-size:.86rem;color:var(--muted)">Aparecerá exactamente en esta parte de la pantalla y podrás arrastrarlo libremente</p>
+    <div class="author-switch" id="modalAuthorSwitch" style="margin-top:10px">
+      <button type="button" class="${selectedNoteAuthor.includes('Kenia')?'on':''}" data-author="Kenia 💖">Kenia 💖</button>
+      <button type="button" class="${selectedNoteAuthor.includes('Javier')?'on':''}" data-author="Javier 🖤">Javier 🖤</button>
+    </div>
+    <input type="text" id="quickNoteInp" class="cap-input" placeholder="Escribe tu notita aquí..." maxlength="110">
+    <div class="row" style="margin-top:14px">
+      <button class="btn gold" id="confirmQuickNoteBtn">📌 Pegar en la pantalla</button>
+    </div>
+  `);
+  $$("#modalAuthorSwitch button").forEach(b => {
+    b.onclick = () => {
+      $$("#modalAuthorSwitch button").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      selectedNoteAuthor = b.dataset.author;
+    };
+  });
+  $("#confirmQuickNoteBtn").onclick = async () => {
+    const txt = ($("#quickNoteInp").value || "").trim();
+    if(!txt){ toast("Escribe un mensajito primero ✏️"); return; }
+    closeModal();
+    await crearPostitEn(txt, selectedNoteAuthor, window.scrollY + innerHeight * 0.35);
+  };
+};
+
+/* ===================== PIZARRA DE DIBUJO COMPARTIDA EN LA NUBE ===================== */
+let isDrawingDoodle = false;
+let lastLoadedDoodle = "";
+function cargarDoodleRemoto(dataUrl){
+  if(!dataUrl || dataUrl === lastLoadedDoodle || isDrawingDoodle) return;
+  lastLoadedDoodle = dataUrl;
+  const cv = $("#doodleCv"), ctx = cv.getContext("2d");
+  const img = new Image();
+  img.onload = () => {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(img, 0, 0, cv.width, cv.height);
+  };
+  img.src = dataUrl;
+}
+
+(function(){
+  const cv = $("#doodleCv"), ctx = cv.getContext("2d");
+  let brushColor = "#ff2a6d";
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.lineWidth = 4.5;
+
+  $$(".color-dot").forEach(b => {
+    b.onclick = () => {
+      $$(".color-dot").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      brushColor = b.dataset.col;
+      Sound.pop();
+    };
+  });
+
+  const getPos = e => {
+    const r = cv.getBoundingClientRect();
+    return {
+      x: (e.clientX - r.left) * (cv.width / r.width),
+      y: (e.clientY - r.top) * (cv.height / r.height)
+    };
+  };
+
+  cv.addEventListener("pointerdown", e => {
+    isDrawingDoodle = true;
+    cv.setPointerCapture(e.pointerId);
+    const p = getPos(e);
+    ctx.strokeStyle = brushColor;
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  });
+
+  cv.addEventListener("pointermove", e => {
+    if(!isDrawingDoodle) return;
+    const p = getPos(e);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+  });
+
+  const stopDraw = () => { isDrawingDoodle = false; };
+  addEventListener("pointerup", stopDraw);
+  addEventListener("pointercancel", stopDraw);
+
+  $("#clearDoodleBtn").onclick = () => {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    Sound.pop();
+  };
+
+  $("#saveDoodleBtn").onclick = async () => {
+    const dataUrl = cv.toDataURL("image/png");
+    lastLoadedDoodle = dataUrl;
+    cloudState.doodleDataUrl = dataUrl;
+    Sound.win();
+    conf({particleCount:50,spread:60,origin:{y:.7}});
+    toast("🎨 ¡Dibujo guardado para ambos celulares!");
+    await guardarEstadoEnNube();
+  };
+
+  if(cloudState.doodleDataUrl) cargarDoodleRemoto(cloudState.doodleDataUrl);
+})();
+
+/* ===================== NOTAS DE VOZ ===================== */
 let cloudAudios = [];
 
 function renderAudios(){
@@ -1534,7 +1839,7 @@ renderAudios();
   };
 })();
 
-/* ===================== POLAROIDS + SINCRONIZACIÓN GENERAL EN SEGUNDO PLANO ===================== */
+/* ===================== POLAROIDS CON REACCIONES Y POSICIÓN SINCRONIZADA ===================== */
 const TEXTOS_BASE = [
   "Kenia & Javier 💖",
   "Tu sonrisa hermosa",
@@ -1568,7 +1873,7 @@ function comprimirFoto(file, max=1000){
 }
 
 async function sincronizarNube(forzarRender = false){
-  if(!forzarRender && (isDraggingPol || $("#modal").classList.contains("show"))) return;
+  if(!forzarRender && (isDraggingPol || isDraggingNote || isDrawingDoodle || $("#modal").classList.contains("show"))) return;
 
   try{
     let files = [];
@@ -1612,9 +1917,11 @@ async function sincronizarNube(forzarRender = false){
       cloudState = { ...cloudState, ...remoteState };
       store.set("kenia_cloud_state", cloudState);
       $("#missCount").textContent = cloudState.missCount || 0;
+      renderCravingBanner();
       renderNotes();
       renderCoupons();
       renderPlans();
+      if(cloudState.doodleDataUrl) cargarDoodleRemoto(cloudState.doodleDataUrl);
       tick();
       stateChanged = true;
     }
@@ -1634,7 +1941,8 @@ async function sincronizarNube(forzarRender = false){
     const baseSlots = TEXTOS_BASE.map((t, idx) => ({
       src: "",
       texto: capsMap[`slot_${idx}.jpg`] || t,
-      fileName: null
+      fileName: null,
+      key: `slot_${idx}.jpg`
     }));
     const extras = [];
 
@@ -1645,12 +1953,13 @@ async function sincronizarNube(forzarRender = false){
         if(idx >= 0 && idx < baseSlots.length){
           baseSlots[idx].src = f.url;
           baseSlots[idx].fileName = f.name;
+          baseSlots[idx].key = f.name;
           baseSlots[idx].texto = capsMap[f.name] || TEXTOS_BASE[idx];
         } else {
-          extras.push({ src: f.url, texto: capsMap[f.name] || "Kenia & Javier 💖", fileName: f.name });
+          extras.push({ src: f.url, texto: capsMap[f.name] || "Kenia & Javier 💖", fileName: f.name, key: f.name });
         }
       } else {
-        extras.push({ src: f.url, texto: capsMap[f.name] || "Kenia & Javier 💖", fileName: f.name });
+        extras.push({ src: f.url, texto: capsMap[f.name] || "Kenia & Javier 💖", fileName: f.name, key: f.name });
       }
     });
 
@@ -1659,6 +1968,7 @@ async function sincronizarNube(forzarRender = false){
       if(emptySlot){
         emptySlot.src = ex.src;
         emptySlot.fileName = ex.fileName;
+        emptySlot.key = ex.fileName;
         if(capsMap[ex.fileName]) emptySlot.texto = capsMap[ex.fileName];
       } else {
         baseSlots.push(ex);
@@ -1666,7 +1976,8 @@ async function sincronizarNube(forzarRender = false){
     }
 
     CONFIG.fotos = baseSlots;
-    renderPols(true);
+    renderPols();
+    renderNotes();
   }catch(e){ console.warn("Error sincronizando:", e); }
 }
 
@@ -1689,9 +2000,9 @@ async function subirFoto(file, slotIndex = null, customCaption = null){
       CONFIG.fotos[slotIndex].src = dataUrl;
       CONFIG.fotos[slotIndex].texto = finalCaption;
     } else {
-      CONFIG.fotos.push({ src: dataUrl, texto: finalCaption, fileName: null });
+      CONFIG.fotos.push({ src: dataUrl, texto: finalCaption, fileName: null, key: `temp_${Date.now()}` });
     }
-    renderPols(true);
+    renderPols();
 
     const r = await fetch(WORKER_URL, {
       method: "POST",
@@ -1748,11 +2059,11 @@ async function eliminarFotoDeGitHub(i){
     }
 
     if(i < TEXTOS_BASE.length){
-      CONFIG.fotos[i] = { src: "", texto: TEXTOS_BASE[i], fileName: null };
+      CONFIG.fotos[i] = { src: "", texto: TEXTOS_BASE[i], fileName: null, key: `slot_${i}.jpg` };
     } else {
       CONFIG.fotos.splice(i, 1);
     }
-    renderPols(true);
+    renderPols();
     Sound.pop();
     toast("✅ Foto eliminada en todos los dispositivos 🗑️");
     setTimeout(() => sincronizarNube(true), 1200);
@@ -1788,7 +2099,7 @@ function openPhoto(i){
     const keyName = f.fileName || `slot_${i}.jpg`;
     cloudState.captions = cloudState.captions || {};
     cloudState.captions[keyName] = newCap;
-    renderPols(true);
+    renderPols();
     closeModal();
     toast("✏️ Frase actualizada para los dos");
     await guardarEstadoEnNube();
@@ -1822,42 +2133,87 @@ function openPhoto(i){
 }
 
 let zTop=10;
-const savedPositions = {};
-function renderPols(keepPos = false){
+function renderPols(){
   const board=$("#board");
-  board.querySelectorAll(".pol").forEach((e, idx) => {
-    if(keepPos){
-      savedPositions[idx] = { left: e.style.left, top: e.style.top, transform: e.style.transform, zIndex: e.style.zIndex };
-    }
-    e.remove();
-  });
-  const bw=board.clientWidth||340, cols=bw<520?2:3, pw=145, gap=Math.max(6,(bw-cols*pw)/(cols+1)), rows=Math.ceil(CONFIG.fotos.length/cols);
-  board.style.height=Math.max(420,rows*215+70)+"px";
+  board.querySelectorAll(".pol").forEach(e => e.remove());
+  const bw=board.clientWidth||340, cols=bw<520?2:3, pw=150, gap=Math.max(6,(bw-cols*pw)/(cols+1)), rows=Math.ceil(CONFIG.fotos.length/cols);
+  board.style.height=Math.max(440,rows*235+75)+"px";
+
+  const coordsMap = cloudState.polCoords || {};
+  const reactsMap = cloudState.photoReacts || {};
+
   CONFIG.fotos.forEach((f,i)=>{
+    const itemKey = f.fileName || f.key || `slot_${i}.jpg`;
+    const rObj = reactsMap[itemKey] || { "❤️": 0, "🥰": 0, "🔥": 0 };
+    const savedC = coordsMap[itemKey];
+
     const src=f.src, el=document.createElement("div"); el.className="pol";
-    el.innerHTML=`<div class="img">${src?`<img src="${src}" alt="">`:"💖"}</div><div class="cap">${f.texto}</div>`;
-    if(keepPos && savedPositions[i]){
-      el.style.left = savedPositions[i].left;
-      el.style.top = savedPositions[i].top;
-      el.style.transform = savedPositions[i].transform;
-      el.style.zIndex = savedPositions[i].zIndex;
+    el.innerHTML=`
+      <div class="img">${src?`<img src="${src}" alt="">`:"💖"}</div>
+      <div class="cap">${f.texto}</div>
+      <div class="pol-reacts">
+        <button class="react-chip" data-em="❤️">❤️ <span>${rObj["❤️"]||0}</span></button>
+        <button class="react-chip" data-em="🥰">🥰 <span>${rObj["🥰"]||0}</span></button>
+        <button class="react-chip" data-em="🔥">🔥 <span>${rObj["🔥"]||0}</span></button>
+      </div>
+    `;
+
+    if(savedC && typeof savedC.xPct === "number" && typeof savedC.yPx === "number"){
+      const maxL = Math.max(4, bw - pw - 4);
+      el.style.left = Math.min(maxL, Math.max(4, (savedC.xPct / 100) * bw)) + "px";
+      el.style.top = Math.max(8, savedC.yPx) + "px";
+      el.style.transform = `rotate(${savedC.rot || 0}deg)`;
     } else {
       el.style.left=(gap+(i%cols)*(pw+gap))+"px";
-      el.style.top=(20+Math.floor(i/cols)*215)+"px";
-      el.style.transform=`rotate(${rnd(-7,7)}deg)`;
+      el.style.top=(20+Math.floor(i/cols)*230)+"px";
+      el.style.transform=`rotate(${(i%2===0?-3.5:3.5)}deg)`;
     }
+
+    // Botones de reacción en la Polaroid
+    el.querySelectorAll(".react-chip").forEach(rb => {
+      rb.addEventListener("pointerdown", e => e.stopPropagation());
+      rb.onclick = async e => {
+        e.stopPropagation();
+        const em = rb.dataset.em;
+        cloudState.photoReacts = cloudState.photoReacts || {};
+        cloudState.photoReacts[itemKey] = cloudState.photoReacts[itemKey] || { "❤️": 0, "🥰": 0, "🔥": 0 };
+        cloudState.photoReacts[itemKey][em] = (cloudState.photoReacts[itemKey][em] || 0) + 1;
+        rb.querySelector("span").textContent = cloudState.photoReacts[itemKey][em];
+        Sound.pop(); vib(20);
+        const rect = rb.getBoundingClientRect();
+        burst(rect.left + rect.width/2, rect.top, 4);
+        await guardarEstadoEnNube();
+      };
+    });
+
     board.appendChild(el);
     let drag=false,sx=0,sy=0,ol=0,ot=0,moved=0;
     el.addEventListener("pointerdown",e=>{ drag=true; isDraggingPol=true; moved=0; el.setPointerCapture(e.pointerId); sx=e.clientX; sy=e.clientY; ol=el.offsetLeft; ot=el.offsetTop; el.style.zIndex=++zTop; });
     el.addEventListener("pointermove",e=>{ if(!drag) return; const dx=e.clientX-sx, dy=e.clientY-sy; moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));
       el.style.left=Math.max(0,Math.min(board.clientWidth-el.offsetWidth,ol+dx))+"px"; el.style.top=Math.max(0,Math.min(board.clientHeight-el.offsetHeight,ot+dy))+"px"; });
-    el.addEventListener("pointerup",()=>{ drag=false; isDraggingPol=false; if(moved<6) openPhoto(i); });
-    el.addEventListener("pointercancel",()=>{ drag=false; isDraggingPol=false; });
+
+    const finishPolDrag = async () => {
+      if(!drag) return;
+      drag=false; isDraggingPol=false;
+      if(moved < 6){
+        openPhoto(i);
+      } else {
+        cloudState.polCoords = cloudState.polCoords || {};
+        cloudState.polCoords[itemKey] = {
+          xPct: Math.round((el.offsetLeft / (board.clientWidth || 340)) * 1000) / 10,
+          yPx: Math.round(el.offsetTop),
+          rot: Math.round(rnd(-6, 6))
+        };
+        await guardarEstadoEnNube();
+      }
+    };
+    el.addEventListener("pointerup", finishPolDrag);
+    el.addEventListener("pointercancel", ()=>{ drag=false; isDraggingPol=false; });
   });
 }
-renderPols(false);
+renderPols();
 sincronizarNube(true);
-addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(()=>renderPols(false),300); });
+addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(renderPols,300); });
 $("#boardKeyBtn").onclick=()=>{ addKey(1,"Álbum Polaroid"); $("#boardKeyBtn").textContent="🗝️ Llave #1 obtenida ✓"; };
 
 $("#mainUploadInp").onchange = e => {
@@ -2169,13 +2525,26 @@ renderQ();
   }
 })();
 
-/* ===================== PLANES SINCRONIZADOS ===================== */
+/* ===================== PLANES SINCRONIZADOS + AGREGAR NUEVOS ===================== */
 function renderPlans(){
+  if(!Array.isArray(cloudState.plansList) || !cloudState.plansList.length){
+    cloudState.plansList = CONFIG.planes.slice();
+  }
+  const allPlans = cloudState.plansList;
   const doneP = cloudState.plansDone || [];
-  $("#plans").innerHTML=CONFIG.planes.map((p,i)=>`<div class="plan ${doneP.includes(i)?"done":""}" data-i="${i}"><div class="box"></div><span>${p}</span></div>`).join("");
-  $("#pfill").style.width=(doneP.length/CONFIG.planes.length*100)+"%";
-  $("#pcount").textContent=`${doneP.length} de ${CONFIG.planes.length} planes cumplidos (sincronizado)`;
-  $$("#plans .plan").forEach(el=>el.onclick=async()=>{
+
+  $("#plans").innerHTML = allPlans.map((p,i)=>`
+    <div class="plan ${doneP.includes(i)?"done":""}" data-i="${i}">
+      <div class="plan-left"><div class="box"></div><span>${p.replace(/</g,"&lt;")}</span></div>
+      <button class="plan-del" data-del="${i}" title="Eliminar plan">✕</button>
+    </div>
+  `).join("");
+
+  $("#pfill").style.width = (allPlans.length ? (doneP.length/allPlans.length*100) : 0)+"%";
+  $("#pcount").textContent = `${doneP.length} de ${allPlans.length} planes cumplidos (sincronizado en ambos celulares)`;
+
+  $$("#plans .plan").forEach(el=>el.onclick=async(e)=>{
+    if(e.target.closest(".plan-del")) return;
     const i=+el.dataset.i;
     const list = [...(cloudState.plansDone || [])];
     const k = list.indexOf(i);
@@ -2183,11 +2552,39 @@ function renderPlans(){
     else{ list.push(i); Sound.chime(); conf({particleCount:50,spread:60,origin:{y:.7}}); }
     cloudState.plansDone = list;
     renderPlans();
-    if(list.length===CONFIG.planes.length){ Sound.win(); conf({particleCount:200,spread:120,origin:{y:.5}}); openModal(`<div class="mi">🏆</div><h3>¡Cumplimos todos los planes!</h3><p>Entonces toca soñar planes nuevos juntos, Kenia 💖</p>`); }
+    if(list.length===allPlans.length && allPlans.length>0){ Sound.win(); conf({particleCount:200,spread:120,origin:{y:.5}}); openModal(`<div class="mi">🏆</div><h3>¡Cumplimos todos los planes!</h3><p>Entonces toca agregar planes nuevos juntos, Kenia 💖</p>`); }
     await guardarEstadoEnNube();
+  });
+
+  $$("#plans .plan-del").forEach(btn => {
+    btn.onclick = async e => {
+      e.stopPropagation();
+      const idx = +btn.dataset.del;
+      cloudState.plansList.splice(idx, 1);
+      cloudState.plansDone = (cloudState.plansDone || [])
+        .filter(x => x !== idx)
+        .map(x => x > idx ? x - 1 : x);
+      renderPlans();
+      Sound.pop();
+      toast("🗑️ Plan eliminado de la lista");
+      await guardarEstadoEnNube();
+    };
   });
 }
 renderPlans();
+
+$("#addPlanBtn").onclick = async () => {
+  const txt = ($("#newPlanInp").value || "").trim();
+  if(!txt){ toast("Escribe primero el nuevo plan ✏️"); return; }
+  if(!Array.isArray(cloudState.plansList)) cloudState.plansList = CONFIG.planes.slice();
+  cloudState.plansList.push(txt);
+  $("#newPlanInp").value = "";
+  renderPlans();
+  Sound.win();
+  conf({particleCount:55,spread:60,origin:{y:.7}});
+  toast("➕ ¡Nuevo plan agregado para los dos!");
+  await guardarEstadoEnNube();
+};
 
 /* ===================== PIROTECNIA ===================== */
 (function(){
