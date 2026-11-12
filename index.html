@@ -485,7 +485,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       <div class="eyebrow rv">álbum interactivo en la nube</div>
       <h2 class="rv" style="margin-bottom:14px">Nuestras <em>Polaroids</em></h2>
       <div style="text-align:center" class="rv">
-        <span class="sync-badge"><i class="sync-dot"></i> Sincronización en tiempo real activa (cada 12s sin mover la página)</span>
+        <span class="sync-badge"><i class="sync-dot"></i> Sincronización automática activa (cada 12s sin mover la página)</span>
       </div>
       <div class="row rv" style="margin-bottom:18px">
         <label class="btn gold" style="cursor:pointer">
@@ -494,7 +494,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
         </label>
         <label class="btn main" style="cursor:pointer">
           📲 Tomar foto con cámara HD
-          <input type="file" id="nativeCamInp" accept="image/*" capture="user" hidden>
+          <input type="file" id="nativeCamInp" accept="image/*" capture="environment" hidden>
         </label>
       </div>
       <div class="board rv" id="board">
@@ -1119,7 +1119,7 @@ const spy=new IntersectionObserver(es=>es.forEach(e=>{
 }),{rootMargin:"-45% 0px -45% 0px"});
 $$("main section[id]").forEach(s=>spy.observe(s));
 
-/* ===================== ESTADO COMPARTIDO EN LA NUBE ===================== */
+/* ===================== ESTADO COMPARTIDO EN LA NUBE (TODO POR POST) ===================== */
 const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
 let cloudState = store.get("kenia_cloud_state", {
   notes: [
@@ -1128,16 +1128,18 @@ let cloudState = store.get("kenia_cloud_state", {
   nextDate: { title: "Nuestra Próxima Cita 💑", iso: "" },
   plansDone: store.get("kenia_plans", []),
   couponsUsed: store.get("kenia_coupons", []),
-  missCount: store.get("kenia_miss", 0)
+  missCount: store.get("kenia_miss", 0),
+  captions: {},
+  audioMeta: {}
 });
 
 async function guardarEstadoEnNube(){
   store.set("kenia_cloud_state", cloudState);
   try{
-    await fetch(`${WORKER_URL}?action=state`, {
-      method: "PUT",
+    await fetch(WORKER_URL, {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ state: cloudState })
+      body: JSON.stringify({ action: "save_state", state: cloudState })
     });
   }catch(e){ console.warn("Error guardando estado en nube:", e); }
 }
@@ -1187,7 +1189,6 @@ function tick(){
   const isDay = now.getDate()===start.getDate();
   $("#todayBanner").innerHTML = isDay ? `<div class="today-banner">🎉 ¡Hoy es nuestro día especial, Kenia! Te amo 💖</div>` : "";
 
-  // Cuenta regresiva de Próxima Cita
   const nd = cloudState.nextDate || {};
   $("#nextDateTitle").textContent = "📅 " + (nd.title || "Nuestra Próxima Cita 💖");
   if(nd.iso){
@@ -1421,15 +1422,6 @@ $("#addNoteBtn").onclick = async () => {
 
 /* Notas de voz */
 let cloudAudios = [];
-function parsearNombreAudio(name){
-  const parts = name.replace(/\.[^.]+$/, "").split("__");
-  let author = "Nota de voz", title = "Para ti 💖";
-  if(parts.length >= 3){
-    try { author = decodeURIComponent(parts[1]); } catch(e){}
-    try { title = decodeURIComponent(parts[2]); } catch(e){}
-  }
-  return { author, title };
-}
 
 function renderAudios(){
   const box = $("#voiceList");
@@ -1437,8 +1429,9 @@ function renderAudios(){
     box.innerHTML = `<p style="font-size:.85rem;color:var(--muted)">Aún no hay mensajes de voz grabados. ¡Graba el primero! 🎙️</p>`;
     return;
   }
+  const metaMap = cloudState.audioMeta || {};
   box.innerHTML = cloudAudios.map(a => {
-    const info = parsearNombreAudio(a.name);
+    const info = metaMap[a.name] || { author: "Con amor 💖", title: "Mensaje de voz" };
     return `
       <div class="voice-item">
         <div style="text-align:left">
@@ -1459,9 +1452,9 @@ function renderAudios(){
       toast("🗑️ Eliminando nota de voz...");
       try{
         await fetch(WORKER_URL, {
-          method: "DELETE",
+          method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ fileName, folder: "audios" })
+          body: JSON.stringify({ action: "delete_file", fileName })
         });
         cloudAudios = cloudAudios.filter(x => x.name !== fileName);
         renderAudios();
@@ -1500,18 +1493,20 @@ renderAudios();
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                type: "audio",
+                action: "upload_audio",
                 contentBase64: base64,
-                author: selectedNoteAuthor,
-                title,
                 ext
               })
             });
-            if(!r.ok) throw new Error(await r.text());
+            const resData = await r.json();
+            if(!r.ok) throw new Error(resData.error || "Error subiendo audio");
+            cloudState.audioMeta = cloudState.audioMeta || {};
+            cloudState.audioMeta[resData.fileName] = { author: selectedNoteAuthor, title };
+            await guardarEstadoEnNube();
             $("#voiceTitleInp").value = "";
             Sound.win();
             toast("✅ ¡Nota de voz guardada para los dos! 🎙️💖");
-            setTimeout(() => sincronizarNube(true), 1500);
+            setTimeout(() => sincronizarNube(true), 1200);
           }catch(err){
             toast("⚠️ No se pudo subir el audio: actualiza tu Worker");
           }
@@ -1553,14 +1548,6 @@ let lastStateSha = "";
 let isDraggingPol = false;
 
 try { localStorage.removeItem("kenia_photos"); } catch(e){}
-
-function extraerTextoDeNombre(fileName, defaultText){
-  const m = fileName.match(/__(.+)\.[^.]+$/);
-  if(m){
-    try { return decodeURIComponent(m[1]); } catch(e){}
-  }
-  return defaultText;
-}
 
 function comprimirFoto(file, max=1000){
   return new Promise((res, rej) => {
@@ -1619,7 +1606,7 @@ async function sincronizarNube(forzarRender = false){
 
     if(!okFetch) return;
 
-    // 1. Actualizar Estado Compartido (Notas, Cita, Planes, Cupones, Extrañar) si cambió
+    let stateChanged = false;
     if(remoteState && (forzarRender || (remoteStateSha && remoteStateSha !== lastStateSha))){
       lastStateSha = remoteStateSha;
       cloudState = { ...cloudState, ...remoteState };
@@ -1629,37 +1616,41 @@ async function sincronizarNube(forzarRender = false){
       renderCoupons();
       renderPlans();
       tick();
+      stateChanged = true;
     }
 
-    // 2. Actualizar Audios si cambiaron
     const audioSig = audios.map(a => `${a.name}:${a.sha}`).sort().join("|");
-    if(forzarRender || audioSig !== lastAudiosSignature){
+    if(forzarRender || stateChanged || audioSig !== lastAudiosSignature){
       lastAudiosSignature = audioSig;
       cloudAudios = audios.sort((a,b) => b.name.localeCompare(a.name));
       renderAudios();
     }
 
-    // 3. Actualizar Fotos Polaroid solo si cambiaron
     const currentSignature = files.map(f => `${f.name}:${f.sha || f.url}`).sort().join("|");
-    if(!forzarRender && currentSignature === lastFilesSignature) return;
+    if(!forzarRender && !stateChanged && currentSignature === lastFilesSignature) return;
     lastFilesSignature = currentSignature;
 
-    const baseSlots = TEXTOS_BASE.map(t => ({ src: "", texto: t, fileName: null }));
+    const capsMap = cloudState.captions || {};
+    const baseSlots = TEXTOS_BASE.map((t, idx) => ({
+      src: "",
+      texto: capsMap[`slot_${idx}.jpg`] || t,
+      fileName: null
+    }));
     const extras = [];
 
     files.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true})).forEach(f => {
-      const m = f.name.match(/^slot_(\d+)(?:__.*)?\./i);
+      const m = f.name.match(/^slot_(\d+)\./i);
       if(m){
         const idx = parseInt(m[1], 10);
         if(idx >= 0 && idx < baseSlots.length){
           baseSlots[idx].src = f.url;
           baseSlots[idx].fileName = f.name;
-          baseSlots[idx].texto = extraerTextoDeNombre(f.name, TEXTOS_BASE[idx]);
+          baseSlots[idx].texto = capsMap[f.name] || TEXTOS_BASE[idx];
         } else {
-          extras.push({ src: f.url, texto: extraerTextoDeNombre(f.name, "Kenia & Javier 💖"), fileName: f.name });
+          extras.push({ src: f.url, texto: capsMap[f.name] || "Kenia & Javier 💖", fileName: f.name });
         }
       } else {
-        extras.push({ src: f.url, texto: extraerTextoDeNombre(f.name, "Kenia & Javier 💖"), fileName: f.name });
+        extras.push({ src: f.url, texto: capsMap[f.name] || "Kenia & Javier 💖", fileName: f.name });
       }
     });
 
@@ -1668,7 +1659,7 @@ async function sincronizarNube(forzarRender = false){
       if(emptySlot){
         emptySlot.src = ex.src;
         emptySlot.fileName = ex.fileName;
-        if(ex.texto !== "Kenia & Javier 💖") emptySlot.texto = ex.texto;
+        if(capsMap[ex.fileName]) emptySlot.texto = capsMap[ex.fileName];
       } else {
         baseSlots.push(ex);
       }
@@ -1706,9 +1697,9 @@ async function subirFoto(file, slotIndex = null, customCaption = null){
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        action: "upload_photo",
         contentBase64: base64,
         slot: slotIndex,
-        caption: finalCaption,
         oldFileName
       })
     });
@@ -1718,6 +1709,12 @@ async function subirFoto(file, slotIndex = null, customCaption = null){
     try { resData = JSON.parse(txt); } catch(e) {}
 
     if(!r.ok) throw new Error(resData.error || txt || `HTTP ${r.status}`);
+
+    if(resData.fileName && finalCaption){
+      cloudState.captions = cloudState.captions || {};
+      cloudState.captions[resData.fileName] = finalCaption;
+      guardarEstadoEnNube();
+    }
 
     Sound.win();
     conf({particleCount:80,spread:70,origin:{y:.6}});
@@ -1738,12 +1735,17 @@ async function eliminarFotoDeGitHub(i){
   toast("🗑️ Eliminando foto de la nube...");
   try{
     const r = await fetch(WORKER_URL, {
-      method: "DELETE",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fileName: f.fileName, folder: "fotos" })
+      body: JSON.stringify({ action: "delete_file", fileName: f.fileName })
     });
     const resData = await r.json();
     if(!r.ok) throw new Error(resData.error || "No se pudo eliminar");
+
+    if(cloudState.captions && cloudState.captions[f.fileName]){
+      delete cloudState.captions[f.fileName];
+      guardarEstadoEnNube();
+    }
 
     if(i < TEXTOS_BASE.length){
       CONFIG.fotos[i] = { src: "", texto: TEXTOS_BASE[i], fileName: null };
@@ -1756,7 +1758,7 @@ async function eliminarFotoDeGitHub(i){
     setTimeout(() => sincronizarNube(true), 1200);
   }catch(e){
     console.error("Error al eliminar:", e);
-    toast("⚠️ No se pudo eliminar: verifica tu Worker");
+    toast("⚠️ No se pudo eliminar: actualiza tu Worker en Cloudflare");
   }
 }
 
@@ -1766,7 +1768,8 @@ function openPhoto(i){
     ${f.src ? `<img class="photo" src="${f.src}" alt="">` : `<div class="mi">💖</div>`}
     <h3>${f.texto}</h3>
     <input type="text" id="modalCapInp" class="cap-input" value="${f.texto.replace(/"/g, '&quot;')}" placeholder="✏️ Escribe el título de la foto" maxlength="38">
-    <div class="row" style="margin-top:14px">
+    <div class="row" style="margin-top:12px">
+      <button class="btn ghost" id="saveCapOnlyBtn">💾 Guardar frase</button>
       <label class="btn gold" style="cursor:pointer">
         📷 ${f.src ? "Cambiar foto" : "Elegir foto"}
         <input type="file" accept="image/*" id="phInp" hidden>
@@ -1778,6 +1781,18 @@ function openPhoto(i){
       ${f.src && f.fileName ? `<button class="btn danger" id="delPhotoBtn">🗑️ Eliminar foto</button>` : ""}
     </div>
   `);
+
+  $("#saveCapOnlyBtn").onclick = async () => {
+    const newCap = ($("#modalCapInp").value || "").trim() || f.texto;
+    CONFIG.fotos[i].texto = newCap;
+    const keyName = f.fileName || `slot_${i}.jpg`;
+    cloudState.captions = cloudState.captions || {};
+    cloudState.captions[keyName] = newCap;
+    renderPols(true);
+    closeModal();
+    toast("✏️ Frase actualizada para los dos");
+    await guardarEstadoEnNube();
+  };
 
   const handleFile = async e => {
     const file = e.target.files[0];
