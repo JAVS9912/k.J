@@ -45,6 +45,7 @@ h3.gt{color:var(--gold);margin-bottom:6px}
 .btn.main{padding:14px 34px;font-size:1rem;background:linear-gradient(135deg,#ff2a6d,#b51755);box-shadow:0 12px 28px rgba(255,42,109,.5)}
 .btn.gold{padding:13px 30px;font-size:.96rem;background:linear-gradient(135deg,#ffde59,#ffa726);color:#12031a;font-weight:700;box-shadow:0 12px 26px rgba(255,222,89,.4)}
 .btn.ghost{padding:11px 22px;font-size:.88rem;background:rgba(255,255,255,.12);border:1px solid var(--line);color:var(--text)}
+.btn.danger{padding:11px 22px;font-size:.88rem;background:rgba(255,71,87,.22);border:1px solid #ff4757;color:#ff8a93}
 .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .sh{animation:shake .45s}
 @keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
@@ -94,7 +95,7 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .mode-chip.on{background:rgba(255,42,109,.4);border-color:var(--gold);color:var(--gold)}
 .hero-hint{margin-top:12px;font-size:.74rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
 
-/* Contador */
+/* Contador & Próxima Cita */
 .counter{padding:30px 18px;text-align:center}
 .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(min-width:640px){.cgrid{grid-template-columns:repeat(6,1fr)}}
@@ -107,7 +108,9 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .next{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:.94rem}
 .next b{color:var(--gold)}
 .today-banner{margin-top:14px;padding:12px;border-radius:16px;background:linear-gradient(135deg,rgba(255,42,109,.4),rgba(255,222,89,.25));border:1px solid var(--gold);font-weight:700;color:var(--gold)}
-.scanner-card{padding:28px 20px;text-align:center;margin-top:20px}
+.date-card{padding:24px 18px;text-align:center;margin-top:18px}
+.date-cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px;margin:12px auto}
+.scanner-card{padding:28px 20px;text-align:center;margin-top:18px}
 .fp-pad{position:relative;width:115px;height:115px;margin:14px auto;border-radius:50%;background:radial-gradient(circle,rgba(255,42,109,.3),rgba(157,78,221,.22));border:2px dashed rgba(255,222,89,.7);display:flex;align-items:center;justify-content:center;font-size:3.2rem;cursor:pointer;user-select:none;touch-action:none;transition:.2s}
 .fp-pad.scanning{transform:scale(1.08);border-style:solid;border-color:var(--accent);box-shadow:0 0 45px var(--accent)}
 .mic-meter{width:190px;height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px auto}
@@ -158,8 +161,32 @@ body.hb-active::after{content:"";position:fixed;inset:0;z-index:390;pointer-even
 .hidden-board-key{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);z-index:1;background:rgba(255,222,89,.2);border:1px dashed var(--gold);border-radius:14px;padding:8px 12px;color:var(--gold);font-family:inherit;font-size:.78rem;cursor:pointer;font-weight:600}
 .booth-card{padding:24px 16px;text-align:center;margin-top:20px}
 .booth-stage{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:center;margin:12px 0}
-#boothVideo{width:220px;height:220px;object-fit:cover;border-radius:16px;border:2px solid var(--line);background:#0d0414;display:none;transform:scaleX(-1)}
+#boothVideo{width:220px;height:220px;object-fit:cover;border-radius:16px;border:2px solid var(--gold);background:#0d0414;display:none}
+#boothVideo.mirror{transform:scaleX(-1)}
 #boothPreview{width:220px;height:auto;aspect-ratio:360/430;border-radius:8px;box-shadow:0 14px 32px rgba(0,0,0,.7)}
+.cap-input{width:100%;max-width:340px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.09);color:#fff;font-family:inherit;font-size:.92rem;text-align:center;margin-top:10px;outline:none}
+.cap-input:focus{border-color:var(--gold)}
+.sync-badge{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;color:var(--gold);background:rgba(255,222,89,.1);border:1px solid rgba(255,222,89,.3);padding:4px 12px;border-radius:99px;margin-bottom:12px}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:#2ed573;box-shadow:0 0 8px #2ed573;animation:pulse 2s infinite}
+
+/* Muro de Notitas & Audios en la nube */
+.notes-composer{padding:22px 18px;text-align:center;margin-bottom:18px}
+.author-switch{display:inline-flex;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:99px;padding:4px;margin-bottom:12px}
+.author-switch button{border:none;background:none;color:var(--muted);padding:6px 16px;border-radius:99px;font-family:inherit;font-weight:700;font-size:.84rem;cursor:pointer}
+.author-switch button.on{background:linear-gradient(135deg,var(--accent),var(--violet));color:#fff}
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:24px}
+.postit{position:relative;padding:18px 16px 14px;border-radius:16px;color:#2a1221;font-family:'Caveat',cursive;box-shadow:0 14px 28px rgba(0,0,0,.6);display:flex;flex-direction:column;justify-content:space-between;min-height:145px;transition:transform .2s}
+.postit:hover{transform:translateY(-4px)}
+.postit.pink{background:linear-gradient(145deg,#ffd1dc,#ffb3c6)}
+.postit.gold{background:linear-gradient(145deg,#fff3b0,#ffde7a)}
+.postit.lilac{background:linear-gradient(145deg,#e5d4ff,#cdb4db)}
+.postit .p-txt{font-size:1.42rem;line-height:1.25;font-weight:700;word-break:break-word}
+.postit .p-meta{margin-top:10px;padding-top:6px;border-top:1px dashed rgba(42,18,33,.25);display:flex;justify-content:space-between;align-items:center;font-family:'Outfit',sans-serif;font-size:.74rem;font-weight:700;color:#5e2a47}
+.postit .p-del{background:none;border:none;color:#a30b37;cursor:pointer;font-size:.95rem;padding:2px 6px}
+.voice-card{padding:24px 18px;text-align:center}
+.voice-list{display:grid;gap:10px;margin-top:16px;max-width:560px;margin-inline:auto}
+.voice-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid var(--line);flex-wrap:wrap}
+.voice-item audio{height:34px;max-width:220px}
 
 /* Frasco & mascota */
 .jar-wrap{display:flex;flex-direction:column;align-items:center;padding:30px 18px;text-align:center}
@@ -295,6 +322,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <a href="#story">📖 Historia</a>
   <a href="#skysec">✨ Cielo</a>
   <a href="#polsec">📸 Fotos</a>
+  <a href="#notesec">📌 Muro & Voz</a>
   <a href="#jarsec">🏺 Razones</a>
   <a href="#couponsec">🎟️ Cupones</a>
   <a href="#funsec">🎰 Ruleta</a>
@@ -341,7 +369,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- TIEMPO -->
+  <!-- TIEMPO & PRÓXIMA CITA -->
   <section id="time">
     <div class="wrap">
       <div class="eyebrow rv">nuestro tiempo</div>
@@ -356,6 +384,21 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
           <button class="btn ghost" id="hbBtnMain">💓 Siente mi latido</button>
         </div>
       </div>
+
+      <!-- Contador de Próxima Cita en la Nube -->
+      <div class="glass date-card rv">
+        <div class="eyebrow">cuenta regresiva compartida</div>
+        <h3 class="gt" id="nextDateTitle">📅 Nuestra Próxima Cita 💖</h3>
+        <div class="date-cd-grid" id="dateCdGrid">
+          <div class="tbox"><div class="tnum" id="cdD">0</div><div class="tlbl">días</div></div>
+          <div class="tbox"><div class="tnum" id="cdH">0</div><div class="tlbl">horas</div></div>
+          <div class="tbox"><div class="tnum" id="cdM">0</div><div class="tlbl">min</div></div>
+          <div class="tbox"><div class="tnum" id="cdS">0</div><div class="tlbl">seg</div></div>
+        </div>
+        <p style="font-size:.86rem;color:var(--muted)" id="nextDateSub">Programa cuándo nos vemos para contar cada segundo juntos</p>
+        <button class="btn gold" id="setDateBtn" style="margin-top:10px">🗓️ Programar / Cambiar Cita</button>
+      </div>
+
       <div class="glass scanner-card rv">
         <div class="eyebrow">detector biométrico de almas gemelas</div>
         <h3 class="gt">Escáner del Hilo Rojo: Kenia & Javier 🧶</h3>
@@ -440,29 +483,79 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <section id="polsec">
     <div class="wrap">
       <div class="eyebrow rv">álbum interactivo en la nube</div>
-      <h2 class="rv">Nuestras <em>Polaroids</em></h2>
+      <h2 class="rv" style="margin-bottom:14px">Nuestras <em>Polaroids</em></h2>
+      <div style="text-align:center" class="rv">
+        <span class="sync-badge"><i class="sync-dot"></i> Sincronización en tiempo real activa (cada 12s sin mover la página)</span>
+      </div>
       <div class="row rv" style="margin-bottom:18px">
         <label class="btn gold" style="cursor:pointer">
-          📤 Agregar nueva Polaroid al álbum 💖
+          📤 Subir foto de galería 💖
           <input type="file" id="mainUploadInp" accept="image/*" hidden>
+        </label>
+        <label class="btn main" style="cursor:pointer">
+          📲 Tomar foto con cámara HD
+          <input type="file" id="nativeCamInp" accept="image/*" capture="user" hidden>
         </label>
       </div>
       <div class="board rv" id="board">
         <button class="hidden-board-key" id="boardKeyBtn">🗝️ ¡Encontraste la Llave #1!</button>
       </div>
-      <div class="hint">Toca cualquier Polaroid para poner o cambiar su foto (se verá en todos nuestros dispositivos) 📸</div>
+      <div class="hint">Toca cualquier Polaroid para verla en grande, cambiar su frase o eliminarla 🗑️📸</div>
       <div class="glass booth-card rv">
-        <h3 class="gt">📸 Cabina Polaroid para Kenia</h3>
+        <h3 class="gt">📸 Cabina Polaroid en Vivo</h3>
+        <p style="font-size:.85rem;color:var(--muted)">Toma una foto instantánea con marco Polaroid y súbela directo al álbum</p>
         <div class="booth-stage">
-          <video id="boothVideo" autoplay playsinline muted></video>
+          <video id="boothVideo" class="mirror" autoplay playsinline muted></video>
           <canvas id="boothPreview" width="360" height="430"></canvas>
         </div>
-        <div class="row">
-          <button class="btn main" id="startCamBtn">📷 Cámara Selfie</button>
-          <button class="btn gold" id="snapBtn" style="display:none">✨ Capturar</button>
-          <label class="btn ghost" style="cursor:pointer">🖼️ Elegir y Subir Foto<input type="file" id="uploadPhotoInp" accept="image/*" hidden></label>
-          <button class="btn ghost" id="dlBoothBtn">⬇️ Guardar</button>
+        <input type="text" id="boothCapInp" class="cap-input" placeholder="✏️ Frase para la Polaroid (ej. Kenia & Javier 💖)" maxlength="38">
+        <div class="row" style="margin-top:12px">
+          <button class="btn main" id="startCamBtn">📷 Encender Cámara</button>
+          <button class="btn ghost" id="flipCamBtn" style="display:none">🔄 Voltear Cámara</button>
+          <button class="btn gold" id="snapBtn" style="display:none">✨ Capturar y Subir</button>
+          <button class="btn danger" id="stopCamBtn" style="display:none">✖ Apagar</button>
+          <label class="btn ghost" style="cursor:pointer">🖼️ Crear desde Galería<input type="file" id="uploadPhotoInp" accept="image/*" hidden></label>
+          <button class="btn ghost" id="dlBoothBtn">⬇️ Descargar</button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MURO DE NOTITAS & NOTAS DE VOZ EN LA NUBE -->
+  <section id="notesec">
+    <div class="wrap">
+      <div class="eyebrow rv">conectados en tiempo real</div>
+      <h2 class="rv">Muro de Notitas y <em>Nuestra Voz</em></h2>
+
+      <!-- Creador de Post-its -->
+      <div class="glass notes-composer rv">
+        <h3 class="gt">📌 Pega una Notita de Amor en el Muro</h3>
+        <div class="author-switch" id="noteAuthorSwitch">
+          <button type="button" class="on" data-author="Kenia 💖">Soy Kenia 💖</button>
+          <button type="button" data-author="Javier 🖤">Soy Javier 🖤</button>
+        </div>
+        <div>
+          <input type="text" id="noteTextInp" class="cap-input" style="max-width:480px" placeholder="Escribe un mensajito bonito para que aparezca en ambos celulares..." maxlength="110">
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn gold" id="addNoteBtn">📌 Pegar Notita en la Nube</button>
+        </div>
+      </div>
+
+      <!-- Cuadrícula de Post-its -->
+      <div class="notes-grid rv" id="notesGrid"></div>
+
+      <!-- Grabadora de Notas de Voz -->
+      <div class="glass voice-card rv">
+        <div class="eyebrow">para escucharnos cuando nos extrañemos</div>
+        <h3 class="gt">🎙️ Mensajes de Voz Guardados en la Nube</h3>
+        <p style="font-size:.86rem;color:var(--muted)">Graba un audio de hasta 15 segundos y quedará guardado para los dos</p>
+        <input type="text" id="voiceTitleInp" class="cap-input" placeholder="✏️ Título del audio (ej. Te amo mi vida 💕)" maxlength="32">
+        <div class="row" style="margin-top:12px">
+          <button class="btn main" id="recVoiceBtn">🎙️ Grabar Mensaje de Voz</button>
+          <button class="btn gold" id="stopVoiceBtn" style="display:none">⏹️ Detener y Subir (<span id="recTimer">15</span>s)</button>
+        </div>
+        <div class="voice-list" id="voiceList"></div>
       </div>
     </div>
   </section>
@@ -495,10 +588,10 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <!-- CUPONES -->
   <section id="couponsec">
     <div class="wrap">
-      <div class="eyebrow rv">vales oficiales</div>
+      <div class="eyebrow rv">vales oficiales sincronizados</div>
       <h2 class="rv">Cuponera para <em>Kenia</em></h2>
       <div class="coupon-grid" id="coupons"></div>
-      <div class="hint">Toca un cupón para canjearlo y avisarle a Javier por WhatsApp 🎟️</div>
+      <div class="hint">Toca un cupón para canjearlo (se marcará en ambos teléfonos y avisará por WhatsApp) 🎟️</div>
     </div>
   </section>
 
@@ -527,7 +620,13 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     <div class="wrap">
       <div class="eyebrow rv">banda sonora</div>
       <h2 class="rv">Canciones que son <em>nuestras</em></h2>
-      <div class="vinyl-wrap rv"><div class="turntable"><div class="vinyl-disc" id="vinylDisc"><div class="vinyl-label">K ♥ J</div></div></div></div>
+      <div class="vinyl-wrap rv">
+        <div class="turntable"><div class="vinyl-disc" id="vinylDisc"><div class="vinyl-label">K ♥ J</div></div></div>
+        <label class="btn ghost" style="margin-top:12px;cursor:pointer">
+          🎶 Cargar canción MP3 desde tu cel/PC
+          <input type="file" id="customMp3Inp" accept="audio/*" hidden>
+        </label>
+      </div>
       <div class="glass pl rv" id="playlist"></div>
       <div class="glass piano-wrap rv">
         <h3 class="gt">🎹 Piano de Cristal para Kenia</h3>
@@ -588,7 +687,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
   <!-- PLANES -->
   <section id="plansec">
     <div class="wrap">
-      <div class="eyebrow rv">lo que viene</div>
+      <div class="eyebrow rv">lo que viene (sincronizado en ambos celulares)</div>
       <h2 class="rv">Nuestra lista de <em>planes</em></h2>
       <div class="glass plans rv" style="margin-bottom:18px">
         <div class="pbar"><i id="pfill"></i></div>
@@ -647,6 +746,8 @@ const CONFIG = {
   whatsappRaw: "6566996813",
   inicio: "2026-01-30T20:00:00",
   clave: "0130",
+  sesionMinutos: 60,
+  syncSegundos: 12,
   musicaArchivo: "",
   intro: "Para ti, Kenia Malanche Lara 💖\nHice este universo entero pensando en ti.\nPorque mereces algo tan único, mágico y bonito\ncomo todo lo que me haces sentir cada día.",
   pregunta: "Kenia Malanche Lara, ¿quieres seguir escribiendo esta historia conmigo para siempre?",
@@ -673,11 +774,11 @@ const CONFIG = {
     { x: 88, y: 56, titulo: "Nuestro futuro", fecha: "Hoy", texto: "Lo mejor todavía está por escribirse juntos." }
   ],
   fotos: [
-    { src: "", texto: "Kenia & Javier 💖" },
-    { src: "", texto: "Tu sonrisa hermosa" },
-    { src: "", texto: "Un día inolvidable" },
-    { src: "", texto: "Mi persona favorita" },
-    { src: "", texto: "Siempre juntos ✨" }
+    { src: "", texto: "Kenia & Javier 💖", fileName: null },
+    { src: "", texto: "Tu sonrisa hermosa", fileName: null },
+    { src: "", texto: "Un día inolvidable", fileName: null },
+    { src: "", texto: "Mi persona favorita", fileName: null },
+    { src: "", texto: "Siempre juntos ✨", fileName: null }
   ],
   razones: [
     "Por la forma en que tus ojos brillan cuando sonríes, Kenia.",
@@ -732,8 +833,7 @@ const CONFIG = {
     "Hacer noche de películas con nuestras botanas favoritas",
     "Cocinar juntos nuestra comida favorita entre risas",
     "Tomarnos una foto en cada lugar nuevo que visitemos"
-  ],
-  autoLockMinutos: 3
+  ]
 };
 </script>
 
@@ -853,7 +953,7 @@ const Sound = (function(){
   function play(i){
     clearInterval(melTimer); audio.pause();
     track = i; const s = CONFIG.canciones[i];
-    if(s.src){ audio.src=s.src; audio.volume=.7; audio.play().catch(()=>{}); }
+    if(s.src){ audio.src=s.src; audio.volume=.75; audio.play().catch(()=>{}); }
     else {
       noteI=0; const seq=s.notes;
       const step=()=>{ const f=seq[noteI%seq.length]; tone(f,.55,"triangle",.1); tone(f/2,.9,"sine",.05); noteI++; };
@@ -863,7 +963,7 @@ const Sound = (function(){
   }
   function toggleMain(){
     if(track>=0){ stop(); return; }
-    if(CONFIG.musicaArchivo){ audio.src=CONFIG.musicaArchivo; audio.volume=.6; audio.play().catch(()=>{}); track=0; ui(true); return; }
+    if(CONFIG.musicaArchivo){ audio.src=CONFIG.musicaArchivo; audio.volume=.7; audio.play().catch(()=>{}); track=0; ui(true); return; }
     play(0);
   }
   function toggleHb(){
@@ -916,11 +1016,13 @@ $("#gGoal").textContent = CONFIG.meta;
 $("#foot").textContent = `Hecho con todo mi 💖 para ${CONFIG.ellaCompleta} • Por ${CONFIG.yo}`;
 (function(){ const h=new Date().getHours(); $("#greet").textContent = (h<12?"☀️ Buenos días":h<19?"🌤️ Buenas tardes":"🌙 Buenas noches")+", "+CONFIG.ella; })();
 
-/* ===================== PUERTA ===================== */
+/* ===================== PUERTA Y SESIÓN PERSISTENTE (60 MIN) ===================== */
 let pinVal="", failedAttempts=0, lockCooldown=false;
 const PL = CONFIG.clave.length;
+const SESSION_DURATION = (CONFIG.sesionMinutos || 60) * 60 * 1000;
 $("#pinDots").innerHTML = Array.from({length:PL},()=>`<span class="pin-dot"></span>`).join("");
 const dots = ()=>$$("#pinDots .pin-dot").forEach((d,i)=>d.classList.toggle("filled",i<pinVal.length));
+
 let typing=false;
 async function typeIntro(){
   if(typing) return; typing=true;
@@ -928,13 +1030,20 @@ async function typeIntro(){
   for(const ch of CONFIG.intro){ el.textContent+=ch; await sleep(ch==="\n"?350:32); }
   el.classList.remove("caret"); typing=false;
 }
+
+function renovarSesion(){
+  store.set("kenia_unlock_until", Date.now() + SESSION_DURATION);
+}
+
 function enter(first){
+  renovarSesion();
   document.body.classList.remove("locked");
   window.dispatchEvent(new Event("entered"));
   if(first){ Sound.win(); conf({particleCount:110,spread:90,origin:{y:.6},colors:["#ff2a6d","#ff758c","#ffd27a","#fff"]}); vib(60); }
   $("#gate").classList.add("out");
-  setTimeout(typeIntro, first?600:200);
+  setTimeout(typeIntro, first?600:150);
 }
+
 function checkPin(){
   if(lockCooldown) return;
   if(pinVal===CONFIG.clave){
@@ -965,6 +1074,7 @@ function checkPin(){
     }
   }
 }
+
 $$("#keypad .kbtn").forEach(b=>b.onclick=()=>{
   if(lockCooldown) return;
   Sound.pop(); const k=b.dataset.k;
@@ -974,22 +1084,28 @@ $$("#keypad .kbtn").forEach(b=>b.onclick=()=>{
   dots();
 });
 
-/* Auto-bloqueo */
 (function(){
   let idleTimer=null;
   const lockApp=()=>{
+    store.set("kenia_unlock_until", 0);
     document.body.classList.add("locked");
     $("#gate").classList.remove("out");
     pinVal=""; failedAttempts=0; dots(); $("#gateErr").textContent="";
-    toast("🔒 Franja de seguridad activada por inactividad");
+    toast("🔒 Sesión expirada por inactividad");
   };
-  const resetIdle=()=>{
+  const touchActivity=()=>{
+    if(document.body.classList.contains("locked")) return;
+    renovarSesion();
     clearTimeout(idleTimer);
-    const mins = CONFIG.autoLockMinutos || 3;
-    idleTimer = setTimeout(lockApp, mins * 60 * 1000);
+    idleTimer = setTimeout(lockApp, SESSION_DURATION);
   };
-  ["pointerdown","keydown","touchstart","scroll"].forEach(ev=>addEventListener(ev,resetIdle,{passive:true}));
-  resetIdle();
+  ["pointerdown","keydown","touchstart","scroll"].forEach(ev=>addEventListener(ev,touchActivity,{passive:true}));
+
+  const savedUntil = store.get("kenia_unlock_until", 0);
+  if(Date.now() < savedUntil){
+    enter(false);
+    idleTimer = setTimeout(lockApp, savedUntil - Date.now());
+  }
 })();
 
 /* ===================== REVEAL, PROGRESO, SCROLLSPY ===================== */
@@ -1002,6 +1118,29 @@ const spy=new IntersectionObserver(es=>es.forEach(e=>{
   $$("#dock a").forEach(a=>{ const on=a.getAttribute("href")===id; a.classList.toggle("active",on); if(on){ const d=$("#dock"); d.scrollTo({left:a.offsetLeft-d.clientWidth/2+a.clientWidth/2,behavior:"smooth"}); } });
 }),{rootMargin:"-45% 0px -45% 0px"});
 $$("main section[id]").forEach(s=>spy.observe(s));
+
+/* ===================== ESTADO COMPARTIDO EN LA NUBE ===================== */
+const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
+let cloudState = store.get("kenia_cloud_state", {
+  notes: [
+    { id: "n1", author: "Javier 🖤", text: "Bienvenida a nuestro muro compartido, mi amor 💖 Escríbeme una notita cuando quieras.", date: "Siempre juntos", color: "gold" }
+  ],
+  nextDate: { title: "Nuestra Próxima Cita 💑", iso: "" },
+  plansDone: store.get("kenia_plans", []),
+  couponsUsed: store.get("kenia_coupons", []),
+  missCount: store.get("kenia_miss", 0)
+});
+
+async function guardarEstadoEnNube(){
+  store.set("kenia_cloud_state", cloudState);
+  try{
+    await fetch(`${WORKER_URL}?action=state`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ state: cloudState })
+    });
+  }catch(e){ console.warn("Error guardando estado en nube:", e); }
+}
 
 /* ===================== LLAVES & COFRE ===================== */
 let keys=store.get("kenia_keys",[]);
@@ -1024,10 +1163,11 @@ $("#openChestBtn").onclick=()=>{
   $("#waChest").onclick=()=>sendWhatsApp("¡Amor! Ya encontré las 3 llaves doradas y abrí el Cofre Secreto en nuestra app 👑💖 ¡Quiero mi sorpresa!");
 };
 
-/* ===================== CONTADOR ===================== */
+/* ===================== CONTADOR PRINCIPAL + PRÓXIMA CITA ===================== */
 const labels=["años","meses","días","horas","minutos","segundos"];
 $("#cgrid").innerHTML=labels.map((l,i)=>`<div class="tbox"><div class="tnum" id="t${i}">0</div><div class="tlbl">${l}</div></div>`).join("");
 const start=new Date(CONFIG.inicio);
+
 function tick(){
   const now=new Date();
   let y=now.getFullYear()-start.getFullYear(), m=now.getMonth()-start.getMonth(), d=now.getDate()-start.getDate(),
@@ -1046,15 +1186,64 @@ function tick(){
   $("#next").innerHTML=`Faltan <b>${dl} ${dl===1?"día":"días"}</b> para cumplir <b>${txt}</b> juntos 💞`;
   const isDay = now.getDate()===start.getDate();
   $("#todayBanner").innerHTML = isDay ? `<div class="today-banner">🎉 ¡Hoy es nuestro día especial, Kenia! Te amo 💖</div>` : "";
+
+  // Cuenta regresiva de Próxima Cita
+  const nd = cloudState.nextDate || {};
+  $("#nextDateTitle").textContent = "📅 " + (nd.title || "Nuestra Próxima Cita 💖");
+  if(nd.iso){
+    const target = new Date(nd.iso);
+    const diff = target - now;
+    if(diff > 0){
+      const cdD = Math.floor(diff / 864e5);
+      const cdH = Math.floor((diff % 864e5) / 36e5);
+      const cdM = Math.floor((diff % 36e5) / 6e4);
+      const cdS = Math.floor((diff % 6e4) / 1000);
+      $("#cdD").textContent = cdD; $("#cdH").textContent = cdH; $("#cdM").textContent = cdM; $("#cdS").textContent = cdS;
+      $("#nextDateSub").textContent = `Cita programada para el ${target.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"})} ✨`;
+    } else {
+      $("#cdD").textContent = "🎉"; $("#cdH").textContent = "💖"; $("#cdM").textContent = "✨"; $("#cdS").textContent = "🥰";
+      $("#nextDateSub").textContent = "¡Llegó el momento de nuestra cita! Disfrutemos muchísimo 💕";
+    }
+  } else {
+    $("#cdD").textContent = "—"; $("#cdH").textContent = "—"; $("#cdM").textContent = "—"; $("#cdS").textContent = "—";
+  }
 }
 setInterval(tick,1000); tick();
 
-/* Extrañar */
-let miss=store.get("kenia_miss",0); $("#missCount").textContent=miss;
-function triggerMiss(){
-  miss++; store.set("kenia_miss",miss); $("#missCount").textContent=miss; Sound.chime(); vib([50,50,50]);
-  openModal(`<div class="mi">💕</div><h3>¡Javier también te extraña, Kenia!</h3><p>Llevas <b>${miss}</b> toques de amor. ¿Le avisas ahorita por WhatsApp?</p><button class="btn main" style="margin-top:14px" id="waMiss">Mandar "Te extraño" 💬</button>`);
-  $("#waMiss").onclick=()=>sendWhatsApp(`¡Hola mi amor! Toqué el botón de "Te extraño" en nuestra app (toque #${miss}) 💕 Te amo.`);
+$("#setDateBtn").onclick = () => {
+  const cur = cloudState.nextDate || { title: "Cena y abrazos 💖", iso: "" };
+  openModal(`
+    <div class="mi">🗓️</div>
+    <h3>Programar Próxima Cita</h3>
+    <p style="font-size:.86rem;color:var(--muted)">Se actualizará en los teléfonos de los dos</p>
+    <input type="text" id="ndTitleInp" class="cap-input" value="${(cur.title||"").replace(/"/g,'&quot;')}" placeholder="Nombre del plan (ej. Ir por helado 🍦)" maxlength="40">
+    <input type="datetime-local" id="ndDateInp" class="cap-input" value="${cur.iso||""}" style="margin-top:10px">
+    <div class="row" style="margin-top:14px">
+      <button class="btn gold" id="saveDateModalBtn">💾 Guardar para los dos</button>
+    </div>
+  `);
+  $("#saveDateModalBtn").onclick = async () => {
+    const title = ($("#ndTitleInp").value || "Nuestra Próxima Cita 💖").trim();
+    const iso = $("#ndDateInp").value;
+    if(!iso){ toast("Elige el día y la hora 🗓️"); return; }
+    cloudState.nextDate = { title, iso };
+    tick();
+    closeModal();
+    Sound.win();
+    toast("🗓️ ¡Cita sincronizada en ambos celulares!");
+    await guardarEstadoEnNube();
+  };
+};
+
+/* Extrañar sincronizado */
+$("#missCount").textContent = cloudState.missCount || 0;
+async function triggerMiss(){
+  cloudState.missCount = (cloudState.missCount || 0) + 1;
+  $("#missCount").textContent = cloudState.missCount;
+  Sound.chime(); vib([50,50,50]);
+  guardarEstadoEnNube();
+  openModal(`<div class="mi">💕</div><h3>¡Javier también te extraña, Kenia!</h3><p>Llevamos <b>${cloudState.missCount}</b> toques de amor sincronizados. ¿Le avisas ahorita por WhatsApp?</p><button class="btn main" style="margin-top:14px" id="waMiss">Mandar "Te extraño" 💬</button>`);
+  $("#waMiss").onclick=()=>sendWhatsApp(`¡Hola mi amor! Toqué el botón de "Te extraño" en nuestra app (toque #${cloudState.missCount}) 💕 Te amo.`);
 }
 $("#missBtnMain").onclick=triggerMiss; $("#missYouTopBtn").onclick=triggerMiss;
 
@@ -1163,10 +1352,8 @@ $("#waxEnv").onclick=async()=>{
   $("#letterSign").textContent=CONFIG.carta.firma; $("#letterSign").classList.add("on");
 };
 
-/* ===================== HISTORIA ===================== */
+/* ===================== HISTORIA & CIELO ===================== */
 $("#chapters").innerHTML=CONFIG.capitulos.map((c,i)=>`<article class="chapter rv"><div class="num">0${i+1}</div><div class="date">${c.fecha}</div><h3>${c.titulo}</h3><p>${c.texto}</p></article>`).join("");
-
-/* ===================== CIELO ===================== */
 (function(){
   const pts=CONFIG.recuerdos, d=pts.map((p,i)=>(i?"L":"M")+p.x+" "+p.y).join(" ");
   $("#sky").innerHTML=`<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="${d}" pathLength="1"/></svg>`+
@@ -1176,8 +1363,183 @@ $("#chapters").innerHTML=CONFIG.capitulos.map((c,i)=>`<article class="chapter rv
   $("#skyKeyBtn").onclick=()=>addKey(2,"Cometa del Cielo");
 })();
 
-/* ===================== POLAROIDS SINCRONIZADAS EN LA NUBE ===================== */
-const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
+/* ===================== MURO DE NOTITAS & NOTAS DE VOZ ===================== */
+let selectedNoteAuthor = "Kenia 💖";
+$$("#noteAuthorSwitch button").forEach(b => {
+  b.onclick = () => {
+    $$("#noteAuthorSwitch button").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    selectedNoteAuthor = b.dataset.author;
+    Sound.pop();
+  };
+});
+
+function renderNotes(){
+  const list = cloudState.notes || [];
+  const colors = ["pink", "gold", "lilac"];
+  $("#notesGrid").innerHTML = list.map((n, idx) => `
+    <div class="postit ${n.color || colors[idx % colors.length]}" style="transform:rotate(${(idx%2===0?-1.5:1.5)}deg)">
+      <div class="p-txt">“${(n.text || "").replace(/</g,"&lt;")}”</div>
+      <div class="p-meta">
+        <span>${n.author || "Con amor"} • ${n.date || ""}</span>
+        <button class="p-del" data-id="${n.id}" title="Borrar notita">🗑️</button>
+      </div>
+    </div>
+  `).join("");
+
+  $$("#notesGrid .p-del").forEach(btn => {
+    btn.onclick = async () => {
+      cloudState.notes = (cloudState.notes || []).filter(x => x.id !== btn.dataset.id);
+      renderNotes();
+      Sound.pop();
+      toast("🗑️ Notita eliminada");
+      await guardarEstadoEnNube();
+    };
+  });
+}
+renderNotes();
+
+$("#addNoteBtn").onclick = async () => {
+  const txt = ($("#noteTextInp").value || "").trim();
+  if(!txt){ toast("Escribe primero tu notita ✏️"); vib(80); return; }
+  const colors = ["pink", "gold", "lilac"];
+  const nueva = {
+    id: "n_" + Date.now(),
+    author: selectedNoteAuthor,
+    text: txt,
+    date: new Date().toLocaleDateString("es-MX",{day:"numeric",month:"short"}),
+    color: colors[Math.floor(Math.random()*colors.length)]
+  };
+  cloudState.notes = [nueva, ...(cloudState.notes || [])];
+  $("#noteTextInp").value = "";
+  renderNotes();
+  Sound.win();
+  conf({particleCount:55,spread:65,origin:{y:.7}});
+  toast("📌 ¡Notita pegada en el muro de los dos!");
+  await guardarEstadoEnNube();
+};
+
+/* Notas de voz */
+let cloudAudios = [];
+function parsearNombreAudio(name){
+  const parts = name.replace(/\.[^.]+$/, "").split("__");
+  let author = "Nota de voz", title = "Para ti 💖";
+  if(parts.length >= 3){
+    try { author = decodeURIComponent(parts[1]); } catch(e){}
+    try { title = decodeURIComponent(parts[2]); } catch(e){}
+  }
+  return { author, title };
+}
+
+function renderAudios(){
+  const box = $("#voiceList");
+  if(!cloudAudios.length){
+    box.innerHTML = `<p style="font-size:.85rem;color:var(--muted)">Aún no hay mensajes de voz grabados. ¡Graba el primero! 🎙️</p>`;
+    return;
+  }
+  box.innerHTML = cloudAudios.map(a => {
+    const info = parsearNombreAudio(a.name);
+    return `
+      <div class="voice-item">
+        <div style="text-align:left">
+          <div style="font-weight:700;color:var(--gold);font-size:.92rem">🎙️ ${info.title}</div>
+          <small style="color:var(--muted)">De: ${info.author}</small>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <audio controls preload="none" src="${a.url}"></audio>
+          <button class="btn danger" style="padding:7px 12px" data-del-audio="${a.name}">🗑️</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  $$("[data-del-audio]").forEach(b => {
+    b.onclick = async () => {
+      const fileName = b.dataset.delAudio;
+      toast("🗑️ Eliminando nota de voz...");
+      try{
+        await fetch(WORKER_URL, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fileName, folder: "audios" })
+        });
+        cloudAudios = cloudAudios.filter(x => x.name !== fileName);
+        renderAudios();
+        toast("✅ Nota de voz eliminada");
+      }catch(e){ toast("⚠️ Error eliminando audio"); }
+    };
+  });
+}
+renderAudios();
+
+(function(){
+  let mediaRecorder = null, chunks = [], recIv = null, secLeft = 15;
+  const recBtn = $("#recVoiceBtn"), stopBtn = $("#stopVoiceBtn"), timerEl = $("#recTimer");
+
+  recBtn.onclick = async () => {
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mime = MediaRecorder.isTypeSupported("audio/mp4") ? "audio/mp4" : "audio/webm";
+      mediaRecorder = new MediaRecorder(stream, { mimeType: mime });
+      chunks = [];
+      mediaRecorder.ondataavailable = e => { if(e.data.size > 0) chunks.push(e.data); };
+      mediaRecorder.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop());
+        clearInterval(recIv);
+        recBtn.style.display = "inline-flex";
+        stopBtn.style.display = "none";
+        const blob = new Blob(chunks, { type: mime });
+        const ext = mime.includes("mp4") ? "mp4" : "webm";
+        const reader = new FileReader();
+        reader.onload = async () => {
+          const base64 = reader.result.split(",")[1];
+          const title = ($("#voiceTitleInp").value || "Te amo mucho 💖").trim();
+          toast("📤 Subiendo nota de voz a la nube...");
+          try{
+            const r = await fetch(WORKER_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                type: "audio",
+                contentBase64: base64,
+                author: selectedNoteAuthor,
+                title,
+                ext
+              })
+            });
+            if(!r.ok) throw new Error(await r.text());
+            $("#voiceTitleInp").value = "";
+            Sound.win();
+            toast("✅ ¡Nota de voz guardada para los dos! 🎙️💖");
+            setTimeout(() => sincronizarNube(true), 1500);
+          }catch(err){
+            toast("⚠️ No se pudo subir el audio: actualiza tu Worker");
+          }
+        };
+        reader.readAsDataURL(blob);
+      };
+
+      mediaRecorder.start();
+      secLeft = 15; timerEl.textContent = secLeft;
+      recBtn.style.display = "none";
+      stopBtn.style.display = "inline-flex";
+      toast("🎙️ Grabando... habla ahora 💖");
+      recIv = setInterval(() => {
+        secLeft--;
+        timerEl.textContent = secLeft;
+        if(secLeft <= 0 && mediaRecorder.state === "recording") mediaRecorder.stop();
+      }, 1000);
+    }catch(e){
+      toast("⚠️ Permiso de micrófono necesario para grabar voz");
+    }
+  };
+
+  stopBtn.onclick = () => {
+    if(mediaRecorder && mediaRecorder.state === "recording") mediaRecorder.stop();
+  };
+})();
+
+/* ===================== POLAROIDS + SINCRONIZACIÓN GENERAL EN SEGUNDO PLANO ===================== */
 const TEXTOS_BASE = [
   "Kenia & Javier 💖",
   "Tu sonrisa hermosa",
@@ -1185,9 +1547,20 @@ const TEXTOS_BASE = [
   "Mi persona favorita",
   "Siempre juntos ✨"
 ];
+let lastFilesSignature = "";
+let lastAudiosSignature = "";
+let lastStateSha = "";
+let isDraggingPol = false;
 
-// Limpiamos el caché local viejo para que ningún dispositivo oculte las fotos de GitHub
 try { localStorage.removeItem("kenia_photos"); } catch(e){}
+
+function extraerTextoDeNombre(fileName, defaultText){
+  const m = fileName.match(/__(.+)\.[^.]+$/);
+  if(m){
+    try { return decodeURIComponent(m[1]); } catch(e){}
+  }
+  return defaultText;
+}
 
 function comprimirFoto(file, max=1000){
   return new Promise((res, rej) => {
@@ -1199,7 +1572,7 @@ function comprimirFoto(file, max=1000){
       c.height = Math.round(img.height * sc);
       c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
       URL.revokeObjectURL(img.src);
-      const dataUrl = c.toDataURL("image/jpeg", 0.82);
+      const dataUrl = c.toDataURL("image/jpeg", 0.84);
       res({ dataUrl, base64: dataUrl.split(",")[1] });
     };
     img.onerror = rej;
@@ -1207,178 +1580,375 @@ function comprimirFoto(file, max=1000){
   });
 }
 
-async function cargarFotosDeGitHub(){
+async function sincronizarNube(forzarRender = false){
+  if(!forzarRender && (isDraggingPol || $("#modal").classList.contains("show"))) return;
+
   try{
-    // 1. Primero intentamos leer a través del Worker (con tu token para evitar bloqueos y ver todo al instante)
     let files = [];
+    let audios = [];
+    let remoteState = null;
+    let remoteStateSha = "";
+    let okFetch = false;
+
     try {
       const r = await fetch(`${WORKER_URL}?t=${Date.now()}`, { cache: "no-store" });
       if(r.ok){
         const data = await r.json();
-        if(Array.isArray(data.files)) files = data.files;
+        if(Array.isArray(data.files)){
+          files = data.files;
+          audios = Array.isArray(data.audios) ? data.audios : [];
+          remoteState = data.state || null;
+          remoteStateSha = data.stateSha || "";
+          okFetch = true;
+        }
       }
     } catch(e){}
 
-    // 2. Respaldo directo si aún no has actualizado el código del Worker
-    if(!files.length){
+    if(!okFetch){
       const r2 = await fetch(`https://api.github.com/repos/JAVS9912/k.J/contents/fotos?t=${Date.now()}`, { cache: "no-store" });
       if(r2.ok){
         const raw = await r2.json();
         if(Array.isArray(raw)){
           files = raw
             .filter(a => a.type === "file" && /\.(jpe?g|png|webp)$/i.test(a.name))
-            .map(a => ({ name: a.name, url: `${a.download_url}?v=${(a.sha||"").slice(0,8)}` }));
+            .map(a => ({ name: a.name, sha: a.sha || "", url: `${a.download_url}?v=${(a.sha||"").slice(0,8)}` }));
+          okFetch = true;
         }
       }
     }
 
-    if(!files.length) return;
+    if(!okFetch) return;
 
-    // Organizar las 5 tarjetas base + cualquier foto extra
-    const baseSlots = TEXTOS_BASE.map(t => ({ src: "", texto: t }));
+    // 1. Actualizar Estado Compartido (Notas, Cita, Planes, Cupones, Extrañar) si cambió
+    if(remoteState && (forzarRender || (remoteStateSha && remoteStateSha !== lastStateSha))){
+      lastStateSha = remoteStateSha;
+      cloudState = { ...cloudState, ...remoteState };
+      store.set("kenia_cloud_state", cloudState);
+      $("#missCount").textContent = cloudState.missCount || 0;
+      renderNotes();
+      renderCoupons();
+      renderPlans();
+      tick();
+    }
+
+    // 2. Actualizar Audios si cambiaron
+    const audioSig = audios.map(a => `${a.name}:${a.sha}`).sort().join("|");
+    if(forzarRender || audioSig !== lastAudiosSignature){
+      lastAudiosSignature = audioSig;
+      cloudAudios = audios.sort((a,b) => b.name.localeCompare(a.name));
+      renderAudios();
+    }
+
+    // 3. Actualizar Fotos Polaroid solo si cambiaron
+    const currentSignature = files.map(f => `${f.name}:${f.sha || f.url}`).sort().join("|");
+    if(!forzarRender && currentSignature === lastFilesSignature) return;
+    lastFilesSignature = currentSignature;
+
+    const baseSlots = TEXTOS_BASE.map(t => ({ src: "", texto: t, fileName: null }));
     const extras = [];
 
     files.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true})).forEach(f => {
-      const m = f.name.match(/^slot_(\d+)\./i);
+      const m = f.name.match(/^slot_(\d+)(?:__.*)?\./i);
       if(m){
         const idx = parseInt(m[1], 10);
         if(idx >= 0 && idx < baseSlots.length){
           baseSlots[idx].src = f.url;
+          baseSlots[idx].fileName = f.name;
+          baseSlots[idx].texto = extraerTextoDeNombre(f.name, TEXTOS_BASE[idx]);
         } else {
-          extras.push({ src: f.url, texto: "Kenia & Javier 💖" });
+          extras.push({ src: f.url, texto: extraerTextoDeNombre(f.name, "Kenia & Javier 💖"), fileName: f.name });
         }
       } else {
-        extras.push({ src: f.url, texto: "Kenia & Javier 💖" });
+        extras.push({ src: f.url, texto: extraerTextoDeNombre(f.name, "Kenia & Javier 💖"), fileName: f.name });
       }
     });
 
-    // Si hay fotos con el formato anterior (foto_12345.jpg), llenar los espacios vacíos primero
     for(const ex of extras){
       const emptySlot = baseSlots.find(s => !s.src);
       if(emptySlot){
         emptySlot.src = ex.src;
+        emptySlot.fileName = ex.fileName;
+        if(ex.texto !== "Kenia & Javier 💖") emptySlot.texto = ex.texto;
       } else {
         baseSlots.push(ex);
       }
     }
 
     CONFIG.fotos = baseSlots;
-    renderPols();
-  }catch(e){ console.warn("Error sincronizando galería:", e); }
+    renderPols(true);
+  }catch(e){ console.warn("Error sincronizando:", e); }
 }
 
-async function subirFoto(file, slotIndex = null){
-  toast("📤 Subiendo foto para todos los dispositivos...");
+setInterval(() => {
+  if(!document.hidden) sincronizarNube(false);
+}, (CONFIG.syncSegundos || 12) * 1000);
+
+document.addEventListener("visibilitychange", () => {
+  if(!document.hidden) sincronizarNube(false);
+});
+
+async function subirFoto(file, slotIndex = null, customCaption = null){
+  toast("📤 Subiendo foto al álbum...");
   try{
     const { dataUrl, base64 } = await comprimirFoto(file, 1000);
+    const oldFileName = (slotIndex !== null && CONFIG.fotos[slotIndex]) ? CONFIG.fotos[slotIndex].fileName : null;
+    const finalCaption = customCaption || (slotIndex !== null && CONFIG.fotos[slotIndex] ? CONFIG.fotos[slotIndex].texto : "Kenia & Javier 💖");
 
-    // Vista previa inmediata
     if(slotIndex !== null && CONFIG.fotos[slotIndex]){
       CONFIG.fotos[slotIndex].src = dataUrl;
+      CONFIG.fotos[slotIndex].texto = finalCaption;
     } else {
-      CONFIG.fotos.push({ src: dataUrl, texto: "Kenia & Javier 💖" });
+      CONFIG.fotos.push({ src: dataUrl, texto: finalCaption, fileName: null });
     }
-    renderPols();
+    renderPols(true);
 
     const r = await fetch(WORKER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contentBase64: base64, slot: slotIndex })
+      body: JSON.stringify({
+        contentBase64: base64,
+        slot: slotIndex,
+        caption: finalCaption,
+        oldFileName
+      })
     });
 
     const txt = await r.text();
     let resData = {};
     try { resData = JSON.parse(txt); } catch(e) {}
 
-    if(!r.ok){
-      throw new Error(resData.error || txt || `HTTP ${r.status}`);
-    }
+    if(!r.ok) throw new Error(resData.error || txt || `HTTP ${r.status}`);
 
     Sound.win();
     conf({particleCount:80,spread:70,origin:{y:.6}});
     toast("✅ ¡Foto sincronizada en todos los dispositivos! 💖");
-    setTimeout(cargarFotosDeGitHub, 1800);
+    setTimeout(() => sincronizarNube(true), 1500);
   }catch(e){
     console.error("Error al subir:", e);
     toast("⚠️ Error al subir: " + (e.message || "Verifica el Worker"));
   }
 }
 
+async function eliminarFotoDeGitHub(i){
+  const f = CONFIG.fotos[i];
+  if(!f || !f.fileName){
+    toast("⚠️ Esta tarjeta aún no tiene archivo en la nube");
+    return;
+  }
+  toast("🗑️ Eliminando foto de la nube...");
+  try{
+    const r = await fetch(WORKER_URL, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fileName: f.fileName, folder: "fotos" })
+    });
+    const resData = await r.json();
+    if(!r.ok) throw new Error(resData.error || "No se pudo eliminar");
+
+    if(i < TEXTOS_BASE.length){
+      CONFIG.fotos[i] = { src: "", texto: TEXTOS_BASE[i], fileName: null };
+    } else {
+      CONFIG.fotos.splice(i, 1);
+    }
+    renderPols(true);
+    Sound.pop();
+    toast("✅ Foto eliminada en todos los dispositivos 🗑️");
+    setTimeout(() => sincronizarNube(true), 1200);
+  }catch(e){
+    console.error("Error al eliminar:", e);
+    toast("⚠️ No se pudo eliminar: verifica tu Worker");
+  }
+}
+
 function openPhoto(i){
-  const f = CONFIG.fotos[i] || { src: "", texto: "Kenia & Javier 💖" };
-  openModal(`${f.src?`<img class="photo" src="${f.src}" alt="">`:`<div class="mi">💖</div>`}<h3>${f.texto}</h3><label class="btn gold" style="margin-top:12px;cursor:pointer">📷 ${f.src?"Cambiar foto en la nube":"Subir foto a esta Polaroid"}<input type="file" accept="image/*" id="phInp" hidden></label>`);
-  $("#phInp").onchange = async e => {
+  const f = CONFIG.fotos[i] || { src: "", texto: "Kenia & Javier 💖", fileName: null };
+  openModal(`
+    ${f.src ? `<img class="photo" src="${f.src}" alt="">` : `<div class="mi">💖</div>`}
+    <h3>${f.texto}</h3>
+    <input type="text" id="modalCapInp" class="cap-input" value="${f.texto.replace(/"/g, '&quot;')}" placeholder="✏️ Escribe el título de la foto" maxlength="38">
+    <div class="row" style="margin-top:14px">
+      <label class="btn gold" style="cursor:pointer">
+        📷 ${f.src ? "Cambiar foto" : "Elegir foto"}
+        <input type="file" accept="image/*" id="phInp" hidden>
+      </label>
+      <label class="btn main" style="cursor:pointer">
+        📲 Tomar foto
+        <input type="file" accept="image/*" capture="environment" id="phCamInp" hidden>
+      </label>
+      ${f.src && f.fileName ? `<button class="btn danger" id="delPhotoBtn">🗑️ Eliminar foto</button>` : ""}
+    </div>
+  `);
+
+  const handleFile = async e => {
     const file = e.target.files[0];
     if(!file) return;
+    const cap = ($("#modalCapInp").value || "").trim() || f.texto;
     closeModal();
-    await subirFoto(file, i);
+    await subirFoto(file, i, cap);
   };
+
+  $("#phInp").onchange = handleFile;
+  $("#phCamInp").onchange = handleFile;
+
+  const delBtn = $("#delPhotoBtn");
+  if(delBtn){
+    let confirmStep = false;
+    delBtn.onclick = async () => {
+      if(!confirmStep){
+        confirmStep = true;
+        delBtn.textContent = "⚠️ ¿Seguro? Toca otra vez para borrar";
+        vib(60);
+        return;
+      }
+      closeModal();
+      await eliminarFotoDeGitHub(i);
+    };
+  }
 }
 
 let zTop=10;
-function renderPols(){
-  const board=$("#board"); board.querySelectorAll(".pol").forEach(e=>e.remove());
+const savedPositions = {};
+function renderPols(keepPos = false){
+  const board=$("#board");
+  board.querySelectorAll(".pol").forEach((e, idx) => {
+    if(keepPos){
+      savedPositions[idx] = { left: e.style.left, top: e.style.top, transform: e.style.transform, zIndex: e.style.zIndex };
+    }
+    e.remove();
+  });
   const bw=board.clientWidth||340, cols=bw<520?2:3, pw=145, gap=Math.max(6,(bw-cols*pw)/(cols+1)), rows=Math.ceil(CONFIG.fotos.length/cols);
   board.style.height=Math.max(420,rows*215+70)+"px";
   CONFIG.fotos.forEach((f,i)=>{
     const src=f.src, el=document.createElement("div"); el.className="pol";
     el.innerHTML=`<div class="img">${src?`<img src="${src}" alt="">`:"💖"}</div><div class="cap">${f.texto}</div>`;
-    el.style.left=(gap+(i%cols)*(pw+gap))+"px"; el.style.top=(20+Math.floor(i/cols)*215)+"px"; el.style.transform=`rotate(${rnd(-7,7)}deg)`;
+    if(keepPos && savedPositions[i]){
+      el.style.left = savedPositions[i].left;
+      el.style.top = savedPositions[i].top;
+      el.style.transform = savedPositions[i].transform;
+      el.style.zIndex = savedPositions[i].zIndex;
+    } else {
+      el.style.left=(gap+(i%cols)*(pw+gap))+"px";
+      el.style.top=(20+Math.floor(i/cols)*215)+"px";
+      el.style.transform=`rotate(${rnd(-7,7)}deg)`;
+    }
     board.appendChild(el);
     let drag=false,sx=0,sy=0,ol=0,ot=0,moved=0;
-    el.addEventListener("pointerdown",e=>{ drag=true; moved=0; el.setPointerCapture(e.pointerId); sx=e.clientX; sy=e.clientY; ol=el.offsetLeft; ot=el.offsetTop; el.style.zIndex=++zTop; });
+    el.addEventListener("pointerdown",e=>{ drag=true; isDraggingPol=true; moved=0; el.setPointerCapture(e.pointerId); sx=e.clientX; sy=e.clientY; ol=el.offsetLeft; ot=el.offsetTop; el.style.zIndex=++zTop; });
     el.addEventListener("pointermove",e=>{ if(!drag) return; const dx=e.clientX-sx, dy=e.clientY-sy; moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));
       el.style.left=Math.max(0,Math.min(board.clientWidth-el.offsetWidth,ol+dx))+"px"; el.style.top=Math.max(0,Math.min(board.clientHeight-el.offsetHeight,ot+dy))+"px"; });
-    el.addEventListener("pointerup",()=>{ drag=false; if(moved<6) openPhoto(i); });
+    el.addEventListener("pointerup",()=>{ drag=false; isDraggingPol=false; if(moved<6) openPhoto(i); });
+    el.addEventListener("pointercancel",()=>{ drag=false; isDraggingPol=false; });
   });
 }
-renderPols();
-cargarFotosDeGitHub();
-addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(renderPols,300); });
+renderPols(false);
+sincronizarNube(true);
+addEventListener("resize",()=>{ clearTimeout(renderPols.t); renderPols.t=setTimeout(()=>renderPols(false),300); });
 $("#boardKeyBtn").onclick=()=>{ addKey(1,"Álbum Polaroid"); $("#boardKeyBtn").textContent="🗝️ Llave #1 obtenida ✓"; };
 
 $("#mainUploadInp").onchange = e => {
   const f = e.target.files[0];
-  if(f) subirFoto(f, null);
+  if(f) subirFoto(f, null, "Kenia & Javier 💖");
+  e.target.value = "";
+};
+$("#nativeCamInp").onchange = e => {
+  const f = e.target.files[0];
+  if(f) subirFoto(f, null, "Nuestra foto 📸💖");
   e.target.value = "";
 };
 
-/* Cabina Polaroid */
+/* ===================== CABINA POLAROID EN VIVO ===================== */
 (function(){
-  const pv=$("#boothPreview"), px=pv.getContext("2d"), vid=$("#boothVideo"); let stream=null;
+  const pv=$("#boothPreview"), px=pv.getContext("2d"), vid=$("#boothVideo");
+  let stream=null, facing="user";
+
+  function stopCamera(){
+    if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
+    vid.style.display="none";
+    $("#snapBtn").style.display="none";
+    $("#flipCamBtn").style.display="none";
+    $("#stopCamBtn").style.display="none";
+    $("#startCamBtn").style.display="inline-flex";
+  }
+
   function cover(src,sw,sh,mirror){
     const s=Math.max(320/sw,320/sh), w=sw*s, h=sh*s, x=20+(320-w)/2, y=20+(320-h)/2;
     px.save(); px.beginPath(); px.rect(20,20,320,320); px.clip();
     if(mirror){ px.translate(360,0); px.scale(-1,1); }
     px.drawImage(src,mirror?360-x-w:x,y,w,h); px.restore();
   }
-  function render(src,sw,sh,mirror){
+
+  function render(src,sw,sh,mirror,customTitle){
+    const title = (customTitle || $("#boothCapInp").value || "Kenia & Javier 💖").trim();
     px.fillStyle="#fff8f0"; px.fillRect(0,0,360,430);
-    if(src) cover(src,sw,sh,mirror); else { px.fillStyle="#310b3a"; px.fillRect(20,20,320,320); px.font="64px serif"; px.textAlign="center"; px.fillText("💖",180,200); }
-    px.fillStyle="#2c1523"; px.font="bold 26px Caveat, cursive"; px.textAlign="center"; px.fillText("Kenia & Javier 💖",180,385);
-    px.font="16px Outfit"; px.fillStyle="#8c586c"; px.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),180,410);
+    if(src) cover(src,sw,sh,mirror);
+    else { px.fillStyle="#310b3a"; px.fillRect(20,20,320,320); px.font="64px serif"; px.textAlign="center"; px.fillText("💖",180,200); }
+    px.fillStyle="#2c1523"; px.font="bold 25px Caveat, cursive"; px.textAlign="center"; px.fillText(title,180,385);
+    px.font="15px Outfit"; px.fillStyle="#8c586c"; px.fillText(new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}),180,410);
   }
   render(null);
-  $("#startCamBtn").onclick=async()=>{
-    try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false}); vid.srcObject=stream; vid.style.display="block"; $("#snapBtn").style.display="inline-flex"; }
-    catch(e){ toast("No hay cámara: elige una foto de tu galería 🖼️"); }
+
+  async function startCamera(mode){
+    stopCamera();
+    facing = mode || facing;
+    try{
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: facing }, width: { ideal: 1080 }, height: { ideal: 1080 } },
+        audio: false
+      });
+      vid.srcObject = stream;
+      vid.classList.toggle("mirror", facing === "user");
+      vid.style.display = "block";
+      await new Promise(resolve => {
+        if(vid.readyState >= 2) resolve();
+        else vid.onloadedmetadata = () => resolve();
+      });
+      await vid.play();
+      $("#startCamBtn").style.display = "none";
+      $("#snapBtn").style.display = "inline-flex";
+      $("#flipCamBtn").style.display = "inline-flex";
+      $("#stopCamBtn").style.display = "inline-flex";
+    }catch(e){
+      toast("Abriendo cámara nativa de tu teléfono 📸");
+      $("#nativeCamInp").click();
+    }
+  }
+
+  $("#startCamBtn").onclick = () => startCamera("user");
+  $("#flipCamBtn").onclick = () => startCamera(facing === "user" ? "environment" : "user");
+  $("#stopCamBtn").onclick = stopCamera;
+
+  $("#snapBtn").onclick = () => {
+    const vw = vid.videoWidth || 640, vh = vid.videoHeight || 640;
+    const cap = ($("#boothCapInp").value || "Kenia & Javier 💖").trim();
+    render(vid, vw, vh, facing === "user", cap);
+    stopCamera();
+    Sound.chime(); vib(40); conf({particleCount:45,spread:65,origin:{y:.7}});
+    pv.toBlob(blob => {
+      if(blob) subirFoto(new File([blob], "polaroid-cam.jpg", {type:"image/jpeg"}), null, cap);
+    }, "image/jpeg", 0.88);
   };
-  $("#snapBtn").onclick=()=>{
-    render(vid,vid.videoWidth||320,vid.videoHeight||320,true);
-    if(stream) stream.getTracks().forEach(t=>t.stop());
-    vid.style.display="none"; $("#snapBtn").style.display="none";
-    Sound.chime(); vib(40); conf({particleCount:40,spread:60,origin:{y:.7}});
-    pv.toBlob(blob => { if(blob) subirFoto(new File([blob], "selfie.jpg", {type:"image/jpeg"}), null); }, "image/jpeg", 0.85);
-  };
-  $("#uploadPhotoInp").onchange=e=>{
-    const f=e.target.files[0]; if(!f) return;
-    const img=new Image();
-    img.onload=()=>{ render(img,img.width,img.height,false); URL.revokeObjectURL(img.src); };
-    img.src=URL.createObjectURL(f);
-    subirFoto(f, null);
+
+  $("#uploadPhotoInp").onchange = e => {
+    const f = e.target.files[0]; if(!f) return;
+    const cap = ($("#boothCapInp").value || "Kenia & Javier 💖").trim();
+    const img = new Image();
+    img.onload = () => {
+      render(img, img.width, img.height, false, cap);
+      URL.revokeObjectURL(img.src);
+      pv.toBlob(blob => {
+        if(blob) subirFoto(new File([blob], "polaroid-gal.jpg", {type:"image/jpeg"}), null, cap);
+      }, "image/jpeg", 0.88);
+    };
+    img.src = URL.createObjectURL(f);
     e.target.value = "";
   };
-  $("#dlBoothBtn").onclick=()=>{ const a=document.createElement("a"); a.download="Polaroid-Kenia-y-Javier.png"; a.href=pv.toDataURL("image/png"); a.click(); };
+
+  $("#dlBoothBtn").onclick = () => {
+    const a = document.createElement("a");
+    a.download = "Polaroid-Kenia-y-Javier.png";
+    a.href = pv.toDataURL("image/png");
+    a.click();
+  };
 })();
 
 /* ===================== FRASCO & MASCOTA ===================== */
@@ -1409,17 +1979,31 @@ $$("[data-pet]").forEach(b=>b.onclick=e=>{
 });
 $("#petAvatar").onclick=()=>{ Sound.pop(); vib(15); const r=$("#petAvatar").getBoundingClientRect(); burst(r.left+r.width/2,r.top+20,5); };
 
-/* ===================== CUPONES ===================== */
-let usedC=store.get("kenia_coupons",[]);
+/* ===================== CUPONES SINCRONIZADOS ===================== */
 function renderCoupons(){
+  const usedC = cloudState.couponsUsed || [];
   $("#coupons").innerHTML=CONFIG.cupones.map(c=>{ const u=usedC.includes(c.id); return `<div class="coupon rv in ${u?"used":""}" data-id="${c.id}"><div><div class="c-top">Vale para Kenia</div><h4>${c.titulo}</h4><p>${c.desc}</p></div><div class="stamp">${u?"CANJEADO 💖":"Toca para canjear →"}</div></div>`; }).join("");
   $$("#coupons .coupon").forEach(el=>el.onclick=()=>{
-    const c=CONFIG.cupones.find(x=>x.id===el.dataset.id), used=usedC.includes(c.id);
-    openModal(`<div class="mi">🎟️</div><div class="md">Vale para Kenia</div><h3>${c.titulo}</h3><p>${c.desc}</p><button class="btn main" style="margin-top:14px" id="useC">${used?"Recordárselo a Javier 💬":"Canjear y avisar a Javier 💬"}</button>`);
-    $("#useC").onclick=()=>{
-      if(!used){ usedC.push(c.id); store.set("kenia_coupons",usedC); renderCoupons(); Sound.win(); conf({particleCount:90,spread:80,origin:{y:.6}}); }
+    const c=CONFIG.cupones.find(x=>x.id===el.dataset.id);
+    const used=(cloudState.couponsUsed||[]).includes(c.id);
+    openModal(`<div class="mi">🎟️</div><div class="md">Vale para Kenia</div><h3>${c.titulo}</h3><p>${c.desc}</p><div class="row" style="margin-top:14px"><button class="btn main" id="useC">${used?"Recordárselo a Javier 💬":"Canjear y avisar a Javier 💬"}</button>${used?`<button class="btn ghost" id="resetC">Reactivar cupón 🔄</button>`:""}</div>`);
+    $("#useC").onclick=async()=>{
+      if(!used){
+        cloudState.couponsUsed = [...(cloudState.couponsUsed||[]), c.id];
+        renderCoupons(); Sound.win(); conf({particleCount:90,spread:80,origin:{y:.6}});
+        guardarEstadoEnNube();
+      }
       sendWhatsApp(`¡Hola amor! ${used?"Te recuerdo mi":"Acabo de canjear mi"} cupón "${c.titulo}" en nuestra app 🎟️💖 ¿Cuándo lo hacemos válido?`); closeModal();
     };
+    const rBtn = $("#resetC");
+    if(rBtn){
+      rBtn.onclick = async () => {
+        cloudState.couponsUsed = (cloudState.couponsUsed||[]).filter(id => id !== c.id);
+        renderCoupons(); closeModal();
+        toast("🎟️ Cupón reactivado para ambos");
+        await guardarEstadoEnNube();
+      };
+    }
   });
 }
 renderCoupons();
@@ -1476,9 +2060,28 @@ renderCoupons();
   };
 })();
 
-/* ===================== MÚSICA ===================== */
-$("#playlist").innerHTML=CONFIG.canciones.map((s,i)=>`<div class="song" data-i="${i}"><div class="ico">🎵</div><div><h4>${s.t}</h4><small>${s.por}</small></div></div>`).join("");
-$$("#playlist .song").forEach(el=>el.onclick=()=>{ const i=+el.dataset.i; if(Sound.track===i) Sound.stop(); else Sound.play(i); });
+/* ===================== MÚSICA + MP3 PERSONALIZADO ===================== */
+function renderPlaylist(){
+  $("#playlist").innerHTML=CONFIG.canciones.map((s,i)=>`<div class="song ${Sound.track===i?"on":""}" data-i="${i}"><div class="ico">🎵</div><div><h4>${s.t}</h4><small>${s.por}</small></div></div>`).join("");
+  $$("#playlist .song").forEach(el=>el.onclick=()=>{ const i=+el.dataset.i; if(Sound.track===i) Sound.stop(); else Sound.play(i); });
+}
+renderPlaylist();
+
+$("#customMp3Inp").onchange = e => {
+  const f = e.target.files[0];
+  if(!f) return;
+  const url = URL.createObjectURL(f);
+  CONFIG.canciones.unshift({
+    t: f.name.replace(/\.[^.]+$/, ""),
+    por: "Nuestra canción especial 💖",
+    notes: [],
+    src: url
+  });
+  renderPlaylist();
+  Sound.play(0);
+  toast("🎶 ¡Reproduciendo nuestra canción!");
+};
+
 const pn=[{l:"Do",f:523.25},{l:"Re",f:587.33},{l:"Mi",f:659.25},{l:"Fa",f:698.46},{l:"Sol",f:783.99},{l:"La",f:880},{l:"Si",f:987.77},{l:"Do+",f:1046.5}];
 $("#pianoKeys").innerHTML=pn.map((n,i)=>`<button class="pkey" data-i="${i}"><span>${n.l}</span></button>`).join("");
 function hit(i){ Sound.tone(pn[i].f,.5,"triangle",.14); const k=$$("#pianoKeys .pkey")[i]; k.classList.add("hit"); setTimeout(()=>k.classList.remove("hit"),180); }
@@ -1503,7 +2106,7 @@ $$("#capsules .cap-box").forEach(el=>el.onclick=()=>{
 $("#tarotGrid").innerHTML=CONFIG.tarot.map((t,i)=>`<div class="tarot-card rv" data-i="${i}"><div class="face-down"><div style="font-size:3rem">🔮</div><small style="color:var(--gold);font-weight:700">${t.tiempo}</small><p style="color:var(--muted);font-size:.85rem;margin-top:6px">Toca para revelar</p></div><div class="face-up"><div style="font-size:2.4rem">${t.ic}</div><small style="color:var(--gold);font-weight:700">${t.tiempo}</small><h4 style="margin:6px 0">${t.titulo}</h4><p style="font-size:.88rem;color:var(--muted)">${t.txt}</p></div></div>`).join("");
 $$("#tarotGrid .tarot-card").forEach(el=>el.onclick=()=>{ if(!el.classList.contains("rev")){ el.classList.add("rev"); Sound.chime(); vib(30); } });
 
-/* ===================== TRIVIA ===================== */
+/* ===================== TRIVIA & MINIJUEGO ===================== */
 let qi=0;
 function renderQ(){
   $("#qDots").innerHTML=CONFIG.trivia.map((_,i)=>`<i class="${i<qi?"on":""}"></i>`).join("");
@@ -1518,7 +2121,6 @@ function renderQ(){
 }
 renderQ();
 
-/* ===================== MINIJUEGO ===================== */
 (function(){
   const cv=$("#gc"), g=cv.getContext("2d"); let run=false,score=0,left=25,bx=0,items=[],timer=null,last=0,spawn=0,cw=0,ch=0;
   function fit(){ const d=Math.min(devicePixelRatio||1,2); cw=cv.clientWidth||320; ch=cv.clientHeight||380; cv.width=cw*d; cv.height=ch*d; g.setTransform(d,0,0,d,0,0); if(!bx) bx=cw/2; }
@@ -1552,17 +2154,22 @@ renderQ();
   }
 })();
 
-/* ===================== PLANES ===================== */
-const doneP=store.get("kenia_plans",[]);
+/* ===================== PLANES SINCRONIZADOS ===================== */
 function renderPlans(){
+  const doneP = cloudState.plansDone || [];
   $("#plans").innerHTML=CONFIG.planes.map((p,i)=>`<div class="plan ${doneP.includes(i)?"done":""}" data-i="${i}"><div class="box"></div><span>${p}</span></div>`).join("");
   $("#pfill").style.width=(doneP.length/CONFIG.planes.length*100)+"%";
-  $("#pcount").textContent=`${doneP.length} de ${CONFIG.planes.length} planes cumplidos`;
-  $$("#plans .plan").forEach(el=>el.onclick=()=>{
-    const i=+el.dataset.i,k=doneP.indexOf(i);
-    if(k>=0) doneP.splice(k,1); else{ doneP.push(i); Sound.chime(); conf({particleCount:50,spread:60,origin:{y:.7}}); }
-    store.set("kenia_plans",doneP); renderPlans();
-    if(doneP.length===CONFIG.planes.length){ Sound.win(); conf({particleCount:200,spread:120,origin:{y:.5}}); openModal(`<div class="mi">🏆</div><h3>¡Cumplimos todos los planes!</h3><p>Entonces toca soñar planes nuevos juntos, Kenia 💖</p>`); }
+  $("#pcount").textContent=`${doneP.length} de ${CONFIG.planes.length} planes cumplidos (sincronizado)`;
+  $$("#plans .plan").forEach(el=>el.onclick=async()=>{
+    const i=+el.dataset.i;
+    const list = [...(cloudState.plansDone || [])];
+    const k = list.indexOf(i);
+    if(k>=0) list.splice(k,1);
+    else{ list.push(i); Sound.chime(); conf({particleCount:50,spread:60,origin:{y:.7}}); }
+    cloudState.plansDone = list;
+    renderPlans();
+    if(list.length===CONFIG.planes.length){ Sound.win(); conf({particleCount:200,spread:120,origin:{y:.5}}); openModal(`<div class="mi">🏆</div><h3>¡Cumplimos todos los planes!</h3><p>Entonces toca soñar planes nuevos juntos, Kenia 💖</p>`); }
+    await guardarEstadoEnNube();
   });
 }
 renderPlans();
