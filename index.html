@@ -7,8 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Kenia 💖">
+<meta name="apple-mobile-web-app-title" content="Kenia & Javier 💖">
 <meta name="format-detection" content="telephone=no">
+<link id="favIcon" rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+<link id="appleIcon" rel="apple-touch-icon" href="">
+<link id="pwaManifest" rel="manifest" href="">
 <title>Para Kenia Malanche Lara 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Great+Vibes&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -30,7 +33,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 #fx{position:fixed;inset:0;z-index:1;pointer-events:none}
 #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:420;background:linear-gradient(90deg,var(--accent),var(--gold),var(--violet));box-shadow:0 0 16px var(--accent)}
 main{position:relative;z-index:10}
-section{min-height:100vh;padding:calc(92px + var(--safe-top)) 18px calc(96px + var(--safe-bot));display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+section{min-height:100vh;padding:calc(96px + var(--safe-top)) 18px calc(96px + var(--safe-bot));display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
 .wrap{width:100%;max-width:880px}
 .eyebrow{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:8px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.8)}
 h2{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;text-align:center;margin-bottom:32px;letter-spacing:-.6px;text-shadow:0 2px 10px rgba(0,0,0,.8)}
@@ -54,10 +57,14 @@ h3.gt{color:var(--gold);margin-bottom:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes floaty{50%{transform:translateY(-8px)}}
 
-/* Controles Superiores */
-.top-controls{position:fixed;top:calc(12px + var(--safe-top));right:14px;z-index:380;display:flex;gap:6px}
-.quest-pill{position:fixed;top:calc(12px + var(--safe-top));left:14px;z-index:380;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;background:rgba(20,5,32,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--gold);color:var(--gold);font-family:inherit;font-size:.84rem;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.6)}
-.icon-btn{width:40px;height:40px;border-radius:50%;background:rgba(20,5,32,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--text);font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+/* Controles Superiores & Radar de Presencia */
+.top-left-stack{position:fixed;top:calc(10px + var(--safe-top));left:12px;z-index:380;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.quest-pill{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;background:rgba(20,5,32,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--gold);color:var(--gold);font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.presence-pill{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;background:rgba(20,5,32,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--muted);font-family:inherit;font-size:.72rem;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.presence-dot{width:8px;height:8px;border-radius:50%;background:#ffa726}
+.presence-dot.online{background:#2ed573;box-shadow:0 0 8px #2ed573;animation:pulse 1.5s infinite}
+.top-controls{position:fixed;top:calc(10px + var(--safe-top));right:12px;z-index:380;display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:62vw}
+.icon-btn{width:38px;height:38px;border-radius:50%;background:rgba(20,5,32,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--text);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.6)}
 .icon-btn.spin{animation:spin 6s linear infinite;border-color:var(--gold)}
 .icon-btn.pulse-hb{animation:beat .75s infinite;background:rgba(255,42,109,.45);border-color:var(--accent)}
 .icon-btn.off{opacity:.45}
@@ -159,16 +166,15 @@ body.hide-postits #freeNotesLayer{display:none}
 .chapter h3{font-size:1.5rem;margin:4px 0 6px}
 .chapter p{color:var(--muted);font-size:.98rem}
 
-/* Cielo */
-.sky{position:relative;width:100%;height:440px;border-radius:30px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(255,42,109,.22),transparent 68%),rgba(10,2,18,.9)}
-.sky svg{position:absolute;inset:0;width:100%;height:100%}
-.sky path{fill:none;stroke:rgba(255,222,89,.65);stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 4s ease .4s}
-.sky.in path{stroke-dashoffset:0}
-.star{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border:none;background:none;cursor:pointer}
+/* Cielo Dinámico */
+.sky{position:relative;width:100%;height:440px;border-radius:30px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(255,42,109,.22),transparent 68%),rgba(10,2,18,.9);cursor:crosshair}
+.sky svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sky path{fill:none;stroke:rgba(255,222,89,.65);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.star{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border:none;background:none;cursor:pointer;z-index:2}
 .star i{position:absolute;inset:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px rgba(255,222,89,.95),0 0 34px 8px rgba(255,42,109,.6);animation:tw 3s infinite ease-in-out}
 @keyframes tw{50%{transform:scale(1.4);opacity:.7}}
-.star span{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;text-shadow:0 2px 6px #000;font-weight:600}
-.secret-key-star{position:absolute;right:8%;top:12%;font-size:1.6rem;background:none;border:none;cursor:pointer;filter:drop-shadow(0 0 12px var(--gold));animation:floaty 3s infinite}
+.star span{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;text-shadow:0 2px 6px #000;font-weight:600;color:#fff}
+.secret-key-star{position:absolute;right:8%;top:12%;font-size:1.6rem;background:none;border:none;cursor:pointer;filter:drop-shadow(0 0 12px var(--gold));animation:floaty 3s infinite;z-index:3}
 
 /* Polaroids & Reacciones & Cabina */
 .board{position:relative;width:100%;height:540px;border-radius:30px;border:1px dashed var(--line);overflow:hidden;background:rgba(15,4,25,.7)}
@@ -216,7 +222,7 @@ body.hide-postits #freeNotesLayer{display:none}
 
 /* Cupones */
 .coupon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.coupon{padding:18px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(255,222,89,.16),rgba(255,42,109,.15));border:1px dashed rgba(255,222,89,.6);cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s}
+.coupon{padding:18px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(255,222,89,.16),rgba(255,42,109,.15));border:1px dashed rgba(255,222,89,.6);cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s;position:relative}
 .coupon:active{transform:scale(.97)}
 .coupon .c-top{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .coupon h4{font-size:1.12rem;margin:6px 0}
@@ -242,7 +248,8 @@ body.hide-postits #freeNotesLayer{display:none}
 .vinyl-disc.spin{animation:spin 4s linear infinite}
 .vinyl-label{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;color:#1a0618;font-size:1.2rem;font-weight:700}
 .pl{padding:10px}
-.song{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;cursor:pointer;border:1px solid transparent}
+.song{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-radius:16px;cursor:pointer;border:1px solid transparent}
+.song-left{display:flex;align-items:center;gap:12px}
 .song.on{background:rgba(255,42,109,.28);border-color:rgba(255,117,140,.5)}
 .song .ico{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--violet));display:flex;align-items:center;justify-content:center;flex:none}
 .song small{color:var(--muted)}
@@ -258,8 +265,8 @@ body.hide-postits #freeNotesLayer{display:none}
 .env .ic{font-size:2rem}
 .env small{display:block;color:var(--gold);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;margin-top:6px;font-weight:700}
 .caps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
-.cap-box{padding:18px 14px;border-radius:18px;text-align:center;background:rgba(255,255,255,.06);border:1px solid var(--line);cursor:pointer}
-.cap-box.locked{opacity:.7;border-style:dashed}
+.cap-box{padding:18px 14px;border-radius:18px;text-align:center;background:rgba(255,255,255,.06);border:1px solid var(--line);cursor:pointer;position:relative}
+.cap-box.locked{opacity:.75;border-style:dashed}
 .tarot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .tarot-card{padding:26px 16px;border-radius:24px;background:linear-gradient(145deg,#2e0f36,#12041a);border:2px solid rgba(255,222,89,.55);text-align:center;cursor:pointer;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .4s}
 .tarot-card .face-up{display:none}
@@ -328,8 +335,16 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
 <!-- Capa global donde flotan los Post-its por toda la página -->
 <div id="freeNotesLayer"></div>
 
-<button class="quest-pill" id="questPill">🗝️ Llaves: <span id="keyCountTop">0</span>/3</button>
+<div class="top-left-stack">
+  <button class="quest-pill" id="questPill">🗝️ Llaves: <span id="keyCountTop">0</span>/3</button>
+  <button class="presence-pill" id="presencePill" title="Toca para cambiar quién eres o mandar un zumbido">
+    <i class="presence-dot" id="presenceDot"></i>
+    <span id="presenceTxt">Conectando radar...</span>
+  </button>
+</div>
+
 <div class="top-controls">
+  <button class="icon-btn" id="buzzKissBtn" title="Mandar lluvia de besos en vivo a su pantalla">💋</button>
   <button class="icon-btn" id="cravingTopBtn" title="Antojo o Deseo de Hoy">🍓</button>
   <button class="icon-btn" id="quickPostitBtn" title="Pegar Post-it aquí">📌</button>
   <button class="icon-btn" id="togglePostitsBtn" title="Mostrar/Ocultar Post-its">👁️</button>
@@ -389,7 +404,6 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
         <button class="mode-chip" data-mode="gold">✨ Oro Celestial</button>
         <button class="mode-chip" data-mode="galaxy">🌌 Galaxia Violeta</button>
       </div>
-      <!-- Banner interactivo de Antojo / Deseo de Hoy -->
       <div>
         <button class="craving-pill" id="cravingBannerBtn">
           🍓 <b>Antojo / Deseo de hoy:</b> <span id="cravingBannerTxt">Toca aquí para pedir un antojo o abrazo ✨</span>
@@ -500,13 +514,13 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- CIELO -->
+  <!-- CIELO DINÁMICO -->
   <section id="skysec">
     <div class="wrap">
-      <div class="eyebrow rv">nuestro cielo</div>
+      <div class="eyebrow rv">nuestro cielo interactivo</div>
       <h2 class="rv">Cada estrella es un <em>recuerdo</em></h2>
       <div class="sky rv" id="sky"></div>
-      <div class="hint">Toca las estrellas y busca el cometa dorado ☄️ (esconde una llave)</div>
+      <div class="hint">✨ Toca una estrella para leerla, o <b>toca cualquier espacio vacío del cielo</b> para plantar una nueva estrella juntos ☄️</div>
     </div>
   </section>
 
@@ -531,7 +545,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       <div class="board rv" id="board">
         <button class="hidden-board-key" id="boardKeyBtn">🗝️ ¡Encontraste la Llave #1!</button>
       </div>
-      <div class="hint">Arrastra cualquier Polaroid para acomodar el collage (se guarda para ambos), reacciona con ❤️🥰🔥 o tócala para editar/borrar 📸</div>
+      <div class="hint">Arrastra cualquier Polaroid para acomodar el collage, reacciona con ❤️🥰🔥 o tócala para editar/borrar 📸</div>
       <div class="glass booth-card rv">
         <h3 class="gt">📸 Cabina Polaroid en Vivo</h3>
         <p style="font-size:.85rem;color:var(--muted)">Toma una foto instantánea con marco Polaroid y súbela directo al álbum</p>
@@ -571,6 +585,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
         </div>
         <div class="row" style="margin-top:12px">
           <button class="btn gold" id="addNoteBtn">📌 Crear Post-it Flotante</button>
+          <button class="btn main" id="sendBuzzMainBtn">💋 Mandar Zumbido de Besos</button>
         </div>
       </div>
 
@@ -608,7 +623,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- FRASCO & MASCOTA -->
+  <!-- FRASCO INFINITO & MASCOTA -->
   <section id="jarsec">
     <div class="wrap">
       <div class="eyebrow rv">dosis de amor</div>
@@ -616,7 +631,10 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
       <div class="glass jar-wrap rv">
         <div class="jar-visual" id="jarBox"><div class="jar-lid"></div>🏺✨</div>
         <div class="jar-note" id="jarNote">Toca el frasco para sacar una razón por la que te amo, Kenia 💖</div>
-        <button class="btn gold" id="jarBtn">Sacar otro papelito ✨</button>
+        <div class="row">
+          <button class="btn gold" id="jarBtn">Sacar otro papelito ✨</button>
+          <button class="btn ghost" id="addReasonBtn">➕ Meter nuevo papelito al frasco</button>
+        </div>
       </div>
       <div class="glass pet-stage rv">
         <div class="eyebrow">mascota guardiana de nuestro amor</div>
@@ -633,11 +651,14 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- CUPONES -->
+  <!-- CUPONES DINÁMICOS -->
   <section id="couponsec">
     <div class="wrap">
       <div class="eyebrow rv">vales oficiales sincronizados</div>
       <h2 class="rv">Cuponera para <em>Kenia</em></h2>
+      <div class="row rv" style="margin-bottom:16px">
+        <button class="btn gold" id="addCouponBtn">➕ Crear Nuevo Cupón de Amor 🎟️</button>
+      </div>
       <div class="coupon-grid" id="coupons"></div>
       <div class="hint">Toca un cupón para canjearlo (se marcará en ambos teléfonos y avisará por WhatsApp) 🎟️</div>
     </div>
@@ -663,17 +684,19 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- MÚSICA -->
+  <!-- MÚSICA EN LA NUBE -->
   <section id="plsec">
     <div class="wrap">
-      <div class="eyebrow rv">banda sonora</div>
+      <div class="eyebrow rv">banda sonora compartida</div>
       <h2 class="rv">Canciones que son <em>nuestras</em></h2>
       <div class="vinyl-wrap rv">
         <div class="turntable"><div class="vinyl-disc" id="vinylDisc"><div class="vinyl-label">K ♥ J</div></div></div>
-        <label class="btn ghost" style="margin-top:12px;cursor:pointer">
-          🎶 Cargar canción MP3 desde tu cel/PC
-          <input type="file" id="customMp3Inp" accept="audio/*" hidden>
-        </label>
+        <div class="row" style="margin-top:12px">
+          <label class="btn gold" style="cursor:pointer">
+            ☁️ Subir canción MP3 para los dos
+            <input type="file" id="cloudMp3Inp" accept="audio/*" hidden>
+          </label>
+        </div>
       </div>
       <div class="glass pl rv" id="playlist"></div>
       <div class="glass piano-wrap rv">
@@ -684,14 +707,16 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- ÁBREME CUANDO -->
+  <!-- ÁBREME CUANDO & CÁPSULAS DEL TIEMPO DINÁMICAS -->
   <section id="opensec">
     <div class="wrap">
       <div class="eyebrow rv">cartas selladas</div>
       <h2 class="rv">Ábreme <em>cuando...</em></h2>
       <div class="env-grid" id="envs"></div>
-      <div style="margin-top:26px">
-        <h3 class="gt" style="text-align:center">⏳ Cápsulas del Tiempo</h3>
+      <div style="margin-top:28px;text-align:center">
+        <h3 class="gt">⏳ Cápsulas del Tiempo</h3>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:10px">Cartas secretas que solo se desbloquean cuando llega su fecha</p>
+        <button class="btn gold" id="addCapsuleBtn">➕ Sellar Nueva Cápsula del Tiempo 🔒</button>
         <div class="caps-grid" id="capsules"></div>
       </div>
     </div>
@@ -732,7 +757,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px 18px c
     </div>
   </section>
 
-  <!-- PLANES (CON AGREGAR NUEVOS PLANES EN LA NUBE) -->
+  <!-- PLANES -->
   <section id="plansec">
     <div class="wrap">
       <div class="eyebrow rv">lo que viene (sincronizado en ambos celulares)</div>
@@ -889,6 +914,36 @@ const CONFIG = {
 };
 </script>
 
+<!-- Generador automático de Ícono y Manifiesto PWA -->
+<script>
+(function(){
+  try{
+    const c = document.createElement("canvas"); c.width = c.height = 192;
+    const x = c.getContext("2d");
+    const g = x.createLinearGradient(0,0,192,192);
+    g.addColorStop(0,"#310b3a"); g.addColorStop(1,"#06010b");
+    x.fillStyle = g; x.beginPath(); x.roundRect(0,0,192,192,42); x.fill();
+    x.strokeStyle = "#ffde59"; x.lineWidth = 6; x.stroke();
+    x.font = "86px serif"; x.textAlign = "center"; x.fillText("💖",96,105);
+    x.fillStyle = "#ffde59"; x.font = "bold 28px Outfit, sans-serif"; x.fillText("K ♥ J",96,158);
+    const iconUrl = c.toDataURL("image/png");
+    document.getElementById("appleIcon").href = iconUrl;
+    document.getElementById("favIcon").href = iconUrl;
+    const manifest = {
+      name: "Kenia & Javier 💖",
+      short_name: "Kenia 💖",
+      start_url: location.href,
+      display: "standalone",
+      background_color: "#06010b",
+      theme_color: "#06010b",
+      icons: [{ src: iconUrl, sizes: "192x192", type: "image/png" }]
+    };
+    const blob = new Blob([JSON.stringify(manifest)], {type: "application/json"});
+    document.getElementById("pwaManifest").href = URL.createObjectURL(blob);
+  }catch(e){}
+})();
+</script>
+
 <!-- Corazón 3D -->
 <script type="module">
 try{
@@ -981,7 +1036,7 @@ function sendWhatsApp(msg){
 
 /* ===================== SONIDO ===================== */
 const Sound = (function(){
-  let ctx=null, melTimer=null, hbTimer=null, hbOn=false, track=-1, noteI=0;
+  let ctx=null, melTimer=null, hbTimer=null, hbOn=false, track=-1, noteI=0, currentList=[];
   const audio = $("#audio");
   function init(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); if(ctx.state==="suspended") ctx.resume(); }
   function tone(f=523.25,dur=.25,type="sine",vol=.1){
@@ -1002,12 +1057,14 @@ const Sound = (function(){
     $$("#playlist .song").forEach((el,i)=>el.classList.toggle("on", on && i===track));
   }
   function stop(){ clearInterval(melTimer); audio.pause(); track=-1; ui(false); }
+  function setList(list){ currentList = list; }
   function play(i){
     clearInterval(melTimer); audio.pause();
-    track = i; const s = CONFIG.canciones[i];
+    const list = currentList.length ? currentList : CONFIG.canciones;
+    track = i; const s = list[i] || CONFIG.canciones[0];
     if(s.src){ audio.src=s.src; audio.volume=.75; audio.play().catch(()=>{}); }
     else {
-      noteI=0; const seq=s.notes;
+      noteI=0; const seq=s.notes || [523.25,659.25,783.99,1046.5];
       const step=()=>{ const f=seq[noteI%seq.length]; tone(f,.55,"triangle",.1); tone(f/2,.9,"sine",.05); noteI++; };
       step(); melTimer=setInterval(step,440);
     }
@@ -1023,7 +1080,7 @@ const Sound = (function(){
     clearInterval(hbTimer);
     if(hbOn){ const b=()=>{ tone(65,.12,"sine",.25); vib([40,90,40]); setTimeout(()=>tone(55,.16,"sine",.2),190); }; b(); hbTimer=setInterval(b,820); toast("💓 Latido de Javier activado (73 BPM)"); }
   }
-  return {init,tone,chime,win,pop,play,stop,toggleMain,toggleHb,get track(){return track;}};
+  return {init,tone,chime,win,pop,play,stop,setList,toggleMain,toggleHb,get track(){return track;}};
 })();
 addEventListener("touchstart",()=>Sound.init(),{once:true,passive:true});
 $("#music").onclick = Sound.toggleMain;
@@ -1037,7 +1094,13 @@ addEventListener("resize",()=>{ W=fx.width=innerWidth; H=fx.height=innerHeight; 
 const stars=Array.from({length:70},()=>({x:rnd(0,W),y:rnd(0,H),r:rnd(.5,1.8),tw:rnd(0,6)}));
 const floaters=Array.from({length:12},()=>({x:rnd(0,W),y:rnd(0,H),s:rnd(10,22),vy:rnd(.25,.7),sw:rnd(0,6),a:rnd(.07,.2)}));
 const bursts=[], shooters=[];
-function burst(x,y,n=7){ for(let i=0;i<n;i++){ const a=rnd(0,6.28),v=rnd(1,3.5); bursts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.5,l:1,e:["💖","✨","💕"][i%3]}); } }
+function burst(x,y,n=7,customEmojis=null){
+  const list = customEmojis || ["💖","✨","💕"];
+  for(let i=0;i<n;i++){
+    const a=rnd(0,6.28),v=rnd(1.2,4.2);
+    bursts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.8,l:1,e:list[i%list.length]});
+  }
+}
 addEventListener("pointerdown",e=>burst(e.clientX,e.clientY,5));
 setInterval(()=>{ if(!document.hidden) shooters.push({x:rnd(W*.3,W),y:rnd(0,H*.4),l:1}); },6500);
 (function bg(){
@@ -1047,7 +1110,7 @@ setInterval(()=>{ if(!document.hidden) shooters.push({x:rnd(W*.3,W),y:rnd(0,H*.4
   for(let i=shooters.length-1;i>=0;i--){ const s=shooters[i]; s.x-=9; s.y+=4.5; s.l-=.02; if(s.l<=0){ shooters.splice(i,1); continue; }
     const g=cx.createLinearGradient(s.x,s.y,s.x+70,s.y-35); g.addColorStop(0,`rgba(255,222,89,${s.l})`); g.addColorStop(1,"rgba(255,222,89,0)");
     cx.globalAlpha=1; cx.strokeStyle=g; cx.lineWidth=2; cx.beginPath(); cx.moveTo(s.x,s.y); cx.lineTo(s.x+70,s.y-35); cx.stroke(); }
-  for(let i=bursts.length-1;i>=0;i--){ const b=bursts[i]; b.x+=b.vx; b.y+=b.vy; b.vy+=.04; b.l-=.02; if(b.l<=0){ bursts.splice(i,1); continue; } cx.globalAlpha=b.l; cx.font="18px serif"; cx.fillText(b.e,b.x,b.y); }
+  for(let i=bursts.length-1;i>=0;i--){ const b=bursts[i]; b.x+=b.vx; b.y+=b.vy; b.vy+=.04; b.l-=.02; if(b.l<=0){ bursts.splice(i,1); continue; } cx.globalAlpha=b.l; cx.font="20px serif"; cx.fillText(b.e,b.x,b.y); }
   cx.globalAlpha=1; requestAnimationFrame(bg);
 })();
 
@@ -1173,12 +1236,17 @@ $$("main section[id]").forEach(s=>spy.observe(s));
 
 /* ===================== ESTADO COMPARTIDO EN LA NUBE ===================== */
 const WORKER_URL = "https://foto-uploader.javi-mtz9997.workers.dev";
+let selectedNoteAuthor = store.get("kenia_who", "Kenia 💖");
 let cloudState = store.get("kenia_cloud_state", {
   notes: [
     { id: "n1", author: "Javier 🖤", text: "¡Arrástrame a cualquier parte de la página, mi amor! 💖", date: "Siempre", color: "gold", xPct: 68, yPx: 320, rot: 3 }
   ],
   nextDate: { title: "Nuestra Próxima Cita 💑", iso: "" },
   craving: { text: "", author: "Kenia 💖", time: "" },
+  customStars: [],
+  customReasons: [],
+  customCapsules: [],
+  customCoupons: [],
   plansList: CONFIG.planes.slice(),
   plansDone: store.get("kenia_plans", []),
   couponsUsed: store.get("kenia_coupons", []),
@@ -1187,10 +1255,18 @@ let cloudState = store.get("kenia_cloud_state", {
   polCoords: {},
   photoReacts: {},
   doodleDataUrl: "",
-  audioMeta: {}
+  audioMeta: {},
+  songMeta: {},
+  presence: { kenia: 0, javier: 0 },
+  buzz: { id: 0, from: "", msg: "" }
 });
 
+let lastSeenBuzzId = store.get("kenia_last_buzz", cloudState.buzz?.id || 0);
+
 async function guardarEstadoEnNube(){
+  const whoKey = selectedNoteAuthor.includes("Kenia") ? "kenia" : "javier";
+  cloudState.presence = cloudState.presence || { kenia: 0, javier: 0 };
+  cloudState.presence[whoKey] = Date.now();
   store.set("kenia_cloud_state", cloudState);
   try{
     await fetch(WORKER_URL, {
@@ -1200,6 +1276,87 @@ async function guardarEstadoEnNube(){
     });
   }catch(e){ console.warn("Error guardando estado en nube:", e); }
 }
+
+/* ===================== RADAR DE PRESENCIA EN LÍNEA + ZUMBIDO DE BESOS ===================== */
+function renderPresence(){
+  const p = cloudState.presence || {};
+  const isMeKenia = selectedNoteAuthor.includes("Kenia");
+  const partnerName = isMeKenia ? "Javier" : "Kenia";
+  const partnerTs = isMeKenia ? (p.javier || 0) : (p.kenia || 0);
+  const dot = $("#presenceDot"), txt = $("#presenceTxt");
+
+  if(!partnerTs){
+    dot.classList.remove("online");
+    txt.textContent = `Soy ${isMeKenia?"Kenia":"Javier"} • Toca para cambiar`;
+    return;
+  }
+  const diffSec = Math.floor((Date.now() - partnerTs) / 1000);
+  if(diffSec < 45){
+    dot.classList.add("online");
+    txt.textContent = `🟢 ${partnerName} está en línea ahorita 💖`;
+  } else {
+    dot.classList.remove("online");
+    const mins = Math.max(1, Math.floor(diffSec / 60));
+    const hrs = Math.floor(mins / 60);
+    const timeStr = hrs > 0 ? `hace ${hrs}h` : `hace ${mins} min`;
+    txt.textContent = `${partnerName} entró ${timeStr} • (Soy ${isMeKenia?"Kenia":"Javier"})`;
+  }
+}
+
+function dispararLluviaDeBesos(fromWho, msg){
+  Sound.win();
+  vib([120, 60, 120, 60, 220]);
+  conf({particleCount:120,spread:110,origin:{y:.5}});
+  for(let i=0;i<8;i++){
+    setTimeout(()=>burst(rnd(W*.15,W*.85), rnd(H*.2,H*.75), 10, ["💋","💖","🥰","💕"]), i*180);
+  }
+  toast(`💋 ¡${fromWho} te mandó una lluvia de besos en vivo! "${msg || "Te amo mucho 💖"}"`);
+}
+
+async function enviarZumbidoBesos(){
+  const buzzId = Date.now();
+  lastSeenBuzzId = buzzId;
+  store.set("kenia_last_buzz", buzzId);
+  cloudState.buzz = {
+    id: buzzId,
+    from: selectedNoteAuthor,
+    msg: "¡Muchos besitos hasta tu pantalla! 💋💖"
+  };
+  dispararLluviaDeBesos("Tú", "Zumbido enviado a su pantalla");
+  await guardarEstadoEnNube();
+}
+
+$("#buzzKissBtn").onclick = enviarZumbidoBesos;
+$("#sendBuzzMainBtn").onclick = enviarZumbidoBesos;
+
+$("#presencePill").onclick = () => {
+  openModal(`
+    <div class="mi">🟢💖</div>
+    <h3>Radar en Vivo & Identidad</h3>
+    <p style="font-size:.86rem;color:var(--muted)">Elige quién está usando este dispositivo para avisarle al otro cuando estés en línea:</p>
+    <div class="author-switch" id="presenceWhoSwitch" style="margin-top:12px">
+      <button type="button" class="${selectedNoteAuthor.includes('Kenia')?'on':''}" data-author="Kenia 💖">Soy Kenia 💖</button>
+      <button type="button" class="${selectedNoteAuthor.includes('Javier')?'on':''}" data-author="Javier 🖤">Soy Javier 🖤</button>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn main" id="modalBuzzBtn">💋 Mandar Zumbido de Besos en Vivo</button>
+    </div>
+  `);
+  $$("#presenceWhoSwitch button").forEach(b => {
+    b.onclick = async () => {
+      $$("#presenceWhoSwitch button").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      selectedNoteAuthor = b.dataset.author;
+      store.set("kenia_who", selectedNoteAuthor);
+      $$("#noteAuthorSwitch button").forEach(x => x.classList.toggle("on", x.dataset.author === selectedNoteAuthor));
+      renderPresence();
+      toast(`✨ Modo activo: ${selectedNoteAuthor}`);
+      await guardarEstadoEnNube();
+    };
+  });
+  $("#modalBuzzBtn").onclick = () => { closeModal(); enviarZumbidoBesos(); };
+};
+renderPresence();
 
 /* ===================== BUZÓN DE ANTOJO / DESEO DE HOY ===================== */
 function renderCravingBanner(){
@@ -1465,27 +1622,91 @@ $("#waxEnv").onclick=async()=>{
   $("#letterSign").textContent=CONFIG.carta.firma; $("#letterSign").classList.add("on");
 };
 
-/* ===================== HISTORIA & CIELO ===================== */
+/* ===================== HISTORIA & CIELO DINÁMICO ===================== */
 $("#chapters").innerHTML=CONFIG.capitulos.map((c,i)=>`<article class="chapter rv"><div class="num">0${i+1}</div><div class="date">${c.fecha}</div><h3>${c.titulo}</h3><p>${c.texto}</p></article>`).join("");
-(function(){
-  const pts=CONFIG.recuerdos, d=pts.map((p,i)=>(i?"L":"M")+p.x+" "+p.y).join(" ");
-  $("#sky").innerHTML=`<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="${d}" pathLength="1"/></svg>`+
-    pts.map((p,i)=>`<button class="star" style="left:${p.x}%;top:${p.y}%" data-i="${i}"><i style="animation-delay:${i*.5}s"></i><span>${p.titulo}</span></button>`).join("")+
+
+function renderSky(){
+  const sky = $("#sky");
+  const custom = cloudState.customStars || [];
+  const pts = [...CONFIG.recuerdos, ...custom];
+  const d = pts.map((p,i)=>(i?"L":"M")+p.x+" "+p.y).join(" ");
+  sky.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="${d}"/></svg>`+
+    pts.map((p,i)=>`<button class="star" style="left:${p.x}%;top:${p.y}%" data-i="${i}"><i style="animation-delay:${(i*.4)%3}s"></i><span>${(p.titulo||"").replace(/</g,"&lt;")}</span></button>`).join("")+
     `<button class="secret-key-star" id="skyKeyBtn" aria-label="Cometa">☄️</button>`;
-  $$("#sky .star").forEach(b=>b.onclick=()=>{ const p=pts[b.dataset.i]; Sound.chime(); vib(30); openModal(`<div class="mi">⭐</div><div class="md">${p.fecha}</div><h3>${p.titulo}</h3><p>${p.texto}</p>`); });
-  $("#skyKeyBtn").onclick=()=>addKey(2,"Cometa del Cielo");
-})();
+
+  $$("#sky .star").forEach(b=>b.onclick=(e)=>{
+    e.stopPropagation();
+    const idx = +b.dataset.i;
+    const p = pts[idx];
+    const isCustom = idx >= CONFIG.recuerdos.length;
+    Sound.chime(); vib(30);
+    openModal(`
+      <div class="mi">⭐</div>
+      <div class="md">${(p.fecha||"").replace(/</g,"&lt;")}</div>
+      <h3>${(p.titulo||"").replace(/</g,"&lt;")}</h3>
+      <p>${(p.texto||"").replace(/</g,"&lt;")}</p>
+      ${isCustom ? `<button class="btn danger" id="delStarBtn" style="margin-top:14px">🗑️ Borrar estrella</button>` : ""}
+    `);
+    const delBtn = $("#delStarBtn");
+    if(delBtn){
+      delBtn.onclick = async () => {
+        const cIdx = idx - CONFIG.recuerdos.length;
+        cloudState.customStars.splice(cIdx, 1);
+        renderSky();
+        closeModal();
+        toast("🗑️ Estrella eliminada del cielo");
+        await guardarEstadoEnNube();
+      };
+    }
+  });
+  $("#skyKeyBtn").onclick=(e)=>{ e.stopPropagation(); addKey(2,"Cometa del Cielo"); };
+}
+renderSky();
+
+$("#sky").onclick = (e) => {
+  if(e.target.closest("button")) return;
+  const r = $("#sky").getBoundingClientRect();
+  const x = Math.round(((e.clientX - r.left) / r.width) * 100);
+  const y = Math.round(((e.clientY - r.top) / r.height) * 100);
+  openModal(`
+    <div class="mi">✨</div>
+    <h3>Plantar Nueva Estrella en Nuestro Cielo</h3>
+    <p style="font-size:.85rem;color:var(--muted)">Quedará unida a nuestra constelación en ambos teléfonos</p>
+    <input type="text" id="stTitleInp" class="cap-input" placeholder="Título (ej. Nuestro viaje soñado 💖)" maxlength="28">
+    <input type="text" id="stDateInp" class="cap-input" value="${new Date().toLocaleDateString('es-MX',{month:'long',year:'numeric'})}" placeholder="Fecha (ej. Noviembre 2026)" maxlength="24">
+    <input type="text" id="stTxtInp" class="cap-input" placeholder="Escribe el recuerdo o deseo de esta estrella..." maxlength="140">
+    <div class="row" style="margin-top:14px">
+      <button class="btn gold" id="saveStarBtn">🌟 Plantar Estrella</button>
+    </div>
+  `);
+  $("#saveStarBtn").onclick = async () => {
+    const titulo = ($("#stTitleInp").value || "").trim();
+    const fecha = ($("#stDateInp").value || "Siempre").trim();
+    const texto = ($("#stTxtInp").value || "").trim();
+    if(!titulo || !texto){ toast("Escribe el título y el recuerdo ✨"); return; }
+    cloudState.customStars = cloudState.customStars || [];
+    cloudState.customStars.push({ x: Math.max(8, Math.min(92, x)), y: Math.max(12, Math.min(86, y)), titulo, fecha, texto });
+    renderSky();
+    closeModal();
+    Sound.win();
+    conf({particleCount:65,spread:70,origin:{y:.6}});
+    toast("🌟 ¡Nueva estrella plantada en nuestro cielo!");
+    await guardarEstadoEnNube();
+  };
+};
 
 /* ===================== POST-ITS LIBRES POR TODA LA PÁGINA ===================== */
-let selectedNoteAuthor = "Kenia 💖";
 let isDraggingNote = false;
 let noteZ = 330;
 
 $$("#noteAuthorSwitch button").forEach(b => {
+  b.classList.toggle("on", b.dataset.author === selectedNoteAuthor);
   b.onclick = () => {
     $$("#noteAuthorSwitch button").forEach(x => x.classList.remove("on"));
     b.classList.add("on");
     selectedNoteAuthor = b.dataset.author;
+    store.set("kenia_who", selectedNoteAuthor);
+    renderPresence();
     Sound.pop();
   };
 });
@@ -1638,6 +1859,7 @@ $("#quickPostitBtn").onclick = () => {
       $$("#modalAuthorSwitch button").forEach(x => x.classList.remove("on"));
       b.classList.add("on");
       selectedNoteAuthor = b.dataset.author;
+      store.set("kenia_who", selectedNoteAuthor);
     };
   });
   $("#confirmQuickNoteBtn").onclick = async () => {
@@ -1849,8 +2071,10 @@ const TEXTOS_BASE = [
 ];
 let lastFilesSignature = "";
 let lastAudiosSignature = "";
+let lastSongsSignature = "";
 let lastStateSha = "";
 let isDraggingPol = false;
+let cloudSongs = [];
 
 try { localStorage.removeItem("kenia_photos"); } catch(e){}
 
@@ -1878,6 +2102,7 @@ async function sincronizarNube(forzarRender = false){
   try{
     let files = [];
     let audios = [];
+    let songs = [];
     let remoteState = null;
     let remoteStateSha = "";
     let okFetch = false;
@@ -1889,6 +2114,7 @@ async function sincronizarNube(forzarRender = false){
         if(Array.isArray(data.files)){
           files = data.files;
           audios = Array.isArray(data.audios) ? data.audios : [];
+          songs = Array.isArray(data.songs) ? data.songs : [];
           remoteState = data.state || null;
           remoteStateSha = data.stateSha || "";
           okFetch = true;
@@ -1916,14 +2142,29 @@ async function sincronizarNube(forzarRender = false){
       lastStateSha = remoteStateSha;
       cloudState = { ...cloudState, ...remoteState };
       store.set("kenia_cloud_state", cloudState);
+
+      // Si llegó un Zumbido de Besos nuevo del otro celular, dispararlo en vivo
+      if(cloudState.buzz && cloudState.buzz.id && cloudState.buzz.id > lastSeenBuzzId){
+        lastSeenBuzzId = cloudState.buzz.id;
+        store.set("kenia_last_buzz", lastSeenBuzzId);
+        if(cloudState.buzz.from !== selectedNoteAuthor){
+          dispararLluviaDeBesos(cloudState.buzz.from || "Tu amor", cloudState.buzz.msg);
+        }
+      }
+
       $("#missCount").textContent = cloudState.missCount || 0;
+      renderPresence();
       renderCravingBanner();
+      renderSky();
       renderNotes();
       renderCoupons();
+      renderCapsules();
       renderPlans();
       if(cloudState.doodleDataUrl) cargarDoodleRemoto(cloudState.doodleDataUrl);
       tick();
       stateChanged = true;
+    } else {
+      renderPresence();
     }
 
     const audioSig = audios.map(a => `${a.name}:${a.sha}`).sort().join("|");
@@ -1931,6 +2172,13 @@ async function sincronizarNube(forzarRender = false){
       lastAudiosSignature = audioSig;
       cloudAudios = audios.sort((a,b) => b.name.localeCompare(a.name));
       renderAudios();
+    }
+
+    const songSig = songs.map(s => `${s.name}:${s.sha}`).sort().join("|");
+    if(forzarRender || stateChanged || songSig !== lastSongsSignature){
+      lastSongsSignature = songSig;
+      cloudSongs = songs.sort((a,b) => b.name.localeCompare(a.name));
+      renderPlaylist();
     }
 
     const currentSignature = files.map(f => `${f.name}:${f.sha || f.url}`).sort().join("|");
@@ -1984,6 +2232,13 @@ async function sincronizarNube(forzarRender = false){
 setInterval(() => {
   if(!document.hidden) sincronizarNube(false);
 }, (CONFIG.syncSegundos || 12) * 1000);
+
+// Latido de presencia cada 30 segundos
+setInterval(() => {
+  if(!document.hidden && !document.body.classList.contains("locked")){
+    guardarEstadoEnNube();
+  }
+}, 30000);
 
 document.addEventListener("visibilitychange", () => {
   if(!document.hidden) sincronizarNube(false);
@@ -2169,7 +2424,6 @@ function renderPols(){
       el.style.transform=`rotate(${(i%2===0?-3.5:3.5)}deg)`;
     }
 
-    // Botones de reacción en la Polaroid
     el.querySelectorAll(".react-chip").forEach(rb => {
       rb.addEventListener("pointerdown", e => e.stopPropagation());
       rb.onclick = async e => {
@@ -2322,17 +2576,42 @@ $("#nativeCamInp").onchange = e => {
   };
 })();
 
-/* ===================== FRASCO & MASCOTA ===================== */
-let order=[], oi=0;
-function shuffle(){ order=CONFIG.razones.map((_,i)=>i).sort(()=>Math.random()-.5); oi=0; }
-shuffle();
+/* ===================== FRASCO DE LAS RAZONES INFINITO & MASCOTA ===================== */
+let oi=0;
 function pullReason(){
-  if(oi>=order.length) shuffle();
+  const allReasons = [...CONFIG.razones, ...(cloudState.customReasons || [])];
+  if(!allReasons.length) return;
   Sound.chime(); vib(25);
   const j=$("#jarBox"); j.classList.remove("sh"); void j.offsetWidth; j.classList.add("sh");
-  $("#jarNote").textContent=`"${CONFIG.razones[order[oi++]]}"`;
+  const pick = allReasons[oi % allReasons.length];
+  oi++;
+  $("#jarNote").textContent=`"${pick}"`;
 }
 $("#jarBox").onclick=pullReason; $("#jarBtn").onclick=pullReason;
+
+$("#addReasonBtn").onclick = () => {
+  openModal(`
+    <div class="mi">🏺✨</div>
+    <h3>Meter Nuevo Papelito al Frasco</h3>
+    <p style="font-size:.86rem;color:var(--muted)">Escribe una razón por la que amas a tu pareja y quedará guardada dentro del frasco para los dos</p>
+    <input type="text" id="newReasonInp" class="cap-input" placeholder="Ej. Por cómo me haces reír hasta que me duele la panza 💖" maxlength="140">
+    <div class="row" style="margin-top:14px">
+      <button class="btn gold" id="saveReasonModalBtn">🏺 Meter al Frasco</button>
+    </div>
+  `);
+  $("#saveReasonModalBtn").onclick = async () => {
+    const val = ($("#newReasonInp").value || "").trim();
+    if(!val){ toast("Escribe primero la razón ✏️"); return; }
+    cloudState.customReasons = cloudState.customReasons || [];
+    cloudState.customReasons.unshift(`${val} (${selectedNoteAuthor})`);
+    $("#jarNote").textContent = `"${val} (${selectedNoteAuthor})"`;
+    closeModal();
+    Sound.win();
+    conf({particleCount:55,spread:65,origin:{y:.6}});
+    toast("🏺 ¡Nuevo papelito guardado en el frasco!");
+    await guardarEstadoEnNube();
+  };
+};
 
 let petXp=store.get("kenia_pet",20);
 const stages=["🧸","🐰","🦊","🦄","🐉"], pmsg=["¡Dale cariñitos para que crezca!","¡Ya se siente querido! 🥰","¡Está feliz de verte, Kenia!","¡Casi alcanza su forma final!","¡Es el guardián más poderoso del amor! 👑"];
@@ -2350,14 +2629,32 @@ $$("[data-pet]").forEach(b=>b.onclick=e=>{
 });
 $("#petAvatar").onclick=()=>{ Sound.pop(); vib(15); const r=$("#petAvatar").getBoundingClientRect(); burst(r.left+r.width/2,r.top+20,5); };
 
-/* ===================== CUPONES SINCRONIZADOS ===================== */
+/* ===================== CUPONES SINCRONIZADOS + CREAR NUEVOS ===================== */
 function renderCoupons(){
   const usedC = cloudState.couponsUsed || [];
-  $("#coupons").innerHTML=CONFIG.cupones.map(c=>{ const u=usedC.includes(c.id); return `<div class="coupon rv in ${u?"used":""}" data-id="${c.id}"><div><div class="c-top">Vale para Kenia</div><h4>${c.titulo}</h4><p>${c.desc}</p></div><div class="stamp">${u?"CANJEADO 💖":"Toca para canjear →"}</div></div>`; }).join("");
+  const allCoupons = [...CONFIG.cupones, ...(cloudState.customCoupons || [])];
+  $("#coupons").innerHTML = allCoupons.map(c=>{
+    const u = usedC.includes(c.id);
+    return `<div class="coupon rv in ${u?"used":""}" data-id="${c.id}"><div><div class="c-top">Vale de Amor</div><h4>${(c.titulo||"").replace(/</g,"&lt;")}</h4><p>${(c.desc||"").replace(/</g,"&lt;")}</p></div><div class="stamp">${u?"CANJEADO 💖":"Toca para canjear →"}</div></div>`;
+  }).join("");
+
   $$("#coupons .coupon").forEach(el=>el.onclick=()=>{
-    const c=CONFIG.cupones.find(x=>x.id===el.dataset.id);
-    const used=(cloudState.couponsUsed||[]).includes(c.id);
-    openModal(`<div class="mi">🎟️</div><div class="md">Vale para Kenia</div><h3>${c.titulo}</h3><p>${c.desc}</p><div class="row" style="margin-top:14px"><button class="btn main" id="useC">${used?"Recordárselo a Javier 💬":"Canjear y avisar a Javier 💬"}</button>${used?`<button class="btn ghost" id="resetC">Reactivar cupón 🔄</button>`:""}</div>`);
+    const all = [...CONFIG.cupones, ...(cloudState.customCoupons || [])];
+    const c = all.find(x=>x.id===el.dataset.id);
+    if(!c) return;
+    const isCustom = (cloudState.customCoupons || []).some(x => x.id === c.id);
+    const used = (cloudState.couponsUsed||[]).includes(c.id);
+    openModal(`
+      <div class="mi">🎟️</div>
+      <div class="md">Vale Oficial</div>
+      <h3>${(c.titulo||"").replace(/</g,"&lt;")}</h3>
+      <p>${(c.desc||"").replace(/</g,"&lt;")}</p>
+      <div class="row" style="margin-top:14px">
+        <button class="btn main" id="useC">${used?"Recordárselo por WhatsApp 💬":"Canjear y avisar por WhatsApp 💬"}</button>
+        ${used?`<button class="btn ghost" id="resetC">Reactivar cupón 🔄</button>`:""}
+        ${isCustom?`<button class="btn danger" id="delC">🗑️ Eliminar vale</button>`:""}
+      </div>
+    `);
     $("#useC").onclick=async()=>{
       if(!used){
         cloudState.couponsUsed = [...(cloudState.couponsUsed||[]), c.id];
@@ -2375,9 +2672,43 @@ function renderCoupons(){
         await guardarEstadoEnNube();
       };
     }
+    const dBtn = $("#delC");
+    if(dBtn){
+      dBtn.onclick = async () => {
+        cloudState.customCoupons = (cloudState.customCoupons||[]).filter(x => x.id !== c.id);
+        renderCoupons(); closeModal();
+        toast("🗑️ Cupón eliminado");
+        await guardarEstadoEnNube();
+      };
+    }
   });
 }
 renderCoupons();
+
+$("#addCouponBtn").onclick = () => {
+  openModal(`
+    <div class="mi">🎟️✨</div>
+    <h3>Crear Nuevo Cupón de Amor</h3>
+    <input type="text" id="cpTitleInp" class="cap-input" placeholder="Título (ej. Tarde de Taquitos y Besos 🌮💖)" maxlength="38">
+    <input type="text" id="cpDescInp" class="cap-input" placeholder="Descripción (ej. Válido cualquier fin de semana sin excusas)" maxlength="95">
+    <div class="row" style="margin-top:14px">
+      <button class="btn gold" id="saveCouponModalBtn">🎟️ Crear Cupón para los dos</button>
+    </div>
+  `);
+  $("#saveCouponModalBtn").onclick = async () => {
+    const titulo = ($("#cpTitleInp").value || "").trim();
+    const desc = ($("#cpDescInp").value || "").trim();
+    if(!titulo || !desc){ toast("Completa el título y la descripción 🎟️"); return; }
+    cloudState.customCoupons = cloudState.customCoupons || [];
+    cloudState.customCoupons.push({ id: "cc_" + Date.now(), titulo, desc });
+    renderCoupons();
+    closeModal();
+    Sound.win();
+    conf({particleCount:60,spread:70,origin:{y:.6}});
+    toast("🎟️ ¡Nuevo cupón agregado a la cuponera!");
+    await guardarEstadoEnNube();
+  };
+};
 
 /* ===================== RASCA & RULETA ===================== */
 (function(){
@@ -2431,26 +2762,92 @@ renderCoupons();
   };
 })();
 
-/* ===================== MÚSICA + MP3 PERSONALIZADO ===================== */
+/* ===================== MÚSICA + SUBIDA DE MP3 A LA NUBE ===================== */
 function renderPlaylist(){
-  $("#playlist").innerHTML=CONFIG.canciones.map((s,i)=>`<div class="song ${Sound.track===i?"on":""}" data-i="${i}"><div class="ico">🎵</div><div><h4>${s.t}</h4><small>${s.por}</small></div></div>`).join("");
-  $$("#playlist .song").forEach(el=>el.onclick=()=>{ const i=+el.dataset.i; if(Sound.track===i) Sound.stop(); else Sound.play(i); });
+  const songMeta = cloudState.songMeta || {};
+  const remoteTracks = cloudSongs.map(s => ({
+    t: songMeta[s.name]?.title || "Nuestra canción en la nube 💖",
+    por: `Subida por ${songMeta[s.name]?.author || "Nosotros"} ☁️`,
+    notes: [],
+    src: s.url,
+    fileName: s.name
+  }));
+  const fullList = [...remoteTracks, ...CONFIG.canciones];
+  Sound.setList(fullList);
+
+  $("#playlist").innerHTML = fullList.map((s,i)=>`
+    <div class="song ${Sound.track===i?"on":""}" data-i="${i}">
+      <div class="song-left">
+        <div class="ico">${s.fileName?"☁️":"🎵"}</div>
+        <div><h4>${(s.t||"").replace(/</g,"&lt;")}</h4><small>${(s.por||"").replace(/</g,"&lt;")}</small></div>
+      </div>
+      ${s.fileName ? `<button class="btn danger" style="padding:6px 12px" data-del-song="${s.fileName}">🗑️</button>` : ""}
+    </div>
+  `).join("");
+
+  $$("#playlist .song").forEach(el=>el.onclick=(e)=>{
+    if(e.target.closest("[data-del-song]")) return;
+    const i=+el.dataset.i;
+    if(Sound.track===i) Sound.stop(); else Sound.play(i);
+  });
+
+  $$("[data-del-song]").forEach(b => {
+    b.onclick = async e => {
+      e.stopPropagation();
+      const fileName = b.dataset.delSong;
+      toast("🗑️ Eliminando canción de la nube...");
+      try{
+        await fetch(WORKER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "delete_file", fileName })
+        });
+        cloudSongs = cloudSongs.filter(x => x.name !== fileName);
+        renderPlaylist();
+        toast("✅ Canción eliminada");
+      }catch(err){ toast("⚠️ Error al eliminar canción"); }
+    };
+  });
 }
 renderPlaylist();
 
-$("#customMp3Inp").onchange = e => {
+$("#cloudMp3Inp").onchange = e => {
   const f = e.target.files[0];
   if(!f) return;
-  const url = URL.createObjectURL(f);
-  CONFIG.canciones.unshift({
-    t: f.name.replace(/\.[^.]+$/, ""),
-    por: "Nuestra canción especial 💖",
-    notes: [],
-    src: url
-  });
-  renderPlaylist();
-  Sound.play(0);
-  toast("🎶 ¡Reproduciendo nuestra canción!");
+  if(f.size > 15 * 1024 * 1024){
+    toast("⚠️ Elige un archivo MP3 menor a 15 MB");
+    return;
+  }
+  const cleanTitle = f.name.replace(/\.[^.]+$/, "");
+  const ext = (f.name.split(".").pop() || "mp3").toLowerCase();
+  toast("☁️ Subiendo canción MP3 para ambos celulares...");
+  const reader = new FileReader();
+  reader.onload = async () => {
+    const base64 = reader.result.split(",")[1];
+    try{
+      const r = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "upload_song",
+          contentBase64: base64,
+          ext
+        })
+      });
+      const resData = await r.json();
+      if(!r.ok) throw new Error(resData.error || "Error subiendo canción");
+      cloudState.songMeta = cloudState.songMeta || {};
+      cloudState.songMeta[resData.fileName] = { title: cleanTitle, author: selectedNoteAuthor };
+      await guardarEstadoEnNube();
+      Sound.win();
+      toast("🎶 ¡Canción guardada en la nube para los dos! 💖");
+      setTimeout(() => sincronizarNube(true), 1400);
+    }catch(err){
+      toast("⚠️ Error subiendo MP3: actualiza tu Worker en Cloudflare");
+    }
+  };
+  reader.readAsDataURL(f);
+  e.target.value = "";
 };
 
 const pn=[{l:"Do",f:523.25},{l:"Re",f:587.33},{l:"Mi",f:659.25},{l:"Fa",f:698.46},{l:"Sol",f:783.99},{l:"La",f:880},{l:"Si",f:987.77},{l:"Do+",f:1046.5}];
@@ -2459,7 +2856,7 @@ function hit(i){ Sound.tone(pn[i].f,.5,"triangle",.14); const k=$$("#pianoKeys .
 $$("#pianoKeys .pkey").forEach(b=>b.addEventListener("pointerdown",()=>hit(+b.dataset.i)));
 $("#autoPlayPianoBtn").onclick=()=>[0,2,4,7,4,2,0,4,7,5,2,4,0].forEach((idx,s)=>setTimeout(()=>hit(idx),s*260));
 
-/* ===================== ÁBREME CUANDO, CÁPSULAS, TAROT ===================== */
+/* ===================== ÁBREME CUANDO, CÁPSULAS DINÁMICAS, TAROT ===================== */
 const readE=store.get("kenia_read",[]);
 $("#envs").innerHTML=CONFIG.abrir.map((o,i)=>`<div class="env rv ${readE.includes(i)?"read":""}" data-i="${i}"><div class="ic">${readE.includes(i)?"💌":"✉️"}</div><small>ábreme cuando</small><h4>${o.t}</h4></div>`).join("");
 $$("#envs .env").forEach(el=>el.onclick=()=>{
@@ -2467,13 +2864,75 @@ $$("#envs .env").forEach(el=>el.onclick=()=>{
   openModal(`<div class="mi">${o.ic}</div><div class="md">ábreme cuando</div><h3>${o.t}</h3><p>${o.msg}</p>`);
   if(!readE.includes(i)){ readE.push(i); store.set("kenia_read",readE); el.classList.add("read"); el.querySelector(".ic").textContent="💌"; }
 });
+
 function capState(c){ const d=new Date(c.unlock+"T00:00:00"), left=Math.ceil((d-new Date())/864e5); return {open:left<=0,left,d}; }
-$("#capsules").innerHTML=CONFIG.capsulas.map((c,i)=>{ const s=capState(c); return `<div class="cap-box rv ${s.open?"":"locked"}" data-i="${i}"><div style="font-size:1.8rem">${s.open?"📬":"🔒"}</div><h4>${c.titulo}</h4><small style="color:var(--gold)">${s.open?"¡Ya se puede abrir!":`Se abre en ${s.left} ${s.left===1?"día":"días"}`}</small></div>`; }).join("");
-$$("#capsules .cap-box").forEach(el=>el.onclick=()=>{
-  const c=CONFIG.capsulas[el.dataset.i], s=capState(c);
-  if(!s.open){ vib(150); toast(`🔒 Se abre el ${s.d.toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"})}`); return; }
-  Sound.chime(); openModal(`<div class="mi">⏳</div><h3>${c.titulo}</h3><p>${c.msg}</p>`);
-});
+function renderCapsules(){
+  const allCaps = [...CONFIG.capsulas, ...(cloudState.customCapsules || [])];
+  $("#capsules").innerHTML = allCaps.map((c,i)=>{
+    const s = capState(c);
+    return `<div class="cap-box rv in ${s.open?"":"locked"}" data-i="${i}"><div style="font-size:1.8rem">${s.open?"📬":"🔒"}</div><h4>${(c.titulo||"").replace(/</g,"&lt;")}</h4><small style="color:var(--gold)">${s.open?"¡Ya se puede abrir!":`Se abre en ${s.left} ${s.left===1?"día":"días"}`}</small></div>`;
+  }).join("");
+
+  $$("#capsules .cap-box").forEach(el=>el.onclick=()=>{
+    const idx = +el.dataset.i;
+    const allCaps = [...CONFIG.capsulas, ...(cloudState.customCapsules || [])];
+    const c = allCaps[idx];
+    const isCustom = idx >= CONFIG.capsulas.length;
+    const s = capState(c);
+    if(!s.open){
+      vib(150);
+      toast(`🔒 Se abre el ${s.d.toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"})}`);
+      return;
+    }
+    Sound.chime();
+    openModal(`
+      <div class="mi">⏳</div>
+      <h3>${(c.titulo||"").replace(/</g,"&lt;")}</h3>
+      <p>${(c.msg||"").replace(/</g,"&lt;")}</p>
+      ${isCustom ? `<button class="btn danger" id="delCapBtn" style="margin-top:14px">🗑️ Borrar cápsula</button>` : ""}
+    `);
+    const delBtn = $("#delCapBtn");
+    if(delBtn){
+      delBtn.onclick = async () => {
+        cloudState.customCapsules.splice(idx - CONFIG.capsulas.length, 1);
+        renderCapsules();
+        closeModal();
+        toast("🗑️ Cápsula eliminada");
+        await guardarEstadoEnNube();
+      };
+    }
+  });
+}
+renderCapsules();
+
+$("#addCapsuleBtn").onclick = () => {
+  openModal(`
+    <div class="mi">⏳🔒</div>
+    <h3>Sellar Nueva Cápsula del Tiempo</h3>
+    <p style="font-size:.85rem;color:var(--muted)">Nadie podrá leer el mensaje secreto hasta que llegue la fecha que elijas</p>
+    <input type="text" id="capTitleInp" class="cap-input" placeholder="Título (ej. Para Navidad 🎄💖)" maxlength="38">
+    <input type="date" id="capDateInp" class="cap-input" style="margin-top:10px">
+    <input type="text" id="capMsgInp" class="cap-input" placeholder="Escribe la carta o sorpresa secreta..." maxlength="220">
+    <div class="row" style="margin-top:14px">
+      <button class="btn gold" id="saveCapModalBtn">🔒 Sellar Cápsula</button>
+    </div>
+  `);
+  $("#saveCapModalBtn").onclick = async () => {
+    const titulo = ($("#capTitleInp").value || "").trim();
+    const unlock = $("#capDateInp").value;
+    const msg = ($("#capMsgInp").value || "").trim();
+    if(!titulo || !unlock || !msg){ toast("Completa el título, la fecha y el mensaje 🔒"); return; }
+    cloudState.customCapsules = cloudState.customCapsules || [];
+    cloudState.customCapsules.push({ titulo, unlock, msg: `${msg}\n\n— Con amor, ${selectedNoteAuthor}` });
+    renderCapsules();
+    closeModal();
+    Sound.win();
+    conf({particleCount:60,spread:70,origin:{y:.6}});
+    toast("🔒 ¡Cápsula sellada en la nube para ambos!");
+    await guardarEstadoEnNube();
+  };
+};
+
 $("#tarotGrid").innerHTML=CONFIG.tarot.map((t,i)=>`<div class="tarot-card rv" data-i="${i}"><div class="face-down"><div style="font-size:3rem">🔮</div><small style="color:var(--gold);font-weight:700">${t.tiempo}</small><p style="color:var(--muted);font-size:.85rem;margin-top:6px">Toca para revelar</p></div><div class="face-up"><div style="font-size:2.4rem">${t.ic}</div><small style="color:var(--gold);font-weight:700">${t.tiempo}</small><h4 style="margin:6px 0">${t.titulo}</h4><p style="font-size:.88rem;color:var(--muted)">${t.txt}</p></div></div>`).join("");
 $$("#tarotGrid .tarot-card").forEach(el=>el.onclick=()=>{ if(!el.classList.contains("rev")){ el.classList.add("rev"); Sound.chime(); vib(30); } });
 
